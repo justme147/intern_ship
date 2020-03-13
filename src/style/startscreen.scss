@@ -11,8 +11,47 @@
   padding: 13.5px 0;
 }
 
+.burger {
+  &__inner {
+    padding: 6.5px 4px;
+
+    &-padding_t {
+      @media (max-width: $bp2) {
+        padding: 6.5px 5px;
+      }
+    }
+  }
+
+  &__item {
+    border: 1.5px solid #fff;
+    display: block;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    width: 24px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &-width_t {
+      @media (max-width: $bp2) {
+        width: 32px;
+      }
+    }
+
+    &-border_bcg {
+      border-color: $main_black;
+      width: 19px;
+    }
+  }
+}
+
 .sidebar {
   background-color: $sidebar_bcg;
+
+  @media (max-width: $bp3) {
+    display: none;
+  }
 
   &__inner {
     width: 64px;
@@ -26,23 +65,9 @@
     @media (max-width: $bp1) {
       width: 65px;
     }
-  }
 
-  &-burger {
-    &__inner {
-      padding: 6.5px 4px;
-    }
-
-    &__item {
-      border: 1.5px solid #fff;
-      display: block;
-      margin-bottom: 5px;
-      border-radius: 3px;
-      width: 24px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
+    @media (max-width: $bp2) {
+      width: 86px;
     }
   }
 
@@ -77,6 +102,10 @@
     width: 57.3%;
   }
 
+  @media (max-width: $bp2) {
+    width: 100%;
+  }
+
   &__inner {
     height: 100%;
     padding: 32px 64px;
@@ -87,11 +116,27 @@
     @media (max-width: $bp1) {
       padding: 32px;
     }
+
+    @media (max-width: $bp3) {
+      padding: 0;
+    }
   }
 
   &-header {
     &__inner {
       @extend %flexinitial;
+
+      @media (max-width: $bp3) {
+        display: block;
+      }
+    }
+
+    &__containerXS {
+      @media (max-width: $bp3) {
+        @include flexbox;
+        justify-content: space-between;
+        padding: 16px 16px 0 16px;
+      }
     }
 
     &__logo {
@@ -101,6 +146,11 @@
     &__location {
       @include flexbox();
       align-items: center;
+
+      @media (max-width: $bp3) {
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
     }
 
     &__icon {
@@ -110,22 +160,52 @@
       @include styletext(14px, normal, $dark_gray, 16px);
       margin-left: 7px;
     }
+
+    &-burger {
+      display: none;
+
+      @media (max-width: $bp3) {
+        display: block;
+      }
+    }
   }
 
   &-content {
+    &__inner {
+      @media (max-width: $bp3) {
+        padding: 0 16px;
+      }
+    }
+
     &__title {
       @include styletext(70px, bold, $main_black, 66px);
+
+      @media (max-width: $bp3) {
+        font-size: 32px;
+        line-height: 100%;
+      }
     }
 
     &__subtitle {
       @include styletext(70px, bold, $main_accent, 66px);
       margin-top: 5px;
+
+      @media (max-width: $bp3) {
+        font-size: 32px;
+        line-height: 100%;
+      }
     }
 
     &__text {
       @include styletext(26px, normal, $dark_gray, 30px);
       font-family: "RobotoL";
       margin-top: 25px;
+
+      @media (max-width: $bp3) {
+        font-size: 18px;
+        line-height: 21px;
+        margin-top: 16px;
+      }
     }
 
     &__button {
@@ -140,20 +220,45 @@
       &:active {
         background: linear-gradient(90deg, #076432 2.61%, #013c27 112.6%);
       }
+
+      @media (max-width: $bp3) {
+        width: 100%;
+        margin-top: 32px;
+        border-radius: 0;
+      }
     }
   }
 
   &-footer {
     &__inner {
       @extend %flexinitial;
+
+      @media (max-width: $bp3) {
+        background-color: $sidebar_bcg;
+        padding: 16px;
+        flex-wrap: wrap;
+      }
     }
 
     &__copy {
       @include styletext(13px, normal, $dark_gray, 15px);
+      @media (max-width: $bp3) {
+        width: 100%;
+        text-align: right;
+        color: $light_gray;
+        order: 2;
+        margin-top: 8px;
+      }
     }
 
     &__phone {
       @include styletext(13px, normal, $main_black, 15px);
+      @media (max-width: $bp3) {
+        width: 100%;
+        text-align: right;
+        color: $main_accent;
+        order: 1;
+      }
     }
   }
 }
@@ -165,6 +270,10 @@
 
   @media (max-width: $bp1) {
     width: 42.7%;
+  }
+
+  @media (max-width: $bp2) {
+    display: none;
   }
 
   &__bcg {

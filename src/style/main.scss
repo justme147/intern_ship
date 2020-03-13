@@ -39,13 +39,33 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "RobotoMd";
+  src: url("fonts/Roboto-Medium.eot");
+  src: local("☺"), url("fonts/Roboto-Medium.woff") format("woff"),
+    url("fonts/Roboto-Medium.ttf") format("truetype"),
+    url("fonts/Roboto-Medium.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RobotoL";
+  src: url("fonts/Roboto-Light.eot");
+  src: local("☺"), url("fonts/Roboto-Light.woff") format("woff"),
+    url("fonts/Roboto-Light.ttf") format("truetype"),
+    url("fonts/Roboto-Light.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 // </Подключение шрифтов>
+
+// <Переменные>
 
 // <Шрифт по умолчанию>
 $fontfamily: "RobotoRg";
 // </Шрифт по умолчанию>
-
-// <Переменные>
 
 $sidebar_bcg: #151b1f;
 $main_accent: #0ec261;
@@ -56,7 +76,10 @@ $admin_bcg: #f5f6f8;
 $white: #fff;
 
 $minwidth: 320px;
-$mw: 1440px;
+// $mw: 1440px;
+$bp1: 1439.98px;
+$bp2: 1023.98px;
+$bp3: 767.98px;
 
 // </Переменные>
 

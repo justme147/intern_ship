@@ -4,8 +4,9 @@
 }
 
 .button {
-  @include styletext(18px, 500, $light_gray, 21px);
+  @include styletext(18px, normal, $light_gray, 21px);
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
+  font-family: "RobotoMd";
   background-blend-mode: darken;
   padding: 13.5px 0;
 }
@@ -21,6 +22,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: $bp1) {
+      width: 65px;
+    }
   }
 
   &-burger {
@@ -44,6 +49,7 @@
   &-lang-switch {
     &__button {
       @include styletext(13px, bold, $main_accent, 15px);
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       background-color: transparent;
       width: 48px;
       height: 48px;
@@ -67,12 +73,20 @@
 .body {
   width: 50%;
 
+  @media (max-width: $bp1) {
+    width: 57.3%;
+  }
+
   &__inner {
     height: 100%;
     padding: 32px 64px;
     @include flexbox();
     flex-direction: column;
     justify-content: space-between;
+
+    @media (max-width: $bp1) {
+      padding: 32px;
+    }
   }
 
   &-header {
@@ -110,6 +124,7 @@
 
     &__text {
       @include styletext(26px, normal, $dark_gray, 30px);
+      font-family: "RobotoL";
       margin-top: 25px;
     }
 
@@ -148,6 +163,10 @@
   background: url("./images/startscreen/slider_screen_1.jpg") center no-repeat;
   background-size: cover;
 
+  @media (max-width: $bp1) {
+    width: 42.7%;
+  }
+
   &__bcg {
     height: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
@@ -167,21 +186,29 @@
       &:hover {
         background-color: rgba(14, 194, 97, 0.2);
       }
+
+      @media (max-width: $bp1) {
+        width: 32px;
+      }
     }
   }
 
   &-content {
-    &__inner {
-      height: 100%;
-      padding: 0 33px;
-    }
+    // &__inner {
+    //   height: 100%;
+    //   padding: 0 32px;
+    // }
 
     &__top {
       height: calc(100% - 40px);
       @include flexbox();
-      padding: 0 33px 92px 33px;
+      padding: 0 32px 92px 32px;
       flex-direction: column;
       justify-content: center;
+
+      @media (max-width: $bp1) {
+        padding: 50px 32px 0 32px;
+      }
     }
 
     &__bottom {
@@ -191,12 +218,24 @@
     }
 
     &__title {
-      @include styletext(40px, 500, $white, 47px);
+      @include styletext(40px, normal, $white, 47px);
+      font-family: "RobotoMd";
+
+      @media (max-width: $bp1) {
+        font-size: 32px;
+        line-height: 37px;
+      }
     }
 
     &__text {
-      @include styletext(24px, 300, $light_gray, 90%);
+      @include styletext(24px, normal, $light_gray, 90%);
+      font-family: "RobotoL";
       margin-top: 8px;
+
+      @media (max-width: $bp1) {
+        font-size: 22px;
+        line-height: 100%;
+      }
     }
 
     &__button {
@@ -239,6 +278,10 @@
 
       &:hover {
         background-color: rgba(14, 194, 97, 0.2);
+      }
+
+      @media (max-width: $bp1) {
+        width: 32px;
       }
     }
   }

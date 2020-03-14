@@ -8,9 +8,8 @@
   display: flex;
 }
 
-@mixin styletext($fz, $fw, $c, $lh) {
+@mixin styletext($fz, $c, $lh) {
   font-size: $fz;
-  font-weight: $fw;
   color: $c;
   line-height: $lh;
 }

@@ -1,10 +1,16 @@
-.container__content {
-  @include flexbox();
-  height: 100vh;
+.container {
+  &__content {
+    @include flexbox();
+    height: 100vh;
+
+    &-menu {
+      justify-content: flex-end;
+    }
+  }
 }
 
 .button {
-  @include styletext(18px, normal, $light_gray, 21px);
+  @include styletext(18px, $light_gray, 21px);
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
   font-family: "RobotoMd";
   background-blend-mode: darken;
@@ -12,35 +18,84 @@
 }
 
 .burger {
+  cursor: pointer;
+
+  &:hover &__item {
+    filter: brightness(0.6);
+  }
+
+  &-active &__item {
+    background-color: transparent;
+
+    &::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+  }
+
   &__inner {
-    padding: 6.5px 4px;
+    // padding: 6.5px 4px;
+    width: 32px;
+    height: 32px;
+    position: relative;
 
     &-padding_t {
       @media (max-width: $bp2) {
-        padding: 6.5px 5px;
+        // padding: 6.5px 5px;
+        width: 42px;
+        height: 32px;
+      }
+
+      @media (max-width: $bp3) {
+        width: 32px;
       }
     }
   }
 
-  &__item {
-    border: 1.5px solid #fff;
-    display: block;
-    margin-bottom: 5px;
+  &__item,
+  &__item::before,
+  &__item::after {
+    // border: 1.5px solid $white;
+    // display: block;
+    height: 3px;
+    background-color: $white;
     border-radius: 3px;
     width: 24px;
+    position: absolute;
 
-    &:last-child {
-      margin-bottom: 0;
+    @media (max-width: $bp2) {
+      width: 32px;
     }
 
-    &-width_t {
-      @media (max-width: $bp2) {
-        width: 32px;
-      }
+    @media (max-width: $bp3) {
+      width: 19px;
+    }
+  }
+
+  &__item {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &::before {
+      content: "";
+      top: -8px;
     }
 
-    &-border_bcg {
-      border-color: $main_black;
+    &::after {
+      content: "";
+      top: 8px;
+    }
+
+    &-border_bcg,
+    &-border_bcg::before,
+    &-border_bcg::after {
+      background-color: $main_black;
       width: 19px;
     }
   }
@@ -53,6 +108,22 @@
     display: none;
   }
 
+  &-menu {
+    background: rgba(21, 27, 31, 0.81);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    min-width: $minwidth;
+    // display: none;
+
+    @media (max-width: $bp3) {
+      display: block;
+      left: 0;
+    }
+  }
+
   &__inner {
     width: 64px;
     height: 100%;
@@ -61,6 +132,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background-color: $sidebar_bcg;
 
     @media (max-width: $bp1) {
       width: 65px;
@@ -69,11 +141,45 @@
     @media (max-width: $bp2) {
       width: 86px;
     }
+
+    &-menu {
+      width: calc(50% + 32px);
+      align-items: start;
+      padding-left: 16px;
+      justify-content: flex-start;
+
+      @media (max-width: $bp1) {
+        width: calc(57.3% + 32.5px);
+        padding-top: 32px;
+        padding-left: 17px;
+      }
+
+      @media (max-width: $bp2) {
+        width: 100%;
+        padding-left: 22px;
+      }
+
+      @media (max-width: $bp3) {
+        padding: 16px 0 15.5px 16px;
+        justify-content: space-between;
+      }
+    }
   }
 
   &-lang-switch {
+    display: block;
+
+    &__display {
+      display: none;
+
+      @media (max-width: $bp3) {
+        display: block;
+      }
+    }
+
     &__button {
-      @include styletext(13px, bold, $main_accent, 15px);
+      @include styletext(13px, $main_accent, 15px);
+      font-weight: bold;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       background-color: transparent;
       width: 48px;
@@ -96,6 +202,7 @@
 }
 
 .body {
+  // display: none;
   width: 50%;
 
   @media (max-width: $bp1) {
@@ -105,6 +212,12 @@
   @media (max-width: $bp2) {
     width: 100%;
   }
+
+  // &-menu {
+  //   @media (max-width: $bp1) {
+  //     width: calc(57.3% - 32.5px);
+  //   }
+  // }
 
   &__inner {
     height: 100%;
@@ -140,7 +253,8 @@
     }
 
     &__logo {
-      @include styletext(30px, bold, $main_accent, 35px);
+      @include styletext(30px, $main_accent, 35px);
+      font-weight: bold;
     }
 
     &__location {
@@ -157,7 +271,7 @@
     }
 
     &__text {
-      @include styletext(14px, normal, $dark_gray, 16px);
+      @include styletext(14px, $dark_gray, 16px);
       margin-left: 7px;
     }
 
@@ -166,6 +280,10 @@
 
       @media (max-width: $bp3) {
         display: block;
+      }
+
+      &__display {
+        display: none;
       }
     }
   }
@@ -178,7 +296,8 @@
     }
 
     &__title {
-      @include styletext(70px, bold, $main_black, 66px);
+      @include styletext(70px, $main_black, 66px);
+      font-weight: bold;
 
       @media (max-width: $bp3) {
         font-size: 32px;
@@ -187,7 +306,8 @@
     }
 
     &__subtitle {
-      @include styletext(70px, bold, $main_accent, 66px);
+      @include styletext(70px, $main_accent, 66px);
+      font-weight: bold;
       margin-top: 5px;
 
       @media (max-width: $bp3) {
@@ -197,7 +317,7 @@
     }
 
     &__text {
-      @include styletext(26px, normal, $dark_gray, 30px);
+      @include styletext(26px, $dark_gray, 30px);
       font-family: "RobotoL";
       margin-top: 25px;
 
@@ -241,7 +361,7 @@
     }
 
     &__copy {
-      @include styletext(13px, normal, $dark_gray, 15px);
+      @include styletext(13px, $dark_gray, 15px);
       @media (max-width: $bp3) {
         width: 100%;
         text-align: right;
@@ -252,7 +372,7 @@
     }
 
     &__phone {
-      @include styletext(13px, normal, $main_black, 15px);
+      @include styletext(13px, $main_black, 15px);
       @media (max-width: $bp3) {
         width: 100%;
         text-align: right;
@@ -264,9 +384,9 @@
 }
 
 .slider {
-  width: 50%;
   background: url("./images/startscreen/slider_screen_1.jpg") center no-repeat;
   background-size: cover;
+  width: 50%;
 
   @media (max-width: $bp1) {
     width: 42.7%;
@@ -274,6 +394,14 @@
 
   @media (max-width: $bp2) {
     display: none;
+  }
+
+  &-menu {
+    width: calc(50% - 32px);
+
+    @media (max-width: $bp1) {
+      width: calc(42.7% - 32.5px);
+    }
   }
 
   &__bcg {
@@ -327,7 +455,7 @@
     }
 
     &__title {
-      @include styletext(40px, normal, $white, 47px);
+      @include styletext(40px, $white, 47px);
       font-family: "RobotoMd";
 
       @media (max-width: $bp1) {
@@ -337,7 +465,7 @@
     }
 
     &__text {
-      @include styletext(24px, normal, $light_gray, 90%);
+      @include styletext(24px, $light_gray, 90%);
       font-family: "RobotoL";
       margin-top: 8px;
 
@@ -393,5 +521,77 @@
         width: 32px;
       }
     }
+  }
+}
+
+.menu {
+  display: none;
+  height: 100%;
+
+  &-display {
+    display: block;
+  }
+
+  &__inner {
+    height: 100%;
+    padding: 0 0 0 112px;
+    @include flexbox();
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: $bp1) {
+      padding-left: 81px;
+    }
+
+    @media (max-width: $bp3) {
+      padding: 0 0 0 12px;
+      justify-content: flex-start;
+      margin-top: 28px;
+    }
+  }
+}
+
+.list {
+  &-flex {
+    @include flexbox();
+    margin-top: 38px;
+  }
+
+  &__item {
+    @include styletext(32px, $white, 37px);
+    font-family: "RobotoMd";
+    text-transform: uppercase;
+    margin-top: 10px;
+
+    @media (max-width: $bp2) {
+      font-size: 28px;
+      line-height: 33px;
+    }
+
+    @media (max-width: $bp3) {
+      font-size: 22px;
+      line-height: 26px;
+    }
+
+    &:hover {
+      color: $main_accent;
+    }
+
+    &-social {
+      margin: 0 0 0 24px;
+      line-height: 0;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+  }
+
+  &__image:hover path {
+    fill: $main_accent;
   }
 }

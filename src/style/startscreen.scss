@@ -2,10 +2,17 @@
   &__content {
     @include flexbox();
     height: 100vh;
+  }
 
-    &-menu {
-      justify-content: flex-end;
-    }
+  &__menu {
+    width: 100%;
+    height: 100%;
+    min-width: $minwidth;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(21, 27, 31, 0.81);
+    display: none;
   }
 }
 
@@ -24,29 +31,13 @@
     filter: brightness(0.6);
   }
 
-  &-active &__item {
-    background-color: transparent;
-
-    &::before {
-      top: 0;
-      transform: rotate(45deg);
-    }
-
-    &::after {
-      top: 0;
-      transform: rotate(-45deg);
-    }
-  }
-
   &__inner {
-    // padding: 6.5px 4px;
     width: 32px;
     height: 32px;
     position: relative;
 
     &-padding_t {
       @media (max-width: $bp2) {
-        // padding: 6.5px 5px;
         width: 42px;
         height: 32px;
       }
@@ -60,8 +51,6 @@
   &__item,
   &__item::before,
   &__item::after {
-    // border: 1.5px solid $white;
-    // display: block;
     height: 3px;
     background-color: $white;
     border-radius: 3px;
@@ -98,6 +87,20 @@
       background-color: $main_black;
       width: 19px;
     }
+
+    &-close {
+      background-color: transparent;
+
+      &::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+    }
   }
 }
 
@@ -106,22 +109,6 @@
 
   @media (max-width: $bp3) {
     display: none;
-  }
-
-  &-menu {
-    background: rgba(21, 27, 31, 0.81);
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    min-width: $minwidth;
-    // display: none;
-
-    @media (max-width: $bp3) {
-      display: block;
-      left: 0;
-    }
   }
 
   &__inner {
@@ -140,29 +127,6 @@
 
     @media (max-width: $bp2) {
       width: 86px;
-    }
-
-    &-menu {
-      width: calc(50% + 32px);
-      align-items: start;
-      padding-left: 16px;
-      justify-content: flex-start;
-
-      @media (max-width: $bp1) {
-        width: calc(57.3% + 32.5px);
-        padding-top: 32px;
-        padding-left: 17px;
-      }
-
-      @media (max-width: $bp2) {
-        width: 100%;
-        padding-left: 22px;
-      }
-
-      @media (max-width: $bp3) {
-        padding: 16px 0 15.5px 16px;
-        justify-content: space-between;
-      }
     }
   }
 
@@ -213,12 +177,6 @@
     width: 100%;
   }
 
-  // &-menu {
-  //   @media (max-width: $bp1) {
-  //     width: calc(57.3% - 32.5px);
-  //   }
-  // }
-
   &__inner {
     height: 100%;
     padding: 32px 64px;
@@ -248,6 +206,7 @@
       @media (max-width: $bp3) {
         @include flexbox;
         justify-content: space-between;
+        align-items: flex-start;
         padding: 16px 16px 0 16px;
       }
     }
@@ -396,14 +355,6 @@
     display: none;
   }
 
-  &-menu {
-    width: calc(50% - 32px);
-
-    @media (max-width: $bp1) {
-      width: calc(42.7% - 32.5px);
-    }
-  }
-
   &__bcg {
     height: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
@@ -431,11 +382,6 @@
   }
 
   &-content {
-    // &__inner {
-    //   height: 100%;
-    //   padding: 0 32px;
-    // }
-
     &__top {
       height: calc(100% - 40px);
       @include flexbox();
@@ -525,16 +471,42 @@
 }
 
 .menu {
-  display: none;
   height: 100%;
-
-  &-display {
-    display: block;
-  }
 
   &__inner {
     height: 100%;
-    padding: 0 0 0 112px;
+    width: calc(50% + 32px);
+    background-color: $sidebar_bcg;
+    padding: 32px 0 16px 16px;
+    @include flexbox();
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @media (max-width: $bp1) {
+      width: calc(57.3% + 28px);
+    }
+
+    @media (max-width: $bp2) {
+      width: 100%;
+      padding-left: 22px;
+    }
+
+    @media (max-width: $bp3) {
+      padding: 16px 0 16px 16px;
+    }
+  }
+}
+
+.list {
+  &-flex {
+    @include flexbox();
+    margin-top: 38px;
+  }
+
+  &__inner {
+    padding-left: 112px;
+    height: 100%;
     @include flexbox();
     flex-direction: column;
     justify-content: center;
@@ -544,17 +516,10 @@
     }
 
     @media (max-width: $bp3) {
-      padding: 0 0 0 12px;
+      padding-left: 10px;
       justify-content: flex-start;
       margin-top: 28px;
     }
-  }
-}
-
-.list {
-  &-flex {
-    @include flexbox();
-    margin-top: 38px;
   }
 
   &__item {
@@ -571,6 +536,10 @@
     @media (max-width: $bp3) {
       font-size: 22px;
       line-height: 26px;
+    }
+
+    &:first-child {
+      margin-top: 0;
     }
 
     &:hover {

@@ -13,6 +13,7 @@
     left: 0;
     background: rgba(21, 27, 31, 0.81);
     display: none;
+    z-index: 999;
   }
 }
 
@@ -166,7 +167,6 @@
 }
 
 .body {
-  // display: none;
   width: 50%;
 
   @media (max-width: $bp1) {
@@ -315,15 +315,14 @@
       @media (max-width: $bp3) {
         background-color: $sidebar_bcg;
         padding: 16px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: flex-end;
       }
     }
 
     &__copy {
       @include styletext(13px, $dark_gray, 15px);
       @media (max-width: $bp3) {
-        width: 100%;
-        text-align: right;
         color: $light_gray;
         order: 2;
         margin-top: 8px;
@@ -333,8 +332,6 @@
     &__phone {
       @include styletext(13px, $main_black, 15px);
       @media (max-width: $bp3) {
-        width: 100%;
-        text-align: right;
         color: $main_accent;
         order: 1;
       }
@@ -343,61 +340,61 @@
 }
 
 .slider {
-  background: url("./images/startscreen/slider_screen_1.jpg") center no-repeat;
-  background-size: cover;
-  width: 50%;
-
-  @media (max-width: $bp1) {
-    width: 42.7%;
-  }
-
-  @media (max-width: $bp2) {
-    display: none;
-  }
-
   &__bcg {
-    height: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
     mix-blend-mode: normal;
-    @include flexbox;
-    justify-content: space-between;
+    width: 100%;
+    height: 100%;
   }
 
-  &-left {
-    &__inner {
-      width: 64px;
-      height: 100%;
-      @include flexbox();
-      align-items: center;
-      justify-content: center;
+  &__item {
+    width: 100%;
+    height: 100%;
+  }
 
-      &:hover {
-        background-color: rgba(14, 194, 97, 0.2);
-      }
+  &__image {
+    width: 100%;
+    height: 100%;
 
-      @media (max-width: $bp1) {
-        width: 32px;
-      }
+    &-slide1 {
+      background: url("./images/startscreen/slider_screen_1.jpg") center
+        no-repeat;
+      background-size: cover;
+    }
+
+    &-slide2 {
+      background: url("./images/startscreen/slider_screen_2.jpg") 5% 50%
+        no-repeat;
+      background-size: cover;
+    }
+
+    &-slide3 {
+      background: url("./images/startscreen/slider_screen_3.jpg") left no-repeat;
+      background-size: cover;
+    }
+
+    &-slide4 {
+      background: url("./images/startscreen/slider_screen_4.jpg") center
+        no-repeat;
+      background-size: cover;
     }
   }
 
   &-content {
+    height: 100%;
+    @include flexbox();
+    align-items: flex-end;
     &__top {
-      height: calc(100% - 40px);
+      height: calc(100% - 237px);
       @include flexbox();
-      padding: 0 32px 92px 32px;
+      padding: 0 110px 0 96px;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
 
       @media (max-width: $bp1) {
-        padding: 50px 32px 0 32px;
+        padding: 0 68px 0 64px;
+        height: calc(100% - 277px);
       }
-    }
-
-    &__bottom {
-      height: 40px;
-      @include flexbox();
-      justify-content: center;
     }
 
     &__title {
@@ -426,48 +423,127 @@
       border-radius: 4px;
       margin-top: 32px;
 
-      &-bcg {
+      &-bcg1 {
         background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
       }
-    }
 
-    &-pagination {
-      &__item {
-        display: block;
-        width: 8px;
-        height: 8px;
-        background-color: $light_gray;
-        border-radius: 50%;
-        margin-left: 8px;
+      &-bcg2 {
+        background: linear-gradient(90deg, #132949 0%, #0c7b67 100%);
+      }
 
-        &-active {
-          background-color: $main_accent;
-        }
+      &-bcg3 {
+        background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+      }
 
-        &:first-child {
-          margin-left: 0;
-        }
+      &-bcg4 {
+        background: linear-gradient(90deg, #281349 0%, #720c7b 100%);
       }
     }
   }
+}
 
-  &-right {
-    &__inner {
-      width: 64px;
-      height: 100%;
-      @include flexbox();
-      align-items: center;
-      justify-content: center;
+/* Слайдер */
+.slick-slider {
+  width: calc(50% - 32px);
+  position: relative;
 
-      &:hover {
-        background-color: rgba(14, 194, 97, 0.2);
-      }
-
-      @media (max-width: $bp1) {
-        width: 32px;
-      }
-    }
+  @media (max-width: $bp1) {
+    width: calc(42.7% - 27.5px);
   }
+
+  @media (max-width: $bp2) {
+    display: none;
+  }
+}
+/* Слайдер запущен */
+.slick-slider.slick-initialized {
+}
+/* Слайдер с точками */
+.slick-slider.slick-dotted {
+}
+/* Ограничивающая оболочка */
+.slick-list {
+  height: 100%;
+  overflow: hidden;
+}
+/* Лента слайдов */
+.slick-track {
+  display: flex;
+  height: 100%;
+}
+/* Слайд */
+.slick-slide {
+}
+/* Слайд активный (показывается) */
+.slick-slide.slick-active {
+}
+/* Слайд основной */
+.slick-slide.slick-current {
+}
+/* Слайд по центру */
+.slick-slide.slick-center {
+}
+/* Клонированный слайд */
+.slick-slide.slick-cloned {
+}
+/* Стрелка */
+.slick-arrow {
+  height: 100%;
+  width: 64px;
+  position: absolute;
+  top: 0;
+  font-size: 0;
+  z-index: 10;
+  background-color: transparent;
+
+  &-img {
+    margin: 0 auto;
+  }
+
+  &:hover {
+    background-color: rgba(14, 194, 97, 0.2);
+  }
+
+  @media (max-width: $bp1) {
+    width: 32px;
+  }
+}
+/* Стрелка влево */
+.slick-arrow.slick-prev {
+  left: 0;
+}
+/* Стрелка вправо */
+.slick-arrow.slick-next {
+  right: 0;
+}
+/* Стрелка не активная */
+.slick-arrow.slick-disabled {
+}
+/* Точки (булиты) */
+.slick-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.slick-dots li {
+  list-style: none;
+}
+/* Активная точка */
+.slick-dots li.slick-active button {
+  background-color: $main_accent;
+}
+/* Элемент точки */
+.slick-dots li button {
+  font-size: 0;
+  width: 8px;
+  height: 8px;
+  background-color: $light_gray;
+  border-radius: 50%;
+  margin: 0 4px;
 }
 
 .menu {

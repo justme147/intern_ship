@@ -154,7 +154,6 @@
         color: #fff;
         border: 1px solid #fff;
         border-radius: 50%;
-        // cursor: url(./images/startscreen/cursor_lang_hover.svg);
       }
 
       &:active {
@@ -331,9 +330,23 @@
 
     &__phone {
       @include styletext(13px, $main_black, 15px);
+
+      &:hover,
+      &:active {
+        color: $main_accent;
+      }
+
       @media (max-width: $bp3) {
         color: $main_accent;
         order: 1;
+
+        &:hover {
+          color: $light_gray;
+        }
+
+        &:active {
+          color: $white;
+        }
       }
     }
   }

@@ -248,6 +248,7 @@
 
   &-content {
     &__inner {
+      margin-top: 10px;
       @media (max-width: $bp3) {
         padding: 0 16px;
       }
@@ -310,6 +311,7 @@
   &-footer {
     &__inner {
       @extend %flexinitial;
+      margin-top: 10px;
 
       @media (max-width: $bp3) {
         background-color: $sidebar_bcg;
@@ -396,17 +398,18 @@
   &-content {
     height: 100%;
     @include flexbox();
-    align-items: flex-end;
+    // align-items: flex-end;
+    align-items: center;
     &__top {
-      height: calc(100% - 237px);
-      @include flexbox();
+      // height: calc(100% - 237px);
+      // @include flexbox();
       padding: 0 110px 0 96px;
-      flex-direction: column;
-      justify-content: flex-start;
+      // flex-direction: column;
+      // justify-content: flex-start;
 
       @media (max-width: $bp1) {
         padding: 0 68px 0 64px;
-        height: calc(100% - 277px);
+        // height: calc(100% - 277px);
       }
     }
 

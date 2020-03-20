@@ -178,7 +178,7 @@ h6 {
 .wrapper {
   width: 100%;
   min-height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 
 // </Оболочка>
@@ -197,5 +197,4 @@ h6 {
 // <Подключение файлов стилей страниц и элементов>
 
 @import "./startscreen.scss";
-
-// </Подключение файлов стилей страниц и элементов>
+@import "./orderpage.scss";

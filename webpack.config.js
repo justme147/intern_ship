@@ -88,7 +88,17 @@ const plugins = () => {
       template: "./index.html",
       minify: {
         collapseWhitespace: isProd
-      }
+      },
+      title: "Need For Drive",
+      filename: "index.html"
+    }),
+    new HTMLWebpackPlugin({
+      template: "./order_page.html",
+      minify: {
+        collapseWhitespace: isProd
+      },
+      title: "Need For Drive | Order page",
+      filename: "order_page.html"
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
@@ -117,7 +127,7 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
-    main: ["@babel/polyfill", "./scripts/index.js"]
+    main: ["@babel/polyfill", "./scripts/index.jsx"]
   },
   output: {
     filename: filename("js"),

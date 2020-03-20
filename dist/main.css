@@ -111,7 +111,7 @@ h6 {
 .wrapper {
   width: 100%;
   min-height: 100%;
-  overflow: hidden; }
+  overflow: auto; }
 
 .container {
   width: 100%; }
@@ -119,6 +119,8 @@ h6 {
 .container__content {
   display: flex;
   height: 100vh; }
+  .container__content--order {
+    justify-content: flex-end; }
 
 .container__menu {
   width: 100%;
@@ -133,12 +135,15 @@ h6 {
 
 .button {
   font-size: 18px;
-  color: #eee;
+  color: #fff;
   line-height: 21px;
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
   font-family: "RobotoMd";
   background-blend-mode: darken;
-  padding: 13.5px 0; }
+  padding: 13.5px 0;
+  border-radius: 8px; }
+  .button:disabled {
+    background: #eee; }
 
 .burger {
   cursor: pointer; }
@@ -150,11 +155,11 @@ h6 {
     height: 32px;
     position: relative; }
     @media (max-width: 1023.98px) {
-      .burger__inner-padding_t {
+      .burger__inner--padding_t {
         width: 42px;
         height: 32px; } }
     @media (max-width: 767.98px) {
-      .burger__inner-padding_t {
+      .burger__inner--padding_t {
         width: 32px; } }
   .burger__item, .burger__item::before, .burger__item::after {
     height: 3px;
@@ -178,15 +183,15 @@ h6 {
     .burger__item::after {
       content: "";
       top: 8px; }
-    .burger__item-border_bcg, .burger__item-border_bcg::before, .burger__item-border_bcg::after {
+    .burger__item--border_bcg, .burger__item--border_bcg::before, .burger__item--border_bcg::after {
       background-color: #121212;
       width: 19px; }
-    .burger__item-close {
+    .burger__item--close {
       background-color: transparent; }
-      .burger__item-close::before {
+      .burger__item--close::before {
         top: 0;
         transform: rotate(45deg); }
-      .burger__item-close::after {
+      .burger__item--close::after {
         top: 0;
         transform: rotate(-45deg); }
 
@@ -195,6 +200,11 @@ h6 {
   @media (max-width: 767.98px) {
     .sidebar {
       display: none; } }
+  .sidebar--fixed {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0; }
   .sidebar__inner {
     width: 64px;
     height: 100%;
@@ -325,7 +335,6 @@ h6 {
         margin-top: 16px; } }
   .body-content__button {
     width: 250px;
-    border-radius: 8px;
     margin-top: 60px; }
     .body-content__button:hover {
       background: linear-gradient(90deg, #0b934a 2.61%, #026e47 112.6%); }
@@ -381,16 +390,16 @@ h6 {
 .slider__image {
   width: 100%;
   height: 100%; }
-  .slider__image-slide1 {
+  .slider__image--slide1 {
     background: url("./images/startscreen/slider_screen_1.jpg") center no-repeat;
     background-size: cover; }
-  .slider__image-slide2 {
+  .slider__image--slide2 {
     background: url("./images/startscreen/slider_screen_2.jpg") 5% 50% no-repeat;
     background-size: cover; }
-  .slider__image-slide3 {
+  .slider__image--slide3 {
     background: url("./images/startscreen/slider_screen_3.jpg") left no-repeat;
     background-size: cover; }
-  .slider__image-slide4 {
+  .slider__image--slide4 {
     background: url("./images/startscreen/slider_screen_4.jpg") center no-repeat;
     background-size: cover; }
 
@@ -425,14 +434,15 @@ h6 {
   .slider-content__button {
     width: 164px;
     border-radius: 4px;
-    margin-top: 32px; }
-    .slider-content__button-bcg1 {
+    margin-top: 32px;
+    color: #eee; }
+    .slider-content__button--bcg1 {
       background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%); }
-    .slider-content__button-bcg2 {
+    .slider-content__button--bcg2 {
       background: linear-gradient(90deg, #132949 0%, #0c7b67 100%); }
-    .slider-content__button-bcg3 {
+    .slider-content__button--bcg3 {
       background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%); }
-    .slider-content__button-bcg4 {
+    .slider-content__button--bcg4 {
       background: linear-gradient(90deg, #281349 0%, #720c7b 100%); }
 
 /* Слайдер */
@@ -537,7 +547,7 @@ h6 {
       .menu__inner {
         padding: 16px 0 16px 16px; } }
 
-.list-flex {
+.list--flex {
   display: flex;
   margin-top: 38px; }
 
@@ -575,10 +585,10 @@ h6 {
     margin-top: 0; }
   .list__item:hover {
     color: #0ec261; }
-  .list__item-social {
+  .list__item--social {
     margin: 0 0 0 24px;
     line-height: 0; }
-    .list__item-social:first-child {
+    .list__item--social:first-child {
       margin: 0; }
 
 .list__link {
@@ -586,6 +596,186 @@ h6 {
 
 .list__image:hover path {
   fill: #0ec261; }
+
+.body--order {
+  width: calc(100% - 64px); }
+
+.body-header__inner--padding {
+  padding: 32px 64px; }
+
+.body-list {
+  display: flex; }
+  .body-list__inner {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 8px 64px; }
+  .body-list__item {
+    font-size: 14px;
+    color: #999;
+    line-height: 16px;
+    font-weight: bold;
+    display: flex;
+    cursor: pointer; }
+    .body-list__item--active {
+      color: #0ec261; }
+    .body-list__item--complete {
+      color: #121212; }
+  .body-list__image {
+    margin: 0 16px; }
+
+.body-main__content {
+  display: flex;
+  justify-content: space-between; }
+
+.body-main-location__inner {
+  padding: 0 0 0 64px; }
+
+.body-main-location__form {
+  font-size: 14px;
+  color: #121212;
+  line-height: 16px;
+  font-family: "RobotoL";
+  margin-top: 32px;
+  display: inline-block;
+  text-align: right; }
+
+.body-main-location__group {
+  position: relative;
+  margin-top: 12px; }
+  .body-main-location__group:first-child {
+    margin-top: 0; }
+
+.body-main-location__input {
+  margin-left: 8px;
+  padding: 0 15px 3px 8px;
+  border-bottom: 1px solid #999;
+  width: 224px; }
+
+.body-main-location__delete {
+  position: absolute;
+  bottom: 6px;
+  right: 4px;
+  cursor: pointer; }
+
+.body-main-location__map {
+  margin-top: 45px; }
+
+.body-main-location__subtitle {
+  font-size: 14px;
+  color: #121212;
+  line-height: 16px;
+  font-family: "RobotoL"; }
+
+.body-main-location__chart {
+  width: 736px;
+  height: 352px;
+  background-color: #999;
+  margin-top: 16px; }
+
+.body-main-model__inner {
+  padding: 0 0 0 64px; }
+
+.body-main-model__ul {
+  display: flex;
+  margin-top: 32px; }
+
+.body-main-model__li {
+  display: flex;
+  margin-left: 16px;
+  font-size: 14px;
+  color: #999;
+  line-height: 16px;
+  font-family: "RobotoL";
+  cursor: pointer; }
+  .body-main-model__li:first-child {
+    margin-left: 0; }
+  .body-main-model__li--active {
+    color: #121212; }
+    .body-main-model__li--active span {
+      border: 3px solid #0ec261; }
+
+.body-main-model__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 48px; }
+
+.body-main-model__item {
+  width: 369px;
+  padding: 16px;
+  text-align: right;
+  border: 1px solid #eee;
+  cursor: pointer; }
+  .body-main-model__item:hover {
+    border-color: #999; }
+  .body-main-model__item--active {
+    border-color: #0ec261; }
+
+.body-main-model__title {
+  text-align: left;
+  font-size: 18px;
+  color: #121212;
+  line-height: 21px; }
+
+.body-main-model__price {
+  text-align: left;
+  font-size: 14px;
+  color: #999;
+  line-height: 16px; }
+
+.body-main-model__image {
+  display: inline-block;
+  margin-top: 36px;
+  height: 117px; }
+
+.body-main-model__circle {
+  width: 12px;
+  height: 12px;
+  display: block;
+  border: 1px solid #999;
+  border-radius: 50%;
+  margin-right: 8px; }
+
+.body-main-order__inner {
+  width: 384px;
+  padding: 32px 64px 0 32px;
+  border-left: 1px solid #eee; }
+
+.body-main-order__title {
+  font-size: 18px;
+  color: #121212;
+  line-height: 21px;
+  font-family: "RobotoMd";
+  text-align: right;
+  margin-bottom: 26px; }
+
+.body-main-order__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 14px;
+  color: #121212;
+  line-height: 16px;
+  font-family: "RobotoL";
+  margin-top: 16px; }
+
+.body-main-order__text {
+  max-width: 150px;
+  text-align: right;
+  color: #999; }
+
+.body-main-order__price {
+  font-size: 16px;
+  color: #121212;
+  line-height: 16px;
+  font-family: "RobotoMd";
+  margin-top: 32px; }
+  .body-main-order__price span {
+    font-family: "Roboto";
+    font-weight: bold; }
+
+.body-main-order__button {
+  width: 247px;
+  margin-top: 32px; }
 
 
 /*# sourceMappingURL=main.css.map*/

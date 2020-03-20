@@ -1,0 +1,244 @@
+.body {
+  &--order {
+    width: calc(100% - 64px);
+    // padding: 0 64px;
+  }
+
+  &-header__inner {
+    &--padding {
+      padding: 32px 64px;
+    }
+  }
+
+  &-list {
+    @include flexbox();
+
+    &__inner {
+      border-top: 1px solid $light_gray;
+      border-bottom: 1px solid $light_gray;
+      padding: 8px 64px;
+    }
+
+    &__item {
+      @include styletext(14px, $dark_gray, 16px);
+      font-weight: bold;
+      @include flexbox();
+      cursor: pointer;
+
+      &--active {
+        color: $main_accent;
+      }
+
+      &--complete {
+        color: $main_black;
+      }
+    }
+
+    &__image {
+      margin: 0 16px;
+    }
+  }
+
+  &-main {
+    &__inner {
+      // padding: 0 64px;
+      // display: flex;
+      // flex-wrap: wrap;
+    }
+
+    &__content {
+      display: flex;
+      // justify-content: flex-end;
+      justify-content: space-between;
+    }
+
+    &-location {
+      // padding: 0 0 0 64px;
+
+      &__inner {
+        // width: calc(100% - 384px);
+        padding: 0 0 0 64px;
+      }
+
+      &__form {
+        // @include flexbox();
+        // flex-wrap: wrap;
+        @include styletext(14px, $main_black, 16px);
+        font-family: "RobotoL";
+        margin-top: 32px;
+        display: inline-block;
+        text-align: right;
+      }
+
+      &__label {
+      }
+
+      &__group {
+        position: relative;
+        margin-top: 12px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      &__input {
+        margin-left: 8px;
+        padding: 0 15px 3px 8px;
+        border-bottom: 1px solid $dark_gray;
+        width: 224px;
+      }
+
+      &__delete {
+        position: absolute;
+        bottom: 6px;
+        right: 4px;
+        cursor: pointer;
+      }
+
+      &__map {
+        margin-top: 45px;
+      }
+
+      &__subtitle {
+        @include styletext(14px, $main_black, 16px);
+        font-family: "RobotoL";
+      }
+
+      &__chart {
+        width: 736px;
+        height: 352px;
+        background-color: $dark_gray;
+        margin-top: 16px;
+      }
+    }
+
+    &-model {
+      &__inner {
+        // width: calc(100% - 384px);
+        padding: 0 0 0 64px;
+      }
+
+      &__ul {
+        display: flex;
+        margin-top: 32px;
+      }
+
+      &__li {
+        display: flex;
+        margin-left: 16px;
+        @include styletext(14px, $dark_gray, 16px);
+        font-family: "RobotoL";
+        cursor: pointer;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &--active {
+          color: $main_black;
+
+          span {
+            border: 3px solid $main_accent;
+          }
+        }
+      }
+
+      &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 48px;
+      }
+
+      &__item {
+        width: 369px;
+        padding: 16px;
+        text-align: right;
+        border: 1px solid $light_gray;
+        cursor: pointer;
+
+        &:hover {
+          border-color: $dark_gray;
+        }
+
+        &--active {
+          border-color: $main_accent;
+        }
+      }
+
+      &__title {
+        text-align: left;
+        @include styletext(18px, $main_black, 21px);
+      }
+
+      &__price {
+        text-align: left;
+        @include styletext(14px, $dark_gray, 16px);
+      }
+
+      &__image {
+        display: inline-block;
+        margin-top: 36px;
+        height: 117px;
+      }
+
+      &__circle {
+        width: 12px;
+        height: 12px;
+        display: block;
+        border: 1px solid $dark_gray;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    }
+
+    &-order {
+      &__inner {
+        width: 384px;
+        padding: 32px 64px 0 32px;
+        border-left: 1px solid $light_gray;
+      }
+
+      &__title {
+        @include styletext(18px, $main_black, 21px);
+        font-family: "RobotoMd";
+        text-align: right;
+        margin-bottom: 26px;
+      }
+
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        @include styletext(14px, $main_black, 16px);
+        font-family: "RobotoL";
+        margin-top: 16px;
+      }
+
+      &__subtitle {
+      }
+
+      &__text {
+        max-width: 150px;
+        text-align: right;
+        color: $dark_gray;
+      }
+
+      &__price {
+        @include styletext(16px, $main_black, 16px);
+        font-family: "RobotoMd";
+        margin-top: 32px;
+
+        span {
+          font-family: "Roboto";
+          font-weight: bold;
+        }
+      }
+
+      &__button {
+        width: 247px;
+        margin-top: 32px;
+      }
+    }
+  }
+}

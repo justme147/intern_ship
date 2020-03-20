@@ -2,6 +2,10 @@
   &__content {
     @include flexbox();
     height: 100vh;
+
+    &--order {
+      justify-content: flex-end;
+    }
   }
 
   &__menu {
@@ -18,11 +22,16 @@
 }
 
 .button {
-  @include styletext(18px, $light_gray, 21px);
+  @include styletext(18px, $white, 21px);
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
   font-family: "RobotoMd";
   background-blend-mode: darken;
   padding: 13.5px 0;
+  border-radius: 8px;
+
+  &:disabled {
+    background: $light_gray;
+  }
 }
 
 .burger {
@@ -37,7 +46,7 @@
     height: 32px;
     position: relative;
 
-    &-padding_t {
+    &--padding_t {
       @media (max-width: $bp2) {
         width: 42px;
         height: 32px;
@@ -82,14 +91,14 @@
       top: 8px;
     }
 
-    &-border_bcg,
-    &-border_bcg::before,
-    &-border_bcg::after {
+    &--border_bcg,
+    &--border_bcg::before,
+    &--border_bcg::after {
       background-color: $main_black;
       width: 19px;
     }
 
-    &-close {
+    &--close {
       background-color: transparent;
 
       &::before {
@@ -110,6 +119,13 @@
 
   @media (max-width: $bp3) {
     display: none;
+  }
+
+  &--fixed {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
 
   &__inner {
@@ -289,7 +305,6 @@
 
     &__button {
       width: 250px;
-      border-radius: 8px;
       margin-top: 60px;
 
       &:hover {
@@ -371,24 +386,24 @@
     width: 100%;
     height: 100%;
 
-    &-slide1 {
+    &--slide1 {
       background: url("./images/startscreen/slider_screen_1.jpg") center
         no-repeat;
       background-size: cover;
     }
 
-    &-slide2 {
+    &--slide2 {
       background: url("./images/startscreen/slider_screen_2.jpg") 5% 50%
         no-repeat;
       background-size: cover;
     }
 
-    &-slide3 {
+    &--slide3 {
       background: url("./images/startscreen/slider_screen_3.jpg") left no-repeat;
       background-size: cover;
     }
 
-    &-slide4 {
+    &--slide4 {
       background: url("./images/startscreen/slider_screen_4.jpg") center
         no-repeat;
       background-size: cover;
@@ -438,20 +453,21 @@
       width: 164px;
       border-radius: 4px;
       margin-top: 32px;
+      color: $light_gray;
 
-      &-bcg1 {
+      &--bcg1 {
         background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
       }
 
-      &-bcg2 {
+      &--bcg2 {
         background: linear-gradient(90deg, #132949 0%, #0c7b67 100%);
       }
 
-      &-bcg3 {
+      &--bcg3 {
         background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
       }
 
-      &-bcg4 {
+      &--bcg4 {
         background: linear-gradient(90deg, #281349 0%, #720c7b 100%);
       }
     }
@@ -591,7 +607,7 @@
 }
 
 .list {
-  &-flex {
+  &--flex {
     @include flexbox();
     margin-top: 38px;
   }
@@ -638,7 +654,7 @@
       color: $main_accent;
     }
 
-    &-social {
+    &--social {
       margin: 0 0 0 24px;
       line-height: 0;
 

@@ -12,7 +12,11 @@ function OrderLocation(props) {
     );
   }
 
-  return <p className="body-main-order__text">{item.value}</p>;
+  return (
+    <p className="body-main-order__text">
+      {item.value === true ? "Да" : item.value}
+    </p>
+  );
 }
 
 export default function OrderItem(props) {

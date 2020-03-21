@@ -597,6 +597,116 @@ h6 {
 .list__image:hover path {
   fill: #0ec261; }
 
+.form-section__container {
+  font-size: 14px;
+  color: #121212;
+  line-height: 16px;
+  font-family: "RobotoL";
+  margin-top: 32px;
+  display: inline-block;
+  text-align: right; }
+  .form-section__container--margin {
+    margin-top: 16px; }
+
+.form-section__group {
+  position: relative;
+  margin-top: 12px; }
+  .form-section__group:first-child {
+    margin-top: 0; }
+
+.form-section__input {
+  margin-left: 8px;
+  padding: 0 15px 3px 8px;
+  border-bottom: 1px solid #999;
+  width: 224px; }
+
+.form-section__delete {
+  position: absolute;
+  bottom: 6px;
+  right: 4px;
+  cursor: pointer; }
+
+.radio-section__container {
+  display: flex;
+  font-size: 14px;
+  color: #999;
+  line-height: 16px;
+  font-family: "RobotoL";
+  margin-left: 16px;
+  cursor: pointer;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  align-items: center; }
+  .radio-section__container:hover {
+    color: #121212; }
+  .radio-section__container:first-child {
+    margin-left: 0; }
+  .radio-section__container--margin {
+    margin-left: 0;
+    margin-top: 8px; }
+
+.radio-section__input {
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0; }
+  .radio-section__input:checked ~ .radio-section__checkmark {
+    border: 3px solid #0ec261; }
+
+.radio-section__checkmark {
+  margin-right: 8px;
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid #999; }
+
+.checkbox-section__container {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #999;
+  line-height: 16px;
+  font-family: "RobotoL";
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.checkbox-section__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0; }
+  .checkbox-section__input:checked ~ .checkbox-section__checkmark {
+    border-color: #0ec261; }
+  .checkbox-section__input:checked ~ .checkbox-section__checkmark:after {
+    display: block; }
+
+.checkbox-section__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  border: 1px solid #999; }
+  .checkbox-section__checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 3px;
+    bottom: 2px;
+    width: 7px;
+    height: 11px;
+    border: solid #121212;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg); }
+
 .body--order {
   width: calc(100% - 64px); }
 
@@ -630,33 +740,6 @@ h6 {
 .body-main-location__inner {
   padding: 0 0 0 64px; }
 
-.body-main-location__form {
-  font-size: 14px;
-  color: #121212;
-  line-height: 16px;
-  font-family: "RobotoL";
-  margin-top: 32px;
-  display: inline-block;
-  text-align: right; }
-
-.body-main-location__group {
-  position: relative;
-  margin-top: 12px; }
-  .body-main-location__group:first-child {
-    margin-top: 0; }
-
-.body-main-location__input {
-  margin-left: 8px;
-  padding: 0 15px 3px 8px;
-  border-bottom: 1px solid #999;
-  width: 224px; }
-
-.body-main-location__delete {
-  position: absolute;
-  bottom: 6px;
-  right: 4px;
-  cursor: pointer; }
-
 .body-main-location__map {
   margin-top: 45px; }
 
@@ -673,7 +756,7 @@ h6 {
   margin-top: 16px; }
 
 .body-main-model__inner {
-  padding: 0 0 0 64px; }
+  padding: 0 0 32px 64px; }
 
 .body-main-model__ul {
   display: flex;
@@ -697,7 +780,8 @@ h6 {
 .body-main-model__list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 48px; }
+  margin-top: 48px;
+  max-width: 738px; }
 
 .body-main-model__item {
   width: 369px;
@@ -734,6 +818,22 @@ h6 {
   border: 1px solid #999;
   border-radius: 50%;
   margin-right: 8px; }
+
+.body-main-options__inner {
+  padding: 0 0 32px 64px; }
+
+.body-main-options__subtitle {
+  font-size: 14px;
+  color: #121212;
+  line-height: 16px;
+  font-family: "RobotoL";
+  margin-top: 32px; }
+
+.body-main-options__group {
+  display: flex;
+  margin-top: 16px; }
+  .body-main-options__group--display {
+    display: block; }
 
 .body-main-order__inner {
   width: 384px;

@@ -8,10 +8,20 @@ export default function ModelList(props) {
       {props.cars.map(item => {
         return props.filter !== "all" ? (
           props.filter === item.class ? (
-            <ModelItem car={item} key={item.id} />
+            <ModelItem
+              car={item}
+              key={item.id}
+              onMenuItemClick={props.onMenuItemClick}
+              selectItem={props.selectItem}
+            />
           ) : null
         ) : (
-          <ModelItem car={item} key={item.id} />
+          <ModelItem
+            car={item}
+            key={item.id}
+            onMenuItemClick={props.onMenuItemClick}
+            selectItem={props.selectItem}
+          />
         );
       })}
     </div>

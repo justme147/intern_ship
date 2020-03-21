@@ -18,11 +18,11 @@ export default class LocationForm extends React.Component {
 
   render() {
     return (
-      <form className="body-main-location__form">
-        <div className="body-main-location__group">
-          <label className="body-main-location__label">Город</label>
+      <form className="form-section__container">
+        <div className="form-section__group">
+          <label className="form-section__label">Город</label>
           <input
-            className="body-main-location__input"
+            className="form-section__input"
             type="text"
             value={this.props.city}
             onChange={this.inputChange}
@@ -31,17 +31,17 @@ export default class LocationForm extends React.Component {
           {this.props.city && (
             <img
               src="./images/orderpage/form_icon_delete.svg"
-              className="body-main-location__delete"
+              className="form-section__delete"
               onClick={this.inputClick}
               name="city"
             />
           )}
         </div>
 
-        <div className="body-main-location__group">
-          <label className="body-main-location__label">Пункт выдачи</label>
+        <div className="form-section__group">
+          <label className="form-section__label">Пункт выдачи</label>
           <input
-            className="body-main-location__input"
+            className="form-section__input"
             type="text"
             value={this.props.place}
             onChange={this.inputChange}
@@ -51,7 +51,7 @@ export default class LocationForm extends React.Component {
           {this.props.place && (
             <img
               src="./images/orderpage/form_icon_delete.svg"
-              className="body-main-location__delete"
+              className="form-section__delete"
               onClick={this.inputClick}
               name="place"
             />

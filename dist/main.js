@@ -171,6 +171,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Location_Location_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Location/Location.jsx */ "./components/Location/Location.jsx");
 /* harmony import */ var _Order_Order_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Order/Order.jsx */ "./components/Order/Order.jsx");
 /* harmony import */ var _Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Model/Model.jsx */ "./components/Model/Model.jsx");
+/* harmony import */ var _Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Options/Options.jsx */ "./components/Options/Options.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -194,6 +195,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -240,21 +242,121 @@ var App = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleInputClick", function (e) {
       e.persist();
 
+      var newOrder = _this.state.order.map(function (item, i) {
+        if (i === 0) {
+          return _objectSpread({}, item, _defineProperty({}, e.target.name, ""));
+        } else {
+          return _objectSpread({}, item);
+        }
+      });
+
       _this.setState(function (prev) {
-        return _objectSpread({}, prev, {}, _defineProperty({}, e.target.name, ""));
+        return _objectSpread({}, prev, {}, _defineProperty({}, e.target.name, ""), {
+          order: newOrder
+        });
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleButtonClick", function () {
       _this.setState({
-        isActive: 2
+        isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleModelItemClick", function (model) {
+      var newOrder = _this.state.order.map(function (item, i) {
+        if (i === 1) {
+          return _objectSpread({}, item, {
+            value: model
+          });
+        } else {
+          return _objectSpread({}, item);
+        }
+      });
+
+      _this.setState({
+        order: newOrder
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMenuColorChange", function (color) {
+      var newOrder = _this.state.order.map(function (item, i) {
+        if (i === 2) {
+          return _objectSpread({}, item, {
+            value: color
+          });
+        } else {
+          return _objectSpread({}, item);
+        }
+      });
+
+      _this.setState({
+        order: newOrder
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputDateChange", function (since, by) {
+      var from = new Date(since.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
+      var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
+      var time = new Date(to - from);
+      var day = time.getDate() === 1 ? 1 : time.getDate() - 1;
+      var hours = time.getHours() + time.getTimezoneOffset() / 60;
+      var datetime = [];
+      day ? datetime.push(day + "д") : null;
+      hours ? datetime.push(hours + "ч") : null;
+
+      var newOrder = _this.state.order.map(function (item, i) {
+        if (i === 3) {
+          return _objectSpread({}, item, {
+            value: datetime.join(" ")
+          });
+        } else {
+          return _objectSpread({}, item);
+        }
+      });
+
+      _this.setState({
+        order: newOrder
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMenuTariffChange", function (tariff) {
+      var newOrder = _this.state.order.map(function (item, i) {
+        if (i === 4) {
+          return _objectSpread({}, item, {
+            value: tariff
+          });
+        } else {
+          return _objectSpread({}, item);
+        }
+      });
+
+      _this.setState({
+        order: newOrder
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMenuServicesChange", function (name, value) {
+      var newOrder = _this.state.order.map(function (item, i) {
+        if (i === 5 && name === "fuel" || i === 6 && name === "chair" || i === 7 && name === "wheel") {
+          return _objectSpread({}, item, {
+            value: value
+          });
+        } else {
+          return _objectSpread({}, item);
+        }
+      });
+
+      _this.setState({
+        order: newOrder
       });
     });
 
     _this.state = {
-      isActive: 2,
+      isActive: 1,
       city: document.querySelector(".body-header__text").textContent || "",
       place: "",
+      // ПОМЕНЯТЬ ОРДЕР И ВСЕ ЧТО ОТ НЕГО ИДЕТ
       order: [{
         city: document.querySelector(".body-header__text").textContent || null,
         place: null,
@@ -280,12 +382,18 @@ var App = /*#__PURE__*/function (_React$Component) {
       }, {
         value: false,
         title: "Правый руль"
-      }]
+      }] // ПОМЕНЯТЬ ОРДЕР И ВСЕ ЧТО ОТ НЕГО ИДЕТ
+
     };
     _this.handleMenuClick = _this.handleMenuClick.bind(_assertThisInitialized(_this));
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     _this.handleInputClick = _this.handleInputClick.bind(_assertThisInitialized(_this));
     _this.handleButtonClick = _this.handleButtonClick.bind(_assertThisInitialized(_this));
+    _this.handleModelItemClick = _this.handleModelItemClick.bind(_assertThisInitialized(_this));
+    _this.handleMenuColorChange = _this.handleMenuColorChange.bind(_assertThisInitialized(_this));
+    _this.handleInputDateChange = _this.handleInputDateChange.bind(_assertThisInitialized(_this));
+    _this.handleMenuTariffChange = _this.handleMenuTariffChange.bind(_assertThisInitialized(_this));
+    _this.handleMenuServicesChange = _this.handleMenuServicesChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -308,7 +416,18 @@ var App = /*#__PURE__*/function (_React$Component) {
           break;
 
         case 2:
-          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            onMenuItemClick: this.handleModelItemClick
+          });
+          break;
+
+        case 3:
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            onMenuColorChange: this.handleMenuColorChange,
+            onInputDateChange: this.handleInputDateChange,
+            onMenuTarifChange: this.handleMenuTariffChange,
+            onMenuServicesChange: this.handleMenuServicesChange
+          });
           break;
       }
 
@@ -429,28 +548,28 @@ var LocationForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "body-main-location__form"
+        className: "form-section__container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "body-main-location__group"
+        className: "form-section__group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "body-main-location__label"
+        className: "form-section__label"
       }, "\u0413\u043E\u0440\u043E\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "body-main-location__input",
+        className: "form-section__input",
         type: "text",
         value: this.props.city,
         onChange: this.inputChange,
         name: "city"
       }), this.props.city && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "./images/orderpage/form_icon_delete.svg",
-        className: "body-main-location__delete",
+        className: "form-section__delete",
         onClick: this.inputClick,
         name: "city"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "body-main-location__group"
+        className: "form-section__group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "body-main-location__label"
+        className: "form-section__label"
       }, "\u041F\u0443\u043D\u043A\u0442 \u0432\u044B\u0434\u0430\u0447\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "body-main-location__input",
+        className: "form-section__input",
         type: "text",
         value: this.props.place,
         onChange: this.inputChange,
@@ -458,7 +577,7 @@ var LocationForm = /*#__PURE__*/function (_React$Component) {
         placeholder: "\u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0432\u0432\u043E\u0434\u0438\u0442\u044C \u043F\u0443\u043D\u043A\u0442 \u0432\u044B\u0434\u0430\u0447\u0438"
       }), this.props.place && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "./images/orderpage/form_icon_delete.svg",
-        className: "body-main-location__delete",
+        className: "form-section__delete",
         onClick: this.inputClick,
         name: "place"
       })));
@@ -497,7 +616,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Model() {
+function Model(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
     id: 1,
     model: "ELANTRA",
@@ -543,13 +662,23 @@ function Model() {
       car = _useState2[0],
       setCar = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("all"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      filter = _useState4[0],
-      setFilter = _useState4[1];
+      select = _useState4[0],
+      setSelect = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("all"),
+      _useState6 = _slicedToArray(_useState5, 2),
+      filter = _useState6[0],
+      setFilter = _useState6[1];
 
   function handleMenuClick(name) {
     setFilter(name);
+  }
+
+  function handleItemClick(id, model) {
+    setSelect(id);
+    props.onMenuItemClick(model);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -561,7 +690,9 @@ function Model() {
     onMenuClick: handleMenuClick
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModelList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     cars: car,
-    filter: filter
+    filter: filter,
+    onMenuItemClick: handleItemClick,
+    selectItem: select
   })));
 }
 
@@ -581,9 +712,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 function ModelItem(_ref) {
-  var car = _ref.car;
+  var car = _ref.car,
+      onMenuItemClick = _ref.onMenuItemClick,
+      selectItem = _ref.selectItem;
+  var classes = ["body-main-model__item"];
+
+  if (car.id === selectItem) {
+    classes.push("body-main-model__item--active");
+  }
+
+  function modelItemClick() {
+    onMenuItemClick(car.id, car.model);
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "body-main-model__item"
+    className: classes.join(" "),
+    onClick: modelItemClick
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "body-main-model__title"
   }, car.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -617,10 +761,14 @@ function ModelList(props) {
   }, props.cars.map(function (item) {
     return props.filter !== "all" ? props.filter === item.class ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModelItem_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
       car: item,
-      key: item.id
+      key: item.id,
+      onMenuItemClick: props.onMenuItemClick,
+      selectItem: props.selectItem
     }) : null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModelItem_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
       car: item,
-      key: item.id
+      key: item.id,
+      onMenuItemClick: props.onMenuItemClick,
+      selectItem: props.selectItem
     });
   }));
 }
@@ -815,6 +963,326 @@ function NavigationList(props) {
 
 /***/ }),
 
+/***/ "./components/Options/Options.jsx":
+/*!****************************************!*\
+  !*** ./components/Options/Options.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Options; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _OptionsColor_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OptionsColor.jsx */ "./components/Options/OptionsColor.jsx");
+/* harmony import */ var _OptionsDate_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./OptionsDate.jsx */ "./components/Options/OptionsDate.jsx");
+/* harmony import */ var _OptionsTariff_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OptionsTariff.jsx */ "./components/Options/OptionsTariff.jsx");
+/* harmony import */ var _OptionsServices_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OptionsServices.jsx */ "./components/Options/OptionsServices.jsx");
+
+
+
+
+
+function Options(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-options__inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "body-main-options__subtitle"
+  }, "\u0426\u0432\u0435\u0442"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsColor_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    menuColorChange: props.onMenuColorChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "body-main-options__subtitle"
+  }, "\u0414\u0430\u0442\u0430 \u0430\u0440\u0435\u043D\u0434\u044B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsDate_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    inputDateChange: props.onInputDateChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "body-main-options__subtitle"
+  }, "\u0422\u0430\u0440\u0438\u0444"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsTariff_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    menuTariffChange: props.onMenuTarifChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "body-main-options__subtitle"
+  }, "\u0414\u043E\u043F \u0443\u0441\u043B\u0443\u0433\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsServices_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    menuServicesChange: props.onMenuServicesChange
+  })));
+}
+
+/***/ }),
+
+/***/ "./components/Options/OptionsColor.jsx":
+/*!*********************************************!*\
+  !*** ./components/Options/OptionsColor.jsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OptionsColor; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function OptionsColor(props) {
+  function handleInputChange(e) {
+    props.menuColorChange(e.target.value);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-options__group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "radio-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "color",
+    value: "\u041B\u044E\u0431\u043E\u0439",
+    onChange: handleInputChange,
+    className: "radio-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "radio-section__checkmark"
+  }), "\u041B\u044E\u0431\u043E\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "radio-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "color",
+    value: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439",
+    onChange: handleInputChange,
+    className: "radio-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "radio-section__checkmark"
+  }), "\u041A\u0440\u0430\u0441\u043D\u044B\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "radio-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "color",
+    value: "\u0413\u043E\u043B\u0443\u0431\u043E\u0439",
+    onChange: handleInputChange,
+    className: "radio-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "radio-section__checkmark"
+  }), "\u0413\u043E\u043B\u0443\u0431\u043E\u0439"));
+}
+
+/***/ }),
+
+/***/ "./components/Options/OptionsDate.jsx":
+/*!********************************************!*\
+  !*** ./components/Options/OptionsDate.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OptionsDate; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_input_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-input-mask */ "../node_modules/react-input-mask/index.js");
+/* harmony import */ var react_input_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_input_mask__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function OptionsDate(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(new Date().toLocaleString("ru")),
+      _useState2 = _slicedToArray(_useState, 2),
+      since = _useState2[0],
+      setSince = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      by = _useState4[0],
+      setBy = _useState4[1];
+
+  function handleFormChange(e) {
+    e.target.name === "since" ? setSince(e.target.value) : setBy(e.target.value);
+    props.inputDateChange(since, by);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "form-section__container form-section__container--margin"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-section__group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-section__label"
+  }, "\u0421"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    className: "form-section__input",
+    type: "text",
+    value: since,
+    onChange: handleFormChange,
+    name: "since",
+    placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0438 \u0432\u0440\u0435\u043C\u044F",
+    mask: "99.99.9999 99:99",
+    maskChar: "-"
+  }), since && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/orderpage/form_icon_delete.svg",
+    className: "form-section__delete",
+    onClick: function onClick() {
+      return setSince("");
+    },
+    name: "city"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-section__group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-section__label"
+  }, "\u041F\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    className: "form-section__input",
+    type: "text",
+    value: by,
+    onChange: handleFormChange,
+    name: "by",
+    placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0438 \u0432\u0440\u0435\u043C\u044F",
+    mask: "99.99.9999 99:99",
+    maskChar: "-"
+  }), by && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/orderpage/form_icon_delete.svg",
+    className: "form-section__delete",
+    onClick: function onClick() {
+      return setBy("");
+    },
+    name: "place"
+  })));
+}
+
+/***/ }),
+
+/***/ "./components/Options/OptionsServices.jsx":
+/*!************************************************!*\
+  !*** ./components/Options/OptionsServices.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OptionsServices; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+function OptionsServices(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      fuel = _useState2[0],
+      setFuel = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      chair = _useState4[0],
+      setChair = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      wheel = _useState6[0],
+      setWheel = _useState6[1];
+
+  function handleInputChange(e) {
+    if (e.target.name === "fuel") {
+      setFuel(e.target.checked);
+    } else if (e.target.name === "chair") {
+      setChair(e.target.checked);
+    } else {
+      setWheel(e.target.checked);
+    }
+
+    props.menuServicesChange(e.target.name, e.target.checked);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-options__group body-main-options__group--display"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    name: "fuel",
+    checked: fuel,
+    onChange: handleInputChange,
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark"
+  }), "\u041F\u043E\u043B\u043D\u044B\u0439 \u0431\u0430\u043A, 500\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    name: "chair",
+    checked: chair,
+    onChange: handleInputChange,
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark"
+  }), "\u0414\u0435\u0442\u0441\u043A\u043E\u0435 \u043A\u0440\u0435\u0441\u043B\u043E, 200\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    name: "wheel",
+    checked: wheel,
+    onChange: handleInputChange,
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark"
+  }), "\u041F\u0440\u0430\u0432\u044B\u0439 \u0440\u0443\u043B\u044C, 1600\u0440"));
+}
+
+/***/ }),
+
+/***/ "./components/Options/OptionsTariff.jsx":
+/*!**********************************************!*\
+  !*** ./components/Options/OptionsTariff.jsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OptionsTariff; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function OptionsTariff(props) {
+  function handleInputChange(e) {
+    props.menuTariffChange(e.target.value);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-options__group body-main-options__group--display"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "radio-section__container radio-section__container--margin"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "tariff",
+    value: "\u041F\u043E\u043C\u0438\u043D\u0443\u0442\u043D\u043E",
+    onChange: handleInputChange,
+    className: "radio-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "radio-section__checkmark"
+  }), "\u041F\u043E\u043C\u0438\u043D\u0443\u0442\u043D\u043E, 7\u20BD/\u043C\u0438\u043D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "radio-section__container radio-section__container--margin"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "tariff",
+    value: "\u041D\u0430 \u0441\u0443\u0442\u043A\u0438",
+    onChange: handleInputChange,
+    className: "radio-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "radio-section__checkmark"
+  }), "\u041D\u0430 \u0441\u0443\u0442\u043A\u0438, 1999 \u20BD/\u0441\u0443\u0442\u043A\u0438"));
+}
+
+/***/ }),
+
 /***/ "./components/Order/Order.jsx":
 /*!************************************!*\
   !*** ./components/Order/Order.jsx ***!
@@ -883,7 +1351,7 @@ function OrderLocation(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "body-main-order__text"
-  }, item.value);
+  }, item.value === true ? "Да" : item.value);
 }
 
 function OrderItem(props) {

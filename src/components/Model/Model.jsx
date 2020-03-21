@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ModelMenu from "./ModelMenu.jsx";
 import ModelList from "./ModelList.jsx";
 
-export default function Model() {
+export default function Model(props) {
   const [car, setCar] = useState([
     { id: 1, model: "ELANTRA", price: "12 000 - 15 000 Р", class: "eco" },
     { id: 2, model: "i30 N", price: "10 000 - 32 000 Р", class: "premium" },
@@ -15,17 +15,29 @@ export default function Model() {
     { id: 8, model: "SONATA", price: "10 000 - 32 000 Р", class: "eco" }
   ]);
 
+  const [select, setSelect] = useState(null);
+
   const [filter, setFilter] = useState("all");
 
   function handleMenuClick(name) {
     setFilter(name);
   }
 
+  function handleItemClick(id, model) {
+    setSelect(id);
+    props.onMenuItemClick(model);
+  }
+
   return (
     <div className="body-main-model__inner">
       <div className="body-main-model">
         <ModelMenu filter={filter} onMenuClick={handleMenuClick} />
-        <ModelList cars={car} filter={filter} />
+        <ModelList
+          cars={car}
+          filter={filter}
+          onMenuItemClick={handleItemClick}
+          selectItem={select}
+        />
       </div>
     </div>
   );

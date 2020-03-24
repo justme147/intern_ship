@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function OptionsColor(props) {
   function handleInputChange(e) {
-    props.menuColorChange(e.target.value);
+    props.menuColorChange("value", e.target.value, 2);
   }
 
   return (

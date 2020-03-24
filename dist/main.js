@@ -174,10 +174,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Options/Options.jsx */ "./components/Options/Options.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -221,144 +217,84 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleButtonClick", function () {
+      // const history = this.state.history;
+      // const current = history[history.length - 1];
+      // const newOrder = this.state.order;
+      _this.setState({
+        isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4 // history: this.state.history.concat({ order: newOrder })
+
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleOrderChange", function (name, value, index) {
+      var newOrder = _this.state.order.slice();
+
+      newOrder[index][name] = value;
+
+      _this.setState({
+        order: newOrder
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleInputChange", function (e) {
-      e.persist();
-
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 0) {
-          return _objectSpread({}, item, _defineProperty({}, e.target.name, e.target.value));
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
-
-      _this.setState(function (prev) {
-        return _objectSpread({}, prev, {}, _defineProperty({}, e.target.name, e.target.value), {
-          order: newOrder
-        });
-      });
+      _this.setState(_defineProperty({}, e.target.name, e.target.value));
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInputClick", function (e) {
-      e.persist();
-
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 0) {
-          return _objectSpread({}, item, _defineProperty({}, e.target.name, ""));
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
-
-      _this.setState(function (prev) {
-        return _objectSpread({}, prev, {}, _defineProperty({}, e.target.name, ""), {
-          order: newOrder
-        });
-      });
+      _this.setState(_defineProperty({}, e.target.name, ""));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleButtonClick", function () {
-      _this.setState({
-        isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4
-      });
+    _defineProperty(_assertThisInitialized(_this), "handleLocationInputChange", function (e, index) {
+      _this.handleInputChange(e);
+
+      _this.handleOrderChange(e.target.name, e.target.value, index);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleModelItemClick", function (model) {
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 1) {
-          return _objectSpread({}, item, {
-            value: model
-          });
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
+    _defineProperty(_assertThisInitialized(_this), "handleLocationInputClick", function (e, index) {
+      _this.handleInputClick(e);
 
-      _this.setState({
-        order: newOrder
-      });
+      _this.handleOrderChange(e.target.name, "", index);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleMenuColorChange", function (color) {
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 2) {
-          return _objectSpread({}, item, {
-            value: color
-          });
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
+    _defineProperty(_assertThisInitialized(_this), "handleDateInputChange", function (e, index) {
+      _this.handleInputChange(e);
 
-      _this.setState({
-        order: newOrder
-      });
-    });
+      var since = _this.state.since;
+      var by = _this.state.by; // console.log("since", since);
+      // console.log("by", by);
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputDateChange", function (since, by) {
       var from = new Date(since.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
-      var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
-      var time = new Date(to - from);
-      var day = time.getDate() === 1 ? 1 : time.getDate() - 1;
-      var hours = time.getHours() + time.getTimezoneOffset() / 60;
+      var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1")); // console.log("from", from);
+      // console.log("to", to);
+
+      var time = new Date(to - from); // console.log("time", time);
+
+      var day = time.getDate() === 0 ? 0 : time.getDate() - 1;
+      var hours = time.getHours() + time.getTimezoneOffset() / 60; // console.log("day", day);
+      // console.log("hours", hours);
+
       var datetime = [];
       day ? datetime.push(day + "д") : null;
-      hours ? datetime.push(hours + "ч") : null;
+      hours ? datetime.push(hours + "ч") : null; // console.log("datetime", datetime);
 
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 3) {
-          return _objectSpread({}, item, {
-            value: datetime.join(" ")
-          });
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
-
-      _this.setState({
-        order: newOrder
-      });
+      _this.handleOrderChange("value", datetime.join(" "), index);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleMenuTariffChange", function (tariff) {
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 4) {
-          return _objectSpread({}, item, {
-            value: tariff
-          });
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
+    _defineProperty(_assertThisInitialized(_this), "handleDateInputClick", function (e, index) {
+      _this.handleInputClick(e);
 
-      _this.setState({
-        order: newOrder
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleMenuServicesChange", function (name, value) {
-      var newOrder = _this.state.order.map(function (item, i) {
-        if (i === 5 && name === "fuel" || i === 6 && name === "chair" || i === 7 && name === "wheel") {
-          return _objectSpread({}, item, {
-            value: value
-          });
-        } else {
-          return _objectSpread({}, item);
-        }
-      });
-
-      _this.setState({
-        order: newOrder
-      });
+      _this.handleOrderChange("value", "", index);
     });
 
     _this.state = {
       isActive: 1,
       city: document.querySelector(".body-header__text").textContent || "",
       place: "",
-      // ПОМЕНЯТЬ ОРДЕР И ВСЕ ЧТО ОТ НЕГО ИДЕТ
+      since: new Date().toLocaleString(),
+      by: "",
       order: [{
-        city: document.querySelector(".body-header__text").textContent || null,
+        city: document.querySelector(".body-header__text").textContent || "",
         place: null,
         title: "Пункт выдачи"
       }, {
@@ -382,51 +318,52 @@ var App = /*#__PURE__*/function (_React$Component) {
       }, {
         value: false,
         title: "Правый руль"
-      }] // ПОМЕНЯТЬ ОРДЕР И ВСЕ ЧТО ОТ НЕГО ИДЕТ
-
+      }],
+      history: []
     };
     _this.handleMenuClick = _this.handleMenuClick.bind(_assertThisInitialized(_this));
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     _this.handleInputClick = _this.handleInputClick.bind(_assertThisInitialized(_this));
     _this.handleButtonClick = _this.handleButtonClick.bind(_assertThisInitialized(_this));
-    _this.handleModelItemClick = _this.handleModelItemClick.bind(_assertThisInitialized(_this));
-    _this.handleMenuColorChange = _this.handleMenuColorChange.bind(_assertThisInitialized(_this));
-    _this.handleInputDateChange = _this.handleInputDateChange.bind(_assertThisInitialized(_this));
-    _this.handleMenuTariffChange = _this.handleMenuTariffChange.bind(_assertThisInitialized(_this));
-    _this.handleMenuServicesChange = _this.handleMenuServicesChange.bind(_assertThisInitialized(_this));
+    _this.handleOrderChange = _this.handleOrderChange.bind(_assertThisInitialized(_this));
+    _this.handleLocationInputChange = _this.handleLocationInputChange.bind(_assertThisInitialized(_this));
+    _this.handleLocationInputClick = _this.handleLocationInputClick.bind(_assertThisInitialized(_this));
+    _this.handleDateInputChange = _this.handleDateInputChange.bind(_assertThisInitialized(_this));
+    _this.handleDateInputClick = _this.handleDateInputClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
     key: "render",
     value: function render() {
-      var city = this.state.city;
-      var place = this.state.place;
-      var isActive = this.state.isActive;
+      var isActive = this.state.isActive; // const history = this.state.history;
+      // const current = history[isActive - 1];
+
       var renderStep;
 
       switch (this.state.isActive) {
         case 1:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Location_Location_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            city: city,
-            place: place,
-            onInputChange: this.handleInputChange,
+            city: this.state.city,
+            place: this.state.place,
+            onInputChange: this.handleLocationInputChange,
             onInputClick: this.handleInputClick
           });
           break;
 
         case 2:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            onMenuItemClick: this.handleModelItemClick
+            onMenuItemClick: this.handleOrderChange
           });
           break;
 
         case 3:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            onMenuColorChange: this.handleMenuColorChange,
-            onInputDateChange: this.handleInputDateChange,
-            onMenuTarifChange: this.handleMenuTariffChange,
-            onMenuServicesChange: this.handleMenuServicesChange
+            since: this.state.since,
+            by: this.state.by,
+            onOrderChange: this.handleOrderChange,
+            onInputDateChange: this.handleDateInputChange,
+            onInputDateClick: this.handleDateInputClick
           });
           break;
       }
@@ -500,94 +437,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LocationForm; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var LocationForm = /*#__PURE__*/function (_React$Component) {
-  _inherits(LocationForm, _React$Component);
-
-  function LocationForm(props) {
-    var _this;
-
-    _classCallCheck(this, LocationForm);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LocationForm).call(this, props));
-    _this.inputChange = _this.inputChange.bind(_assertThisInitialized(_this));
-    _this.inputClick = _this.inputClick.bind(_assertThisInitialized(_this));
-    return _this;
+function LocationForm(props) {
+  function inputChange(e) {
+    props.onInputChange(e, 0);
   }
 
-  _createClass(LocationForm, [{
-    key: "inputChange",
-    value: function inputChange(e) {
-      this.props.onInputChange(e);
-    }
-  }, {
-    key: "inputClick",
-    value: function inputClick(e) {
-      this.props.onInputClick(e);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "form-section__container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-section__group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-section__label"
-      }, "\u0413\u043E\u0440\u043E\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-section__input",
-        type: "text",
-        value: this.props.city,
-        onChange: this.inputChange,
-        name: "city"
-      }), this.props.city && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "./images/orderpage/form_icon_delete.svg",
-        className: "form-section__delete",
-        onClick: this.inputClick,
-        name: "city"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-section__group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-section__label"
-      }, "\u041F\u0443\u043D\u043A\u0442 \u0432\u044B\u0434\u0430\u0447\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-section__input",
-        type: "text",
-        value: this.props.place,
-        onChange: this.inputChange,
-        name: "place",
-        placeholder: "\u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0432\u0432\u043E\u0434\u0438\u0442\u044C \u043F\u0443\u043D\u043A\u0442 \u0432\u044B\u0434\u0430\u0447\u0438"
-      }), this.props.place && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "./images/orderpage/form_icon_delete.svg",
-        className: "form-section__delete",
-        onClick: this.inputClick,
-        name: "place"
-      })));
-    }
-  }]);
+  function inputClick(e) {
+    props.onInputClick(e, 0);
+  }
 
-  return LocationForm;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "form-section__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-section__group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-section__label"
+  }, "\u0413\u043E\u0440\u043E\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-section__input",
+    type: "text",
+    value: props.city,
+    onChange: inputChange,
+    name: "city"
+  }), props.city && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/orderpage/form_icon_delete.svg",
+    className: "form-section__delete",
+    onClick: inputClick,
+    name: "city"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-section__group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-section__label"
+  }, "\u041F\u0443\u043D\u043A\u0442 \u0432\u044B\u0434\u0430\u0447\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-section__input",
+    type: "text",
+    value: props.place,
+    onChange: inputChange,
+    name: "place",
+    placeholder: "\u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0432\u0432\u043E\u0434\u0438\u0442\u044C \u043F\u0443\u043D\u043A\u0442 \u0432\u044B\u0434\u0430\u0447\u0438"
+  }), props.place && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/orderpage/form_icon_delete.svg",
+    className: "form-section__delete",
+    onClick: inputClick,
+    name: "place"
+  })));
+}
 
 /***/ }),
 
@@ -678,7 +572,7 @@ function Model(props) {
 
   function handleItemClick(id, model) {
     setSelect(id);
-    props.onMenuItemClick(model);
+    props.onMenuItemClick("value", model, 1);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -992,19 +886,22 @@ function Options(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "body-main-options__subtitle"
   }, "\u0426\u0432\u0435\u0442"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsColor_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    menuColorChange: props.onMenuColorChange
+    menuColorChange: props.onOrderChange
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "body-main-options__subtitle"
   }, "\u0414\u0430\u0442\u0430 \u0430\u0440\u0435\u043D\u0434\u044B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsDate_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    inputDateChange: props.onInputDateChange
+    inputDateChange: props.onInputDateChange,
+    inputDateClick: props.onInputDateClick,
+    since: props.since,
+    by: props.by
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "body-main-options__subtitle"
   }, "\u0422\u0430\u0440\u0438\u0444"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsTariff_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    menuTariffChange: props.onMenuTarifChange
+    menuTariffChange: props.onOrderChange
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "body-main-options__subtitle"
   }, "\u0414\u043E\u043F \u0443\u0441\u043B\u0443\u0433\u0438"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsServices_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    menuServicesChange: props.onMenuServicesChange
+    menuServicesChange: props.onOrderChange
   })));
 }
 
@@ -1025,7 +922,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function OptionsColor(props) {
   function handleInputChange(e) {
-    props.menuColorChange(e.target.value);
+    props.menuColorChange("value", e.target.value, 2);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1079,32 +976,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_input_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-input-mask */ "../node_modules/react-input-mask/index.js");
 /* harmony import */ var react_input_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_input_mask__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 function OptionsDate(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(new Date().toLocaleString("ru")),
-      _useState2 = _slicedToArray(_useState, 2),
-      since = _useState2[0],
-      setSince = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      by = _useState4[0],
-      setBy = _useState4[1];
-
-  function handleFormChange(e) {
-    e.target.name === "since" ? setSince(e.target.value) : setBy(e.target.value);
-    props.inputDateChange(since, by);
-  }
-
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form-section__container form-section__container--margin"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1114,19 +988,21 @@ function OptionsDate(props) {
   }, "\u0421"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_1___default.a, {
     className: "form-section__input",
     type: "text",
-    value: since,
-    onChange: handleFormChange,
+    value: props.since,
+    onChange: function onChange(e) {
+      return props.inputDateChange(e, 3);
+    },
     name: "since",
     placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0438 \u0432\u0440\u0435\u043C\u044F",
     mask: "99.99.9999 99:99",
     maskChar: "-"
-  }), since && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }), props.since && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: "./images/orderpage/form_icon_delete.svg",
     className: "form-section__delete",
-    onClick: function onClick() {
-      return setSince("");
+    onClick: function onClick(e) {
+      return props.inputDateClick(e, 3);
     },
-    name: "city"
+    name: "since"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-section__group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -1134,19 +1010,21 @@ function OptionsDate(props) {
   }, "\u041F\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_1___default.a, {
     className: "form-section__input",
     type: "text",
-    value: by,
-    onChange: handleFormChange,
+    value: props.by,
+    onChange: function onChange(e) {
+      return props.inputDateChange(e, 3);
+    },
     name: "by",
     placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0438 \u0432\u0440\u0435\u043C\u044F",
     mask: "99.99.9999 99:99",
     maskChar: "-"
-  }), by && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }), props.by && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: "./images/orderpage/form_icon_delete.svg",
     className: "form-section__delete",
-    onClick: function onClick() {
-      return setBy("");
+    onClick: function onClick(e) {
+      return props.inputDateClick(e, 3);
     },
-    name: "place"
+    name: "by"
   })));
 }
 
@@ -1189,7 +1067,7 @@ function OptionsServices(props) {
       wheel = _useState6[0],
       setWheel = _useState6[1];
 
-  function handleInputChange(e) {
+  function handleInputChange(e, index) {
     if (e.target.name === "fuel") {
       setFuel(e.target.checked);
     } else if (e.target.name === "chair") {
@@ -1198,7 +1076,7 @@ function OptionsServices(props) {
       setWheel(e.target.checked);
     }
 
-    props.menuServicesChange(e.target.name, e.target.checked);
+    props.menuServicesChange("value", e.target.checked, index);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1209,7 +1087,9 @@ function OptionsServices(props) {
     type: "checkbox",
     name: "fuel",
     checked: fuel,
-    onChange: handleInputChange,
+    onChange: function onChange(e) {
+      return handleInputChange(e, 5);
+    },
     className: "checkbox-section__input"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "checkbox-section__checkmark"
@@ -1219,7 +1099,9 @@ function OptionsServices(props) {
     type: "checkbox",
     name: "chair",
     checked: chair,
-    onChange: handleInputChange,
+    onChange: function onChange(e) {
+      return handleInputChange(e, 6);
+    },
     className: "checkbox-section__input"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "checkbox-section__checkmark"
@@ -1229,7 +1111,9 @@ function OptionsServices(props) {
     type: "checkbox",
     name: "wheel",
     checked: wheel,
-    onChange: handleInputChange,
+    onChange: function onChange(e) {
+      return handleInputChange(e, 7);
+    },
     className: "checkbox-section__input"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "checkbox-section__checkmark"
@@ -1253,7 +1137,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function OptionsTariff(props) {
   function handleInputChange(e) {
-    props.menuTariffChange(e.target.value);
+    props.menuTariffChange("value", e.target.value, 4);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

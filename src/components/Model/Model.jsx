@@ -25,7 +25,7 @@ export default function Model(props) {
 
   function handleItemClick(id, model) {
     setSelect(id);
-    props.onMenuItemClick(model);
+    props.onMenuItemClick("value", model, 1);
   }
 
   return (

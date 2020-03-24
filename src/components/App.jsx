@@ -13,11 +13,11 @@ export default class App extends React.Component {
       isActive: 1,
       city: document.querySelector(".body-header__text").textContent || "",
       place: "",
-      // ПОМЕНЯТЬ ОРДЕР И ВСЕ ЧТО ОТ НЕГО ИДЕТ
+      since: new Date().toLocaleString(),
+      by: "",
       order: [
         {
-          city:
-            document.querySelector(".body-header__text").textContent || null,
+          city: document.querySelector(".body-header__text").textContent || "",
           place: null,
           title: "Пункт выдачи"
         },
@@ -49,19 +49,19 @@ export default class App extends React.Component {
           value: false,
           title: "Правый руль"
         }
-      ]
-      // ПОМЕНЯТЬ ОРДЕР И ВСЕ ЧТО ОТ НЕГО ИДЕТ
+      ],
+      history: []
     };
 
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputClick = this.handleInputClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.handleModelItemClick = this.handleModelItemClick.bind(this);
-    this.handleMenuColorChange = this.handleMenuColorChange.bind(this);
-    this.handleInputDateChange = this.handleInputDateChange.bind(this);
-    this.handleMenuTariffChange = this.handleMenuTariffChange.bind(this);
-    this.handleMenuServicesChange = this.handleMenuServicesChange.bind(this);
+    this.handleOrderChange = this.handleOrderChange.bind(this);
+    this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
+    this.handleLocationInputClick = this.handleLocationInputClick.bind(this);
+    this.handleDateInputChange = this.handleDateInputChange.bind(this);
+    this.handleDateInputClick = this.handleDateInputClick.bind(this);
   }
 
   handleMenuClick = id => {
@@ -72,133 +72,79 @@ export default class App extends React.Component {
     });
   };
 
-  handleInputChange = e => {
-    e.persist();
+  handleButtonClick = () => {
+    // const history = this.state.history;
+    // const current = history[history.length - 1];
+    // const newOrder = this.state.order;
 
-    const newOrder = this.state.order.map((item, i) => {
-      if (i === 0) {
-        return { ...item, [e.target.name]: e.target.value };
-      } else {
-        return { ...item };
-      }
+    this.setState({
+      isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4
+      // history: this.state.history.concat({ order: newOrder })
     });
+  };
 
-    this.setState(prev => ({
-      ...prev,
-      ...{
-        [e.target.name]: e.target.value
-      },
-      order: newOrder
-    }));
+  handleOrderChange = (name, value, index) => {
+    const newOrder = this.state.order.slice();
+
+    newOrder[index][name] = value;
+
+    this.setState({ order: newOrder });
+  };
+
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleInputClick = e => {
-    e.persist();
-
-    const newOrder = this.state.order.map((item, i) => {
-      if (i === 0) {
-        return { ...item, [e.target.name]: "" };
-      } else {
-        return { ...item };
-      }
-    });
-
-    this.setState(prev => ({
-      ...prev,
-      ...{
-        [e.target.name]: ""
-      },
-      order: newOrder
-    }));
+    this.setState({ [e.target.name]: "" });
   };
 
-  handleButtonClick = () => {
-    this.setState({
-      isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4
-    });
+  handleLocationInputChange = (e, index) => {
+    this.handleInputChange(e);
+    this.handleOrderChange(e.target.name, e.target.value, index);
   };
 
-  handleModelItemClick = model => {
-    const newOrder = this.state.order.map((item, i) => {
-      if (i === 1) {
-        return { ...item, value: model };
-      } else {
-        return { ...item };
-      }
-    });
-
-    this.setState({ order: newOrder });
+  handleLocationInputClick = (e, index) => {
+    this.handleInputClick(e);
+    this.handleOrderChange(e.target.name, "", index);
   };
 
-  handleMenuColorChange = color => {
-    const newOrder = this.state.order.map((item, i) => {
-      if (i === 2) {
-        return { ...item, value: color };
-      } else {
-        return { ...item };
-      }
-    });
+  handleDateInputChange = (e, index) => {
+    this.handleInputChange(e);
 
-    this.setState({ order: newOrder });
-  };
+    const since = this.state.since;
+    const by = this.state.by;
+    // console.log("since", since);
+    // console.log("by", by);
 
-  handleInputDateChange = (since, by) => {
     const from = new Date(since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
     const to = new Date(by.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
-
+    // console.log("from", from);
+    // console.log("to", to);
     const time = new Date(to - from);
-
-    const day = time.getDate() === 1 ? 1 : time.getDate() - 1;
+    // console.log("time", time);
+    const day = time.getDate() === 0 ? 0 : time.getDate() - 1;
     const hours = time.getHours() + time.getTimezoneOffset() / 60;
-
+    // console.log("day", day);
+    // console.log("hours", hours);
     const datetime = [];
 
     day ? datetime.push(day + "д") : null;
     hours ? datetime.push(hours + "ч") : null;
+    // console.log("datetime", datetime);
 
-    const newOrder = this.state.order.map((item, i) => {
-      if (i === 3) {
-        return { ...item, value: datetime.join(" ") };
-      } else {
-        return { ...item };
-      }
-    });
-
-    this.setState({ order: newOrder });
+    this.handleOrderChange("value", datetime.join(" "), index);
   };
 
-  handleMenuTariffChange = tariff => {
-    const newOrder = this.state.order.map((item, i) => {
-      if (i === 4) {
-        return { ...item, value: tariff };
-      } else {
-        return { ...item };
-      }
-    });
-
-    this.setState({ order: newOrder });
-  };
-
-  handleMenuServicesChange = (name, value) => {
-    const newOrder = this.state.order.map((item, i) => {
-      if (
-        (i === 5 && name === "fuel") ||
-        (i === 6 && name === "chair") ||
-        (i === 7 && name === "wheel")
-      ) {
-        return { ...item, value };
-      } else {
-        return { ...item };
-      }
-    });
-
-    this.setState({ order: newOrder });
+  handleDateInputClick = (e, index) => {
+    this.handleInputClick(e);
+    this.handleOrderChange("value", "", index);
   };
 
   render() {
-    const city = this.state.city;
-    const place = this.state.place;
     const isActive = this.state.isActive;
+    // const history = this.state.history;
+    // const current = history[isActive - 1];
 
     let renderStep;
 
@@ -206,23 +152,24 @@ export default class App extends React.Component {
       case 1:
         renderStep = (
           <Location
-            city={city}
-            place={place}
-            onInputChange={this.handleInputChange}
+            city={this.state.city}
+            place={this.state.place}
+            onInputChange={this.handleLocationInputChange}
             onInputClick={this.handleInputClick}
           />
         );
         break;
       case 2:
-        renderStep = <Model onMenuItemClick={this.handleModelItemClick} />;
+        renderStep = <Model onMenuItemClick={this.handleOrderChange} />;
         break;
       case 3:
         renderStep = (
           <Options
-            onMenuColorChange={this.handleMenuColorChange}
-            onInputDateChange={this.handleInputDateChange}
-            onMenuTarifChange={this.handleMenuTariffChange}
-            onMenuServicesChange={this.handleMenuServicesChange}
+            since={this.state.since}
+            by={this.state.by}
+            onOrderChange={this.handleOrderChange}
+            onInputDateChange={this.handleDateInputChange}
+            onInputDateClick={this.handleDateInputClick}
           />
         );
         break;

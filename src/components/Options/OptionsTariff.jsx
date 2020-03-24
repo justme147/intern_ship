@@ -2,7 +2,7 @@ import React from "react";
 
 export default function OptionsTariff(props) {
   function handleInputChange(e) {
-    props.menuTariffChange(e.target.value);
+    props.menuTariffChange("value", e.target.value, 4);
   }
 
   return (

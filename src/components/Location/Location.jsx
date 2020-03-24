@@ -10,7 +10,7 @@ export default function Location(props) {
           city={props.city}
           place={props.place}
           onInputChange={props.onInputChange}
-          onInputClick={props.onInputClick}
+          // onInputClick={props.onInputClick}
         />
         <div className="body-main-location__map">
           <h5 className="body-main-location__subtitle">Выбрать на карте:</h5>

@@ -2,11 +2,11 @@ import React from "react";
 
 export default function LocationForm(props) {
   function inputChange(e) {
-    props.onInputChange(e, 0);
+    props.onInputChange(e.target.name, e.target.value, 0);
   }
 
   function inputClick(e) {
-    props.onInputClick(e, 0);
+    props.onInputChange(e.target.name, "", 0);
   }
 
   return (

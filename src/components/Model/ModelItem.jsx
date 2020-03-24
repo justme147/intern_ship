@@ -8,7 +8,7 @@ export default function ModelItem({ car, onMenuItemClick, selectItem }) {
   }
 
   function modelItemClick() {
-    onMenuItemClick(car.id, car.model);
+    onMenuItemClick(car.id, car.model, car.name, car.number, car.fuel);
   }
 
   return (

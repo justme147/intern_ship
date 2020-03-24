@@ -15,7 +15,7 @@ export default function Options(props) {
         <h4 className="body-main-options__subtitle">Дата аренды</h4>
         <OptionDate
           inputDateChange={props.onInputDateChange}
-          inputDateClick={props.onInputDateClick}
+          inputDateClick={props.onOrderChange}
           since={props.since}
           by={props.by}
         />

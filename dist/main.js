@@ -172,6 +172,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Order_Order_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Order/Order.jsx */ "./components/Order/Order.jsx");
 /* harmony import */ var _Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Model/Model.jsx */ "./components/Model/Model.jsx");
 /* harmony import */ var _Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Options/Options.jsx */ "./components/Options/Options.jsx");
+/* harmony import */ var _Total_Total_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Total/Total.jsx */ "./components/Total/Total.jsx");
+/* harmony import */ var _Modal_Modal_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Modal/Modal.jsx */ "./components/Modal/Modal.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -199,6 +201,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -217,12 +221,19 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleButtonDeclineClick", function () {
+      _this.setState({
+        isModal: false
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleButtonClick", function () {
       // const history = this.state.history;
       // const current = history[history.length - 1];
       // const newOrder = this.state.order;
       _this.setState({
-        isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4 // history: this.state.history.concat({ order: newOrder })
+        isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4,
+        isModal: _this.state.isActive === 4 ? true : false // history: this.state.history.concat({ order: newOrder })
 
       });
     });
@@ -237,77 +248,47 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputChange", function (e) {
-      _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleInputClick", function (e) {
-      _this.setState(_defineProperty({}, e.target.name, ""));
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleLocationInputChange", function (e, index) {
-      _this.handleInputChange(e);
-
-      _this.handleOrderChange(e.target.name, e.target.value, index);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleLocationInputClick", function (e, index) {
-      _this.handleInputClick(e);
-
-      _this.handleOrderChange(e.target.name, "", index);
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleDateInputChange", function (e, index) {
-      _this.handleInputChange(e);
+      // this.handleInputChange(e);
+      _this.handleOrderChange(e.target.name, e.target.value, index);
 
-      var since = _this.state.since;
-      var by = _this.state.by; // console.log("since", since);
-      // console.log("by", by);
-
+      var since = _this.state.order[index].since;
+      var by = _this.state.order[index].by;
       var from = new Date(since.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
-      var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1")); // console.log("from", from);
-      // console.log("to", to);
-
-      var time = new Date(to - from); // console.log("time", time);
-
+      var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
+      var time = new Date(to - from);
       var day = time.getDate() === 0 ? 0 : time.getDate() - 1;
-      var hours = time.getHours() + time.getTimezoneOffset() / 60; // console.log("day", day);
-      // console.log("hours", hours);
-
+      var hours = time.getHours() + time.getTimezoneOffset() / 60;
       var datetime = [];
       day ? datetime.push(day + "д") : null;
-      hours ? datetime.push(hours + "ч") : null; // console.log("datetime", datetime);
+      hours ? datetime.push(hours + "ч") : null;
 
       _this.handleOrderChange("value", datetime.join(" "), index);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDateInputClick", function (e, index) {
-      _this.handleInputClick(e);
-
-      _this.handleOrderChange("value", "", index);
-    });
-
     _this.state = {
       isActive: 1,
-      city: document.querySelector(".body-header__text").textContent || "",
-      place: "",
-      since: new Date().toLocaleString(),
-      by: "",
+      isModal: false,
       order: [{
         city: document.querySelector(".body-header__text").textContent || "",
-        place: null,
+        place: "",
         title: "Пункт выдачи"
       }, {
-        value: null,
+        name: "",
+        number: "",
+        value: "",
+        fuel: "",
         title: "Модель"
       }, {
-        value: null,
+        value: "",
         title: "Цвет"
       }, {
-        value: null,
-        title: "Длительность аренды"
+        value: "",
+        title: "Длительность аренды",
+        since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
+        by: ""
       }, {
-        value: null,
+        value: "",
         title: "Тариф"
       }, {
         value: false,
@@ -322,32 +303,37 @@ var App = /*#__PURE__*/function (_React$Component) {
       history: []
     };
     _this.handleMenuClick = _this.handleMenuClick.bind(_assertThisInitialized(_this));
-    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
-    _this.handleInputClick = _this.handleInputClick.bind(_assertThisInitialized(_this));
     _this.handleButtonClick = _this.handleButtonClick.bind(_assertThisInitialized(_this));
     _this.handleOrderChange = _this.handleOrderChange.bind(_assertThisInitialized(_this));
-    _this.handleLocationInputChange = _this.handleLocationInputChange.bind(_assertThisInitialized(_this));
-    _this.handleLocationInputClick = _this.handleLocationInputClick.bind(_assertThisInitialized(_this));
     _this.handleDateInputChange = _this.handleDateInputChange.bind(_assertThisInitialized(_this));
-    _this.handleDateInputClick = _this.handleDateInputClick.bind(_assertThisInitialized(_this));
+    _this.handleButtonDeclineClick = _this.handleButtonDeclineClick.bind(_assertThisInitialized(_this)); // this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleInputClick = this.handleInputClick.bind(this);
+    // this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
+    // this.handleLocationInputClick = this.handleLocationInputClick.bind(this);
+    // this.handleDateInputClick = this.handleDateInputClick.bind(this);
+
     return _this;
   }
 
   _createClass(App, [{
     key: "render",
+    // handleDateInputClick = (e, index) => {
+    //   // this.handleInputClick(e);
+    //   this.handleOrderChange(e.target.name, "", index);
+    //   this.handleOrderChange("value", "", index);
+    // };
     value: function render() {
-      var isActive = this.state.isActive; // const history = this.state.history;
-      // const current = history[isActive - 1];
-
+      var isActive = this.state.isActive;
       var renderStep;
 
       switch (this.state.isActive) {
         case 1:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Location_Location_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            city: this.state.city,
-            place: this.state.place,
-            onInputChange: this.handleLocationInputChange,
-            onInputClick: this.handleInputClick
+            city: this.state.order[0].city,
+            place: this.state.order[0].place,
+            onInputChange: this.handleOrderChange // onInputChange={this.handleLocationInputChange}
+            // onInputClick={this.handleLocationInputClick}
+
           });
           break;
 
@@ -359,11 +345,22 @@ var App = /*#__PURE__*/function (_React$Component) {
 
         case 3:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            since: this.state.since,
-            by: this.state.by,
+            since: this.state.order[3].since,
+            by: this.state.order[3].by,
             onOrderChange: this.handleOrderChange,
-            onInputDateChange: this.handleDateInputChange,
-            onInputDateClick: this.handleDateInputClick
+            onInputDateChange: this.handleDateInputChange // onInputDateClick={this.handleDateInputClick}
+
+          });
+          break;
+
+        case 4:
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Total_Total_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            since: this.state.order[3].since,
+            name: this.state.order[1].name,
+            model: this.state.order[1].value,
+            number: this.state.order[1].number,
+            fuel: this.state.order[1].fuel,
+            isFull: this.state.order[5].value
           });
           break;
       }
@@ -377,8 +374,11 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "body-main__content"
       }, renderStep, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Order_Order_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         order: this.state.order,
-        onButtonClick: this.handleButtonClick
-      })));
+        onButtonClick: this.handleButtonClick,
+        step: this.state.isActive
+      })), this.state.isModal ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_Modal_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        onButtonDeclineClick: this.handleButtonDeclineClick
+      }) : "");
     }
   }]);
 
@@ -412,8 +412,8 @@ function Location(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationForm_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     city: props.city,
     place: props.place,
-    onInputChange: props.onInputChange,
-    onInputClick: props.onInputClick
+    onInputChange: props.onInputChange // onInputClick={props.onInputClick}
+
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main-location__map"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -440,11 +440,11 @@ __webpack_require__.r(__webpack_exports__);
 
 function LocationForm(props) {
   function inputChange(e) {
-    props.onInputChange(e, 0);
+    props.onInputChange(e.target.name, e.target.value, 0);
   }
 
   function inputClick(e) {
-    props.onInputClick(e, 0);
+    props.onInputChange(e.target.name, "", 0);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -485,6 +485,38 @@ function LocationForm(props) {
 
 /***/ }),
 
+/***/ "./components/Modal/Modal.jsx":
+/*!************************************!*\
+  !*** ./components/Modal/Modal.jsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Modal; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Modal(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "modal"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "modal__inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "modal__content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "modal__title"
+  }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button button__accept"
+  }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button button__decline",
+    onClick: props.onButtonDeclineClick
+  }, "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F"))));
+}
+
+/***/ }),
+
 /***/ "./components/Model/Model.jsx":
 /*!************************************!*\
   !*** ./components/Model/Model.jsx ***!
@@ -515,42 +547,66 @@ function Model(props) {
     id: 1,
     model: "ELANTRA",
     price: "12 000 - 15 000 Р",
-    class: "eco"
+    class: "eco",
+    name: "Hyndai",
+    number: "К 761 НА 73",
+    fuel: "36%"
   }, {
     id: 2,
     model: "i30 N",
     price: "10 000 - 32 000 Р",
-    class: "premium"
+    class: "premium",
+    name: "Hyndai",
+    number: "Л 235 ЛК 73",
+    fuel: "85%"
   }, {
     id: 3,
     model: "CRETA",
     price: "12 000 - 25 000 Р",
-    class: "premium"
+    class: "premium",
+    name: "Hyndai",
+    number: "Р 359 ВО 73",
+    fuel: "91%"
   }, {
     id: 4,
     model: "SONATA",
     price: "10 000 - 32 000 Р",
-    class: "eco"
+    class: "eco",
+    name: "Hyndai",
+    number: "А 193 МН 73",
+    fuel: "3%"
   }, {
     id: 5,
     model: "ELANTRA",
     price: "12 000 - 15 000 Р",
-    class: "premium"
+    class: "premium",
+    name: "Hyndai",
+    number: "А 111 БВ 73",
+    fuel: "100%"
   }, {
     id: 6,
     model: "i30 N",
     price: "10 000 - 32 000 Р",
-    class: "premium"
+    class: "premium",
+    name: "Hyndai",
+    number: "Б 222 ГД 73",
+    fuel: "55%"
   }, {
     id: 7,
     model: "CRETA",
     price: "12 000 - 25 000 Р",
-    class: "eco"
+    class: "eco",
+    name: "Hyndai",
+    number: "Д 333 ЕК 73",
+    fuel: "86%"
   }, {
     id: 8,
     model: "SONATA",
     price: "10 000 - 32 000 Р",
-    class: "eco"
+    class: "eco",
+    name: "Hyndai",
+    number: "Е 444 УК 73",
+    fuel: "30%"
   }]),
       _useState2 = _slicedToArray(_useState, 2),
       car = _useState2[0],
@@ -570,9 +626,12 @@ function Model(props) {
     setFilter(name);
   }
 
-  function handleItemClick(id, model) {
+  function handleItemClick(id, model, name, number, fuel) {
     setSelect(id);
     props.onMenuItemClick("value", model, 1);
+    props.onMenuItemClick("name", name, 1);
+    props.onMenuItemClick("number", number, 1);
+    props.onMenuItemClick("fuel", fuel, 1);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -616,7 +675,7 @@ function ModelItem(_ref) {
   }
 
   function modelItemClick() {
-    onMenuItemClick(car.id, car.model);
+    onMenuItemClick(car.id, car.model, car.name, car.number, car.fuel);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -891,7 +950,7 @@ function Options(props) {
     className: "body-main-options__subtitle"
   }, "\u0414\u0430\u0442\u0430 \u0430\u0440\u0435\u043D\u0434\u044B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsDate_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     inputDateChange: props.onInputDateChange,
-    inputDateClick: props.onInputDateClick,
+    inputDateClick: props.onOrderChange,
     since: props.since,
     by: props.by
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
@@ -979,6 +1038,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function OptionsDate(props) {
+  function inputClick(e, index) {
+    props.onOrderChange(e.target.name, "", index);
+    props.onOrderChange("value", "", index);
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form-section__container form-section__container--margin"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1000,7 +1064,7 @@ function OptionsDate(props) {
     src: "./images/orderpage/form_icon_delete.svg",
     className: "form-section__delete",
     onClick: function onClick(e) {
-      return props.inputDateClick(e, 3);
+      return inputClick(e, 3);
     },
     name: "since"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1022,7 +1086,7 @@ function OptionsDate(props) {
     src: "./images/orderpage/form_icon_delete.svg",
     className: "form-section__delete",
     onClick: function onClick(e) {
-      return props.inputDateClick(e, 3);
+      return inputClick(e, 3);
     },
     name: "by"
   })));
@@ -1183,6 +1247,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Order(props) {
+  function OrderButton() {
+    var button;
+
+    switch (props.step) {
+      case 1:
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "button body-main-order__button",
+          disabled: !props.order[0].city || !props.order[0].place,
+          onClick: props.onButtonClick
+        }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C");
+        break;
+
+      case 2:
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "button body-main-order__button",
+          disabled: !props.order[1].value,
+          onClick: props.onButtonClick
+        }, "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E");
+        break;
+
+      case 3:
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "button body-main-order__button",
+          disabled: !props.order[3].value || !props.order[4].value,
+          onClick: props.onButtonClick
+        }, "\u0418\u0442\u043E\u0433\u043E");
+        break;
+
+      case 4:
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "button body-main-order__button",
+          onClick: props.onButtonClick
+        }, "\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C");
+        break;
+    }
+
+    return button;
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main-order__inner"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1197,11 +1300,7 @@ function Order(props) {
     });
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "body-main-order__price"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u0426\u0435\u043D\u0430: "), "\u043E\u0442 8 000 \u0434\u043E 12 000 \u20BD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "button body-main-order__button",
-    disabled: !props.order[0].city || !props.order[0].place,
-    onClick: props.onButtonClick
-  }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u043E\u0434\u0435\u043B\u044C")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u0426\u0435\u043D\u0430: "), "\u043E\u0442 8 000 \u0434\u043E 12 000 \u20BD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OrderButton, null)));
 }
 
 /***/ }),
@@ -1246,6 +1345,47 @@ function OrderItem(props) {
   }, props.items.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OrderLocation, {
     item: props.items
   }));
+}
+
+/***/ }),
+
+/***/ "./components/Total/Total.jsx":
+/*!************************************!*\
+  !*** ./components/Total/Total.jsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Total; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Total(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-total__inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-total"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-total__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-total__descr"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main-total__model"
+  }, props.name, ", ", props.model), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main-total__number"
+  }, props.number.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main-total__fuel"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u0422\u043E\u043F\u043B\u0438\u0432\u043E "), props.isFull ? "100%" : props.fuel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main-total__since"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0441 "), props.since)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main-total__img"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/orderpage/cars/".concat(props.model, ".jpg"),
+    alt: "",
+    className: "body-main-total__image"
+  })))));
 }
 
 /***/ }),

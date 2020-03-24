@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import InputMask from "react-input-mask";
 
 export default function OptionsDate(props) {
+  function inputClick(e, index) {
+    props.onOrderChange(e.target.name, "", index);
+    props.onOrderChange("value", "", index);
+  }
   return (
     <form className="form-section__container form-section__container--margin">
       <div className="form-section__group">
@@ -20,7 +24,7 @@ export default function OptionsDate(props) {
           <img
             src="./images/orderpage/form_icon_delete.svg"
             className="form-section__delete"
-            onClick={e => props.inputDateClick(e, 3)}
+            onClick={e => inputClick(e, 3)}
             name="since"
           />
         )}
@@ -42,7 +46,7 @@ export default function OptionsDate(props) {
           <img
             src="./images/orderpage/form_icon_delete.svg"
             className="form-section__delete"
-            onClick={e => props.inputDateClick(e, 3)}
+            onClick={e => inputClick(e, 3)}
             name="by"
           />
         )}

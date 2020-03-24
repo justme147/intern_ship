@@ -5,36 +5,43 @@ import Location from "./Location/Location.jsx";
 import Order from "./Order/Order.jsx";
 import Model from "./Model/Model.jsx";
 import Options from "./Options/Options.jsx";
+import Total from "./Total/Total.jsx";
+import Modal from "./Modal/Modal.jsx";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isActive: 1,
-      city: document.querySelector(".body-header__text").textContent || "",
-      place: "",
-      since: new Date().toLocaleString(),
-      by: "",
+      isModal: false,
       order: [
         {
           city: document.querySelector(".body-header__text").textContent || "",
-          place: null,
+          place: "",
           title: "Пункт выдачи"
         },
         {
-          value: null,
+          name: "",
+          number: "",
+          value: "",
+          fuel: "",
           title: "Модель"
         },
         {
-          value: null,
+          value: "",
           title: "Цвет"
         },
         {
-          value: null,
-          title: "Длительность аренды"
+          value: "",
+          title: "Длительность аренды",
+          since: new Date()
+            .toLocaleString()
+            .slice(0, -3)
+            .replace(",", ""),
+          by: ""
         },
         {
-          value: null,
+          value: "",
           title: "Тариф"
         },
         {
@@ -54,14 +61,16 @@ export default class App extends React.Component {
     };
 
     this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleInputClick = this.handleInputClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOrderChange = this.handleOrderChange.bind(this);
-    this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
-    this.handleLocationInputClick = this.handleLocationInputClick.bind(this);
     this.handleDateInputChange = this.handleDateInputChange.bind(this);
-    this.handleDateInputClick = this.handleDateInputClick.bind(this);
+    this.handleButtonDeclineClick = this.handleButtonDeclineClick.bind(this);
+
+    // this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleInputClick = this.handleInputClick.bind(this);
+    // this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
+    // this.handleLocationInputClick = this.handleLocationInputClick.bind(this);
+    // this.handleDateInputClick = this.handleDateInputClick.bind(this);
   }
 
   handleMenuClick = id => {
@@ -72,13 +81,18 @@ export default class App extends React.Component {
     });
   };
 
+  handleButtonDeclineClick = () => {
+    this.setState({ isModal: false });
+  };
+
   handleButtonClick = () => {
     // const history = this.state.history;
     // const current = history[history.length - 1];
     // const newOrder = this.state.order;
 
     this.setState({
-      isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4
+      isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4,
+      isModal: this.state.isActive === 4 ? true : false
       // history: this.state.history.concat({ order: newOrder })
     });
   };
@@ -91,60 +105,55 @@ export default class App extends React.Component {
     this.setState({ order: newOrder });
   };
 
-  handleInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  // handleInputChange = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
 
-  handleInputClick = e => {
-    this.setState({ [e.target.name]: "" });
-  };
+  // handleInputClick = e => {
+  //   this.setState({ [e.target.name]: "" });
+  // };
 
-  handleLocationInputChange = (e, index) => {
-    this.handleInputChange(e);
-    this.handleOrderChange(e.target.name, e.target.value, index);
-  };
+  // handleLocationInputChange = (e, index) => {
+  //   // this.handleInputChange(e);
+  //   this.handleOrderChange(e.target.name, e.target.value, index);
+  // };
 
-  handleLocationInputClick = (e, index) => {
-    this.handleInputClick(e);
-    this.handleOrderChange(e.target.name, "", index);
-  };
+  // handleLocationInputClick = (e, index) => {
+  //   // this.handleInputClick(e);
+  //   this.handleOrderChange(e.target.name, "", index);
+  // };
 
   handleDateInputChange = (e, index) => {
-    this.handleInputChange(e);
+    // this.handleInputChange(e);
+    this.handleOrderChange(e.target.name, e.target.value, index);
 
-    const since = this.state.since;
-    const by = this.state.by;
-    // console.log("since", since);
-    // console.log("by", by);
+    const since = this.state.order[index].since;
+    const by = this.state.order[index].by;
 
     const from = new Date(since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
     const to = new Date(by.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
-    // console.log("from", from);
-    // console.log("to", to);
+
     const time = new Date(to - from);
-    // console.log("time", time);
+
     const day = time.getDate() === 0 ? 0 : time.getDate() - 1;
     const hours = time.getHours() + time.getTimezoneOffset() / 60;
-    // console.log("day", day);
-    // console.log("hours", hours);
+
     const datetime = [];
 
     day ? datetime.push(day + "д") : null;
     hours ? datetime.push(hours + "ч") : null;
-    // console.log("datetime", datetime);
 
     this.handleOrderChange("value", datetime.join(" "), index);
   };
 
-  handleDateInputClick = (e, index) => {
-    this.handleInputClick(e);
-    this.handleOrderChange("value", "", index);
-  };
+  // handleDateInputClick = (e, index) => {
+  //   // this.handleInputClick(e);
+  //   this.handleOrderChange(e.target.name, "", index);
+  //   this.handleOrderChange("value", "", index);
+  // };
 
   render() {
     const isActive = this.state.isActive;
-    // const history = this.state.history;
-    // const current = history[isActive - 1];
 
     let renderStep;
 
@@ -152,10 +161,11 @@ export default class App extends React.Component {
       case 1:
         renderStep = (
           <Location
-            city={this.state.city}
-            place={this.state.place}
-            onInputChange={this.handleLocationInputChange}
-            onInputClick={this.handleInputClick}
+            city={this.state.order[0].city}
+            place={this.state.order[0].place}
+            onInputChange={this.handleOrderChange}
+            // onInputChange={this.handleLocationInputChange}
+            // onInputClick={this.handleLocationInputClick}
           />
         );
         break;
@@ -165,11 +175,23 @@ export default class App extends React.Component {
       case 3:
         renderStep = (
           <Options
-            since={this.state.since}
-            by={this.state.by}
+            since={this.state.order[3].since}
+            by={this.state.order[3].by}
             onOrderChange={this.handleOrderChange}
             onInputDateChange={this.handleDateInputChange}
-            onInputDateClick={this.handleDateInputClick}
+            // onInputDateClick={this.handleDateInputClick}
+          />
+        );
+        break;
+      case 4:
+        renderStep = (
+          <Total
+            since={this.state.order[3].since}
+            name={this.state.order[1].name}
+            model={this.state.order[1].value}
+            number={this.state.order[1].number}
+            fuel={this.state.order[1].fuel}
+            isFull={this.state.order[5].value}
           />
         );
         break;
@@ -185,8 +207,15 @@ export default class App extends React.Component {
           <Order
             order={this.state.order}
             onButtonClick={this.handleButtonClick}
+            step={this.state.isActive}
           />
         </div>
+
+        {this.state.isModal ? (
+          <Modal onButtonDeclineClick={this.handleButtonDeclineClick} />
+        ) : (
+          ""
+        )}
       </div>
     );
   }

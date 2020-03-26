@@ -19,6 +19,7 @@ export default function LocationForm(props) {
           value={props.city}
           onChange={inputChange}
           name="city"
+          placeholder="Начните вводить город выдачи"
         />
         {props.city && (
           <img

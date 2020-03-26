@@ -10,7 +10,10 @@ export default function Options(props) {
     <div className="body-main-options__inner">
       <div className="body-main-options">
         <h4 className="body-main-options__subtitle">Цвет</h4>
-        <OptionColor menuColorChange={props.onOrderChange} />
+        <OptionColor
+          menuColorChange={props.onOrderChange}
+          colors={props.colors}
+        />
 
         <h4 className="body-main-options__subtitle">Дата аренды</h4>
         <OptionDate

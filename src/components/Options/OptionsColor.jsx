@@ -1,4 +1,5 @@
 import React from "react";
+import RadioButton from "../RadioButton/RadioButton.jsx";
 
 export default function OptionsColor(props) {
   function handleInputChange(e) {
@@ -7,39 +8,16 @@ export default function OptionsColor(props) {
 
   return (
     <div className="body-main-options__group">
-      <label className="radio-section__container">
-        <input
-          type="radio"
-          name="color"
-          value="Любой"
-          onChange={handleInputChange}
-          className="radio-section__input"
-        />
-        <span className="radio-section__checkmark"></span>
-        Любой
-      </label>
-      <label className="radio-section__container">
-        <input
-          type="radio"
-          name="color"
-          value="Красный"
-          onChange={handleInputChange}
-          className="radio-section__input"
-        />
-        <span className="radio-section__checkmark"></span>
-        Красный
-      </label>
-      <label className="radio-section__container">
-        <input
-          type="radio"
-          name="color"
-          value="Голубой"
-          onChange={handleInputChange}
-          className="radio-section__input"
-        />
-        <span className="radio-section__checkmark"></span>
-        Голубой
-      </label>
+      {props.colors.map(item => {
+        return (
+          <RadioButton
+            name="color"
+            value={item}
+            inputChange={handleInputChange}
+            key={item}
+          />
+        );
+      })}
     </div>
   );
 }

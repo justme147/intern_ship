@@ -1,12 +1,14 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import NavigationList from "./Navigation/NavigationList.jsx";
+import Navbar from "./Navbar/Navbar.jsx";
+import Header from "./Header/Header.jsx";
 import Location from "./Location/Location.jsx";
-import Order from "./Order/Order.jsx";
 import Model from "./Model/Model.jsx";
 import Options from "./Options/Options.jsx";
 import Total from "./Total/Total.jsx";
-import Modal from "./Modal/Modal.jsx";
+import OrderPage from "./Pages/OrderPage.jsx";
+import WatchPage from "./Pages/WatchPage.jsx";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,9 +16,12 @@ export default class App extends React.Component {
     this.state = {
       isActive: 1,
       isModal: false,
+      // orderId: `RU${Date.now()}`,
+      colorsCar: [],
       order: [
         {
-          city: document.querySelector(".body-header__text").textContent || "",
+          // city: document.querySelector(".body-header__text").textContent || "",
+          city: "",
           place: "",
           title: "Пункт выдачи"
         },
@@ -65,12 +70,7 @@ export default class App extends React.Component {
     this.handleOrderChange = this.handleOrderChange.bind(this);
     this.handleDateInputChange = this.handleDateInputChange.bind(this);
     this.handleButtonDeclineClick = this.handleButtonDeclineClick.bind(this);
-
-    // this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleInputClick = this.handleInputClick.bind(this);
-    // this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
-    // this.handleLocationInputClick = this.handleLocationInputClick.bind(this);
-    // this.handleDateInputClick = this.handleDateInputClick.bind(this);
+    this.handleModelClick = this.handleModelClick.bind(this);
   }
 
   handleMenuClick = id => {
@@ -105,26 +105,11 @@ export default class App extends React.Component {
     this.setState({ order: newOrder });
   };
 
-  // handleInputChange = e => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // };
-
-  // handleInputClick = e => {
-  //   this.setState({ [e.target.name]: "" });
-  // };
-
-  // handleLocationInputChange = (e, index) => {
-  //   // this.handleInputChange(e);
-  //   this.handleOrderChange(e.target.name, e.target.value, index);
-  // };
-
-  // handleLocationInputClick = (e, index) => {
-  //   // this.handleInputClick(e);
-  //   this.handleOrderChange(e.target.name, "", index);
-  // };
+  handleModelClick = value => {
+    this.setState({ colorsCar: value });
+  };
 
   handleDateInputChange = (e, index) => {
-    // this.handleInputChange(e);
     this.handleOrderChange(e.target.name, e.target.value, index);
 
     const since = this.state.order[index].since;
@@ -135,22 +120,21 @@ export default class App extends React.Component {
 
     const time = new Date(to - from);
 
-    const day = time.getDate() === 0 ? 0 : time.getDate() - 1;
-    const hours = time.getHours() + time.getTimezoneOffset() / 60;
+    const month = time.getMonth();
+    const day = time.getDate() - 1;
+    let hours = time.getHours() + time.getTimezoneOffset() / 60;
+    hours = hours < 0 ? 24 + hours : hours;
+    const minutes = time.getMinutes();
 
     const datetime = [];
 
+    month ? datetime.push(month + "м") : null;
     day ? datetime.push(day + "д") : null;
     hours ? datetime.push(hours + "ч") : null;
+    minutes ? datetime.push(minutes + "мин") : null;
 
     this.handleOrderChange("value", datetime.join(" "), index);
   };
-
-  // handleDateInputClick = (e, index) => {
-  //   // this.handleInputClick(e);
-  //   this.handleOrderChange(e.target.name, "", index);
-  //   this.handleOrderChange("value", "", index);
-  // };
 
   render() {
     const isActive = this.state.isActive;
@@ -164,13 +148,16 @@ export default class App extends React.Component {
             city={this.state.order[0].city}
             place={this.state.order[0].place}
             onInputChange={this.handleOrderChange}
-            // onInputChange={this.handleLocationInputChange}
-            // onInputClick={this.handleLocationInputClick}
           />
         );
         break;
       case 2:
-        renderStep = <Model onMenuItemClick={this.handleOrderChange} />;
+        renderStep = (
+          <Model
+            onMenuItemClick={this.handleOrderChange}
+            onModelClick={this.handleModelClick}
+          />
+        );
         break;
       case 3:
         renderStep = (
@@ -179,7 +166,7 @@ export default class App extends React.Component {
             by={this.state.order[3].by}
             onOrderChange={this.handleOrderChange}
             onInputDateChange={this.handleDateInputChange}
-            // onInputDateClick={this.handleDateInputClick}
+            colors={this.state.colorsCar}
           />
         );
         break;
@@ -198,25 +185,44 @@ export default class App extends React.Component {
     }
 
     return (
-      <div className="body-main__inner">
-        <NavigationList active={isActive} menuClick={this.handleMenuClick} />
+      <BrowserRouter className="wrapper">
+        <div className="container">
+          <div className="container__content container__content--order">
+            <Navbar />
+            <section className="body--order">
+              <Header />
 
-        <div className="body-main__content">
-          {renderStep}
-
-          <Order
-            order={this.state.order}
-            onButtonClick={this.handleButtonClick}
-            step={this.state.isActive}
-          />
+              <Switch>
+                <Route path="/">
+                  <OrderPage
+                    isActive={isActive}
+                    handleMenuClick={this.handleMenuClick}
+                    renderStep={renderStep}
+                    order={this.state.order}
+                    handleButtonClick={this.handleButtonClick}
+                    isModal={this.state.isModal}
+                    handleButtonDeclineClick={this.handleButtonDeclineClick}
+                    orderId={this.state.orderId}
+                  />
+                </Route>
+                {/* <Route path={`/${this.state.orderId}`}>
+                  <WatchPage
+                    order={this.state.order}
+                    handleButtonClick={this.handleButtonClick}
+                    isActive={isActive}
+                    since={this.state.order[3].since}
+                    name={this.state.order[1].name}
+                    model={this.state.order[1].value}
+                    number={this.state.order[1].number}
+                    fuel={this.state.order[1].fuel}
+                    isFull={this.state.order[5].value}
+                  />
+                </Route> */}
+              </Switch>
+            </section>
+          </div>
         </div>
-
-        {this.state.isModal ? (
-          <Modal onButtonDeclineClick={this.handleButtonDeclineClick} />
-        ) : (
-          ""
-        )}
-      </div>
+      </BrowserRouter>
     );
   }
 }

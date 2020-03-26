@@ -167,13 +167,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Navigation_NavigationList_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Navigation/NavigationList.jsx */ "./components/Navigation/NavigationList.jsx");
-/* harmony import */ var _Location_Location_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Location/Location.jsx */ "./components/Location/Location.jsx");
-/* harmony import */ var _Order_Order_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Order/Order.jsx */ "./components/Order/Order.jsx");
-/* harmony import */ var _Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Model/Model.jsx */ "./components/Model/Model.jsx");
-/* harmony import */ var _Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Options/Options.jsx */ "./components/Options/Options.jsx");
-/* harmony import */ var _Total_Total_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Total/Total.jsx */ "./components/Total/Total.jsx");
-/* harmony import */ var _Modal_Modal_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Modal/Modal.jsx */ "./components/Modal/Modal.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Navbar_Navbar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navbar/Navbar.jsx */ "./components/Navbar/Navbar.jsx");
+/* harmony import */ var _Header_Header_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header/Header.jsx */ "./components/Header/Header.jsx");
+/* harmony import */ var _Location_Location_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Location/Location.jsx */ "./components/Location/Location.jsx");
+/* harmony import */ var _Model_Model_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Model/Model.jsx */ "./components/Model/Model.jsx");
+/* harmony import */ var _Options_Options_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Options/Options.jsx */ "./components/Options/Options.jsx");
+/* harmony import */ var _Total_Total_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Total/Total.jsx */ "./components/Total/Total.jsx");
+/* harmony import */ var _Pages_OrderPage_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Pages/OrderPage.jsx */ "./components/Pages/OrderPage.jsx");
+/* harmony import */ var _Pages_WatchPage_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Pages/WatchPage.jsx */ "./components/Pages/WatchPage.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -193,6 +195,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -248,8 +252,13 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleModelClick", function (value) {
+      _this.setState({
+        colorsCar: value
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleDateInputChange", function (e, index) {
-      // this.handleInputChange(e);
       _this.handleOrderChange(e.target.name, e.target.value, index);
 
       var since = _this.state.order[index].since;
@@ -257,11 +266,16 @@ var App = /*#__PURE__*/function (_React$Component) {
       var from = new Date(since.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
       var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
       var time = new Date(to - from);
-      var day = time.getDate() === 0 ? 0 : time.getDate() - 1;
+      var month = time.getMonth();
+      var day = time.getDate() - 1;
       var hours = time.getHours() + time.getTimezoneOffset() / 60;
+      hours = hours < 0 ? 24 + hours : hours;
+      var minutes = time.getMinutes();
       var datetime = [];
+      month ? datetime.push(month + "м") : null;
       day ? datetime.push(day + "д") : null;
       hours ? datetime.push(hours + "ч") : null;
+      minutes ? datetime.push(minutes + "мин") : null;
 
       _this.handleOrderChange("value", datetime.join(" "), index);
     });
@@ -269,8 +283,11 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       isActive: 1,
       isModal: false,
+      // orderId: `RU${Date.now()}`,
+      colorsCar: [],
       order: [{
-        city: document.querySelector(".body-header__text").textContent || "",
+        // city: document.querySelector(".body-header__text").textContent || "",
+        city: "",
         place: "",
         title: "Пункт выдачи"
       }, {
@@ -306,55 +323,45 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this.handleButtonClick = _this.handleButtonClick.bind(_assertThisInitialized(_this));
     _this.handleOrderChange = _this.handleOrderChange.bind(_assertThisInitialized(_this));
     _this.handleDateInputChange = _this.handleDateInputChange.bind(_assertThisInitialized(_this));
-    _this.handleButtonDeclineClick = _this.handleButtonDeclineClick.bind(_assertThisInitialized(_this)); // this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleInputClick = this.handleInputClick.bind(this);
-    // this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
-    // this.handleLocationInputClick = this.handleLocationInputClick.bind(this);
-    // this.handleDateInputClick = this.handleDateInputClick.bind(this);
-
+    _this.handleButtonDeclineClick = _this.handleButtonDeclineClick.bind(_assertThisInitialized(_this));
+    _this.handleModelClick = _this.handleModelClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
     key: "render",
-    // handleDateInputClick = (e, index) => {
-    //   // this.handleInputClick(e);
-    //   this.handleOrderChange(e.target.name, "", index);
-    //   this.handleOrderChange("value", "", index);
-    // };
     value: function render() {
       var isActive = this.state.isActive;
       var renderStep;
 
       switch (this.state.isActive) {
         case 1:
-          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Location_Location_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Location_Location_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
             city: this.state.order[0].city,
             place: this.state.order[0].place,
-            onInputChange: this.handleOrderChange // onInputChange={this.handleLocationInputChange}
-            // onInputClick={this.handleLocationInputClick}
-
+            onInputChange: this.handleOrderChange
           });
           break;
 
         case 2:
-          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Model_Model_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            onMenuItemClick: this.handleOrderChange
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Model_Model_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            onMenuItemClick: this.handleOrderChange,
+            onModelClick: this.handleModelClick
           });
           break;
 
         case 3:
-          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Options_Options_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Options_Options_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
             since: this.state.order[3].since,
             by: this.state.order[3].by,
             onOrderChange: this.handleOrderChange,
-            onInputDateChange: this.handleDateInputChange // onInputDateClick={this.handleDateInputClick}
-
+            onInputDateChange: this.handleDateInputChange,
+            colors: this.state.colorsCar
           });
           break;
 
         case 4:
-          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Total_Total_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Total_Total_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
             since: this.state.order[3].since,
             name: this.state.order[1].name,
             model: this.state.order[1].value,
@@ -365,20 +372,26 @@ var App = /*#__PURE__*/function (_React$Component) {
           break;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "body-main__inner"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation_NavigationList_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        active: isActive,
-        menuClick: this.handleMenuClick
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "body-main__content"
-      }, renderStep, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Order_Order_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container__content container__content--order"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar_Navbar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "body--order"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header_Header_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pages_OrderPage_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        isActive: isActive,
+        handleMenuClick: this.handleMenuClick,
+        renderStep: renderStep,
         order: this.state.order,
-        onButtonClick: this.handleButtonClick,
-        step: this.state.isActive
-      })), this.state.isModal ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_Modal_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        onButtonDeclineClick: this.handleButtonDeclineClick
-      }) : "");
+        handleButtonClick: this.handleButtonClick,
+        isModal: this.state.isModal,
+        handleButtonDeclineClick: this.handleButtonDeclineClick,
+        orderId: this.state.orderId
+      })))))));
     }
   }]);
 
@@ -386,6 +399,40 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
+
+/***/ }),
+
+/***/ "./components/Header/Header.jsx":
+/*!**************************************!*\
+  !*** ./components/Header/Header.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Header; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Header() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    className: "body-header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-header__inner body-header__inner--padding"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "index.html",
+    className: "body-header__logo"
+  }, "Need for drive"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-header__location"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "images/startscreen/icon_map_marker.svg",
+    alt: "map_marker",
+    className: "body-header__icon"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-header__text"
+  }, "\u0423\u043B\u044C\u044F\u043D\u043E\u0432\u0441\u043A"))));
+}
 
 /***/ }),
 
@@ -458,7 +505,8 @@ function LocationForm(props) {
     type: "text",
     value: props.city,
     onChange: inputChange,
-    name: "city"
+    name: "city",
+    placeholder: "\u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0432\u0432\u043E\u0434\u0438\u0442\u044C \u0433\u043E\u0440\u043E\u0434 \u0432\u044B\u0434\u0430\u0447\u0438"
   }), props.city && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: "./images/orderpage/form_icon_delete.svg",
     className: "form-section__delete",
@@ -550,7 +598,8 @@ function Model(props) {
     class: "eco",
     name: "Hyndai",
     number: "К 761 НА 73",
-    fuel: "36%"
+    fuel: "36%",
+    color: ["Красный", "Белый", "Коричневый"]
   }, {
     id: 2,
     model: "i30 N",
@@ -558,7 +607,8 @@ function Model(props) {
     class: "premium",
     name: "Hyndai",
     number: "Л 235 ЛК 73",
-    fuel: "85%"
+    fuel: "85%",
+    color: ["Зеленый", "Красный", "Синий"]
   }, {
     id: 3,
     model: "CRETA",
@@ -566,7 +616,8 @@ function Model(props) {
     class: "premium",
     name: "Hyndai",
     number: "Р 359 ВО 73",
-    fuel: "91%"
+    fuel: "91%",
+    color: ["Желтый", "Белый", "Красный"]
   }, {
     id: 4,
     model: "SONATA",
@@ -574,7 +625,8 @@ function Model(props) {
     class: "eco",
     name: "Hyndai",
     number: "А 193 МН 73",
-    fuel: "3%"
+    fuel: "3%",
+    color: ["Черный", "Красный", "Голубой"]
   }, {
     id: 5,
     model: "ELANTRA",
@@ -582,7 +634,8 @@ function Model(props) {
     class: "premium",
     name: "Hyndai",
     number: "А 111 БВ 73",
-    fuel: "100%"
+    fuel: "100%",
+    color: ["Красный", "Оранжевый", "Зеленый"]
   }, {
     id: 6,
     model: "i30 N",
@@ -590,7 +643,8 @@ function Model(props) {
     class: "premium",
     name: "Hyndai",
     number: "Б 222 ГД 73",
-    fuel: "55%"
+    fuel: "55%",
+    color: ["Белый", "Красный", "Серый"]
   }, {
     id: 7,
     model: "CRETA",
@@ -598,7 +652,8 @@ function Model(props) {
     class: "eco",
     name: "Hyndai",
     number: "Д 333 ЕК 73",
-    fuel: "86%"
+    fuel: "86%",
+    color: ["Красный", "Оранжевый", "Белый"]
   }, {
     id: 8,
     model: "SONATA",
@@ -606,7 +661,8 @@ function Model(props) {
     class: "eco",
     name: "Hyndai",
     number: "Е 444 УК 73",
-    fuel: "30%"
+    fuel: "30%",
+    color: ["Красный", "Черный", "Белый"]
   }]),
       _useState2 = _slicedToArray(_useState, 2),
       car = _useState2[0],
@@ -626,12 +682,14 @@ function Model(props) {
     setFilter(name);
   }
 
-  function handleItemClick(id, model, name, number, fuel) {
+  function handleItemClick(id, model, name, number, fuel, colors) {
+    var color = ["Любой"];
     setSelect(id);
     props.onMenuItemClick("value", model, 1);
     props.onMenuItemClick("name", name, 1);
     props.onMenuItemClick("number", number, 1);
     props.onMenuItemClick("fuel", fuel, 1);
+    props.onModelClick(color.concat(colors));
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -675,7 +733,7 @@ function ModelItem(_ref) {
   }
 
   function modelItemClick() {
-    onMenuItemClick(car.id, car.model, car.name, car.number, car.fuel);
+    onMenuItemClick(car.id, car.model, car.name, car.number, car.fuel, car.color);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -819,6 +877,39 @@ function ModelMenuItem(_ref) {
 
 /***/ }),
 
+/***/ "./components/Navbar/Navbar.jsx":
+/*!**************************************!*\
+  !*** ./components/Navbar/Navbar.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Navbar; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Navbar() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "sidebar sidebar--fixed"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sidebar__inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "burger"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "burger__inner burger__inner--padding_t"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "burger__item"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sidebar-lang-switch"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "sidebar-lang-switch__button"
+  }, "Eng"))));
+}
+
+/***/ }),
+
 /***/ "./components/Navigation/NavigationItem.jsx":
 /*!**************************************************!*\
   !*** ./components/Navigation/NavigationItem.jsx ***!
@@ -945,7 +1036,8 @@ function Options(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "body-main-options__subtitle"
   }, "\u0426\u0432\u0435\u0442"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsColor_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    menuColorChange: props.onOrderChange
+    menuColorChange: props.onOrderChange,
+    colors: props.colors
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "body-main-options__subtitle"
   }, "\u0414\u0430\u0442\u0430 \u0430\u0440\u0435\u043D\u0434\u044B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OptionsDate_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -978,6 +1070,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OptionsColor; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _RadioButton_RadioButton_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RadioButton/RadioButton.jsx */ "./components/RadioButton/RadioButton.jsx");
+
 
 function OptionsColor(props) {
   function handleInputChange(e) {
@@ -986,37 +1080,14 @@ function OptionsColor(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main-options__group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "radio-section__container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "radio",
-    name: "color",
-    value: "\u041B\u044E\u0431\u043E\u0439",
-    onChange: handleInputChange,
-    className: "radio-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "radio-section__checkmark"
-  }), "\u041B\u044E\u0431\u043E\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "radio-section__container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "radio",
-    name: "color",
-    value: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439",
-    onChange: handleInputChange,
-    className: "radio-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "radio-section__checkmark"
-  }), "\u041A\u0440\u0430\u0441\u043D\u044B\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "radio-section__container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "radio",
-    name: "color",
-    value: "\u0413\u043E\u043B\u0443\u0431\u043E\u0439",
-    onChange: handleInputChange,
-    className: "radio-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "radio-section__checkmark"
-  }), "\u0413\u043E\u043B\u0443\u0431\u043E\u0439"));
+  }, props.colors.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RadioButton_RadioButton_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      name: "color",
+      value: item,
+      inputChange: handleInputChange,
+      key: item
+    });
+  }));
 }
 
 /***/ }),
@@ -1198,35 +1269,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OptionsTariff; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _RadioButton_RadioButton_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RadioButton/RadioButton.jsx */ "./components/RadioButton/RadioButton.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 function OptionsTariff(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: 1,
+    value: "Поминутно",
+    title: "Поминутно, 7₽/мин"
+  }, {
+    id: 2,
+    value: "На сутки",
+    title: "На сутки, 1999 ₽/сутки"
+  }]),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
   function handleInputChange(e) {
     props.menuTariffChange("value", e.target.value, 4);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main-options__group body-main-options__group--display"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "radio-section__container radio-section__container--margin"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "radio",
-    name: "tariff",
-    value: "\u041F\u043E\u043C\u0438\u043D\u0443\u0442\u043D\u043E",
-    onChange: handleInputChange,
-    className: "radio-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "radio-section__checkmark"
-  }), "\u041F\u043E\u043C\u0438\u043D\u0443\u0442\u043D\u043E, 7\u20BD/\u043C\u0438\u043D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "radio-section__container radio-section__container--margin"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "radio",
-    name: "tariff",
-    value: "\u041D\u0430 \u0441\u0443\u0442\u043A\u0438",
-    onChange: handleInputChange,
-    className: "radio-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "radio-section__checkmark"
-  }), "\u041D\u0430 \u0441\u0443\u0442\u043A\u0438, 1999 \u20BD/\u0441\u0443\u0442\u043A\u0438"));
+  }, value.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RadioButton_RadioButton_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      name: "tariff",
+      value: item.value,
+      title: item.title,
+      inputChange: handleInputChange,
+      key: item.id,
+      labelClass: "radio-section__container--margin"
+    });
+  }));
 }
 
 /***/ }),
@@ -1345,6 +1428,122 @@ function OrderItem(props) {
   }, props.items.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(OrderLocation, {
     item: props.items
   }));
+}
+
+/***/ }),
+
+/***/ "./components/Pages/OrderPage.jsx":
+/*!****************************************!*\
+  !*** ./components/Pages/OrderPage.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OrderPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Navigation_NavigationList_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Navigation/NavigationList.jsx */ "./components/Navigation/NavigationList.jsx");
+/* harmony import */ var _Order_Order_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Order/Order.jsx */ "./components/Order/Order.jsx");
+/* harmony import */ var _Modal_Modal_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Modal/Modal.jsx */ "./components/Modal/Modal.jsx");
+
+
+
+
+function OrderPage(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation_NavigationList_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    active: props.isActive,
+    menuClick: props.handleMenuClick
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__content"
+  }, props.renderStep, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Order_Order_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    order: props.order,
+    onButtonClick: props.handleButtonClick,
+    step: props.isActive
+  })), props.isModal ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal_Modal_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onButtonDeclineClick: props.handleButtonDeclineClick,
+    orderId: props.orderId
+  }) : ""));
+}
+
+/***/ }),
+
+/***/ "./components/Pages/WatchPage.jsx":
+/*!****************************************!*\
+  !*** ./components/Pages/WatchPage.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OrderPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Navigation_NavigationList_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Navigation/NavigationList.jsx */ "./components/Navigation/NavigationList.jsx");
+/* harmony import */ var _Order_Order_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Order/Order.jsx */ "./components/Order/Order.jsx");
+/* harmony import */ var _Total_Total_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Total/Total.jsx */ "./components/Total/Total.jsx");
+
+
+
+
+function OrderPage(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-list__inner"
+  }, "\u0417\u0430\u043A\u0430\u0437 \u043D\u043E\u043C\u0435\u0440 RU58491823"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Total_Total_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    since: props.since,
+    name: props.name,
+    model: props.model,
+    number: props.number,
+    fuel: props.fuel,
+    isFull: props.isFull
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Order_Order_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    order: props.order,
+    onButtonClick: props.handleButtonClick,
+    step: props.isActive
+  }))));
+}
+
+/***/ }),
+
+/***/ "./components/RadioButton/RadioButton.jsx":
+/*!************************************************!*\
+  !*** ./components/RadioButton/RadioButton.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RadioButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function RadioButton(props) {
+  var labelClasses = ["radio-section__container"];
+  props.labelClass ? labelClasses.push(props.labelClass) : null;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: labelClasses.join(" ")
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: props.name,
+    value: props.value,
+    onChange: props.inputChange,
+    className: "radio-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "radio-section__checkmark"
+  }), props.title ? props.title : props.value);
 }
 
 /***/ }),

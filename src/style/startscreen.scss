@@ -6,6 +6,17 @@
     &--order {
       justify-content: flex-end;
     }
+
+    &--gray {
+      background-color: $admin_bcg;
+      height: 100%;
+    }
+
+    &--center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   &__menu {
@@ -115,7 +126,7 @@
 }
 
 .sidebar {
-  background-color: $sidebar_bcg;
+  // background-color: $sidebar_bcg;
 
   @media (max-width: $bp3) {
     display: none;

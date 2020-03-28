@@ -73,6 +73,12 @@ $dark_gray: #999;
 $light_gray: #eee;
 $admin_bcg: #f5f6f8;
 $white: #fff;
+$blue: #007bff;
+$admin_title: #3d5170;
+$admin_subtitle: #495057;
+$admin_border: #becad6;
+$red: #c4183c;
+$button_red: #cb3656;
 
 $minwidth: 320px;
 // $mw: 1440px;
@@ -198,3 +204,4 @@ h6 {
 
 @import "./startscreen.scss";
 @import "./orderpage.scss";
+@import "./adminpanel.scss";

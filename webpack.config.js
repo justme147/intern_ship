@@ -100,6 +100,22 @@ const plugins = () => {
       title: "Need For Drive | Order page",
       filename: "order_page.html"
     }),
+    new HTMLWebpackPlugin({
+      template: "./admin_auth.html",
+      minify: {
+        collapseWhitespace: isProd
+      },
+      title: "Need For Drive | Admin Auth",
+      filename: "admin_auth.html"
+    }),
+    new HTMLWebpackPlugin({
+      template: "./admin_car_setting.html",
+      minify: {
+        collapseWhitespace: isProd
+      },
+      title: "Need For Drive | Admin Car Setting",
+      filename: "admin_car_setting.html"
+    }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {

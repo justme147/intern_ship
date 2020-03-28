@@ -1714,6 +1714,26 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
       $img.replaceWith($svg);
     }, "xml");
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0__("img.sidebar__icon").each(function () {
+    var $img = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    var imgID = $img.attr("id");
+    var imgClass = $img.attr("class");
+    var imgURL = $img.attr("src");
+    jquery__WEBPACK_IMPORTED_MODULE_0__["get"](imgURL, function (data) {
+      var $svg = jquery__WEBPACK_IMPORTED_MODULE_0__(data).find("svg");
+
+      if (typeof imgID !== "undefined") {
+        $svg = $svg.attr("id", imgID);
+      }
+
+      if (typeof imgClass !== "undefined") {
+        $svg = $svg.attr("class", imgClass + " replaced-svg");
+      }
+
+      $svg = $svg.removeAttr("xmlns:a");
+      $img.replaceWith($svg);
+    }, "xml");
+  });
 });
 
 /***/ }),

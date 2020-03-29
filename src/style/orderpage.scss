@@ -98,6 +98,15 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &--color {
+      @include styletext(10px, $admin_subtitle, 12px);
+      font-family: "RobotoRg";
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 
   &__input {
@@ -112,6 +121,15 @@
     }
 
     &:checked ~ .checkbox-section__checkmark:after {
+      display: block;
+    }
+
+    &:checked ~ .checkbox-section__checkmark--blue {
+      border-color: $blue;
+      background-color: $blue;
+    }
+
+    &:checked ~ .checkbox-section__checkmark--blue:after {
       display: block;
     }
   }
@@ -138,6 +156,38 @@
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
       transform: rotate(45deg);
+    }
+
+    &--blue {
+      width: 13px;
+      height: 13px;
+      border-radius: 2px;
+
+      &:after {
+        border: solid $white;
+        border-width: 0 2px 2px 0;
+        width: 5px;
+        height: 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -70%) rotate(45deg);
+      }
+    }
+
+    &--border {
+      width: 13px;
+      height: 13px;
+      border-radius: 1px;
+      border: 0.5px solid $admin_border;
+
+      &:after {
+        border-width: 0 2px 2px 0;
+        width: 5px;
+        height: 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-35%, -70%) rotate(45deg);
+      }
     }
   }
 }

@@ -140,6 +140,9 @@
 
   &__container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     // background-color: $admin_bcg;
   }
 
@@ -267,6 +270,12 @@
 
     &__image {
       margin: 0 auto;
+
+      &--width {
+        margin: 0;
+        width: 163px;
+        height: 100%;
+      }
     }
 
     &__model {
@@ -371,6 +380,19 @@
       @include styletext(13.5px, #5a6169, 19px);
       letter-spacing: -0.408571px;
       margin-top: 13px;
+
+      &--light {
+        @include styletext(13px, #889098, 15px);
+        margin-top: 6px;
+
+        & font {
+          color: $main_black;
+        }
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
     }
 
     &__settings {
@@ -460,6 +482,14 @@
       }
     }
 
+    &__checkbox-group {
+      display: inline-block;
+
+      &--margin {
+        margin-top: 14px;
+      }
+    }
+
     &__edit {
     }
 
@@ -487,6 +517,80 @@
         background-color: $button_red;
       }
     }
+
+    &__order {
+      max-width: 1062px;
+      width: 100%;
+      background: $white;
+      box-shadow: 0px 7px 70px rgba(90, 97, 105, 0.1),
+        0px 10px 10px rgba(90, 97, 105, 0.06),
+        0px 4px 8px rgba(90, 97, 105, 0.12), 0px 2px 0px rgba(90, 97, 105, 0.11);
+      border-radius: 9px;
+      margin-top: 30px;
+    }
+
+    &__header {
+      box-shadow: 0px 0.5px 0px #e0e2e8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 21px 14px;
+    }
+
+    &__list {
+    }
+
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 21px;
+    }
+
+    &__car {
+      display: flex;
+      align-items: center;
+    }
+
+    &__descr {
+      margin-left: 16px;
+    }
+
+    &__price {
+      @include styletext(24px, $main_black, 28px);
+      letter-spacing: -0.754286px;
+    }
+
+    &__btn-group {
+      display: flex;
+    }
+
+    &__action {
+      @include styletext(11px, #5a6169, 13px);
+      letter-spacing: -0.345714px;
+      width: 71.5px;
+      padding: 5.5px 0 6px;
+      background: $white;
+      border: 0.5px solid $admin_border;
+
+      &--accept {
+        border-radius: 4px 0px 0px 4px;
+      }
+
+      &--decline {
+        border-left: none;
+        border-right: none;
+      }
+
+      &--change {
+        border-radius: 0px 4px 4px 0px;
+      }
+    }
+
+    &__footer {
+      box-shadow: 0px -0.5px 0px #e0e2e8;
+      padding: 21px 0;
+    }
   }
 
   &-footer {
@@ -500,11 +604,11 @@
       padding: 26px 27px;
     }
 
-    &__list {
+    &__ul {
       display: flex;
     }
 
-    &__item {
+    &__li {
       margin-left: 16px;
       @include styletext(14px, $blue, 16px);
       cursor: pointer;

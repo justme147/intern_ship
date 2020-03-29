@@ -90,153 +90,197 @@
 
           <section class="body">
             <div class="body__container">
-              <header class="body-header body-header--flex">
-                <div class="body-header__search">
-                  <label class="body-header__label">
-                    <img
-                      src="./images/adminpanel/search_icon.svg"
-                      alt=""
-                      class="body-header_icon"
-                    />
-                    <input
-                      type="text"
-                      class="body-header__input"
-                      placeholder="Поиск ..."
-                    />
-                  </label>
-                </div>
-                <div class="body-header__wrap">
-                  <div class="body-header__notification">
-                    <img
-                      src="./images/adminpanel/notifications_icon.svg"
-                      alt=""
-                      class="body-header__icon body-header__icon--width"
-                    />
-                    <span class="body-header__count">2</span>
+              <div class="body-top">
+                <header class="body-header body-header--flex">
+                  <div class="body-header__search">
+                    <label class="body-header__label">
+                      <img
+                        src="./images/adminpanel/search_icon.svg"
+                        alt=""
+                        class="body-header_icon"
+                      />
+                      <input
+                        type="text"
+                        class="body-header__input"
+                        placeholder="Поиск ..."
+                      />
+                    </label>
                   </div>
-                  <div class="body-header__user">
-                    <img
-                      src="./images/adminpanel/avatar.jpg"
-                      alt=""
-                      class="body-header__avatar"
-                    />
-                    <p class="body-header__name">Admin</p>
-                    &#9660;
-                  </div>
-                </div>
-              </header>
-
-              <main class="body-main">
-                <div class="body-main__container">
-                  <h1 class="body-main__title">Карточка автомобиля</h1>
-                  <div class="body-main__wrap">
-                    <div class="body-main__card">
-                      <div class="body-main__info">
-                        <img
-                          src="./images/orderpage/cars/i30 N.jpg"
-                          alt=""
-                          class="body-main__image"
-                        />
-                        <h3 class="body-main__model">Hyndai, i30 N</h3>
-                        <p class="body-main__type">Компакт-кар</p>
-                        <label class="body-main__file">
-                          <input type="file" />
-                          <span class="body-main__choose"
-                            >Выберите файл...</span
-                          >
-                          <span class="body-main__overview">Обзор</span>
-                        </label>
-                      </div>
-                      <div class="body-main__fuel">
-                        <div class="body-main__filled">
-                          <h4 class="body-main__label">Заполнено</h4>
-                          <p class="body-main__percent">74%</p>
-                        </div>
-                        <div class="body-main__progress">
-                          <div class="body-main__current"></div>
-                        </div>
-                      </div>
-                      <div class="body-main__description">
-                        <h4 class="body-main__label body-main__label--bold">
-                          Описание
-                        </h4>
-                        <p class="body-main__text">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Odio eaque, quidem, commodi soluta qui quae quod
-                          dolorum sint alias, possimus illum assumenda eligendi
-                          cumque?
-                        </p>
-                      </div>
+                  <div class="body-header__wrap">
+                    <div class="body-header__notification">
+                      <img
+                        src="./images/adminpanel/notifications_icon.svg"
+                        alt=""
+                        class="body-header__icon body-header__icon--width"
+                      />
+                      <span class="body-header__count">2</span>
                     </div>
-                    <div class="body-main__settings">
-                      <h2 class="body-main__subtitle">Настройки автомобиля</h2>
-                      <div
-                        class="body-main__wrap body-main__wrap--nowrap body-main__wrap--margin"
-                      >
-                        <label class="body-main__group">
-                          Модель автомобиля
-                          <input
-                            type="text"
-                            class="body-main__input"
-                            placeholder="Введите модель автомобиля"
+                    <div class="body-header__user">
+                      <img
+                        src="./images/adminpanel/avatar.jpg"
+                        alt=""
+                        class="body-header__avatar"
+                      />
+                      <p class="body-header__name">Admin</p>
+                      &#9660;
+                    </div>
+                  </div>
+                </header>
+
+                <main class="body-main">
+                  <div class="body-main__container">
+                    <h1 class="body-main__title">Карточка автомобиля</h1>
+                    <div class="body-main__wrap">
+                      <div class="body-main__card">
+                        <div class="body-main__info">
+                          <img
+                            src="./images/orderpage/cars/i30 N.jpg"
+                            alt=""
+                            class="body-main__image"
                           />
-                        </label>
-                        <label class="body-main__group body-main__group--red">
-                          Тип автомобиля
-                          <input
-                            type="text"
-                            class="body-main__input"
-                            placeholder="Введите тип автомобиля"
-                          />
-                          <span class="body-main__error">Пример ошибки</span>
-                        </label>
+                          <h3 class="body-main__model">Hyndai, i30 N</h3>
+                          <p class="body-main__type">Компакт-кар</p>
+                          <label class="body-main__file">
+                            <input type="file" />
+                            <span class="body-main__choose"
+                              >Выберите файл...</span
+                            >
+                            <span class="body-main__overview">Обзор</span>
+                          </label>
+                        </div>
+                        <div class="body-main__fuel">
+                          <div class="body-main__filled">
+                            <h4 class="body-main__label">Заполнено</h4>
+                            <p class="body-main__percent">74%</p>
+                          </div>
+                          <div class="body-main__progress">
+                            <div class="body-main__current"></div>
+                          </div>
+                        </div>
+                        <div class="body-main__description">
+                          <h4 class="body-main__label body-main__label--bold">
+                            Описание
+                          </h4>
+                          <p class="body-main__text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Odio eaque, quidem, commodi soluta qui quae
+                            quod dolorum sint alias, possimus illum assumenda
+                            eligendi cumque?
+                          </p>
+                        </div>
                       </div>
-                      <div class="body-main__wrap body-main__wrap--end">
-                        <label
-                          class="body-main__group body-main__group--margin"
+                      <div class="body-main__settings">
+                        <h2 class="body-main__subtitle">
+                          Настройки автомобиля
+                        </h2>
+                        <div
+                          class="body-main__wrap body-main__wrap--nowrap body-main__wrap--margin"
                         >
-                          Доступные цвета
-                          <input
-                            type="text"
-                            class="body-main__input"
-                            placeholder="Введите цвет автомобиля"
-                          />
-                        </label>
-                        <button class="body-main__create">
-                          <span></span>
-                        </button>
-                      </div>
-
-                      <div class="body-main__wrap body-main__wrap--between">
-                        <div class="body-main__edit">
-                          <button
-                            class="body-main__button body-main__button--blue"
+                          <label class="body-main__group">
+                            Модель автомобиля
+                            <input
+                              type="text"
+                              class="body-main__input"
+                              placeholder="Введите модель автомобиля"
+                            />
+                          </label>
+                          <label class="body-main__group body-main__group--red">
+                            Тип автомобиля
+                            <input
+                              type="text"
+                              class="body-main__input"
+                              placeholder="Введите тип автомобиля"
+                            />
+                            <span class="body-main__error">Пример ошибки</span>
+                          </label>
+                        </div>
+                        <div class="body-main__wrap body-main__wrap--end">
+                          <label
+                            class="body-main__group body-main__group--margin"
                           >
-                            Сохранить
-                          </button>
-                          <button
-                            class="body-main__button body-main__button--gray"
-                          >
-                            Отменить
+                            Доступные цвета
+                            <input
+                              type="text"
+                              class="body-main__input"
+                              placeholder="Введите цвет автомобиля"
+                            />
+                          </label>
+                          <button class="body-main__create">
+                            <span></span>
                           </button>
                         </div>
-                        <div class="body-main__delete">
-                          <button
-                            class="body-main__button body-main__button--red"
+
+                        <div
+                          class="body-main__checkbox-group body-main__checkbox-group--margin"
+                        >
+                          <label
+                            class="checkbox-section__container checkbox-section__container--color"
                           >
-                            Удалить
-                          </button>
+                            <input
+                              type="checkbox"
+                              class="checkbox-section__input"
+                            />
+                            <span
+                              class="checkbox-section__checkmark checkbox-section__checkmark--blue"
+                            ></span>
+                            Красный
+                          </label>
+                          <label
+                            class="checkbox-section__container checkbox-section__container--color"
+                          >
+                            <input
+                              type="checkbox"
+                              class="checkbox-section__input"
+                            />
+                            <span
+                              class="checkbox-section__checkmark checkbox-section__checkmark--blue"
+                            ></span>
+                            Белый
+                          </label>
+                          <label
+                            class="checkbox-section__container checkbox-section__container--color"
+                          >
+                            <input
+                              type="checkbox"
+                              class="checkbox-section__input"
+                            />
+                            <span
+                              class="checkbox-section__checkmark checkbox-section__checkmark--blue"
+                            ></span>
+                            Черный
+                          </label>
+                        </div>
+
+                        <div class="body-main__wrap body-main__wrap--between">
+                          <div class="body-main__edit">
+                            <button
+                              class="body-main__button body-main__button--blue"
+                            >
+                              Сохранить
+                            </button>
+                            <button
+                              class="body-main__button body-main__button--gray"
+                            >
+                              Отменить
+                            </button>
+                          </div>
+                          <div class="body-main__delete">
+                            <button
+                              class="body-main__button body-main__button--red"
+                            >
+                              Удалить
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </main>
-
+                </main>
+              </div>
               <footer class="body-footer body-footer--flex">
-                <ul class="body-footer__list">
-                  <li class="body-footer__item">Главная страница</li>
-                  <li class="body-footer__item">Ссылка</li>
+                <ul class="body-footer__ul">
+                  <li class="body-footer__li">Главная страница</li>
+                  <li class="body-footer__li">Ссылка</li>
                 </ul>
                 <p class="body-footer__copyright">
                   Copyright © 2020 Simbirsoft

@@ -223,11 +223,20 @@
   &-main {
     &__container {
       padding: 28px 27px;
+
+      &--center {
+        text-align: center;
+      }
     }
 
     &__title {
       @include styletext(29px, $admin_title, 33px);
       letter-spacing: -0.725px;
+
+      &--gray {
+        @include styletext(75px, #cacedb, 88px);
+        letter-spacing: -5.76923px;
+      }
     }
 
     &__wrap {
@@ -393,6 +402,12 @@
           margin-top: 0;
         }
       }
+
+      &--size {
+        @include styletext(20px, #818ea3, 23px);
+        letter-spacing: -0.5px;
+        margin-top: 15px;
+      }
     }
 
     &__settings {
@@ -409,6 +424,12 @@
       @include styletext(17.5px, $admin_title, 21px);
       letter-spacing: -0.4375px;
       font-family: "RobotoMd";
+
+      &--size {
+        @include styletext(50px, $admin_title, 57px);
+        letter-spacing: -2.5px;
+        margin-top: 13px;
+      }
     }
 
     &__group {
@@ -516,6 +537,17 @@
       &--red {
         background-color: $button_red;
       }
+
+      &--width {
+        width: 95px;
+        @include styletext(11px, $white, 13px);
+        padding-top: 8px;
+        letter-spacing: -0.345714px;
+      }
+
+      &--margin {
+        margin-top: 35px;
+      }
     }
 
     &__order {
@@ -535,6 +567,63 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 21px 14px;
+    }
+
+    &__options {
+      display: flex;
+    }
+
+    &__select-wrapper {
+      position: relative;
+      width: 110.5px;
+      border: 0.5px solid $admin_border;
+      border-radius: 4px;
+      margin-left: 15px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    &__select {
+      width: 110.5px;
+      padding: 8px 0 8.5px 14px;
+      background: transparent;
+      border: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      @include styletext(11px, #868e96, 13px);
+      letter-spacing: -0.345714px;
+      cursor: pointer;
+    }
+
+    &__arrows {
+      width: 8px;
+      height: 0px;
+      background: #000000;
+      position: absolute;
+      // z-index: -9999;
+      right: 8px;
+      top: 50%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        border: 4px solid transparent;
+        border-bottom-color: #000000;
+        border-top: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 1px;
+        border: 4px solid transparent;
+        border-top-color: #000000;
+        border-bottom: 0;
+      }
     }
 
     &__list {

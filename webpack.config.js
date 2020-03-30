@@ -124,6 +124,14 @@ const plugins = () => {
       title: "Need For Drive | Admin Order List",
       filename: "admin_order_list.html"
     }),
+    new HTMLWebpackPlugin({
+      template: "./admin_error.html",
+      minify: {
+        collapseWhitespace: isProd
+      },
+      title: "Need For Drive | Admin Error",
+      filename: "admin_error.html"
+    }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {

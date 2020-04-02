@@ -125,6 +125,14 @@ const plugins = () => {
       filename: "admin_order_list.html"
     }),
     new HTMLWebpackPlugin({
+      template: "./admin_table.html",
+      minify: {
+        collapseWhitespace: isProd
+      },
+      title: "Need For Drive | Admin Table",
+      filename: "admin_table.html"
+    }),
+    new HTMLWebpackPlugin({
       template: "./admin_error.html",
       minify: {
         collapseWhitespace: isProd

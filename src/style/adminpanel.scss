@@ -547,6 +547,11 @@
 
       &--margin {
         margin-top: 35px;
+        margin-left: 11px;
+      }
+
+      &--marginL {
+        margin-left: 15px;
       }
     }
 
@@ -562,11 +567,14 @@
     }
 
     &__header {
-      box-shadow: 0px 0.5px 0px #e0e2e8;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 15px 21px 14px;
+
+      &--border {
+        box-shadow: 0px 0.5px 0px #e0e2e8;
+      }
     }
 
     &__options {
@@ -627,6 +635,9 @@
     }
 
     &__list {
+      &--padding {
+        padding: 0 20px;
+      }
     }
 
     &__item {
@@ -676,9 +687,32 @@
       }
     }
 
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+
+      & th,
+      & td {
+        padding: 11px 0 11.5px 0;
+        text-align: center;
+        @include styletext(12px, $admin_title, 14px);
+        letter-spacing: -0.377143px;
+      }
+
+      & th:first-child,
+      & td:first-child {
+        text-align: left;
+        width: 77px;
+      }
+    }
+
     &__footer {
-      box-shadow: 0px -0.5px 0px #e0e2e8;
       padding: 21px 0;
+
+      &--border {
+        box-shadow: 0px -0.5px 0px #e0e2e8;
+      }
     }
   }
 

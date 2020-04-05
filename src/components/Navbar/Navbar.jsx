@@ -1,18 +1,19 @@
 import React from "react";
 
-export default function Navbar() {
-  return (
-    <section className="sidebar sidebar--fixed">
-      <div className="sidebar__inner">
-        <div className="burger">
-          <div className="burger__inner burger__inner--padding_t">
-            <span className="burger__item"></span>
-          </div>
-        </div>
+import LangSwitch from "./LangSwitch.jsx";
+import BurgerMenu from "./BurgerMenu.jsx";
 
-        <div className="sidebar-lang-switch">
-          <button className="sidebar-lang-switch__button">Eng</button>
-        </div>
+export default function Navbar(props) {
+  const classes = ["sidebar"];
+  if (props.fixed) {
+    classes.push("sidebar--fixed");
+  }
+  return (
+    <section className={classes.join(" ")}>
+      <div className="sidebar__inner">
+        <BurgerMenu padding />
+
+        <LangSwitch />
       </div>
     </section>
   );

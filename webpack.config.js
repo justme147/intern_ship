@@ -13,38 +13,38 @@ const isProd = !isDev;
 const optimization = () => {
   const config = {
     splitChunks: {
-      chunks: "all"
-    }
+      chunks: "all",
+    },
   };
 
   if (isProd) {
     config.minimizer = [
       new OptimizeCssAssetsPlugin(),
-      new TerserWebpackPlugin()
+      new TerserWebpackPlugin(),
     ];
   }
 
   return config;
 };
 
-const filename = ext => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
-const cssLoaders = extra => {
+const cssLoaders = (extra) => {
   const loaders = [
     {
       loader: MiniCssExtractPlugin.loader,
       options: {
         hmr: isDev,
-        reloadAll: true
-      }
+        reloadAll: true,
+      },
     },
     {
       loader: "css-loader",
       options: {
-        url: false
-      }
+        url: false,
+      },
     },
-    "postcss-loader"
+    "postcss-loader",
   ];
 
   if (extra) {
@@ -54,10 +54,10 @@ const cssLoaders = extra => {
   return loaders;
 };
 
-const babelOptions = preset => {
+const babelOptions = (preset) => {
   const opts = {
     presets: ["@babel/preset-env"],
-    plugins: ["@babel/plugin-proposal-class-properties"]
+    plugins: ["@babel/plugin-proposal-class-properties"],
   };
 
   if (preset) {
@@ -87,73 +87,73 @@ const plugins = () => {
     new HTMLWebpackPlugin({
       template: "./index.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive",
-      filename: "index.html"
+      filename: "index.html",
     }),
     new HTMLWebpackPlugin({
       template: "./order_page.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive | Order page",
-      filename: "order_page.html"
+      filename: "order_page.html",
     }),
     new HTMLWebpackPlugin({
       template: "./admin_auth.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive | Admin Auth",
-      filename: "admin_auth.html"
+      filename: "admin_auth.html",
     }),
     new HTMLWebpackPlugin({
       template: "./admin_car_setting.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive | Admin Car Setting",
-      filename: "admin_car_setting.html"
+      filename: "admin_car_setting.html",
     }),
     new HTMLWebpackPlugin({
       template: "./admin_order_list.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive | Admin Order List",
-      filename: "admin_order_list.html"
+      filename: "admin_order_list.html",
     }),
     new HTMLWebpackPlugin({
       template: "./admin_table.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive | Admin Table",
-      filename: "admin_table.html"
+      filename: "admin_table.html",
     }),
     new HTMLWebpackPlugin({
       template: "./admin_error.html",
       minify: {
-        collapseWhitespace: isProd
+        collapseWhitespace: isProd,
       },
       title: "Need For Drive | Admin Error",
-      filename: "admin_error.html"
+      filename: "admin_error.html",
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, "./src/images/**/*"),
-        to: path.resolve(__dirname, "dist")
+        to: path.resolve(__dirname, "dist"),
       },
       {
         from: path.resolve(__dirname, "./src/fonts/*"),
-        to: path.resolve(__dirname, "dist")
-      }
+        to: path.resolve(__dirname, "dist"),
+      },
     ]),
     new MiniCssExtractPlugin({
-      filename: filename("css")
-    })
+      filename: filename("css"),
+    }),
   ];
 
   // if (isProd) {
@@ -167,22 +167,24 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
-    main: ["@babel/polyfill", "./scripts/index.jsx"]
+    main: ["@babel/polyfill", "./scripts/index.jsx"],
   },
   output: {
     filename: filename("js"),
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   resolve: {
     extensions: [".scss", ".css", ".js"],
     alias: {
-      "@": path.resolve(__dirname, "src")
-    }
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   optimization: optimization(),
   devServer: {
     port: 8000,
-    hot: isDev
+    hot: isDev,
+    historyApiFallback: true,
   },
   devtool: isDev ? "source-map" : "",
   plugins: plugins(),
@@ -190,15 +192,15 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: cssLoaders()
+        use: cssLoaders(),
       },
       {
         test: /\.less$/,
-        use: cssLoaders("less-loader")
+        use: cssLoaders("less-loader"),
       },
       {
         test: /\.s[ac]ss$/,
-        use: cssLoaders("sass-loader")
+        use: cssLoaders("sass-loader"),
       },
       // {
       //   test: /\.(png|jpg|svg|gif)$/,
@@ -206,32 +208,32 @@ module.exports = {
       // },
       {
         test: /\.(ttf|woff|woff2|eot|svg)$/,
-        use: ["file-loader"]
+        use: ["file-loader"],
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: {
           loader: "babel-loader",
-          options: babelOptions()
-        }
+          options: babelOptions(),
+        },
       },
       {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: {
           loader: "babel-loader",
-          options: babelOptions("@babel/preset-typescript")
-        }
+          options: babelOptions("@babel/preset-typescript"),
+        },
       },
       {
         test: /\.jsx$/,
         exclude: /node_modules/,
         loader: {
           loader: "babel-loader",
-          options: babelOptions("@babel/preset-react")
-        }
-      }
-    ]
-  }
+          options: babelOptions("@babel/preset-react"),
+        },
+      },
+    ],
+  },
 };

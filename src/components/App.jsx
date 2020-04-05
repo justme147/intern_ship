@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Navbar from "./Navbar/Navbar.jsx";
-import Header from "./Header/Header.jsx";
 import Location from "./Location/Location.jsx";
 import Model from "./Model/Model.jsx";
 import Options from "./Options/Options.jsx";
 import Total from "./Total/Total.jsx";
-import OrderPage from "./Pages/OrderPage.jsx";
-import WatchPage from "./Pages/WatchPage.jsx";
+import MainPage from "./Pages/MainPage.jsx";
+import OrderLayout from "./layouts/OrderLayout.jsx";
+import AdminAuth from "./Pages/AdminAuth.jsx";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,53 +15,49 @@ export default class App extends React.Component {
     this.state = {
       isActive: 1,
       isModal: false,
-      // orderId: `RU${Date.now()}`,
+      orderId: `RU${Date.now()}`,
       colorsCar: [],
       order: [
         {
-          // city: document.querySelector(".body-header__text").textContent || "",
           city: "",
           place: "",
-          title: "Пункт выдачи"
+          title: "Пункт выдачи",
         },
         {
           name: "",
           number: "",
           value: "",
           fuel: "",
-          title: "Модель"
+          title: "Модель",
         },
         {
           value: "",
-          title: "Цвет"
+          title: "Цвет",
         },
         {
           value: "",
           title: "Длительность аренды",
-          since: new Date()
-            .toLocaleString()
-            .slice(0, -3)
-            .replace(",", ""),
-          by: ""
+          since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
+          by: "",
         },
         {
           value: "",
-          title: "Тариф"
+          title: "Тариф",
         },
         {
           value: false,
-          title: "Полный бак"
+          title: "Полный бак",
         },
         {
           value: false,
-          title: "Детское кресло"
+          title: "Детское кресло",
         },
         {
           value: false,
-          title: "Правый руль"
-        }
+          title: "Правый руль",
+        },
       ],
-      history: []
+      history: [],
     };
 
     this.handleMenuClick = this.handleMenuClick.bind(this);
@@ -73,11 +68,11 @@ export default class App extends React.Component {
     this.handleModelClick = this.handleModelClick.bind(this);
   }
 
-  handleMenuClick = id => {
+  handleMenuClick = (id) => {
     if (id >= this.state.isActive) return;
 
     this.setState({
-      isActive: id
+      isActive: id,
     });
   };
 
@@ -92,7 +87,7 @@ export default class App extends React.Component {
 
     this.setState({
       isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4,
-      isModal: this.state.isActive === 4 ? true : false
+      isModal: this.state.isActive === 4 ? true : false,
       // history: this.state.history.concat({ order: newOrder })
     });
   };
@@ -105,7 +100,7 @@ export default class App extends React.Component {
     this.setState({ order: newOrder });
   };
 
-  handleModelClick = value => {
+  handleModelClick = (value) => {
     this.setState({ colorsCar: value });
   };
 
@@ -185,43 +180,23 @@ export default class App extends React.Component {
     }
 
     return (
-      <BrowserRouter className="wrapper">
-        <div className="container">
-          <div className="container__content container__content--order">
-            <Navbar />
-            <section className="body--order">
-              <Header />
-
-              <Switch>
-                <Route path="/">
-                  <OrderPage
-                    isActive={isActive}
-                    handleMenuClick={this.handleMenuClick}
-                    renderStep={renderStep}
-                    order={this.state.order}
-                    handleButtonClick={this.handleButtonClick}
-                    isModal={this.state.isModal}
-                    handleButtonDeclineClick={this.handleButtonDeclineClick}
-                    orderId={this.state.orderId}
-                  />
-                </Route>
-                {/* <Route path={`/${this.state.orderId}`}>
-                  <WatchPage
-                    order={this.state.order}
-                    handleButtonClick={this.handleButtonClick}
-                    isActive={isActive}
-                    since={this.state.order[3].since}
-                    name={this.state.order[1].name}
-                    model={this.state.order[1].value}
-                    number={this.state.order[1].number}
-                    fuel={this.state.order[1].fuel}
-                    isFull={this.state.order[5].value}
-                  />
-                </Route> */}
-              </Switch>
-            </section>
-          </div>
-        </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={MainPage} />>
+          <Route path="/order">
+            <OrderLayout
+              isActive={isActive}
+              handleMenuClick={this.handleMenuClick}
+              renderStep={renderStep}
+              order={this.state.order}
+              handleButtonClick={this.handleButtonClick}
+              isModal={this.state.isModal}
+              handleButtonDeclineClick={this.handleButtonDeclineClick}
+              orderId={this.state.orderId}
+            />
+          </Route>
+          <Route path="/admin" component={AdminAuth} />
+        </Switch>
       </BrowserRouter>
     );
   }

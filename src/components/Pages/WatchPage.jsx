@@ -8,7 +8,9 @@ export default function OrderPage(props) {
   return (
     <div className="body-main">
       <div className="body-main__inner">
-        <div className="body-list__inner">Заказ номер RU58491823</div>
+        <div className="body-list__inner">
+          <p className="body-list__orderId">Заказ номер {props.orderId}</p>
+        </div>
 
         <div className="body-main__content">
           <Total

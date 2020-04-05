@@ -277,6 +277,11 @@
     &__image {
       margin: 0 16px;
     }
+
+    &__orderId {
+      @include styletext(14px, $main_black, 16px);
+      font-weight: bold;
+    }
   }
 
   &-main {

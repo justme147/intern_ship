@@ -1,5 +1,7 @@
 import React from "react";
 
+import Navbar from "../Navbar/Navbar.jsx";
+import Header from "../Header/Header.jsx";
 import NavigationList from "../Navigation/NavigationList.jsx";
 import Order from "../Order/Order.jsx";
 import Modal from "../Modal/Modal.jsx";

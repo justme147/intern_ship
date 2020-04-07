@@ -7,7 +7,9 @@ import Options from "./Options/Options.jsx";
 import Total from "./Total/Total.jsx";
 import MainPage from "./Pages/MainPage.jsx";
 import OrderLayout from "./layouts/OrderLayout.jsx";
+import AdminPanel from "./Pages/AdminPanel.jsx";
 import AdminAuth from "./Pages/AdminAuth.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -195,7 +197,8 @@ export default class App extends React.Component {
               orderId={this.state.orderId}
             />
           </Route>
-          <Route path="/admin" component={AdminAuth} />
+          <Route path="/admin" component={AdminPanel} />
+          {/* <Route path="/admin/login" component={AdminAuth} /> */}
         </Switch>
       </BrowserRouter>
     );

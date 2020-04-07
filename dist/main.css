@@ -1111,6 +1111,12 @@ h6 {
     box-shadow: inset 4px 0px 0px #007bff, inset 0px -1px 0px #e1e5eb; }
     .sidebar__item:hover .sidebar__icon path {
       fill: #007bff; }
+  .sidebar__item.active {
+    background-color: #fbfbfb;
+    color: #007bff;
+    box-shadow: inset 4px 0px 0px #007bff, inset 0px -1px 0px #e1e5eb; }
+    .sidebar__item.active .sidebar__icon path {
+      fill: #007bff; }
 
 .sidebar__icon {
   margin-right: 13px; }
@@ -1254,7 +1260,7 @@ h6 {
     padding-left: 13px;
     text-align: left; }
   .body-main__overview {
-    width: 65px;
+    width: 66px;
     text-align: center;
     border-left: 0.5px solid #becad6;
     background-color: #e9ecef;
@@ -1544,12 +1550,13 @@ h6 {
       display: flex; }
     .body-footer__li {
       margin-left: 16px;
-      font-size: 14px;
-      color: #007bff;
-      line-height: 16px;
       cursor: pointer; }
       .body-footer__li:first-child {
         margin-left: 0; }
+      .body-footer__li a {
+        font-size: 14px;
+        color: #007bff;
+        line-height: 16px; }
     .body-footer__copyright {
       font-size: 14px;
       color: #818ea3;

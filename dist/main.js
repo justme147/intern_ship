@@ -137,7 +137,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
@@ -174,7 +174,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Total_Total_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Total/Total.jsx */ "./components/Total/Total.jsx");
 /* harmony import */ var _Pages_MainPage_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Pages/MainPage.jsx */ "./components/Pages/MainPage.jsx");
 /* harmony import */ var _layouts_OrderLayout_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layouts/OrderLayout.jsx */ "./components/layouts/OrderLayout.jsx");
-/* harmony import */ var _Pages_AdminAuth_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Pages/AdminAuth.jsx */ "./components/Pages/AdminAuth.jsx");
+/* harmony import */ var _Pages_AdminPanel_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Pages/AdminPanel.jsx */ "./components/Pages/AdminPanel.jsx");
+/* harmony import */ var _Pages_AdminAuth_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Pages/AdminAuth.jsx */ "./components/Pages/AdminAuth.jsx");
+/* harmony import */ var _layouts_AdminLayout_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/AdminLayout.jsx */ "./components/layouts/AdminLayout.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -194,6 +196,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -386,7 +390,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         orderId: this.state.orderId
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/admin",
-        component: _Pages_AdminAuth_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
+        component: _Pages_AdminPanel_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
       })));
     }
   }]);
@@ -395,6 +399,350 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
+
+/***/ }),
+
+/***/ "./components/CarCard/CarCard.jsx":
+/*!****************************************!*\
+  !*** ./components/CarCard/CarCard.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CarCard; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function CarCard() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__card"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/orderpage/cars/i30 N.jpg",
+    alt: "",
+    className: "body-main__image"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "body-main__model"
+  }, "Hyndai, i30 N"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__type"
+  }, "\u041A\u043E\u043C\u043F\u0430\u043A\u0442-\u043A\u0430\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "body-main__file"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "body-main__choose"
+  }, "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0444\u0430\u0439\u043B..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "body-main__overview"
+  }, "\u041E\u0431\u0437\u043E\u0440"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__fuel"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__filled"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "body-main__label"
+  }, "\u0417\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__percent"
+  }, "74%")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__progress"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__current"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__description"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "body-main__label body-main__label--bold"
+  }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__text"
+  }, "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimus illum assumenda eligendi cumque?")));
+}
+
+/***/ }),
+
+/***/ "./components/CarCard/CarSetting.jsx":
+/*!*******************************************!*\
+  !*** ./components/CarCard/CarSetting.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CarSetting; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Checkbox_AdminCheckbox_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Checkbox/AdminCheckbox.jsx */ "./components/Checkbox/AdminCheckbox.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function CarSetting() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: 1,
+    color: "Красный"
+  }, {
+    id: 2,
+    color: "Белый"
+  }, {
+    id: 3,
+    color: "Черный"
+  }]),
+      _useState2 = _slicedToArray(_useState, 2),
+      colors = _useState2[0],
+      setColors = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__settings"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "body-main__subtitle"
+  }, "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__wrap body-main__wrap--nowrap body-main__wrap--margin"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "body-main__group"
+  }, "\u041C\u043E\u0434\u0435\u043B\u044C \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "body-main__input",
+    placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043C\u043E\u0434\u0435\u043B\u044C \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "body-main__group body-main__group--red"
+  }, "\u0422\u0438\u043F \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "body-main__input",
+    placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0438\u043F \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "body-main__error"
+  }, "\u041F\u0440\u0438\u043C\u0435\u0440 \u043E\u0448\u0438\u0431\u043A\u0438"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__wrap body-main__wrap--end"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "body-main__group body-main__group--margin"
+  }, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0435 \u0446\u0432\u0435\u0442\u0430", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "body-main__input",
+    placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0446\u0432\u0435\u0442 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__create"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__checkbox-group body-main__checkbox-group--margin"
+  }, colors.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox_AdminCheckbox_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      text: item.color,
+      key: item.id
+    });
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__wrap body-main__wrap--between"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__edit"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__button body-main__button--blue"
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__button body-main__button--gray"
+  }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__delete"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__button body-main__button--red"
+  }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))));
+}
+
+/***/ }),
+
+/***/ "./components/Checkbox/AdminCheckbox.jsx":
+/*!***********************************************!*\
+  !*** ./components/Checkbox/AdminCheckbox.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminCheckbox; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function AdminCheckbox(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container checkbox-section__container--color"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark checkbox-section__checkmark--blue"
+  }), props.text);
+}
+
+/***/ }),
+
+/***/ "./components/Footer/Admin/Footer.jsx":
+/*!********************************************!*\
+  !*** ./components/Footer/Admin/Footer.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Footer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function Footer() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: 1,
+    title: "Главная страница",
+    url: "/"
+  }, {
+    id: 2,
+    title: "Ссылка",
+    url: "/admin"
+  }]),
+      _useState2 = _slicedToArray(_useState, 2),
+      menuItem = _useState2[0],
+      setMenuItem = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+    className: "body-footer body-footer--flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "body-footer__ul"
+  }, menuItem.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: item.id,
+      className: "body-footer__li"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: item.url
+    }, item.title));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-footer__copyright"
+  }, "Copyright \xA9 2020 Simbirsoft"));
+}
+
+/***/ }),
+
+/***/ "./components/Header/Admin/Header.jsx":
+/*!********************************************!*\
+  !*** ./components/Header/Admin/Header.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Header; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _HeaderSearch_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeaderSearch.jsx */ "./components/Header/Admin/HeaderSearch.jsx");
+/* harmony import */ var _HeaderNotification_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HeaderNotification.jsx */ "./components/Header/Admin/HeaderNotification.jsx");
+/* harmony import */ var _HeaderUser_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HeaderUser.jsx */ "./components/Header/Admin/HeaderUser.jsx");
+
+
+
+
+function Header() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    className: "body-header body-header--flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeaderSearch_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-header__wrap"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeaderNotification_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeaderUser_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+}
+
+/***/ }),
+
+/***/ "./components/Header/Admin/HeaderNotification.jsx":
+/*!********************************************************!*\
+  !*** ./components/Header/Admin/HeaderNotification.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderNotification; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function HeaderNotification() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-header__notification"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/adminpanel/notifications_icon.svg",
+    alt: "",
+    className: "body-header__icon body-header__icon--width"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "body-header__count"
+  }, "2"));
+}
+
+/***/ }),
+
+/***/ "./components/Header/Admin/HeaderSearch.jsx":
+/*!**************************************************!*\
+  !*** ./components/Header/Admin/HeaderSearch.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderSearch; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function HeaderSearch() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-header__search"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "body-header__label"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/adminpanel/search_icon.svg",
+    alt: "",
+    className: "body-header_icon"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "body-header__input",
+    placeholder: "\u041F\u043E\u0438\u0441\u043A ..."
+  })));
+}
+
+/***/ }),
+
+/***/ "./components/Header/Admin/HeaderUser.jsx":
+/*!************************************************!*\
+  !*** ./components/Header/Admin/HeaderUser.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderUser; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function HeaderUser() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-header__user"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/adminpanel/avatar.jpg",
+    alt: "",
+    className: "body-header__avatar"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-header__name"
+  }, "Admin"), "\u25BC");
+}
 
 /***/ }),
 
@@ -428,7 +776,7 @@ function Header(props) {
   }, "Need for drive"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-header__location"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "images/startscreen/icon_map_marker.svg",
+    src: "/images/startscreen/icon_map_marker.svg",
     alt: "map_marker",
     className: "body-header__icon"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -880,6 +1228,173 @@ function ModelMenuItem(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "body-main-model__circle"
   }), item.title);
+}
+
+/***/ }),
+
+/***/ "./components/Navbar/Admin/Navbar.jsx":
+/*!********************************************!*\
+  !*** ./components/Navbar/Admin/Navbar.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Navbar; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _NavbarHeader_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavbarHeader.jsx */ "./components/Navbar/Admin/NavbarHeader.jsx");
+/* harmony import */ var _NavbarMenu_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NavbarMenu.jsx */ "./components/Navbar/Admin/NavbarMenu.jsx");
+
+
+
+function Navbar() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "sidebar"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sidebar__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    className: "sidebar__menu"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarHeader_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMenu_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
+}
+
+/***/ }),
+
+/***/ "./components/Navbar/Admin/NavbarHeader.jsx":
+/*!**************************************************!*\
+  !*** ./components/Navbar/Admin/NavbarHeader.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NavbarHeader; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+function NavbarHeader() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    className: "sidebar__header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/adminpanel/logo.svg",
+    alt: "",
+    className: "sidebar__image"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/",
+    className: "sidebar__title"
+  }, "Need for drive"));
+}
+
+/***/ }),
+
+/***/ "./components/Navbar/Admin/NavbarMenu.jsx":
+/*!************************************************!*\
+  !*** ./components/Navbar/Admin/NavbarMenu.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NavbarMenu; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _NavbarMenuItem_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavbarMenuItem.jsx */ "./components/Navbar/Admin/NavbarMenuItem.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function NavbarMenu() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: 1,
+    title: "Карточка автомобиля",
+    url: "/car-setting"
+  }, {
+    id: 2,
+    title: "Список авто",
+    url: "/car-list"
+  }, {
+    id: 3,
+    title: "Заказы",
+    url: "/order-list"
+  }, {
+    id: 4,
+    title: "Menu 4",
+    url: ""
+  }, {
+    id: 5,
+    title: "Menu 5",
+    url: ""
+  }, {
+    id: 6,
+    title: "Menu 6",
+    url: ""
+  }, {
+    id: 7,
+    title: "Menu 7",
+    url: ""
+  }]),
+      _useState2 = _slicedToArray(_useState, 2),
+      menuItem = _useState2[0],
+      setMenuItem = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      active = _useState4[0],
+      setActive = _useState4[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "sidebar__list"
+  }, menuItem.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMenuItem_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: item.id,
+      item: item,
+      active: active,
+      onItemClick: function onItemClick() {
+        return setActive(item.id);
+      }
+    });
+  }));
+}
+
+/***/ }),
+
+/***/ "./components/Navbar/Admin/NavbarMenuItem.jsx":
+/*!****************************************************!*\
+  !*** ./components/Navbar/Admin/NavbarMenuItem.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NavbarMenuItem; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+function NavbarMenuItem(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    onClick: props.onItemClick
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/admin".concat(props.item.url),
+    className: props.active !== props.item.id ? "sidebar__item" : "sidebar__item active"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/adminpanel/menu_item_".concat(props.item.id, ".svg"),
+    alt: "",
+    className: "sidebar__icon"
+  }), props.item.title));
 }
 
 /***/ }),
@@ -1659,46 +2174,370 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _layouts_EmptyAdminLayout_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layouts/EmptyAdminLayout.jsx */ "./components/layouts/EmptyAdminLayout.jsx");
 
-
+ // import EmptyAdminLayout from "../layouts/EmptyAdminLayout.jsx";
 
 function AdminAuth() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_EmptyAdminLayout_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "auth"
+  return (// <EmptyAdminLayout>
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "wrapper"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "container__content container__content--gray container__content--center"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "auth"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "auth__row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: "/images/adminpanel/logo.svg",
+      alt: "logo",
+      className: "auth__logo"
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "auth__title"
+    }, "Need for drive")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "auth__content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      className: "auth__subtitle"
+    }, "\u0412\u0445\u043E\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: "auth__form"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "auth__label"
+    }, "\u041F\u043E\u0447\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "email",
+      className: "auth__input"
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "auth__label"
+    }, "\u041F\u0430\u0440\u043E\u043B\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "password",
+      className: "auth__input"
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "auth__row auth__row--between"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "auth__link"
+    }, "\u0417\u0430\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/admin"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button auth__button"
+    }, "\u0412\u043E\u0439\u0442\u0438"))))))))) // </EmptyAdminLayout>
+
+  );
+}
+
+/***/ }),
+
+/***/ "./components/Pages/AdminCarList.jsx":
+/*!*******************************************!*\
+  !*** ./components/Pages/AdminCarList.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminCarList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/AdminBodyLayout.jsx */ "./components/layouts/AdminBodyLayout.jsx");
+
+
+function AdminCarList() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    title: "\u0421\u043F\u0438\u0441\u043E\u043A \u0430\u0432\u0442\u043E"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "auth__row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "./images/adminpanel/logo.svg",
-    alt: "logo",
-    className: "auth__logo"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "auth__title"
-  }, "Need for drive")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "auth__content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "auth__subtitle"
-  }, "\u0412\u0445\u043E\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    className: "auth__form"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "auth__label"
-  }, "\u041F\u043E\u0447\u0442\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "email",
-    className: "auth__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "auth__label"
-  }, "\u041F\u0430\u0440\u043E\u043B\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "password",
-    className: "auth__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "auth__row auth__row--between"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "auth__link"
-  }, "\u0417\u0430\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/admin/car_setting"
+    className: "body-main__order"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Field")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__options"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "button auth__button"
-  }, "\u0412\u043E\u0439\u0442\u0438")))))));
+    className: "body-main__button body-main__button--red body-main__button--width"
+  }, "Reset"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__button body-main__button--blue body-main__button--width body-main__button--marginL"
+  }, "Apply"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__list body-main__list--padding"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "body-main__table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Header"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "19,291"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__footer"
+  })));
+}
+
+/***/ }),
+
+/***/ "./components/Pages/AdminCarSetting.jsx":
+/*!**********************************************!*\
+  !*** ./components/Pages/AdminCarSetting.jsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminCarSetting; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/AdminBodyLayout.jsx */ "./components/layouts/AdminBodyLayout.jsx");
+/* harmony import */ var _CarCard_CarCard_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CarCard/CarCard.jsx */ "./components/CarCard/CarCard.jsx");
+/* harmony import */ var _CarCard_CarSetting_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../CarCard/CarSetting.jsx */ "./components/CarCard/CarSetting.jsx");
+
+
+
+
+function AdminCarSetting() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    title: "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0430 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__wrap"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CarCard_CarCard_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CarCard_CarSetting_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+}
+
+/***/ }),
+
+/***/ "./components/Pages/AdminOrderList.jsx":
+/*!*********************************************!*\
+  !*** ./components/Pages/AdminOrderList.jsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminOrderList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/AdminBodyLayout.jsx */ "./components/layouts/AdminBodyLayout.jsx");
+
+
+function AdminOrderList() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    title: "\u0417\u0430\u043A\u0430\u0437\u044B"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__order"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__header body-main__header--border"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0417\u0430 \u0433\u043E\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0417\u0430 \u043C\u0435\u0441\u044F\u0446"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0417\u0430 \u043D\u0435\u0434\u0435\u043B\u044E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0417\u0430 \u0434\u0435\u043D\u044C"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Sonata"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Elantra"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "i30 N"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Creta"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0423\u043B\u044C\u044F\u043D\u043E\u0432\u0441\u043A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u041C\u043E\u0441\u043A\u0432\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0421\u0430\u043C\u0430\u0440\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u041A\u0430\u0437\u0430\u043D\u044C"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__select-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__arrows"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "",
+    id: "",
+    className: "body-main__select"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0412 \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u0435"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u041D\u0435 \u043D\u0430\u0447\u0430\u0442\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u043E")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__button body-main__button--blue body-main__button--width"
+  }, "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__list"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__car"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/images/orderpage/cars/ELANTRA.jpg",
+    alt: "",
+    className: "body-main__image body-main__image--width"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__descr"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__text body-main__text--light"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", null, "ELANTRA"), " \u0432 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", null, "\u0423\u043B\u044C\u044F\u043D\u043E\u0432\u0441\u043A"), ", \u041D\u0430\u0440\u0438\u043C\u0430\u043D\u043E\u0432\u0430 42"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__text body-main__text--light"
+  }, "12.06.2019 12:00 \u2014 13.06.2019 12:00"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__text body-main__text--light"
+  }, "\u0426\u0432\u0435\u0442: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", null, "\u0413\u043E\u043B\u0443\u0431\u043E\u0439")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__checkbox-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container checkbox-section__container--color"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark checkbox-section__checkmark--border"
+  }), "\u041F\u043E\u043B\u043D\u044B\u0439 \u0431\u0430\u043A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container checkbox-section__container--color"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark checkbox-section__checkmark--border"
+  }), "\u0414\u0435\u0442\u0441\u043A\u043E\u0435 \u043A\u0440\u0435\u0441\u043B\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "checkbox-section__container checkbox-section__container--color"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    className: "checkbox-section__input"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "checkbox-section__checkmark checkbox-section__checkmark--border"
+  }), "\u041F\u0440\u0430\u0432\u044B\u0439 \u0440\u0443\u043B\u044C")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__price"
+  }, "4 300 \u20BD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__btn-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__action body-main__action--accept"
+  }, "\u0413\u043E\u0442\u043E\u0432\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__action body-main__action--decline"
+  }, "\u041E\u0442\u043C\u0435\u043D\u0430"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__action body-main__action--change"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__footer body-main__footer--border"
+  })));
+}
+
+/***/ }),
+
+/***/ "./components/Pages/AdminPanel.jsx":
+/*!*****************************************!*\
+  !*** ./components/Pages/AdminPanel.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminPanel; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _AdminAuth_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminAuth.jsx */ "./components/Pages/AdminAuth.jsx");
+/* harmony import */ var _layouts_AdminLayout_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layouts/AdminLayout.jsx */ "./components/layouts/AdminLayout.jsx");
+
+
+
+
+function AdminPanel() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/admin",
+    exact: true,
+    component: _layouts_AdminLayout_jsx__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/admin/login",
+    component: _AdminAuth_jsx__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }))));
 }
 
 /***/ }),
@@ -2035,7 +2874,7 @@ function Total(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0441 "), props.since)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main-total__img"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "images/orderpage/cars/".concat(props.model, ".jpg"),
+    src: "/images/orderpage/cars/".concat(props.model, ".jpg"),
     alt: "",
     className: "body-main-total__image"
   })))));
@@ -2043,27 +2882,84 @@ function Total(props) {
 
 /***/ }),
 
-/***/ "./components/layouts/EmptyAdminLayout.jsx":
-/*!*************************************************!*\
-  !*** ./components/layouts/EmptyAdminLayout.jsx ***!
-  \*************************************************/
+/***/ "./components/layouts/AdminBodyLayout.jsx":
+/*!************************************************!*\
+  !*** ./components/layouts/AdminBodyLayout.jsx ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EmptyAdminLayout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminBodyLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-function EmptyAdminLayout(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "wrapper"
+function AdminBodyLayout(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+    className: "body-main"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container__content container__content--gray container__content--center"
-  }, props.children)));
+    className: "body-main__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "body-main__title"
+  }, props.title), props.children));
+}
+
+/***/ }),
+
+/***/ "./components/layouts/AdminLayout.jsx":
+/*!********************************************!*\
+  !*** ./components/layouts/AdminLayout.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminLayout; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Navbar_Admin_Navbar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Navbar/Admin/Navbar.jsx */ "./components/Navbar/Admin/Navbar.jsx");
+/* harmony import */ var _Header_Admin_Header_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Header/Admin/Header.jsx */ "./components/Header/Admin/Header.jsx");
+/* harmony import */ var _Pages_AdminCarSetting_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Pages/AdminCarSetting.jsx */ "./components/Pages/AdminCarSetting.jsx");
+/* harmony import */ var _Pages_AdminCarList_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Pages/AdminCarList.jsx */ "./components/Pages/AdminCarList.jsx");
+/* harmony import */ var _Pages_AdminOrderList_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Pages/AdminOrderList.jsx */ "./components/Pages/AdminOrderList.jsx");
+/* harmony import */ var _Footer_Admin_Footer_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Footer/Admin/Footer.jsx */ "./components/Footer/Admin/Footer.jsx");
+
+
+
+
+
+
+
+
+function AdminLayout(props) {
+  return (// <BrowserRouter>
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "wrapper"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "container__content container__content--gray"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar_Admin_Navbar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "body"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "body__container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "body-top"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header_Admin_Header_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      path: "/admin/car-setting",
+      component: _Pages_AdminCarSetting_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      path: "/admin/car-list",
+      component: _Pages_AdminCarList_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      path: "/admin/order-list",
+      component: _Pages_AdminOrderList_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer_Admin_Footer_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null)))))) // </BrowserRouter>
+
+  );
 }
 
 /***/ }),

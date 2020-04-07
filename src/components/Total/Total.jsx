@@ -23,7 +23,7 @@ export default function Total(props) {
           </div>
           <div className="body-main-total__img">
             <img
-              src={`images/orderpage/cars/${props.model}.jpg`}
+              src={`/images/orderpage/cars/${props.model}.jpg`}
               alt=""
               className="body-main-total__image"
             />

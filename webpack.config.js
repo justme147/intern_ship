@@ -92,54 +92,6 @@ const plugins = () => {
       title: "Need For Drive",
       filename: "index.html",
     }),
-    new HTMLWebpackPlugin({
-      template: "./order_page.html",
-      minify: {
-        collapseWhitespace: isProd,
-      },
-      title: "Need For Drive | Order page",
-      filename: "order_page.html",
-    }),
-    new HTMLWebpackPlugin({
-      template: "./admin_auth.html",
-      minify: {
-        collapseWhitespace: isProd,
-      },
-      title: "Need For Drive | Admin Auth",
-      filename: "admin_auth.html",
-    }),
-    new HTMLWebpackPlugin({
-      template: "./admin_car_setting.html",
-      minify: {
-        collapseWhitespace: isProd,
-      },
-      title: "Need For Drive | Admin Car Setting",
-      filename: "admin_car_setting.html",
-    }),
-    new HTMLWebpackPlugin({
-      template: "./admin_order_list.html",
-      minify: {
-        collapseWhitespace: isProd,
-      },
-      title: "Need For Drive | Admin Order List",
-      filename: "admin_order_list.html",
-    }),
-    new HTMLWebpackPlugin({
-      template: "./admin_table.html",
-      minify: {
-        collapseWhitespace: isProd,
-      },
-      title: "Need For Drive | Admin Table",
-      filename: "admin_table.html",
-    }),
-    new HTMLWebpackPlugin({
-      template: "./admin_error.html",
-      minify: {
-        collapseWhitespace: isProd,
-      },
-      title: "Need For Drive | Admin Error",
-      filename: "admin_error.html",
-    }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
@@ -172,7 +124,7 @@ module.exports = {
   output: {
     filename: filename("js"),
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    // publicPath: "/",
   },
   resolve: {
     extensions: [".scss", ".css", ".js"],

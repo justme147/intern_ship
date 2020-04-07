@@ -14,7 +14,7 @@ export default function Header(props) {
       </Link>
       <div className="body-header__location">
         <img
-          src="images/startscreen/icon_map_marker.svg"
+          src="/images/startscreen/icon_map_marker.svg"
           alt="map_marker"
           className="body-header__icon"
         />

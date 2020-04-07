@@ -128,6 +128,16 @@
         fill: $blue;
       }
     }
+
+    &.active {
+      background-color: #fbfbfb;
+      color: $blue;
+      box-shadow: inset 4px 0px 0px #007bff, inset 0px -1px 0px #e1e5eb;
+
+      .sidebar__icon path {
+        fill: $blue;
+      }
+    }
   }
 
   &__icon {
@@ -330,7 +340,7 @@
     }
 
     &__overview {
-      width: 65px;
+      width: 66px;
       text-align: center;
       border-left: 0.5px solid $admin_border;
       background-color: #e9ecef;
@@ -732,11 +742,15 @@
 
     &__li {
       margin-left: 16px;
-      @include styletext(14px, $blue, 16px);
+
       cursor: pointer;
 
       &:first-child {
         margin-left: 0;
+      }
+
+      & a {
+        @include styletext(14px, $blue, 16px);
       }
     }
 

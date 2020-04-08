@@ -235,20 +235,29 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleButtonClick", function () {
       // const order = this.state.order;
+      var history = _this.state.history;
+      var current = history[history.length - 1];
+      var order = current.order;
+
       _this.setState({
         isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4,
-        isModal: _this.state.isActive === 4 ? true : false // history: this.state.history.concat({ order }),
-
+        isModal: _this.state.isActive === 4 ? true : false,
+        history: _this.state.history.concat({
+          order: order
+        })
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleOrderChange", function (name, value, index) {
-      var newOrder = _this.state.order.slice();
+      var history = _this.state.history;
+      var current = history[history.length - 1];
+      var newOrder = current.order.slice(); // const newOrder = this.state.order.slice();
 
       newOrder[index][name] = value;
+      history[history.length - 1].order = newOrder; // console.log(history);
 
       _this.setState({
-        order: newOrder
+        history: history
       });
     });
 
@@ -261,8 +270,13 @@ var App = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleDateInputChange", function (e, index) {
       _this.handleOrderChange(e.target.name, e.target.value, index);
 
-      var since = _this.state.order[index].since;
-      var by = _this.state.order[index].by;
+      var history = _this.state.history;
+      var current = history[history.length - 1];
+      var order = current.order; // const since = this.state.order[index].since;
+      // const by = this.state.order[index].by;
+
+      var since = order[index].since;
+      var by = order[index].by;
       var from = new Date(since.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
       var to = new Date(by.replace(/(\d+).(\d+).(\d+)/, "$3.$2.$1"));
       var time = new Date(to - from);
@@ -281,42 +295,83 @@ var App = /*#__PURE__*/function (_React$Component) {
     });
 
     _this.state = {
-      history: [],
+      history: [{
+        order: [{
+          city: "",
+          place: "",
+          title: "Пункт выдачи"
+        }, {
+          name: "",
+          number: "",
+          value: "",
+          fuel: "",
+          title: "Модель"
+        }, {
+          value: "",
+          title: "Цвет"
+        }, {
+          value: "",
+          title: "Длительность аренды",
+          since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
+          by: ""
+        }, {
+          value: "",
+          title: "Тариф"
+        }, {
+          value: false,
+          title: "Полный бак"
+        }, {
+          value: false,
+          title: "Детское кресло"
+        }, {
+          value: false,
+          title: "Правый руль"
+        }]
+      }],
       isActive: 1,
       isModal: false,
       orderId: "RU".concat(Date.now()),
-      colorsCar: [],
-      order: [{
-        city: "",
-        place: "",
-        title: "Пункт выдачи"
-      }, {
-        name: "",
-        number: "",
-        value: "",
-        fuel: "",
-        title: "Модель"
-      }, {
-        value: "",
-        title: "Цвет"
-      }, {
-        value: "",
-        title: "Длительность аренды",
-        since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
-        by: ""
-      }, {
-        value: "",
-        title: "Тариф"
-      }, {
-        value: false,
-        title: "Полный бак"
-      }, {
-        value: false,
-        title: "Детское кресло"
-      }, {
-        value: false,
-        title: "Правый руль"
-      }]
+      colorsCar: [] // order: [
+      //   {
+      //     city: "",
+      //     place: "",
+      //     title: "Пункт выдачи",
+      //   },
+      //   {
+      //     name: "",
+      //     number: "",
+      //     value: "",
+      //     fuel: "",
+      //     title: "Модель",
+      //   },
+      //   {
+      //     value: "",
+      //     title: "Цвет",
+      //   },
+      //   {
+      //     value: "",
+      //     title: "Длительность аренды",
+      //     since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
+      //     by: "",
+      //   },
+      //   {
+      //     value: "",
+      //     title: "Тариф",
+      //   },
+      //   {
+      //     value: false,
+      //     title: "Полный бак",
+      //   },
+      //   {
+      //     value: false,
+      //     title: "Детское кресло",
+      //   },
+      //   {
+      //     value: false,
+      //     title: "Правый руль",
+      //   },
+      // ],
+
     };
     _this.handleMenuClick = _this.handleMenuClick.bind(_assertThisInitialized(_this));
     _this.handleButtonClick = _this.handleButtonClick.bind(_assertThisInitialized(_this));
@@ -331,13 +386,18 @@ var App = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var isActive = this.state.isActive;
+      var history = this.state.history;
+      var current = history[history.length - 1];
+      var order = current.order;
       var renderStep;
 
       switch (this.state.isActive) {
         case 1:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Location_Location_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            city: this.state.order[0].city,
-            place: this.state.order[0].place,
+            city: order[0].city,
+            place: order[0].place // city={this.state.order[0].city}
+            // place={this.state.order[0].place}
+            ,
             onInputChange: this.handleOrderChange
           });
           break;
@@ -351,8 +411,10 @@ var App = /*#__PURE__*/function (_React$Component) {
 
         case 3:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Options_Options_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            since: this.state.order[3].since,
-            by: this.state.order[3].by,
+            since: order[3].since,
+            by: order[3].by // since={this.state.order[3].since}
+            // by={this.state.order[3].by}
+            ,
             onOrderChange: this.handleOrderChange,
             onInputDateChange: this.handleDateInputChange,
             colors: this.state.colorsCar
@@ -361,12 +423,18 @@ var App = /*#__PURE__*/function (_React$Component) {
 
         case 4:
           renderStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Total_Total_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            since: this.state.order[3].since,
-            name: this.state.order[1].name,
-            model: this.state.order[1].value,
-            number: this.state.order[1].number,
-            fuel: this.state.order[1].fuel,
-            isFull: this.state.order[5].value
+            since: order[3].since,
+            name: order[1].name,
+            model: order[1].value,
+            number: order[1].number,
+            fuel: order[1].fuel,
+            isFull: order[5].value // since={this.state.order[3].since}
+            // name={this.state.order[1].name}
+            // model={this.state.order[1].value}
+            // number={this.state.order[1].number}
+            // fuel={this.state.order[1].fuel}
+            // isFull={this.state.order[5].value}
+
           });
           break;
       }
@@ -380,8 +448,9 @@ var App = /*#__PURE__*/function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_OrderLayout_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
         isActive: isActive,
         handleMenuClick: this.handleMenuClick,
-        renderStep: renderStep,
-        order: this.state.order,
+        renderStep: renderStep // order={this.state.order}
+        ,
+        order: order,
         handleButtonClick: this.handleButtonClick,
         isModal: this.state.isModal,
         handleButtonDeclineClick: this.handleButtonDeclineClick,

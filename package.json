@@ -11,6 +11,7 @@
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "browserslist": "> 0.25%, not dead",
+  "homepage": ".",
   "author": "justme147",
   "license": "ISC",
   "devDependencies": {

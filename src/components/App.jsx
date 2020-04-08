@@ -15,51 +15,94 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [],
+      history: [
+        {
+          order: [
+            {
+              city: "",
+              place: "",
+              title: "Пункт выдачи",
+            },
+            {
+              name: "",
+              number: "",
+              value: "",
+              fuel: "",
+              title: "Модель",
+            },
+            {
+              value: "",
+              title: "Цвет",
+            },
+            {
+              value: "",
+              title: "Длительность аренды",
+              since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
+              by: "",
+            },
+            {
+              value: "",
+              title: "Тариф",
+            },
+            {
+              value: false,
+              title: "Полный бак",
+            },
+            {
+              value: false,
+              title: "Детское кресло",
+            },
+            {
+              value: false,
+              title: "Правый руль",
+            },
+          ],
+        },
+      ],
       isActive: 1,
       isModal: false,
       orderId: `RU${Date.now()}`,
       colorsCar: [],
-      order: [
-        {
-          city: "",
-          place: "",
-          title: "Пункт выдачи",
-        },
-        {
-          name: "",
-          number: "",
-          value: "",
-          fuel: "",
-          title: "Модель",
-        },
-        {
-          value: "",
-          title: "Цвет",
-        },
-        {
-          value: "",
-          title: "Длительность аренды",
-          since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
-          by: "",
-        },
-        {
-          value: "",
-          title: "Тариф",
-        },
-        {
-          value: false,
-          title: "Полный бак",
-        },
-        {
-          value: false,
-          title: "Детское кресло",
-        },
-        {
-          value: false,
-          title: "Правый руль",
-        },
-      ],
+      // order: [
+      //   {
+      //     city: "",
+      //     place: "",
+      //     title: "Пункт выдачи",
+      //   },
+      //   {
+      //     name: "",
+      //     number: "",
+      //     value: "",
+      //     fuel: "",
+      //     title: "Модель",
+      //   },
+      //   {
+      //     value: "",
+      //     title: "Цвет",
+      //   },
+      //   {
+      //     value: "",
+      //     title: "Длительность аренды",
+      //     since: new Date().toLocaleString().slice(0, -3).replace(",", ""),
+      //     by: "",
+      //   },
+      //   {
+      //     value: "",
+      //     title: "Тариф",
+      //   },
+      //   {
+      //     value: false,
+      //     title: "Полный бак",
+      //   },
+      //   {
+      //     value: false,
+      //     title: "Детское кресло",
+      //   },
+      //   {
+      //     value: false,
+      //     title: "Правый руль",
+      //   },
+      // ],
     };
 
     this.handleMenuClick = this.handleMenuClick.bind(this);
@@ -84,20 +127,29 @@ export default class App extends React.Component {
 
   handleButtonClick = () => {
     // const order = this.state.order;
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const order = current.order;
 
     this.setState({
       isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4,
       isModal: this.state.isActive === 4 ? true : false,
-      // history: this.state.history.concat({ order }),
+      history: this.state.history.concat({ order }),
     });
   };
 
   handleOrderChange = (name, value, index) => {
-    const newOrder = this.state.order.slice();
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const newOrder = current.order.slice();
+    // const newOrder = this.state.order.slice();
 
     newOrder[index][name] = value;
+    history[history.length - 1].order = newOrder;
 
-    this.setState({ order: newOrder });
+    // console.log(history);
+
+    this.setState({ history });
   };
 
   handleModelClick = (value) => {
@@ -107,8 +159,14 @@ export default class App extends React.Component {
   handleDateInputChange = (e, index) => {
     this.handleOrderChange(e.target.name, e.target.value, index);
 
-    const since = this.state.order[index].since;
-    const by = this.state.order[index].by;
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const order = current.order;
+
+    // const since = this.state.order[index].since;
+    // const by = this.state.order[index].by;
+    const since = order[index].since;
+    const by = order[index].by;
 
     const from = new Date(since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
     const to = new Date(by.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
@@ -133,6 +191,9 @@ export default class App extends React.Component {
 
   render() {
     const isActive = this.state.isActive;
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const order = current.order;
 
     let renderStep;
 
@@ -140,8 +201,10 @@ export default class App extends React.Component {
       case 1:
         renderStep = (
           <Location
-            city={this.state.order[0].city}
-            place={this.state.order[0].place}
+            city={order[0].city}
+            place={order[0].place}
+            // city={this.state.order[0].city}
+            // place={this.state.order[0].place}
             onInputChange={this.handleOrderChange}
           />
         );
@@ -157,8 +220,10 @@ export default class App extends React.Component {
       case 3:
         renderStep = (
           <Options
-            since={this.state.order[3].since}
-            by={this.state.order[3].by}
+            since={order[3].since}
+            by={order[3].by}
+            // since={this.state.order[3].since}
+            // by={this.state.order[3].by}
             onOrderChange={this.handleOrderChange}
             onInputDateChange={this.handleDateInputChange}
             colors={this.state.colorsCar}
@@ -168,12 +233,18 @@ export default class App extends React.Component {
       case 4:
         renderStep = (
           <Total
-            since={this.state.order[3].since}
-            name={this.state.order[1].name}
-            model={this.state.order[1].value}
-            number={this.state.order[1].number}
-            fuel={this.state.order[1].fuel}
-            isFull={this.state.order[5].value}
+            since={order[3].since}
+            name={order[1].name}
+            model={order[1].value}
+            number={order[1].number}
+            fuel={order[1].fuel}
+            isFull={order[5].value}
+            // since={this.state.order[3].since}
+            // name={this.state.order[1].name}
+            // model={this.state.order[1].value}
+            // number={this.state.order[1].number}
+            // fuel={this.state.order[1].fuel}
+            // isFull={this.state.order[5].value}
           />
         );
         break;
@@ -188,7 +259,8 @@ export default class App extends React.Component {
               isActive={isActive}
               handleMenuClick={this.handleMenuClick}
               renderStep={renderStep}
-              order={this.state.order}
+              // order={this.state.order}
+              order={order}
               handleButtonClick={this.handleButtonClick}
               isModal={this.state.isModal}
               handleButtonDeclineClick={this.handleButtonDeclineClick}

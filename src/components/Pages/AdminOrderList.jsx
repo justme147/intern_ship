@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AdminBodyLayout from "../layouts/AdminBodyLayout.jsx";
+import AdminCheckbox from "../Checkbox/AdminCheckbox.jsx";
 
 export default function AdminOrderList() {
+  const [options, setOptions] = useState([
+    { id: 1, text: "Полный бак" },
+    { id: 2, text: "Детское кресло" },
+    { id: 3, text: "Правый руль" },
+  ]);
   return (
     <AdminBodyLayout title="Заказы">
       <div className="body-main__order">
@@ -69,21 +75,9 @@ export default function AdminOrderList() {
               </div>
             </div>
             <div className="body-main__checkbox-group">
-              <label className="checkbox-section__container checkbox-section__container--color">
-                <input type="checkbox" className="checkbox-section__input" />
-                <span className="checkbox-section__checkmark checkbox-section__checkmark--border"></span>
-                Полный бак
-              </label>
-              <label className="checkbox-section__container checkbox-section__container--color">
-                <input type="checkbox" className="checkbox-section__input" />
-                <span className="checkbox-section__checkmark checkbox-section__checkmark--border"></span>
-                Детское кресло
-              </label>
-              <label className="checkbox-section__container checkbox-section__container--color">
-                <input type="checkbox" className="checkbox-section__input" />
-                <span className="checkbox-section__checkmark checkbox-section__checkmark--border"></span>
-                Правый руль
-              </label>
+              {options.map((item) => {
+                return <AdminCheckbox text={item.text} key={item.id} border />;
+              })}
             </div>
             <div className="body-main__price">4 300 ₽</div>
             <div className="body-main__btn-group">

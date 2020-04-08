@@ -234,12 +234,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleButtonClick", function () {
-      // const history = this.state.history;
-      // const current = history[history.length - 1];
-      // const newOrder = this.state.order;
+      // const order = this.state.order;
       _this.setState({
         isActive: _this.state.isActive < 4 ? _this.state.isActive + 1 : 4,
-        isModal: _this.state.isActive === 4 ? true : false // history: this.state.history.concat({ order: newOrder })
+        isModal: _this.state.isActive === 4 ? true : false // history: this.state.history.concat({ order }),
 
       });
     });
@@ -283,6 +281,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     });
 
     _this.state = {
+      history: [],
       isActive: 1,
       isModal: false,
       orderId: "RU".concat(Date.now()),
@@ -317,8 +316,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       }, {
         value: false,
         title: "Правый руль"
-      }],
-      history: []
+      }]
     };
     _this.handleMenuClick = _this.handleMenuClick.bind(_assertThisInitialized(_this));
     _this.handleButtonClick = _this.handleButtonClick.bind(_assertThisInitialized(_this));
@@ -377,7 +375,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         path: "/",
         exact: true,
         component: _Pages_MainPage_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
-      }), ">", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/order"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_OrderLayout_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
         isActive: isActive,
@@ -390,7 +388,11 @@ var App = /*#__PURE__*/function (_React$Component) {
         orderId: this.state.orderId
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/admin",
-        component: _Pages_AdminPanel_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
+        exact: true,
+        component: _layouts_AdminLayout_jsx__WEBPACK_IMPORTED_MODULE_10__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/admin/login",
+        component: _Pages_AdminAuth_jsx__WEBPACK_IMPORTED_MODULE_9__["default"]
       })));
     }
   }]);
@@ -532,7 +534,8 @@ function CarSetting() {
   }, colors.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox_AdminCheckbox_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
       text: item.color,
-      key: item.id
+      key: item.id,
+      blue: true
     });
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main__wrap body-main__wrap--between"
@@ -565,13 +568,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 function AdminCheckbox(props) {
+  var spanClasses = ["checkbox-section__checkmark"];
+
+  if (props.blue) {
+    spanClasses.push("checkbox-section__checkmark--blue");
+  }
+
+  if (props.border) {
+    spanClasses.push("checkbox-section__checkmark--border");
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "checkbox-section__container checkbox-section__container--color"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "checkbox",
     className: "checkbox-section__input"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "checkbox-section__checkmark checkbox-section__checkmark--blue"
+    className: spanClasses.join(" ")
   }), props.text);
 }
 
@@ -2360,6 +2373,37 @@ function AdminCarSetting() {
 
 /***/ }),
 
+/***/ "./components/Pages/AdminError.jsx":
+/*!*****************************************!*\
+  !*** ./components/Pages/AdminError.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AdminError; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function AdminError() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+    className: "body-main"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-main__container body-main__container--center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "body-main__title body-main__title--gray"
+  }, "500"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "body-main__subtitle body-main__subtitle--size"
+  }, "\u0427\u0442\u043E \u0442\u043E \u043F\u043E\u0448\u043B\u043E \u043D\u0435 \u0442\u0430\u043A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "body-main__text body-main__text--size"
+  }, "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "body-main__button body-main__button--blue body-main__button--width body-main__button--margin"
+  }, "\u041D\u0430\u0437\u0430\u0434")));
+}
+
+/***/ }),
+
 /***/ "./components/Pages/AdminOrderList.jsx":
 /*!*********************************************!*\
   !*** ./components/Pages/AdminOrderList.jsx ***!
@@ -2373,9 +2417,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/AdminBodyLayout.jsx */ "./components/layouts/AdminBodyLayout.jsx");
+/* harmony import */ var _Checkbox_AdminCheckbox_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Checkbox/AdminCheckbox.jsx */ "./components/Checkbox/AdminCheckbox.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 function AdminOrderList() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: 1,
+    text: "Полный бак"
+  }, {
+    id: 2,
+    text: "Детское кресло"
+  }, {
+    id: 3,
+    text: "Правый руль"
+  }]),
+      _useState2 = _slicedToArray(_useState, 2),
+      options = _useState2[0],
+      setOptions = _useState2[1];
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AdminBodyLayout_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: "\u0417\u0430\u043A\u0430\u0437\u044B"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2468,28 +2536,13 @@ function AdminOrderList() {
     className: "body-main__text body-main__text--light"
   }, "\u0426\u0432\u0435\u0442: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", null, "\u0413\u043E\u043B\u0443\u0431\u043E\u0439")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main__checkbox-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "checkbox-section__container checkbox-section__container--color"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "checkbox",
-    className: "checkbox-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "checkbox-section__checkmark checkbox-section__checkmark--border"
-  }), "\u041F\u043E\u043B\u043D\u044B\u0439 \u0431\u0430\u043A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "checkbox-section__container checkbox-section__container--color"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "checkbox",
-    className: "checkbox-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "checkbox-section__checkmark checkbox-section__checkmark--border"
-  }), "\u0414\u0435\u0442\u0441\u043A\u043E\u0435 \u043A\u0440\u0435\u0441\u043B\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "checkbox-section__container checkbox-section__container--color"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "checkbox",
-    className: "checkbox-section__input"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "checkbox-section__checkmark checkbox-section__checkmark--border"
-  }), "\u041F\u0440\u0430\u0432\u044B\u0439 \u0440\u0443\u043B\u044C")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, options.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox_AdminCheckbox_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: item.text,
+      key: item.id,
+      border: true
+    });
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main__price"
   }, "4 300 \u20BD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "body-main__btn-group"
@@ -2760,7 +2813,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slider; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _SliderItem_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SliderItem.jsx */ "./components/Slider/SliderItem.jsx");
+/* harmony import */ var _scripts_slider_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../scripts/slider.js */ "./scripts/slider.js");
+/* harmony import */ var _SliderItem_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SliderItem.jsx */ "./components/Slider/SliderItem.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -2768,6 +2822,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2793,10 +2848,13 @@ function Slider() {
       sliderList = _useState2[0],
       setSliderList = _useState2[1];
 
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    Object(_scripts_slider_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "slider"
   }, sliderList.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SliderItem_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SliderItem_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
       item: item,
       key: item.id
     });
@@ -2925,7 +2983,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_AdminCarSetting_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Pages/AdminCarSetting.jsx */ "./components/Pages/AdminCarSetting.jsx");
 /* harmony import */ var _Pages_AdminCarList_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Pages/AdminCarList.jsx */ "./components/Pages/AdminCarList.jsx");
 /* harmony import */ var _Pages_AdminOrderList_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Pages/AdminOrderList.jsx */ "./components/Pages/AdminOrderList.jsx");
-/* harmony import */ var _Footer_Admin_Footer_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Footer/Admin/Footer.jsx */ "./components/Footer/Admin/Footer.jsx");
+/* harmony import */ var _Pages_AdminError_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Pages/AdminError.jsx */ "./components/Pages/AdminError.jsx");
+/* harmony import */ var _Footer_Admin_Footer_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Footer/Admin/Footer.jsx */ "./components/Footer/Admin/Footer.jsx");
+
 
 
 
@@ -2935,31 +2995,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function AdminLayout(props) {
-  return (// <BrowserRouter>
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "wrapper"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "container__content container__content--gray"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar_Admin_Navbar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-      className: "body"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "body__container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "body-top"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header_Admin_Header_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-      path: "/admin/car-setting",
-      component: _Pages_AdminCarSetting_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-      path: "/admin/car-list",
-      component: _Pages_AdminCarList_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-      path: "/admin/order-list",
-      component: _Pages_AdminOrderList_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer_Admin_Footer_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null)))))) // </BrowserRouter>
-
-  );
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container__content container__content--gray"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar_Admin_Navbar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body__container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "body-top"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header_Admin_Header_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/admin/car-setting",
+    component: _Pages_AdminCarSetting_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/admin/car-list",
+    component: _Pages_AdminCarList_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/admin/order-list",
+    component: _Pages_AdminOrderList_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer_Admin_Footer_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null)))))));
 }
 
 /***/ }),
@@ -3069,18 +3126,19 @@ react_dom__WEBPACK_IMPORTED_MODULE_5___default.a.render(react__WEBPACK_IMPORTED_
 /*!***************************!*\
   !*** ./scripts/slider.js ***!
   \***************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return slick; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var slick_carousel_slick_slick_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! slick-carousel/slick/slick.min.js */ "../node_modules/slick-carousel/slick/slick.min.js");
 /* harmony import */ var slick_carousel_slick_slick_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_min_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
+function slick() {
   jquery__WEBPACK_IMPORTED_MODULE_0__(".slider").slick({
     dots: true,
     speed: 1000,
@@ -3091,7 +3149,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__(".slick-arrow.slick-prev").append('<img src="./images/startscreen/slider_left_arrow.svg" class="slick-arrow-img" />');
   jquery__WEBPACK_IMPORTED_MODULE_0__(".slick-arrow.slick-next").append('<img src="./images/startscreen/slider_right_arrow.svg" class="slick-arrow-img" />');
-});
+}
 
 /***/ }),
 
@@ -3099,19 +3157,21 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
 /*!************************************!*\
   !*** ./scripts/startscreenmenu.js ***!
   \************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return toggleMenu; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+ // $(document).ready(function() {
 
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
+function toggleMenu() {
   jquery__WEBPACK_IMPORTED_MODULE_0__(".burger").on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(".container__menu").fadeToggle(200);
   });
-});
+} // });
 
 /***/ }),
 

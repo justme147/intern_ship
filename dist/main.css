@@ -290,7 +290,8 @@ h6 {
     font-weight: bold; }
   .body-header__location {
     display: flex;
-    align-items: center; }
+    align-items: center;
+    cursor: pointer; }
     @media (max-width: 767.98px) {
       .body-header__location {
         justify-content: flex-end;
@@ -447,12 +448,28 @@ h6 {
     color: #eee; }
     .slider-content__button--bcg1 {
       background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%); }
+      .slider-content__button--bcg1:hover {
+        background: linear-gradient(90deg, #0f3831 0%, #0a6116 100%); }
+      .slider-content__button--bcg1:active {
+        background: linear-gradient(90deg, #0d302a 0%, #07410e 100%); }
     .slider-content__button--bcg2 {
       background: linear-gradient(90deg, #132949 0%, #0c7b67 100%); }
+      .slider-content__button--bcg2:hover {
+        background: linear-gradient(90deg, #11233f 0%, #0a5e4e 100%); }
+      .slider-content__button--bcg2:active {
+        background: linear-gradient(90deg, #0e1c33 0%, #07463a 100%); }
     .slider-content__button--bcg3 {
       background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%); }
+      .slider-content__button--bcg3:hover {
+        background: linear-gradient(90deg, #38250f 0%, #660b31 100%); }
+      .slider-content__button--bcg3:active {
+        background: linear-gradient(90deg, #291b0b 0%, #4e0926 100%); }
     .slider-content__button--bcg4 {
       background: linear-gradient(90deg, #281349 0%, #720c7b 100%); }
+      .slider-content__button--bcg4:hover {
+        background: linear-gradient(90deg, #1d0e36 0%, #57095e 100%); }
+      .slider-content__button--bcg4:active {
+        background: linear-gradient(90deg, #180b2c 0%, #420747 100%); }
 
 /* Слайдер */
 .slick-slider {

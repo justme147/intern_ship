@@ -15,6 +15,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      history: [],
       isActive: 1,
       isModal: false,
       orderId: `RU${Date.now()}`,
@@ -59,7 +60,6 @@ export default class App extends React.Component {
           title: "Правый руль",
         },
       ],
-      history: [],
     };
 
     this.handleMenuClick = this.handleMenuClick.bind(this);
@@ -83,14 +83,12 @@ export default class App extends React.Component {
   };
 
   handleButtonClick = () => {
-    // const history = this.state.history;
-    // const current = history[history.length - 1];
-    // const newOrder = this.state.order;
+    // const order = this.state.order;
 
     this.setState({
       isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4,
       isModal: this.state.isActive === 4 ? true : false,
-      // history: this.state.history.concat({ order: newOrder })
+      // history: this.state.history.concat({ order }),
     });
   };
 
@@ -184,7 +182,7 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={MainPage} />>
+          <Route path="/" exact component={MainPage} />
           <Route path="/order">
             <OrderLayout
               isActive={isActive}
@@ -197,8 +195,8 @@ export default class App extends React.Component {
               orderId={this.state.orderId}
             />
           </Route>
-          <Route path="/admin" component={AdminPanel} />
-          {/* <Route path="/admin/login" component={AdminAuth} /> */}
+          <Route path="/admin" exact component={AdminLayout} />
+          <Route path="/admin/login" component={AdminAuth} />
         </Switch>
       </BrowserRouter>
     );

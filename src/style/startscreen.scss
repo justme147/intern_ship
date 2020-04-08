@@ -246,6 +246,7 @@
     &__location {
       @include flexbox();
       align-items: center;
+      cursor: pointer;
 
       @media (max-width: $bp3) {
         justify-content: flex-end;
@@ -469,18 +470,50 @@
 
       &--bcg1 {
         background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
+
+        &:hover {
+          background: linear-gradient(90deg, #0f3831 0%, #0a6116 100%);
+        }
+
+        &:active {
+          background: linear-gradient(90deg, #0d302a 0%, #07410e 100%);
+        }
       }
 
       &--bcg2 {
         background: linear-gradient(90deg, #132949 0%, #0c7b67 100%);
+
+        &:hover {
+          background: linear-gradient(90deg, #11233f 0%, #0a5e4e 100%);
+        }
+
+        &:active {
+          background: linear-gradient(90deg, #0e1c33 0%, #07463a 100%);
+        }
       }
 
       &--bcg3 {
         background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+
+        &:hover {
+          background: linear-gradient(90deg, #38250f 0%, #660b31 100%);
+        }
+
+        &:active {
+          background: linear-gradient(90deg, #291b0b 0%, #4e0926 100%);
+        }
       }
 
       &--bcg4 {
         background: linear-gradient(90deg, #281349 0%, #720c7b 100%);
+
+        &:hover {
+          background: linear-gradient(90deg, #1d0e36 0%, #57095e 100%);
+        }
+
+        &:active {
+          background: linear-gradient(90deg, #180b2c 0%, #420747 100%);
+        }
       }
     }
   }

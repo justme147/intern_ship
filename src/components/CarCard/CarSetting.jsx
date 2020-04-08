@@ -46,7 +46,7 @@ export default function CarSetting() {
 
       <div className="body-main__checkbox-group body-main__checkbox-group--margin">
         {colors.map((item) => {
-          return <AdminCheckbox text={item.color} key={item.id} />;
+          return <AdminCheckbox text={item.color} key={item.id} blue />;
         })}
       </div>
 

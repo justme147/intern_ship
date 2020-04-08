@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import slick from "../../scripts/slider.js";
 import SliderItem from "./SliderItem.jsx";
 
 export default function Slider() {
@@ -26,6 +27,11 @@ export default function Slider() {
       text: "Автомобиль проходит еженедельное ТО",
     },
   ]);
+
+  useEffect(() => {
+    slick();
+  });
+
   return (
     <section className="slider">
       {sliderList.map((item) => {

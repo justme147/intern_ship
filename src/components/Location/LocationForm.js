@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import deleteIcon from "../../assets/images/orderpage/form_icon_delete.svg";
 
-export default function LocationForm(props) {
+function LocationForm(props) {
   function inputChange(e) {
     props.onInputChange(e.target.name, e.target.value, 0);
   }
@@ -55,3 +56,11 @@ export default function LocationForm(props) {
     </form>
   );
 }
+
+LocationForm.propTypes = {
+  city: PropTypes.string,
+  place: PropTypes.string,
+  onInputChange: PropTypes.func,
+};
+
+export default LocationForm;

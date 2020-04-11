@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ModelItem from "./ModelItem";
 
-export default function ModelList(props) {
+function ModelList(props) {
   return (
     <div className="body-main-model__list">
       {props.cars.map((item) => {
@@ -27,3 +28,12 @@ export default function ModelList(props) {
     </div>
   );
 }
+
+ModelList.propTypes = {
+  cars: PropTypes.arrayOf(PropTypes.object),
+  filter: PropTypes.string,
+  onMenuItemClick: PropTypes.func,
+  selectItem: PropTypes.number,
+};
+
+export default ModelList;

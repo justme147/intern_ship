@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function NavbarMenuItem(props) {
+function NavbarMenuItem(props) {
   return (
     <li onClick={props.onItemClick}>
       <Link
@@ -18,3 +19,11 @@ export default function NavbarMenuItem(props) {
     </li>
   );
 }
+
+NavbarMenuItem.propTypes = {
+  item: PropTypes.object,
+  active: PropTypes.number,
+  onItemClick: PropTypes.func,
+};
+
+export default NavbarMenuItem;

@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function BurgerMenu(props) {
+function BurgerMenu(props) {
   const burgerClasses = ["burger"];
   const innerClasses = ["burger__inner"];
   const itemClasses = ["burger__item"];
@@ -29,3 +30,12 @@ export default function BurgerMenu(props) {
     </div>
   );
 }
+
+BurgerMenu.propTypes = {
+  burger: PropTypes.bool,
+  padding: PropTypes.bool,
+  border: PropTypes.bool,
+  close: PropTypes.bool,
+};
+
+export default BurgerMenu;

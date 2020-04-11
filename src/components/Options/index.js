@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import OptionColor from "./OptionsColor";
 import OptionDate from "./OptionsDate";
 import OptionTariff from "./OptionsTariff";
 import OptionServices from "./OptionsServices";
 
-export default function Options(props) {
+function Options(props) {
   return (
     <div className="body-main-options__inner">
       <div className="body-main-options">
@@ -32,3 +33,13 @@ export default function Options(props) {
     </div>
   );
 }
+
+Options.propTypes = {
+  since: PropTypes.string,
+  by: PropTypes.string,
+  onOrderChange: PropTypes.func,
+  onInputDateChange: PropTypes.func,
+  colors: PropTypes.array,
+};
+
+export default Options;

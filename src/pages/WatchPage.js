@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Order from "../components/Order";
 import Total from "../components/Total";
 
-export default function OrderPage(props) {
+function WatchPage(props) {
   return (
     <div className="body-main">
       <div className="body-main__inner">
@@ -32,3 +33,12 @@ export default function OrderPage(props) {
     </div>
   );
 }
+
+WatchPage.propTypes = {
+  order: PropTypes.arrayOf(PropTypes.object),
+  handleButtonClick: PropTypes.func,
+  isActive: PropTypes.number,
+  orderId: PropTypes.string,
+};
+
+export default WatchPage;

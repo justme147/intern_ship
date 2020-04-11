@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import arrowIcon from "../../assets/images/orderpage/menu_arrow.svg";
 
-export default function NavigationItem({ link, active, clickItem }) {
+function NavigationItem({ link, active, clickItem }) {
   const classes = ["body-list__item"];
 
   if (link.id === active) {
@@ -24,3 +25,11 @@ export default function NavigationItem({ link, active, clickItem }) {
     </li>
   );
 }
+
+NavigationItem.propTypes = {
+  link: PropTypes.object,
+  active: PropTypes.number,
+  clickItem: PropTypes.func,
+};
+
+export default NavigationItem;

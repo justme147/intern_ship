@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import LocationForm from "./LocationForm";
 
-export default function Location(props) {
+function Location(props) {
   return (
     <div className="body-main-location__inner">
       <div className="body-main-location">
@@ -20,3 +21,11 @@ export default function Location(props) {
     </div>
   );
 }
+
+Location.propTypes = {
+  city: PropTypes.string,
+  place: PropTypes.string,
+  onInputChange: PropTypes.func,
+};
+
+export default Location;

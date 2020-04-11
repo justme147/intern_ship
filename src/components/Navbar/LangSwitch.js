@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function LangSwitch(props) {
+function LangSwitch(props) {
   const [isEng, setIsEng] = useState(true);
   const classes = ["sidebar-lang-switch"];
   if (props.display) {
@@ -17,3 +18,9 @@ export default function LangSwitch(props) {
     </div>
   );
 }
+
+LangSwitch.propTypes = {
+  display: PropTypes.bool,
+};
+
+export default LangSwitch;

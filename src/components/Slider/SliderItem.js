@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function SliderItem(props) {
+function SliderItem(props) {
   const item = props.item;
   return (
     <div className="slider__item">
@@ -22,3 +23,9 @@ export default function SliderItem(props) {
     </div>
   );
 }
+
+SliderItem.propTypes = {
+  item: PropTypes.object,
+};
+
+export default SliderItem;

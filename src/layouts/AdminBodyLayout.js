@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function AdminBodyLayout(props) {
+function AdminBodyLayout(props) {
   return (
     <main className="body-main">
       <div className="body-main__container">
@@ -10,3 +11,10 @@ export default function AdminBodyLayout(props) {
     </main>
   );
 }
+
+AdminBodyLayout.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.object,
+};
+
+export default AdminBodyLayout;

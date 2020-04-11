@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import marker from "../../assets/images/startscreen/icon_map_marker.svg";
 
-export default function Header(props) {
+function Header(props) {
   const classes = ["body-header__inner"];
 
   if (props.padding) {
@@ -21,3 +22,9 @@ export default function Header(props) {
     </div>
   );
 }
+
+Header.propTypes = {
+  padding: PropTypes.bool,
+};
+
+export default Header;

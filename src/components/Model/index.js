@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import ModelMenu from "./ModelMenu";
 import ModelList from "./ModelList";
@@ -8,7 +9,7 @@ import imageCreta from "../../assets/images/orderpage/cars/CRETA.jpg";
 import imageI30n from "../../assets/images/orderpage/cars/i30N.jpg";
 import imageSonata from "../../assets/images/orderpage/cars/SONATA.jpg";
 
-export default function Model(props) {
+function Model(props) {
   const [car, setCar] = useState([
     {
       id: 1,
@@ -133,3 +134,10 @@ export default function Model(props) {
     </div>
   );
 }
+
+Model.propTypes = {
+  onMenuItemClick: PropTypes.func,
+  onModelClick: PropTypes.func,
+};
+
+export default Model;

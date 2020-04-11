@@ -1,14 +1,14 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Route, Switch } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import OrderPage from "../pages/OrderPage";
 import WatchPage from "../pages/WatchPage";
 
-export default function OrderLayout(props) {
+function OrderLayout(props) {
   return (
-    // <BrowserRouter>
     <div className="wrapper">
       <div className="container">
         <div className="container__content container__content--order">
@@ -31,7 +31,7 @@ export default function OrderLayout(props) {
                   orderId={props.orderId}
                 />
               </Route>
-              <Route path={`/order/${props.orderId}`}>
+              <Route path={`/order/:${props.orderId}`}>
                 <WatchPage
                   order={props.order}
                   handleButtonClick={props.handleButtonClick}
@@ -44,6 +44,18 @@ export default function OrderLayout(props) {
         </div>
       </div>
     </div>
-    // </BrowserRouter>
   );
 }
+
+OrderLayout.propTypes = {
+  isActive: PropTypes.number,
+  handleMenuClick: PropTypes.func,
+  renderStep: PropTypes.object,
+  order: PropTypes.arrayOf(PropTypes.object),
+  handleButtonClick: PropTypes.func,
+  isModal: PropTypes.bool,
+  handleButtonDeclineClick: PropTypes.func,
+  orderId: PropTypes.string,
+};
+
+export default OrderLayout;

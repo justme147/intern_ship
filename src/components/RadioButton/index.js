@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function RadioButton(props) {
+function RadioButton(props) {
   const labelClasses = ["radio-section__container"];
 
   if (props.labelClass) {
@@ -21,3 +22,13 @@ export default function RadioButton(props) {
     </label>
   );
 }
+
+RadioButton.propTypes = {
+  labelClass: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.string,
+  inputChange: PropTypes.func,
+  title: PropTypes.string,
+};
+
+export default RadioButton;

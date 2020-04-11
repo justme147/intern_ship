@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function ModelItem({ car, onMenuItemClick, selectItem }) {
+function ModelItem({ car, onMenuItemClick, selectItem }) {
   const classes = ["body-main-model__item"];
 
   if (car.id === selectItem) {
@@ -27,3 +28,11 @@ export default function ModelItem({ car, onMenuItemClick, selectItem }) {
     </div>
   );
 }
+
+ModelItem.propTypes = {
+  car: PropTypes.object,
+  onMenuItemClick: PropTypes.func,
+  selectItem: PropTypes.number,
+};
+
+export default ModelItem;

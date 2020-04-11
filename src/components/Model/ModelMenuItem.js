@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function ModelMenuItem({ item, filter, menuClick }) {
+function ModelMenuItem({ item, filter, menuClick }) {
   const classes = ["body-main-model__li"];
 
   if (filter === item.name) {
@@ -18,3 +19,11 @@ export default function ModelMenuItem({ item, filter, menuClick }) {
     </li>
   );
 }
+
+ModelMenuItem.propTypes = {
+  item: PropTypes.object,
+  filter: PropTypes.string,
+  menuClick: PropTypes.func,
+};
+
+export default ModelMenuItem;

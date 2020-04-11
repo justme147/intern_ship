@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import RadioButton from "../RadioButton";
 
-export default function OptionsTariff(props) {
+function OptionsTariff(props) {
   const [value, setValue] = useState([
     {
       id: 1,
@@ -36,3 +37,9 @@ export default function OptionsTariff(props) {
     </div>
   );
 }
+
+OptionsTariff.propTypes = {
+  menuTariffChange: PropTypes.func,
+};
+
+export default OptionsTariff;

@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import OrderItem from "./OrderItem";
 
-export default function Order(props) {
+function Order(props) {
   function OrderButton() {
     let button;
     switch (props.step) {
@@ -72,3 +73,11 @@ export default function Order(props) {
     </div>
   );
 }
+
+Order.propTypes = {
+  order: PropTypes.arrayOf(PropTypes.object),
+  onButtonClick: PropTypes.func,
+  step: PropTypes.number,
+};
+
+export default Order;

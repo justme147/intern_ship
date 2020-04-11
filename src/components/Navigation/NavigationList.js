@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import NavigationItem from "./NavigationItem";
 
-export default function NavigationList(props) {
+function NavigationList(props) {
   const [links, setLinks] = useState([
     {
       id: 1,
@@ -39,3 +40,10 @@ export default function NavigationList(props) {
     </nav>
   );
 }
+
+NavigationList.propTypes = {
+  active: PropTypes.number,
+  menuClick: PropTypes.func,
+};
+
+export default NavigationList;

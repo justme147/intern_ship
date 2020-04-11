@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function OptionsServices(props) {
+function OptionsServices(props) {
   const [fuel, setFuel] = useState(false);
   const [chair, setChair] = useState(false);
   const [wheel, setWheel] = useState(false);
@@ -24,7 +25,7 @@ export default function OptionsServices(props) {
           type="checkbox"
           name="fuel"
           checked={fuel}
-          onChange={e => handleInputChange(e, 5)}
+          onChange={(e) => handleInputChange(e, 5)}
           className="checkbox-section__input"
         />
         <span className="checkbox-section__checkmark"></span>
@@ -35,7 +36,7 @@ export default function OptionsServices(props) {
           type="checkbox"
           name="chair"
           checked={chair}
-          onChange={e => handleInputChange(e, 6)}
+          onChange={(e) => handleInputChange(e, 6)}
           className="checkbox-section__input"
         />
         <span className="checkbox-section__checkmark"></span>
@@ -46,7 +47,7 @@ export default function OptionsServices(props) {
           type="checkbox"
           name="wheel"
           checked={wheel}
-          onChange={e => handleInputChange(e, 7)}
+          onChange={(e) => handleInputChange(e, 7)}
           className="checkbox-section__input"
         />
         <span className="checkbox-section__checkmark"></span>
@@ -55,3 +56,9 @@ export default function OptionsServices(props) {
     </div>
   );
 }
+
+OptionsServices.propTypes = {
+  menuServicesChange: PropTypes.func,
+};
+
+export default OptionsServices;

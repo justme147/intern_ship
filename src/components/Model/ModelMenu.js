@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import ModelMenuItem from "./ModelMenuItem";
 
-export default function ModelMenu(props) {
+function ModelMenu(props) {
   const [menu, setMenu] = useState([
     { id: 1, name: "all", title: "Все модели" },
     { id: 2, name: "eco", title: "Эконом" },
@@ -23,3 +24,10 @@ export default function ModelMenu(props) {
     </ul>
   );
 }
+
+ModelMenu.propTypes = {
+  filter: PropTypes.string,
+  onMenuClick: PropTypes.func,
+};
+
+export default ModelMenu;

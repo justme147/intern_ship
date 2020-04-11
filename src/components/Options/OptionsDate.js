@@ -1,9 +1,10 @@
 import React from "react";
 import InputMask from "react-input-mask";
+import PropTypes from "prop-types";
 
 import deleteIcon from "../../assets/images/orderpage/form_icon_delete.svg";
 
-export default function OptionsDate(props) {
+function OptionsDate(props) {
   function inputClick(e, index) {
     props.inputDateClick(e.target.name, "", index);
     props.inputDateClick("value", "", index);
@@ -56,3 +57,12 @@ export default function OptionsDate(props) {
     </form>
   );
 }
+
+OptionsDate.propTypes = {
+  inputDateChange: PropTypes.func,
+  inputDateClick: PropTypes.func,
+  since: PropTypes.string,
+  by: PropTypes.string,
+};
+
+export default OptionsDate;

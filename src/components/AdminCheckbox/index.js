@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function AdminCheckbox(props) {
+function AdminCheckbox(props) {
   const spanClasses = ["checkbox-section__checkmark"];
 
   if (props.blue) {
@@ -19,3 +20,11 @@ export default function AdminCheckbox(props) {
     </label>
   );
 }
+
+AdminCheckbox.propTypes = {
+  blue: PropTypes.bool,
+  border: PropTypes.bool,
+  text: PropTypes.string,
+};
+
+export default AdminCheckbox;

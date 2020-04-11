@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function Total(props) {
+function Total(props) {
   return (
     <div className="body-main-total__inner">
       <div className="body-main-total">
@@ -29,3 +30,15 @@ export default function Total(props) {
     </div>
   );
 }
+
+Total.propTypes = {
+  name: PropTypes.string,
+  model: PropTypes.string,
+  number: PropTypes.string,
+  isFull: PropTypes.bool,
+  fuel: PropTypes.string,
+  since: PropTypes.string,
+  image: PropTypes.string,
+};
+
+export default Total;

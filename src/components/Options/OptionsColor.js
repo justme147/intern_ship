@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import RadioButton from "../RadioButton";
 
-export default function OptionsColor(props) {
+function OptionsColor(props) {
   function handleInputChange(e) {
     props.menuColorChange("value", e.target.value, 2);
   }
@@ -22,3 +23,10 @@ export default function OptionsColor(props) {
     </div>
   );
 }
+
+OptionsColor.propTypes = {
+  menuColorChange: PropTypes.func,
+  colors: PropTypes.array,
+};
+
+export default OptionsColor;

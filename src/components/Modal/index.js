@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function Modal(props) {
+function Modal(props) {
   return (
     <div className="modal">
       <div className="modal__inner">
@@ -26,3 +27,10 @@ export default function Modal(props) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  onButtonDeclineClick: PropTypes.func,
+  orderId: PropTypes.string,
+};
+
+export default Modal;

@@ -266,8 +266,8 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/build/" exact component={MainPage} />
-          <Route path="/build/order">
+          <Route path="/" exact component={MainPage} />
+          <Route path="/order">
             <OrderLayout
               isActive={isActive}
               handleMenuClick={this.handleMenuClick}
@@ -280,8 +280,8 @@ export default class App extends React.Component {
               orderId={this.state.orderId}
             />
           </Route>
-          <Route path="/build/admin" exact component={AdminLayout} />
-          <Route path="/build/admin/login" component={AdminAuth} />
+          <Route path="/admin" exact component={AdminLayout} />
+          <Route path="/admin/login" component={AdminAuth} />
         </Switch>
       </BrowserRouter>
     );

@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function OrderLocation(props) {
+function OrderValue(props) {
   const item = props.item;
 
   if (item.hasOwnProperty("city") || item.hasOwnProperty("place")) {
@@ -19,12 +20,22 @@ function OrderLocation(props) {
   );
 }
 
-export default function OrderItem(props) {
+function OrderItem(props) {
   return (
     <div className="body-main-order__item">
       <p className="body-main-order__subtitle">{props.items.title}</p>
 
-      <OrderLocation item={props.items} />
+      <OrderValue item={props.items} />
     </div>
   );
 }
+
+OrderItem.propTypes = {
+  items: PropTypes.object,
+};
+
+OrderValue.propTypes = {
+  item: PropTypes.object,
+};
+
+export default OrderItem;

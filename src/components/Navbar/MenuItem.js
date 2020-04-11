@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function MenuItem(props) {
+function MenuItem(props) {
   const classes = ["list__item"];
 
   if (props.social) {
@@ -21,3 +22,11 @@ export default function MenuItem(props) {
     </li>
   );
 }
+
+MenuItem.propTypes = {
+  text: PropTypes.string,
+  icon: PropTypes.string,
+  social: PropTypes.bool,
+};
+
+export default MenuItem;

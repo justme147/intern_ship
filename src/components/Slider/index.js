@@ -30,7 +30,7 @@ export default function Slider() {
 
   useEffect(() => {
     slick();
-  });
+  }, []);
 
   return (
     <section className="slider">

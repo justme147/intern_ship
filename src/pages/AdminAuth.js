@@ -1,17 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // import EmptyAdminLayout from "../layouts/EmptyAdminLayout.jsx";
 import logo from "../assets/images/adminpanel/logo.svg";
 
 export default function AdminAuth() {
+  const history = useHistory();
   return (
     // <EmptyAdminLayout>
     <div className="wrapper">
       <div className="container">
         <div className="container__content container__content--gray container__content--center">
           <section className="auth">
-            <div className="auth__row">
+            <div
+              className="auth__row auth__row--pointer"
+              onClick={() => history.push("/")}
+            >
               <img src={logo} alt="logo" className="auth__logo" />
               <h1 className="auth__title">Need for drive</h1>
             </div>

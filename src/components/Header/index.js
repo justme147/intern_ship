@@ -16,8 +16,27 @@ function Header(props) {
         Need for drive
       </Link>
       <div className="body-header__location">
-        <img src={marker} alt="map_marker" className="body-header__icon" />
-        <p className="body-header__text">Ульяновск</p>
+        <div className="body-header__loc" onClick={props.onButtonDeclineClick}>
+          <img src={marker} alt="map_marker" className="body-header__icon" />
+          <p className="body-header__text">Ульяновск</p>
+        </div>
+
+        {props.modalShow && (
+          <div className="body-header__modal">
+            <h3 className="body-header__city">Ваш город - Ульяновск?</h3>
+            <div className="body-header__btn-group">
+              <button className="" onClick={props.onButtonAcceptClick}>
+                Да
+              </button>
+              <button className="" onClick={props.onButtonDeclineClick}>
+                Выбрать другой город
+              </button>
+            </div>
+            <p className="body-header__depend">
+              От выбранного города зависит ???
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -25,6 +44,9 @@ function Header(props) {
 
 Header.propTypes = {
   padding: PropTypes.bool,
+  modalShow: PropTypes.bool,
+  onButtonAcceptClick: PropTypes.func,
+  onButtonDeclineClick: PropTypes.func,
 };
 
 export default Header;

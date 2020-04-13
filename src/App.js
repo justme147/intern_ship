@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useRouteMatch } from "react-router-dom";
 
 import Location from "./components/Location";
 import Model from "./components/Model";
@@ -7,9 +7,9 @@ import Options from "./components/Options";
 import Total from "./components/Total";
 import MainPage from "./pages/MainPage";
 import OrderLayout from "./layouts/OrderLayout";
-// import AdminPanel from "./pages/AdminPanel";
-import AdminAuth from "./pages/AdminAuth";
-import AdminLayout from "./layouts/AdminLayout";
+import AdminPanel from "./pages/AdminPanel";
+// import AdminAuth from "./pages/AdminAuth";
+// import AdminLayout from "./layouts/AdminLayout";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -266,8 +266,8 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={MainPage} />
-          <Route path="/order">
+          <Route path="/internship/build/" exact component={MainPage} />
+          <Route path="/internship/build/order">
             <OrderLayout
               isActive={isActive}
               handleMenuClick={this.handleMenuClick}
@@ -280,8 +280,9 @@ export default class App extends React.Component {
               orderId={this.state.orderId}
             />
           </Route>
-          <Route path="/admin" exact component={AdminLayout} />
-          <Route path="/admin/login" component={AdminAuth} />
+          <Route path="/internship/build/admin" component={AdminPanel} />
+          {/* <Route path="/admin" exact component={AdminLayout} /> */}
+          {/* <Route path="/admin/login" component={AdminAuth} /> */}
         </Switch>
       </BrowserRouter>
     );

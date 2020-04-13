@@ -7,6 +7,10 @@
     &--between {
       justify-content: space-between;
     }
+
+    &--pointer {
+      cursor: pointer;
+    }
   }
 
   &__logo {
@@ -96,6 +100,7 @@
     width: 100%;
     justify-content: center;
     box-shadow: inset 0px -1px 0px #e1e5eb;
+    cursor: pointer;
   }
 
   &__image {
@@ -211,9 +216,19 @@
     }
 
     &__user {
+      // padding: 13px 32px 13px 25px;
+      position: relative;
+    }
+
+    &__cont {
       display: flex;
       align-items: center;
+      cursor: pointer;
       padding: 13px 32px 13px 25px;
+
+      &:hover {
+        background-color: #f7f7f7;
+      }
     }
 
     &__avatar {
@@ -227,6 +242,28 @@
       letter-spacing: -0.471429px;
       margin-left: 13px;
       margin-right: 55px;
+    }
+
+    &__dropmenu {
+      width: 100%;
+      position: absolute;
+      bottom: -45px;
+      left: 0;
+      background-color: $white;
+      border: 1px solid #e1e5eb;
+      border-radius: 4px;
+    }
+
+    &__dropitem {
+      text-align: center;
+      padding: 10px;
+      @include styletext(15px, #5a6169, 17px);
+      letter-spacing: -0.471429px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f7f7f7;
+      }
     }
   }
 

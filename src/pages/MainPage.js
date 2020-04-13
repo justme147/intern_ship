@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
@@ -8,7 +8,15 @@ import BurgerMenu from "../components/Navbar/BurgerMenu";
 import Slider from "../components/Slider";
 import MenuList from "../components/Navbar/MenuList";
 
+import closeIcon from "../assets/images/startscreen/icon_close.svg";
+
 export default function MainPage() {
+  const [isCity, setIsCity] = useState(false);
+  const [chooseCity, setChooseCity] = useState(false);
+
+  useEffect(() => {
+    setIsCity(true);
+  }, []);
   return (
     <div className="wrapper">
       <div className="container">
@@ -27,7 +35,11 @@ export default function MainPage() {
                 <div className="body-header__containerXS">
                   <BurgerMenu burger border />
 
-                  <Header />
+                  <Header
+                    modalShow={isCity}
+                    onButtonAcceptClick={() => setIsCity(false)}
+                    onButtonDeclineClick={() => setChooseCity(true)}
+                  />
                 </div>
               </header>
               <div className="body-content">
@@ -79,6 +91,27 @@ export default function MainPage() {
             </div>
           </section>
         </div>
+
+        {chooseCity && (
+          <div className="container__location">
+            <section className="location">
+              <div className="location__inner">
+                <div
+                  className="location__close"
+                  onClick={() => setChooseCity(false)}
+                >
+                  <img src={closeIcon} className="location__icon" />
+                </div>
+                <h2 className="location__title">Укажите Ваш город</h2>
+                <input
+                  type="text"
+                  className="location__input"
+                  placeholder="Введите город"
+                />
+              </div>
+            </section>
+          </div>
+        )}
 
         {/* <!-- End menu section --> */}
       </div>

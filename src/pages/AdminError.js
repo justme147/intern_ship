@@ -1,6 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 export default function AdminError() {
+  const history = useHistory();
+
   return (
     <main className="body-main">
       <div className="body-main__container body-main__container--center">
@@ -11,7 +14,10 @@ export default function AdminError() {
         <p className="body-main__text body-main__text--size">
           Попробуйте перезагрузить страницу
         </p>
-        <button className="body-main__button body-main__button--blue body-main__button--width body-main__button--margin">
+        <button
+          className="body-main__button body-main__button--blue body-main__button--width body-main__button--margin"
+          onClick={() => history.goBack()}
+        >
           Назад
         </button>
       </div>

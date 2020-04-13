@@ -3,15 +3,19 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function Modal(props) {
+  function onButtonAcceptClick() {
+    props.onButtonDeclineClick();
+  }
+
   return (
     <div className="modal">
       <div className="modal__inner">
         <div className="modal__content">
           <h2 className="modal__title">Подтвердить заказ</h2>
-          <Link to={`/order/${props.orderId}`}>
+          <Link to={`/internship/build/order/${props.orderId}`}>
             <button
               className="button button__accept"
-              onClick={props.onButtonDeclineClick}
+              onClick={() => onButtonAcceptClick()}
             >
               Подтвердить
             </button>

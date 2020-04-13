@@ -28,6 +28,7 @@
     padding: 0 15px 3px 8px;
     border-bottom: 1px solid $dark_gray;
     width: 224px;
+    position: relative;
   }
 
   &__delete {
@@ -35,6 +36,52 @@
     bottom: 6px;
     right: 4px;
     cursor: pointer;
+    z-index: 2;
+  }
+
+  &__list {
+    max-width: 224px;
+    width: 100%;
+    max-height: 106px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    text-align: left;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    background-color: $white;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      border-left: 1px solid #eee;
+      padding: 0 2px;
+
+      &-thumb {
+        border-radius: 2px;
+        background-color: $dark_gray;
+        border: 2px solid $white;
+
+        &:hover {
+          background-color: $main_accent;
+        }
+      }
+    }
+  }
+
+  &__item {
+    @include styletext(14px, $dark_gray, 16px);
+    font-family: "RobotoL";
+    padding: 6px 0 6px 8px;
+    cursor: pointer;
+
+    &:hover {
+      color: $main_accent;
+      background-color: #eee;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
 
@@ -519,6 +566,10 @@
       &__button {
         width: 247px;
         margin-top: 32px;
+
+        &--gradient {
+          background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+        }
       }
     }
   }

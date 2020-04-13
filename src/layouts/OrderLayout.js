@@ -15,31 +15,31 @@ function OrderLayout(props) {
           <Navbar fixed />
           <section className="body--order">
             <header className="body-header">
-              <Header padding />
+              <Header padding city={props.headerCity} />
             </header>
 
-            {/* <Switch> */}
-            <Route path="/order" exact>
-              <OrderPage
-                isActive={props.isActive}
-                handleMenuClick={props.handleMenuClick}
-                renderStep={props.renderStep}
-                order={props.order}
-                handleButtonClick={props.handleButtonClick}
-                isModal={props.isModal}
-                handleButtonDeclineClick={props.handleButtonDeclineClick}
-                orderId={props.orderId}
-              />
-            </Route>
-            <Route path={`/order/:id`}>
-              <WatchPage
-                order={props.order}
-                handleButtonClick={props.handleButtonClick}
-                isActive={props.isActive}
-                orderId={props.orderId}
-              />
-            </Route>
-            {/* </Switch> */}
+            <Switch>
+              <Route path="/internship/build/order" exact>
+                <OrderPage
+                  isActive={props.isActive}
+                  handleMenuClick={props.handleMenuClick}
+                  renderStep={props.renderStep}
+                  order={props.order}
+                  handleButtonClick={props.handleButtonClick}
+                  isModal={props.isModal}
+                  handleButtonDeclineClick={props.handleButtonDeclineClick}
+                  orderId={props.orderId}
+                />
+              </Route>
+              <Route path={`/internship/build/order/:id`}>
+                <WatchPage
+                  order={props.order}
+                  handleButtonClick={props.handleButtonClick}
+                  isActive={props.isActive}
+                  orderId={props.orderId}
+                />
+              </Route>
+            </Switch>
           </section>
         </div>
       </div>
@@ -56,6 +56,7 @@ OrderLayout.propTypes = {
   isModal: PropTypes.bool,
   handleButtonDeclineClick: PropTypes.func,
   orderId: PropTypes.string,
+  headerCity: PropTypes.string,
 };
 
 export default OrderLayout;

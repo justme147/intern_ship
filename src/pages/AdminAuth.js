@@ -14,7 +14,7 @@ export default function AdminAuth() {
           <section className="auth">
             <div
               className="auth__row auth__row--pointer"
-              onClick={() => history.push("/")}
+              onClick={() => history.push("/internship/build/")}
             >
               <img src={logo} alt="logo" className="auth__logo" />
               <h1 className="auth__title">Need for drive</h1>
@@ -29,7 +29,7 @@ export default function AdminAuth() {
                 <input type="password" className="auth__input" />
                 <div className="auth__row auth__row--between">
                   <p className="auth__link">Запросить доступ</p>
-                  <Link to="/admin">
+                  <Link to="/internship/build/admin">
                     <button className="button auth__button">Войти</button>
                   </Link>
                 </div>

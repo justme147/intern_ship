@@ -11,6 +11,7 @@ function Location(props) {
           city={props.city}
           place={props.place}
           onInputChange={props.onInputChange}
+          cities={props.cities}
           // onInputClick={props.onInputClick}
         />
         <div className="body-main-location__map">
@@ -26,6 +27,7 @@ Location.propTypes = {
   city: PropTypes.string,
   place: PropTypes.string,
   onInputChange: PropTypes.func,
+  cities: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Location;

@@ -50,6 +50,15 @@ function Order(props) {
           </button>
         );
         break;
+      default:
+        button = (
+          <button
+            className="button body-main-order__button body-main-order__button--gradient"
+            onClick={props.onButtonClick}
+          >
+            Отменить
+          </button>
+        );
     }
 
     return button;

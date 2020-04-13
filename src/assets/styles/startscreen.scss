@@ -325,6 +325,39 @@
       margin-top: 10px;
     }
 
+    &__accept {
+      background: $main_accent;
+      @include styletext(14px, $white, 16px);
+      font-family: "RobotoL";
+      padding: 8px 10px;
+      border-radius: 4px;
+
+      &:hover {
+        background: #0ea555;
+      }
+
+      &:active {
+        background: #0e944c;
+      }
+    }
+
+    &__decline {
+      background: $main_accent;
+      @include styletext(14px, $white, 16px);
+      font-family: "RobotoL";
+      padding: 8px 10px;
+      border-radius: 4px;
+      margin-left: 10px;
+
+      &:hover {
+        background: #0ea555;
+      }
+
+      &:active {
+        background: #0e944c;
+      }
+    }
+
     &__depend {
       @include styletext(12px, $white, 14px);
       font-family: "RobotoL";
@@ -736,10 +769,14 @@
   }
 
   &__icon {
-    cursor: pointer;
+    &--padding {
+      padding: 5px;
+      cursor: pointer;
+      display: inherit;
 
-    &:hover path {
-      fill: $main_accent;
+      &:hover path {
+        fill: $main_accent;
+      }
     }
   }
 
@@ -759,6 +796,45 @@
     width: 100%;
     margin-top: 25px;
     border-radius: 4px;
+  }
+
+  &__list {
+    max-height: 100px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    background-color: $white;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      border-left: 1px solid #eee;
+      padding: 0 2px;
+
+      &-thumb {
+        border-radius: 2px;
+        background-color: $dark_gray;
+        border: 2px solid $white;
+
+        &:hover {
+          background-color: $main_accent;
+        }
+      }
+    }
+  }
+
+  &__item {
+    @include styletext(14px, $dark_gray, 16px);
+    font-family: "RobotoL";
+    padding: 6px 0;
+    cursor: pointer;
+
+    &:hover {
+      color: $main_accent;
+      background-color: #eee;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
 

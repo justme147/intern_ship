@@ -18,17 +18,23 @@ function Header(props) {
       <div className="body-header__location">
         <div className="body-header__loc" onClick={props.onButtonDeclineClick}>
           <img src={marker} alt="map_marker" className="body-header__icon" />
-          <p className="body-header__text">Ульяновск</p>
+          <p className="body-header__text">{props.city}</p>
         </div>
 
         {props.modalShow && (
           <div className="body-header__modal">
-            <h3 className="body-header__city">Ваш город - Ульяновск?</h3>
+            <h3 className="body-header__city">Ваш город - {props.city}?</h3>
             <div className="body-header__btn-group">
-              <button className="" onClick={props.onButtonAcceptClick}>
+              <button
+                className="button body-header__accept"
+                onClick={props.onButtonAcceptClick}
+              >
                 Да
               </button>
-              <button className="" onClick={props.onButtonDeclineClick}>
+              <button
+                className="button body-header__decline"
+                onClick={props.onButtonDeclineClick}
+              >
                 Выбрать другой город
               </button>
             </div>
@@ -43,6 +49,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
+  city: PropTypes.string,
   padding: PropTypes.bool,
   modalShow: PropTypes.bool,
   onButtonAcceptClick: PropTypes.func,

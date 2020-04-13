@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
@@ -9,14 +10,37 @@ import Slider from "../components/Slider";
 import MenuList from "../components/Navbar/MenuList";
 
 import closeIcon from "../assets/images/startscreen/icon_close.svg";
+import imgToSvg from "../assets/scripts/svgHover";
 
-export default function MainPage() {
+function MainPage(props) {
   const [isCity, setIsCity] = useState(false);
   const [chooseCity, setChooseCity] = useState(false);
+  const [city, setCity] = useState("");
 
   useEffect(() => {
-    setIsCity(true);
+    if (localStorage.getItem("isShowed") === "false") {
+      setIsCity(true);
+      localStorage.setItem("isShowed", true);
+    }
   }, []);
+
+  useEffect(() => {
+    imgToSvg(".location__icon");
+  });
+
+  useEffect(() => {
+    imgToSvg(".list__image");
+  }, []);
+
+  function handleItemClick(value) {
+    localStorage.setItem("city", value);
+    props.onListItemClick("city", value, 0);
+    props.onHeaderCityChange(value);
+    setCity("");
+    setChooseCity(false);
+    setIsCity(false);
+  }
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -36,6 +60,7 @@ export default function MainPage() {
                   <BurgerMenu burger border />
 
                   <Header
+                    city={props.city}
                     modalShow={isCity}
                     onButtonAcceptClick={() => setIsCity(false)}
                     onButtonDeclineClick={() => setChooseCity(true)}
@@ -50,7 +75,7 @@ export default function MainPage() {
                     Поминутная аренда авто твоего города
                   </p>
                 </div>
-                <Link to="/order">
+                <Link to="/internship/build/order">
                   <button className="button body-content__button">
                     Забронировать
                   </button>
@@ -96,18 +121,40 @@ export default function MainPage() {
           <div className="container__location">
             <section className="location">
               <div className="location__inner">
-                <div
-                  className="location__close"
-                  onClick={() => setChooseCity(false)}
-                >
-                  <img src={closeIcon} className="location__icon" />
+                <div className="location__close">
+                  <div
+                    className="location__icon--padding"
+                    onClick={() => setChooseCity(false)}
+                  >
+                    <img src={closeIcon} className="location__icon" />
+                  </div>
                 </div>
-                <h2 className="location__title">Укажите Ваш город</h2>
+                <label className="location__title">Укажите Ваш город</label>
                 <input
                   type="text"
                   className="location__input"
                   placeholder="Введите город"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                 />
+                {city && (
+                  <ul className="location__list">
+                    {props.cities.map((item) => {
+                      const valueFix = item.value.toLowerCase();
+                      if (valueFix.includes(city.toLowerCase())) {
+                        return (
+                          <li
+                            key={item.id}
+                            className="location__item"
+                            onClick={() => handleItemClick(item.value)}
+                          >
+                            {item.value}
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                )}
               </div>
             </section>
           </div>
@@ -118,3 +165,12 @@ export default function MainPage() {
     </div>
   );
 }
+
+MainPage.propTypes = {
+  city: PropTypes.string,
+  cities: PropTypes.arrayOf(PropTypes.object),
+  onListItemClick: PropTypes.func,
+  onHeaderCityChange: PropTypes.func,
+};
+
+export default MainPage;

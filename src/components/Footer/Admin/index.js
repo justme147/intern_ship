@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   const [menuItem, setMenuItem] = useState([
-    { id: 1, title: "Главная страница", url: "/" },
-    { id: 2, title: "Ссылка", url: "/admin" },
+    { id: 1, title: "Главная страница", url: "/internship/build/" },
+    { id: 2, title: "Ссылка", url: "/internship/build/admin" },
   ]);
   return (
     <footer className="body-footer body-footer--flex">

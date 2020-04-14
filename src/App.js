@@ -15,6 +15,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      geo: {},
       isActive: 1,
       isModal: false,
       orderId: `RU${Date.now()}`,
@@ -74,6 +75,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount = () => {
+    navigator.geolocation.getCurrentPosition((pos) =>
+      this.setState({ geo: pos.coords })
+    );
+
     if (!localStorage.getItem("city")) {
       localStorage.setItem("city", "Москва");
       localStorage.setItem("isShowed", false);

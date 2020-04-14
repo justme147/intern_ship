@@ -367,6 +367,13 @@
         background-color: $dark_gray;
         margin-top: 16px;
       }
+
+      &__marker {
+        width: 18px;
+        height: 18px;
+        border: 5px solid $main_accent;
+        border-radius: 50%;
+      }
     }
 
     &-model {

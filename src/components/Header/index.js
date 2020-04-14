@@ -12,7 +12,7 @@ function Header(props) {
   }
   return (
     <div className={classes.join(" ")}>
-      <Link to="/" className="body-header__logo">
+      <Link to="/internship/build/" className="body-header__logo">
         Need for drive
       </Link>
       <div className="body-header__location">

@@ -277,6 +277,16 @@
         justify-content: flex-end;
         margin-top: 10px;
       }
+
+      &:hover {
+        .body-header__icon path {
+          stroke: $main_accent;
+        }
+
+        .body-header__text {
+          color: $main_accent;
+        }
+      }
     }
 
     &__icon {

@@ -15,12 +15,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      geo: {},
       isActive: 1,
       isModal: false,
       orderId: `RU${Date.now()}`,
       colorsCar: [],
-      cityHeader: "",
+      cityHeader: localStorage.getItem("city"),
       cities: [
         { id: 1, value: "Москва" },
         { id: 2, value: "Казань" },
@@ -32,7 +31,7 @@ export default class App extends React.Component {
       ],
       order: [
         {
-          city: "",
+          city: localStorage.getItem("city"),
           place: "",
           title: "Пункт выдачи",
         },
@@ -74,27 +73,62 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    navigator.geolocation.getCurrentPosition((pos) =>
-      this.setState({ geo: pos.coords })
-    );
+  // componentDidMount = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       `https://api.ipfind.com/me?auth=${process.env.REACT_APP_IPFIND_TOKEN}&lang=ru`
+  //     );
+  //     const json = await res.json();
+  //     console.log(json);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-    if (!localStorage.getItem("city")) {
-      localStorage.setItem("city", "Москва");
-      localStorage.setItem("isShowed", false);
+  success = async (pos) => {
+    try {
+      const { longitude, latitude } = pos.coords;
+
+      const token = process.env.REACT_APP_MAPBOX_TOKEN;
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${token}&types=place&language=ru`
+      );
+      const json = await response.json();
+      const { features } = json;
+
+      console.log(features[0]);
+
+      const position = {
+        latitude: features[0].center[1],
+        longitude: features[0].center[0],
+      };
+
+      localStorage.setItem("city", features[0].text_ru);
+
+      localStorage.setItem("position", JSON.stringify(position));
+
+      this.setState((prev) => ({
+        ...prev,
+        cityHeader: localStorage.getItem("city"),
+        order: [
+          {
+            ...prev.order[0],
+            city: localStorage.getItem("city"),
+          },
+          ...prev.order.slice(1),
+        ],
+      }));
+    } catch (e) {
+      console.log(e);
     }
+  };
 
-    this.setState((prev) => ({
-      ...prev,
-      cityHeader: localStorage.getItem("city"),
-      order: [
-        {
-          ...prev.order[0],
-          city: localStorage.getItem("city"),
-        },
-        ...prev.order.slice(1, 8),
-      ],
-    }));
+  componentDidMount = () => {
+    if (!localStorage.getItem("city")) {
+      navigator.geolocation.getCurrentPosition(this.success);
+      localStorage.setItem("isShowed", false);
+      return;
+    }
   };
 
   handleMenuClick = (id) => {

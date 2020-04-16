@@ -18,6 +18,8 @@ function MainPage(props) {
   const [city, setCity] = useState("");
 
   useEffect(() => {
+    imgToSvg(".list__image");
+    imgToSvg(".body-header__icon");
     if (localStorage.getItem("isShowed") === "false") {
       setIsCity(true);
       localStorage.setItem("isShowed", true);
@@ -26,19 +28,48 @@ function MainPage(props) {
 
   useEffect(() => {
     imgToSvg(".location__icon");
-  });
 
-  useEffect(() => {
-    imgToSvg(".list__image");
-  }, []);
+    const listener = (e) => {
+      if (e.key === "Escape") {
+        setChooseCity(false);
+      }
+    };
 
-  function handleItemClick(value) {
+    const element = document.querySelector(".container__location");
+
+    if (element) {
+      window.addEventListener("keydown", listener);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, [chooseCity]);
+
+  async function handleItemClick(value) {
     localStorage.setItem("city", value);
     props.onListItemClick("city", value, 0);
     props.onHeaderCityChange(value);
     setCity("");
     setChooseCity(false);
     setIsCity(false);
+
+    const token = process.env.REACT_APP_MAPBOX_TOKEN;
+
+    value = value === "Волгоград" ? "город-герой" : value;
+
+    const response = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${token}&types=place`
+    );
+    const json = await response.json();
+    const { features } = json;
+
+    const position = {
+      latitude: features[0].center[1],
+      longitude: features[0].center[0],
+    };
+
+    localStorage.setItem("position", JSON.stringify(position));
   }
 
   return (
@@ -69,8 +100,8 @@ function MainPage(props) {
               </header>
               <div className="body-content">
                 <div className="body-content__inner">
-                  <h1 className="body-content__title">Каршеринг</h1>
-                  <h2 className="body-content__subtitle">Need for drive</h2>
+                  <h2 className="body-content__title">Каршеринг</h2>
+                  <h1 className="body-content__subtitle">Need for drive</h1>
                   <p className="body-content__text">
                     Поминутная аренда авто твоего города
                   </p>
@@ -126,7 +157,11 @@ function MainPage(props) {
                     className="location__icon--padding"
                     onClick={() => setChooseCity(false)}
                   >
-                    <img src={closeIcon} className="location__icon" />
+                    <img
+                      src={closeIcon}
+                      className="location__icon"
+                      alt="close_icon"
+                    />
                   </div>
                 </div>
                 <label className="location__title">Укажите Ваш город</label>

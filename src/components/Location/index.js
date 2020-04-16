@@ -52,14 +52,22 @@ const markers = [
 
 function Location(props) {
   const [viewport, setViewport] = useState({
-    latitude: 54.3107593,
-    longitude: 48.3642771,
-    zoom: 12,
+    latitude: JSON.parse(localStorage.getItem("position")).latitude,
+    longitude: JSON.parse(localStorage.getItem("position")).longitude,
+    zoom: 11,
     width: "100%",
     height: "100%",
   });
 
   const [selectCar, setSelectCar] = useState(null);
+
+  function ViewportChange(value) {
+    setViewport({
+      ...viewport,
+      latitude: value.latitude,
+      longitude: value.longitude,
+    });
+  }
 
   useEffect(() => {
     const listener = (e) => {
@@ -83,6 +91,7 @@ function Location(props) {
           place={props.place}
           onInputChange={props.onInputChange}
           cities={props.cities}
+          onViewportChange={ViewportChange}
           // onInputClick={props.onInputClick}
         />
         <div className="body-main-location__map">

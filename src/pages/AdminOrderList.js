@@ -85,15 +85,15 @@ export default function AdminOrderList() {
             <div className="body-main__price">4 300 ₽</div>
             <div className="body-main__btn-group">
               <button className="body-main__action body-main__action--accept">
-                <img src={approveIcon} />
+                <img src={approveIcon} alt="accept_icon" />
                 Готово
               </button>
               <button className="body-main__action body-main__action--decline">
-                <img src={rejectIcon} />
+                <img src={rejectIcon} alt="decline_icon" />
                 Отмена
               </button>
               <button className="body-main__action body-main__action--change">
-                <img src={editIcon} />
+                <img src={editIcon} alt="edit_icon" />
                 Изменить
               </button>
             </div>

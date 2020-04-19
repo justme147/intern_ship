@@ -2,33 +2,87 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import deleteIcon from "../../assets/images/orderpage/form_icon_delete.svg";
+import OrderItem from "../Order/OrderItem";
 
 function LocationForm(props) {
   const [cityShow, setCityShow] = useState(false);
+  const [isCorrectCity, setIsCorrectCity] = useState(true);
+
+  const [placies, setPlacies] = useState([]);
+  const [placeShow, setPlaceShow] = useState(false);
+  const [isCorrectPlace, setIsCorrectPlace] = useState(true);
+
+  useEffect(() => {
+    for (let item of props.cities) {
+      if (item.value === props.city) {
+        setIsCorrectCity(true);
+        setPlacies(item.placies);
+        return;
+      }
+    }
+
+    const items = document.querySelectorAll(".form-section__item");
+
+    if (props.city === "") {
+      setIsCorrectCity(true);
+      return;
+    }
+
+    items.length === 0 ? setIsCorrectCity(false) : setIsCorrectCity(true);
+  }, [props.city]);
+
+  useEffect(() => {
+    const items = document.querySelectorAll(".form-section__item");
+
+    if (props.place === "") {
+      setIsCorrectPlace(true);
+      return;
+    }
+
+    items.length === 0 ? setIsCorrectPlace(false) : setIsCorrectPlace(true);
+    console.log("useEffect");
+  }, [props.place]);
 
   function inputChange(e) {
+    if (e.target.name === "city") {
+      props.onInputChange("place", "", 0);
+    }
+
     const value =
       e.target.value.length !== 0
         ? e.target.value[0].toUpperCase() + e.target.value.slice(1)
         : e.target.value;
 
     props.onInputChange(e.target.name, value, 0);
+    setIsCorrectCity(true);
+    setIsCorrectPlace(true);
   }
 
   function inputClick(e) {
+    if (e.target.name === "city") {
+      props.onInputChange("place", "", 0);
+    }
     props.onInputChange(e.target.name, "", 0);
   }
 
   function cityItemClick(value) {
     props.onInputChange("city", value, 0);
     setCityShow(false);
+    setIsCorrectCity(true);
     if (value === props.city) return;
     fetchData(value);
   }
 
-  function onInputKeyDown(e) {
+  function placeItemClick(value) {
+    props.onInputChange("place", value, 0);
+    setPlaceShow(false);
+    setIsCorrectPlace(true);
+    console.log("itemClick");
+  }
+
+  function onInputCityKeyDown(e) {
     if (e.key === "Enter") {
-      console.log(e.target);
+      if (!isCorrectCity) return;
       fetchData(props.city);
       e.target.blur();
       setCityShow(false);
@@ -39,9 +93,7 @@ function LocationForm(props) {
     // if (value === props.city) return;
 
     const token = process.env.REACT_APP_MAPBOX_TOKEN;
-
     const newValue = value === "Волгоград" ? `город-герой ${value}` : value;
-
     const response = await fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${newValue}.json?access_token=${token}&types=place`
     );
@@ -65,7 +117,11 @@ function LocationForm(props) {
       <div className="form-section__group">
         <label className="form-section__label">Город</label>
         <input
-          className="form-section__input"
+          className={
+            !isCorrectCity
+              ? "form-section__input form-section__input--border"
+              : "form-section__input"
+          }
           type="text"
           value={props.city}
           onChange={inputChange}
@@ -73,7 +129,7 @@ function LocationForm(props) {
           placeholder="Начните вводить город выдачи"
           autoComplete="off"
           onFocus={() => setCityShow(true)}
-          onKeyDown={(e) => onInputKeyDown(e)}
+          onKeyDown={(e) => onInputCityKeyDown(e)}
           // onBlur={() => setCityShow(false)}
           // onBlur={() => console.log()}
         />
@@ -85,7 +141,7 @@ function LocationForm(props) {
             name="city"
           />
         )}
-        {cityShow && (
+        {cityShow && isCorrectCity && (
           <ul className="form-section__list">
             {props.cities.map((item) => {
               const valueFix = item.value.toLowerCase();
@@ -103,18 +159,29 @@ function LocationForm(props) {
             })}
           </ul>
         )}
+        {!isCorrectCity && (
+          <p className="form-section__error">
+            Город введен неверно. Проверьте правильность ввода или убедитесь,
+            что в данном городе предоставляются наши услуги.
+          </p>
+        )}
       </div>
 
       <div className="form-section__group">
         <label className="form-section__label">Пункт выдачи</label>
         <input
-          className="form-section__input"
+          className={
+            !isCorrectPlace
+              ? "form-section__input form-section__input--border"
+              : "form-section__input"
+          }
           type="text"
           value={props.place}
           onChange={inputChange}
           name="place"
           placeholder="Начните вводить пункт выдачи"
           autoComplete="off"
+          onFocus={() => setPlaceShow(true)}
         />
         {props.place && (
           <img
@@ -123,6 +190,24 @@ function LocationForm(props) {
             onClick={inputClick}
             name="place"
           />
+        )}
+        {placeShow && isCorrectPlace && (
+          <ul className="form-section__list">
+            {placies.map((item) => {
+              const valueFix = item.descr.toLowerCase();
+              if (valueFix.includes(props.place.toLowerCase())) {
+                return (
+                  <li
+                    className="form-section__item"
+                    key={item.id}
+                    onClick={() => placeItemClick(item.descr)}
+                  >
+                    {item.descr}
+                  </li>
+                );
+              }
+            })}
+          </ul>
         )}
       </div>
     </form>

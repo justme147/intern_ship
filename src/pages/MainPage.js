@@ -11,15 +11,18 @@ import MenuList from "../components/Navbar/MenuList";
 
 import closeIcon from "../assets/images/startscreen/icon_close.svg";
 import imgToSvg from "../assets/scripts/svgHover";
+import toggleMenu from "../assets/scripts/startscreenmenu";
 
 function MainPage(props) {
   const [isCity, setIsCity] = useState(false);
   const [chooseCity, setChooseCity] = useState(false);
   const [city, setCity] = useState("");
+  const [isCorrectCity, setIsCorrectCity] = useState(true);
 
   useEffect(() => {
     imgToSvg(".list__image");
     imgToSvg(".body-header__icon");
+    toggleMenu();
     if (localStorage.getItem("isShowed") === "false") {
       setIsCity(true);
       localStorage.setItem("isShowed", true);
@@ -29,22 +32,47 @@ function MainPage(props) {
   useEffect(() => {
     imgToSvg(".location__icon");
 
+    const input = document.querySelector(".location__input");
+
+    if (input) {
+      input.focus();
+    }
+
     const listener = (e) => {
       if (e.key === "Escape") {
         setChooseCity(false);
+        setCity("");
       }
     };
 
-    const element = document.querySelector(".container__location");
-
-    if (element) {
-      window.addEventListener("keydown", listener);
-    }
+    window.addEventListener("keydown", listener);
 
     return () => {
       window.removeEventListener("keydown", listener);
     };
   }, [chooseCity]);
+
+  useEffect(() => {
+    // setIsCorrectCity(true);
+    const items = document.querySelectorAll(".location__item");
+    // console.log(items);
+
+    if (city === "") {
+      setIsCorrectCity(true);
+      return;
+    }
+
+    items.length === 0 ? setIsCorrectCity(false) : setIsCorrectCity(true);
+  }, [city]);
+
+  function handleInputChange(e) {
+    const value =
+      e.target.value.length !== 0
+        ? e.target.value[0].toUpperCase() + e.target.value.slice(1)
+        : e.target.value;
+    setCity(value);
+    setIsCorrectCity(true);
+  }
 
   async function handleItemClick(value) {
     localStorage.setItem("city", value);
@@ -54,22 +82,34 @@ function MainPage(props) {
     setChooseCity(false);
     setIsCity(false);
 
-    const token = process.env.REACT_APP_MAPBOX_TOKEN;
+    try {
+      const token = process.env.REACT_APP_MAPBOX_TOKEN;
 
-    value = value === "Волгоград" ? "город-герой" : value;
+      value = value === "Волгоград" ? "город-герой" : value;
 
-    const response = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${token}&types=place`
-    );
-    const json = await response.json();
-    const { features } = json;
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${token}&types=place`
+      );
+      const json = await response.json();
+      const { features } = json;
 
-    const position = {
-      latitude: features[0].center[1],
-      longitude: features[0].center[0],
-    };
+      const position = {
+        latitude: features[0].center[1],
+        longitude: features[0].center[0],
+      };
 
-    localStorage.setItem("position", JSON.stringify(position));
+      localStorage.setItem("position", JSON.stringify(position));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function handleWindowClick(e) {
+    console.log(e.target);
+    const modal = document.querySelector(".location__inner");
+    if (e.target === modal || modal.contains(e.target)) return;
+    setChooseCity(false);
+    setCity("");
   }
 
   return (
@@ -149,7 +189,10 @@ function MainPage(props) {
         </div>
 
         {chooseCity && (
-          <div className="container__location">
+          <div
+            className="container__location"
+            onClick={(e) => handleWindowClick(e)}
+          >
             <section className="location">
               <div className="location__inner">
                 <div className="location__close">
@@ -167,12 +210,22 @@ function MainPage(props) {
                 <label className="location__title">Укажите Ваш город</label>
                 <input
                   type="text"
-                  className="location__input"
+                  className={
+                    !isCorrectCity
+                      ? "location__input location__input--border"
+                      : "location__input"
+                  }
                   placeholder="Введите город"
                   value={city}
-                  onChange={(e) => setCity(e.target.value)}
+                  onChange={(e) => handleInputChange(e)}
                 />
-                {city && (
+                {!isCorrectCity && (
+                  <p className="location__error">
+                    Город введен неверно. Проверьте правильность ввода или
+                    убедитесь, что в данном городе предоставляются наши услуги.
+                  </p>
+                )}
+                {city && isCorrectCity && (
                   <ul className="location__list">
                     {props.cities.map((item) => {
                       const valueFix = item.value.toLowerCase();

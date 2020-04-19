@@ -21,13 +21,168 @@ export default class App extends React.Component {
       colorsCar: [],
       cityHeader: localStorage.getItem("city"),
       cities: [
-        { id: 1, value: "Москва" },
-        { id: 2, value: "Казань" },
-        { id: 3, value: "Самара" },
-        { id: 4, value: "Ульяновск" },
-        { id: 5, value: "Саратов" },
-        { id: 6, value: "Волгоград" },
-        { id: 7, value: "Киров" },
+        {
+          id: 1,
+          value: "Москва",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Большая Якиманка 35с1",
+              coordinate: [55.73445880391168, 37.61356985776774],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Сергея Макеева 9с14",
+              coordinate: [55.760906139758134, 37.550691462786745],
+            },
+            {
+              id: 3,
+              car: "Марка, Модель",
+              descr: "5-Я Магистральная 10с2",
+              coordinate: [55.772891165711656, 37.527246433314986],
+            },
+            {
+              id: 4,
+              car: "Марка, Модель",
+              descr: "Чистопрудный Бульвар 17с1",
+              coordinate: [55.76181633857502, 37.6448876541308],
+            },
+          ],
+        },
+        {
+          id: 2,
+          value: "Казань",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Кремлевская, 9",
+              coordinate: [55.794649182115904, 49.11367153374306],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Чистопольская 13а",
+              coordinate: [55.81972459114286, 49.1102370441331],
+            },
+          ],
+        },
+        {
+          id: 3,
+          value: "Самара",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Искровская 1",
+              coordinate: [53.204299580647216, 50.13243197386191],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Аэродромная 47а",
+              coordinate: [53.19149308078397, 50.1891359816143],
+            },
+          ],
+        },
+        {
+          id: 4,
+          value: "Ульяновск",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Московское ш. 108",
+              coordinate: [54.305853506446454, 48.35989261521411],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Карла Маркса 2",
+              coordinate: [54.31627297776601, 48.40030989590599],
+            },
+            {
+              id: 3,
+              car: "Марка, Модель",
+              descr: "Радищева 63",
+              coordinate: [54.329322665236624, 48.401871252190574],
+            },
+            {
+              id: 4,
+              car: "Марка, Модель",
+              descr: "Хрустальная 34а",
+              coordinate: [54.26091940228838, 48.3327532105194],
+            },
+            {
+              id: 5,
+              car: "Марка, Модель",
+              descr: "Стасова 24",
+              coordinate: [54.28951809547812, 48.313453618174265],
+            },
+            {
+              id: 6,
+              car: "Марка, Модель",
+              descr: "Водопроводная 2",
+              coordinate: [54.30166587043291, 48.36805873190667],
+            },
+          ],
+        },
+        {
+          id: 5,
+          value: "Саратов",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Кутякова 13а",
+              coordinate: [51.536282476770594, 46.03231294339025],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Рабочая 145А",
+              coordinate: [51.5346390069607, 45.999251150226314],
+            },
+          ],
+        },
+        {
+          id: 6,
+          value: "Волгоград",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Советская 14А",
+              coordinate: [48.70502239575757, 44.518359949871524],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Новорядская 4",
+              coordinate: [48.71740529619106, 44.49351683494706],
+            },
+          ],
+        },
+        {
+          id: 7,
+          value: "Киров",
+          placies: [
+            {
+              id: 1,
+              car: "Марка, Модель",
+              descr: "Горького 5",
+              coordinate: [58.599079638433835, 49.64727140368382],
+            },
+            {
+              id: 2,
+              car: "Марка, Модель",
+              descr: "Комсомольская 37",
+              coordinate: [58.58034450474878, 49.64762871681853],
+            },
+          ],
+        },
       ],
       order: [
         {
@@ -88,15 +243,16 @@ export default class App extends React.Component {
   success = async (pos) => {
     try {
       const { longitude, latitude } = pos.coords;
-
+      // console.log(pos.coords);
       const token = process.env.REACT_APP_MAPBOX_TOKEN;
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${token}&types=place&language=ru`
       );
       const json = await response.json();
+      // console.log(json);
       const { features } = json;
 
-      console.log(features[0]);
+      // console.log(features[0]);
 
       const position = {
         latitude: features[0].center[1],

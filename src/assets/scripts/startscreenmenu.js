@@ -1,9 +1,14 @@
 import * as $ from "jquery";
 
-$(document).ready(function () {
-  // export default function toggleMenu() {
+// $(document).ready(function () {
+export default function toggleMenu() {
   $(".burger").on("click", () => {
     $(".container__menu").fadeToggle(200);
   });
-  // }
-});
+  $(window).on("keydown", (e) => {
+    if (e.key === "Escape") {
+      $(".container__menu").fadeOut(200);
+    }
+  });
+}
+// });

@@ -29,6 +29,10 @@
     border-bottom: 1px solid $dark_gray;
     width: 224px;
     position: relative;
+
+    &--border {
+      border-color: $red;
+    }
   }
 
   &__delete {
@@ -82,6 +86,41 @@
     &:first-child {
       margin-top: 0;
     }
+  }
+
+  &__error {
+    max-width: 224px;
+    position: absolute;
+    right: 0;
+    @include styletext(12px, $dark_gray, 14px);
+    font-family: "RobotoL";
+    text-align: left;
+    background-color: $white;
+    padding: 4px 0 4px 8px;
+    z-index: 2;
+    color: $red;
+  }
+}
+
+.mapboxgl-popup {
+  &-content {
+    &__title {
+      @include styletext(16px, $main_black, 18px);
+      font-family: "RobotoMd";
+      margin-top: 5px;
+    }
+
+    &__text {
+      @include styletext(14px, $admin_subtitle, 16px);
+      font-family: "RobotoL";
+      margin-top: 5px;
+    }
+  }
+
+  &-close-button {
+    line-height: 18px;
+    font-size: 18px;
+    width: 18px;
   }
 }
 

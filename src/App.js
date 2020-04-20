@@ -437,9 +437,9 @@ export default class App extends React.Component {
     }
 
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path="/internship/build/" exact>
+          <Route path="/" exact>
             <MainPage
               city={this.state.cityHeader}
               cities={this.state.cities}
@@ -449,7 +449,7 @@ export default class App extends React.Component {
               }
             />
           </Route>
-          <Route path="/internship/build/order">
+          <Route path="/order">
             <OrderLayout
               isActive={isActive}
               handleMenuClick={this.handleMenuClick}
@@ -463,7 +463,7 @@ export default class App extends React.Component {
               orderId={this.state.orderId}
             />
           </Route>
-          <Route path="/internship/build/admin" component={AdminPanel} />
+          <Route path="/admin" component={AdminPanel} />
         </Switch>
       </BrowserRouter>
     );

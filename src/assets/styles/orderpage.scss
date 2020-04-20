@@ -99,6 +99,7 @@
     padding: 4px 0 4px 8px;
     z-index: 2;
     color: $red;
+    border: 1px solid #eee;
   }
 }
 
@@ -333,6 +334,8 @@
   &-header__inner {
     &--padding {
       padding: 32px 64px;
+      max-width: 1376px;
+      margin: 0 auto;
     }
   }
 
@@ -340,9 +343,9 @@
     @include flexbox();
 
     &__inner {
-      border-top: 1px solid $light_gray;
-      border-bottom: 1px solid $light_gray;
       padding: 8px 64px;
+      max-width: 1376px;
+      margin: 0 auto;
     }
 
     &__item {
@@ -377,9 +380,15 @@
       // flex-wrap: wrap;
     }
 
+    &__nav {
+      border-top: 1px solid $light_gray;
+      border-bottom: 1px solid $light_gray;
+    }
+
     &__content {
+      max-width: 1376px;
+      margin: 0 auto;
       display: flex;
-      // justify-content: flex-end;
       justify-content: space-between;
     }
 

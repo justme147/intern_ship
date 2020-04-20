@@ -6,7 +6,7 @@ function NavbarMenuItem(props) {
   return (
     <li onClick={props.onItemClick}>
       <Link
-        to={`/internship/build/admin${props.item.url}`}
+        to={`/admin${props.item.url}`}
         className={
           props.active !== props.item.id
             ? "sidebar__item"

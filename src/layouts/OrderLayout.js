@@ -19,7 +19,7 @@ function OrderLayout(props) {
             </header>
 
             <Switch>
-              <Route path="/internship/build/order" exact>
+              <Route path="/order" exact>
                 <OrderPage
                   isActive={props.isActive}
                   handleMenuClick={props.handleMenuClick}
@@ -31,7 +31,7 @@ function OrderLayout(props) {
                   orderId={props.orderId}
                 />
               </Route>
-              <Route path={`/internship/build/order/:id`}>
+              <Route path={`/order/:id`}>
                 <WatchPage
                   order={props.order}
                   handleButtonClick={props.handleButtonClick}

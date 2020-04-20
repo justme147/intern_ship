@@ -24,20 +24,22 @@ function NavigationList(props) {
   ]);
 
   return (
-    <nav className="body-list__inner">
-      <ul className="body-list">
-        {links.map((item) => {
-          return (
-            <NavigationItem
-              link={item}
-              key={item.id}
-              active={props.active}
-              clickItem={props.menuClick}
-            />
-          );
-        })}
-      </ul>
-    </nav>
+    <div className="body-main__nav">
+      <nav className="body-list__inner">
+        <ul className="body-list">
+          {links.map((item) => {
+            return (
+              <NavigationItem
+                link={item}
+                key={item.id}
+                active={props.active}
+                clickItem={props.menuClick}
+              />
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
   );
 }
 

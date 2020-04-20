@@ -19,23 +19,23 @@ export default function AdminPanel() {
     //   </div>
     // </div>
     <Switch>
-      <Route path="/internship/build/admin" exact component={AdminLayout} />
-      <Route path="/internship/build/admin/car-setting">
+      <Route path="/admin" exact component={AdminLayout} />
+      <Route path="/admin/car-setting">
         <AdminLayout>
           <AdminCarSetting />
         </AdminLayout>
       </Route>
-      <Route path="/internship/build/admin/car-list">
+      <Route path="/admin/car-list">
         <AdminLayout>
           <AdminCarList />
         </AdminLayout>
       </Route>
-      <Route path="/internship/build/admin/order-list">
+      <Route path="/admin/order-list">
         <AdminLayout>
           <AdminOrderList />
         </AdminLayout>
       </Route>
-      <Route path="/internship/build/admin/login" component={AdminAuth} />
+      <Route path="/admin/login" component={AdminAuth} />
       <Route>
         <AdminLayout error>
           <AdminError />

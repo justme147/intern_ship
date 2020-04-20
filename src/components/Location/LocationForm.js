@@ -32,6 +32,13 @@ function LocationForm(props) {
   }, [props.city]);
 
   useEffect(() => {
+    for (let item of placies) {
+      if (item.descr === props.place) {
+        setIsCorrectPlace(true);
+        return;
+      }
+    }
+
     const items = document.querySelectorAll(".form-section__item");
 
     if (props.place === "") {
@@ -42,6 +49,35 @@ function LocationForm(props) {
     items.length === 0 ? setIsCorrectPlace(false) : setIsCorrectPlace(true);
     console.log("useEffect");
   }, [props.place]);
+
+  useEffect(() => {
+    const closeUl = (e) => {
+      const inputCity = document.querySelectorAll(".form-section__group")[0];
+      const inputPlace = document.querySelectorAll(".form-section__group")[1];
+
+      if (e.target === inputCity || inputCity.contains(e.target)) {
+        setPlaceShow(false);
+        return;
+      }
+
+      if (e.target === inputPlace || inputPlace.contains(e.target)) {
+        setCityShow(false);
+        return;
+      }
+
+      // if (e.target === inputCity || inputCity.contains(e.target)) return;
+      // if (e.target === inputPlace || inputPlace.contains(e.target)) return;
+
+      setCityShow(false);
+      setPlaceShow(false);
+    };
+
+    window.addEventListener("click", closeUl);
+
+    return () => {
+      window.removeEventListener("click", closeUl);
+    };
+  }, []);
 
   function inputChange(e) {
     if (e.target.name === "city") {
@@ -161,8 +197,8 @@ function LocationForm(props) {
         )}
         {!isCorrectCity && (
           <p className="form-section__error">
-            Город введен неверно. Проверьте правильность ввода или убедитесь,
-            что в данном городе предоставляются наши услуги.
+            Город введен неверно. Проверьте правильность ввода или выберите
+            город из предложенного списка.
           </p>
         )}
       </div>
@@ -208,6 +244,12 @@ function LocationForm(props) {
               }
             })}
           </ul>
+        )}
+        {!isCorrectPlace && (
+          <p className="form-section__error">
+            Пункт выдачи введен неверно. Проверьте правильность ввода или
+            выберите пункт из предложенного списка.
+          </p>
         )}
       </div>
     </form>

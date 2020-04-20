@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import LangSwitch from "../components/Navbar/LangSwitch";
@@ -14,6 +14,7 @@ import imgToSvg from "../assets/scripts/svgHover";
 import toggleMenu from "../assets/scripts/startscreenmenu";
 
 function MainPage(props) {
+  const history = useHistory();
   const [isCity, setIsCity] = useState(false);
   const [chooseCity, setChooseCity] = useState(false);
   const [city, setCity] = useState("");
@@ -146,11 +147,12 @@ function MainPage(props) {
                     Поминутная аренда авто твоего города
                   </p>
                 </div>
-                <Link to="/internship/build/order">
-                  <button className="button body-content__button">
-                    Забронировать
-                  </button>
-                </Link>
+                <button
+                  className="button body-content__button"
+                  onClick={() => history.push("/order")}
+                >
+                  Забронировать
+                </button>
               </div>
               <footer className="body-footer">
                 <div className="body-footer__inner">

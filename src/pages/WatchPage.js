@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 
 import Order from "../components/Order";
 import Total from "../components/Total";
+import { useParams } from "react-router-dom";
 
 function WatchPage(props) {
+  const { id } = useParams();
+  console.log(id);
   return (
     <div className="body-main">
       <div className="body-main__inner">
-        <div className="body-list__inner">
-          <p className="body-list__orderId">Заказ номер {props.orderId}</p>
+        <div className="body-main__nav">
+          <div className="body-list__inner">
+            <p className="body-list__orderId">Заказ номер {id}</p>
+          </div>
         </div>
 
         <div className="body-main__content">

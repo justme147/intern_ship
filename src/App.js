@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, useRouteMatch } from "react-router-dom";
+import { BrowserRouter, Switch, Route, HashRouter } from "react-router-dom";
 
 import Location from "./components/Location";
 import Model from "./components/Model";
@@ -437,35 +437,33 @@ export default class App extends React.Component {
     }
 
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Switch>
-          <Route path="/" exact>
-            <MainPage
-              city={this.state.cityHeader}
-              cities={this.state.cities}
-              onListItemClick={this.handleOrderChange}
-              onHeaderCityChange={(value) =>
-                this.setState({ cityHeader: value })
-              }
-            />
-          </Route>
-          <Route path="/order">
-            <OrderLayout
-              isActive={isActive}
-              handleMenuClick={this.handleMenuClick}
-              renderStep={renderStep}
-              order={this.state.order}
-              headerCity={this.state.cityHeader}
-              // order={order}
-              handleButtonClick={this.handleButtonClick}
-              isModal={this.state.isModal}
-              handleButtonDeclineClick={this.handleButtonDeclineClick}
-              orderId={this.state.orderId}
-            />
-          </Route>
-          <Route path="/admin" component={AdminPanel} />
-        </Switch>
-      </BrowserRouter>
+      <HashRouter basename="/">
+        {/* <Switch> */}
+        <Route path="/" exact>
+          <MainPage
+            city={this.state.cityHeader}
+            cities={this.state.cities}
+            onListItemClick={this.handleOrderChange}
+            onHeaderCityChange={(value) => this.setState({ cityHeader: value })}
+          />
+        </Route>
+        <Route path="/order">
+          <OrderLayout
+            isActive={isActive}
+            handleMenuClick={this.handleMenuClick}
+            renderStep={renderStep}
+            order={this.state.order}
+            headerCity={this.state.cityHeader}
+            // order={order}
+            handleButtonClick={this.handleButtonClick}
+            isModal={this.state.isModal}
+            handleButtonDeclineClick={this.handleButtonDeclineClick}
+            orderId={this.state.orderId}
+          />
+        </Route>
+        <Route path="/admin" component={AdminPanel} />
+        {/* </Switch> */}
+      </HashRouter>
     );
   }
 }

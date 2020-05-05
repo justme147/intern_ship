@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/internship/build/static/css/main.6dcfc762.chunk.css",
-    "main.js": "/internship/build/static/js/main.eeefd9ba.chunk.js",
-    "main.js.map": "/internship/build/static/js/main.eeefd9ba.chunk.js.map",
+    "main.css": "/internship/build/static/css/main.984d1db2.chunk.css",
+    "main.js": "/internship/build/static/js/main.c60e2f58.chunk.js",
+    "main.js.map": "/internship/build/static/js/main.c60e2f58.chunk.js.map",
     "runtime-main.js": "/internship/build/static/js/runtime-main.74b42d9f.js",
     "runtime-main.js.map": "/internship/build/static/js/runtime-main.74b42d9f.js.map",
-    "static/js/2.69b85f99.chunk.js": "/internship/build/static/js/2.69b85f99.chunk.js",
-    "static/js/2.69b85f99.chunk.js.map": "/internship/build/static/js/2.69b85f99.chunk.js.map",
+    "static/js/2.1ae03ebd.chunk.js": "/internship/build/static/js/2.1ae03ebd.chunk.js",
+    "static/js/2.1ae03ebd.chunk.js.map": "/internship/build/static/js/2.1ae03ebd.chunk.js.map",
     "index.html": "/internship/build/index.html",
-    "precache-manifest.8979be807773fd001ee129c27a351a40.js": "/internship/build/precache-manifest.8979be807773fd001ee129c27a351a40.js",
+    "precache-manifest.ed2d4508a4fc56ca9898f2f54588cb0a.js": "/internship/build/precache-manifest.ed2d4508a4fc56ca9898f2f54588cb0a.js",
     "service-worker.js": "/internship/build/service-worker.js",
-    "static/css/main.6dcfc762.chunk.css.map": "/internship/build/static/css/main.6dcfc762.chunk.css.map",
-    "static/js/2.69b85f99.chunk.js.LICENSE.txt": "/internship/build/static/js/2.69b85f99.chunk.js.LICENSE.txt",
+    "static/css/main.984d1db2.chunk.css.map": "/internship/build/static/css/main.984d1db2.chunk.css.map",
+    "static/js/2.1ae03ebd.chunk.js.LICENSE.txt": "/internship/build/static/js/2.1ae03ebd.chunk.js.LICENSE.txt",
     "static/media/CRETA.jpg": "/internship/build/static/media/CRETA.c74e7596.jpg",
     "static/media/ELANTRA.jpg": "/internship/build/static/media/ELANTRA.50e553b8.jpg",
     "static/media/main.scss": "/internship/build/static/media/slider_screen_4.0c23ae9e.jpg",
@@ -43,8 +43,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.74b42d9f.js",
-    "static/js/2.69b85f99.chunk.js",
-    "static/css/main.6dcfc762.chunk.css",
-    "static/js/main.eeefd9ba.chunk.js"
+    "static/js/2.1ae03ebd.chunk.js",
+    "static/css/main.984d1db2.chunk.css",
+    "static/js/main.c60e2f58.chunk.js"
   ]
 }

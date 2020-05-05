@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import ModelMenuItem from "./ModelMenuItem";
+import { fetchData } from "../../assets/scripts/fetchdata";
 
 function ModelMenu(props) {
   const [menu, setMenu] = useState([
     { id: 1, name: "all", title: "Все модели" },
-    { id: 2, name: "eco", title: "Эконом" },
-    { id: 3, name: "premium", title: "Премиум" },
   ]);
+  useEffect(() => {
+    async function fetchMenuItems() {
+      try {
+        const response = await fetchData("category");
+        setMenu([...menu, ...response]);
+        // console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchMenuItems();
+  }, []);
   return (
     <ul className="body-main-model__ul">
       {menu.map((item) => {

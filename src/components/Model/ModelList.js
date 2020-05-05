@@ -8,7 +8,7 @@ function ModelList(props) {
     <div className="body-main-model__list">
       {props.cars.map((item) => {
         return props.filter !== "all" ? (
-          props.filter === item.class ? (
+          props.filter === item.categoryId.name ? (
             <ModelItem
               car={item}
               key={item.id}
@@ -33,7 +33,7 @@ ModelList.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object),
   filter: PropTypes.string,
   onMenuItemClick: PropTypes.func,
-  selectItem: PropTypes.number,
+  selectItem: PropTypes.string,
 };
 
 export default ModelList;

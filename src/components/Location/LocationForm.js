@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import deleteIcon from "../../assets/images/orderpage/form_icon_delete.svg";
 import OrderItem from "../Order/OrderItem";
+import LocationFormInput from "./LocationFormInput";
 
 function LocationForm(props) {
   const [cityShow, setCityShow] = useState(false);
@@ -14,7 +15,7 @@ function LocationForm(props) {
 
   useEffect(() => {
     for (let item of props.cities) {
-      if (item.value === props.city) {
+      if (item.name === props.city) {
         setIsCorrectCity(true);
         setPlacies(item.placies);
         return;
@@ -33,7 +34,7 @@ function LocationForm(props) {
 
   useEffect(() => {
     for (let item of placies) {
-      if (item.descr === props.place) {
+      if (item.address === props.place) {
         setIsCorrectPlace(true);
         return;
       }
@@ -113,15 +114,20 @@ function LocationForm(props) {
     props.onInputChange("place", value, 0);
     setPlaceShow(false);
     setIsCorrectPlace(true);
-    console.log("itemClick");
+    // console.log("itemClick");
   }
 
-  function onInputCityKeyDown(e) {
-    if (e.key === "Enter") {
+  function onInputKeyDown(e) {
+    console.log(e.target.name);
+    if (e.target.name === "city" && e.key === "Enter") {
       if (!isCorrectCity) return;
       fetchData(props.city);
       e.target.blur();
       setCityShow(false);
+    } else if (e.target.name === "place" && e.key === "Enter") {
+      if (!isCorrectPlace) return;
+      e.target.blur();
+      setPlaceShow(false);
     }
   }
 
@@ -135,8 +141,6 @@ function LocationForm(props) {
     );
     const json = await response.json();
     const { features } = json;
-
-    console.log(features);
 
     const position = {
       latitude: features[0].center[1],
@@ -152,105 +156,38 @@ function LocationForm(props) {
     <form className="form-section__container">
       <div className="form-section__group">
         <label className="form-section__label">Город</label>
-        <input
-          className={
-            !isCorrectCity
-              ? "form-section__input form-section__input--border"
-              : "form-section__input"
-          }
-          type="text"
+        <LocationFormInput
+          isCorrect={isCorrectCity}
           value={props.city}
-          onChange={inputChange}
-          name="city"
-          placeholder="Начните вводить город выдачи"
-          autoComplete="off"
-          onFocus={() => setCityShow(true)}
-          onKeyDown={(e) => onInputCityKeyDown(e)}
-          // onBlur={() => setCityShow(false)}
-          // onBlur={() => console.log()}
+          inputChange={inputChange}
+          name={"city"}
+          placeholder={"Начните вводить город выдачи"}
+          handleInputFocus={() => setCityShow(true)}
+          handleInputKeyDown={(e) => onInputKeyDown(e)}
+          iconSrc={deleteIcon}
+          handleIconClick={inputClick}
+          menuShow={cityShow}
+          arrayData={props.cities}
+          handleMenuItemClick={cityItemClick}
         />
-        {props.city && (
-          <img
-            src={deleteIcon}
-            className="form-section__delete"
-            onClick={inputClick}
-            name="city"
-          />
-        )}
-        {cityShow && isCorrectCity && (
-          <ul className="form-section__list">
-            {props.cities.map((item) => {
-              const valueFix = item.value.toLowerCase();
-              if (valueFix.includes(props.city.toLowerCase())) {
-                return (
-                  <li
-                    key={item.id}
-                    className="form-section__item"
-                    onClick={() => cityItemClick(item.value)}
-                  >
-                    {item.value}
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        )}
-        {!isCorrectCity && (
-          <p className="form-section__error">
-            Город введен неверно. Проверьте правильность ввода или выберите
-            город из предложенного списка.
-          </p>
-        )}
       </div>
 
       <div className="form-section__group">
         <label className="form-section__label">Пункт выдачи</label>
-        <input
-          className={
-            !isCorrectPlace
-              ? "form-section__input form-section__input--border"
-              : "form-section__input"
-          }
-          type="text"
+        <LocationFormInput
+          isCorrect={isCorrectPlace}
           value={props.place}
-          onChange={inputChange}
-          name="place"
-          placeholder="Начните вводить пункт выдачи"
-          autoComplete="off"
-          onFocus={() => setPlaceShow(true)}
+          inputChange={inputChange}
+          name={"place"}
+          placeholder={"Начните вводить пункт выдачи"}
+          handleInputFocus={() => setPlaceShow(true)}
+          handleInputKeyDown={(e) => onInputKeyDown(e)}
+          iconSrc={deleteIcon}
+          handleIconClick={inputClick}
+          menuShow={placeShow}
+          arrayData={placies}
+          handleMenuItemClick={placeItemClick}
         />
-        {props.place && (
-          <img
-            src={deleteIcon}
-            className="form-section__delete"
-            onClick={inputClick}
-            name="place"
-          />
-        )}
-        {placeShow && isCorrectPlace && (
-          <ul className="form-section__list">
-            {placies.map((item) => {
-              const valueFix = item.descr.toLowerCase();
-              if (valueFix.includes(props.place.toLowerCase())) {
-                return (
-                  <li
-                    className="form-section__item"
-                    key={item.id}
-                    onClick={() => placeItemClick(item.descr)}
-                  >
-                    {item.descr}
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        )}
-        {!isCorrectPlace && (
-          <p className="form-section__error">
-            Пункт выдачи введен неверно. Проверьте правильность ввода или
-            выберите пункт из предложенного списка.
-          </p>
-        )}
       </div>
     </form>
   );

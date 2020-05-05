@@ -11,45 +11,6 @@ const geolocateStyle = {
   margin: 10,
 };
 
-// const markers = [
-//   {
-//     id: 1,
-//     car: "Марка, Модель",
-//     descr: "Место стоянки",
-//     coordinate: [54.305701651193445, 48.36058638039551],
-//   },
-//   {
-//     id: 2,
-//     car: "Марка, Модель",
-//     descr: "Место стоянки",
-//     coordinate: [54.31627297776601, 48.40030989590599],
-//   },
-//   {
-//     id: 3,
-//     car: "Марка, Модель",
-//     descr: "Место стоянки",
-//     coordinate: [54.329322665236624, 48.401871252190574],
-//   },
-//   {
-//     id: 4,
-//     car: "Марка, Модель",
-//     descr: "Место стоянки",
-//     coordinate: [54.263121947985184, 48.34543218410452],
-//   },
-//   {
-//     id: 5,
-//     car: "Марка, Модель",
-//     descr: "Место стоянки",
-//     coordinate: [54.28951809547812, 48.313453618174265],
-//   },
-//   {
-//     id: 6,
-//     car: "Марка, Модель",
-//     descr: "Место стоянки",
-//     coordinate: [54.29804648106295, 48.36577815163679],
-//   },
-// ];
-
 function Location(props) {
   const [viewport, setViewport] = useState({
     latitude: JSON.parse(localStorage.getItem("position")).latitude,
@@ -72,7 +33,7 @@ function Location(props) {
 
   useEffect(() => {
     for (let item of props.cities) {
-      if (item.value === props.city) {
+      if (item.name === props.city) {
         setMarkers(item.placies);
       }
     }
@@ -128,7 +89,7 @@ function Location(props) {
                     onClick={(e) => {
                       e.preventDefault();
                       setSelectCar(item);
-                      props.onInputChange("place", item.descr, 0);
+                      props.onInputChange("place", item.address, 0);
                     }}
                   ></button>
                 </Marker>
@@ -142,10 +103,10 @@ function Location(props) {
                 >
                   <div className="mapboxgl-popup-content__description">
                     <h2 className="mapboxgl-popup-content__title">
-                      {selectCar.car}
+                      {selectCar.name}
                     </h2>
                     <p className="mapboxgl-popup-content__text">
-                      {selectCar.descr}
+                      {selectCar.address}
                     </p>
                   </div>
                 </Popup>

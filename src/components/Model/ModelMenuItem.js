@@ -15,7 +15,7 @@ function ModelMenuItem({ item, filter, menuClick }) {
       onClick={() => menuClick(item.name)}
     >
       <span className="body-main-model__circle"></span>
-      {item.title}
+      {item.name}
     </li>
   );
 }

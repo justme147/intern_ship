@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import BurgerMenu from "../components/Navbar/BurgerMenu";
 import Slider from "../components/Slider";
 import MenuList from "../components/Navbar/MenuList";
+import ChooseCity from "../components/Modal/ChooseCity";
 
 import closeIcon from "../assets/images/startscreen/icon_close.svg";
 import imgToSvg from "../assets/scripts/svgHover";
@@ -86,7 +87,7 @@ function MainPage(props) {
     try {
       const token = process.env.REACT_APP_MAPBOX_TOKEN;
 
-      value = value === "Волгоград" ? "город-герой" : value;
+      value = value === "Волгоград" ? "город-герой " + value : value;
 
       const response = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${token}&types=place`
@@ -106,7 +107,6 @@ function MainPage(props) {
   }
 
   function handleWindowClick(e) {
-    console.log(e.target);
     const modal = document.querySelector(".location__inner");
     if (e.target === modal || modal.contains(e.target)) return;
     setChooseCity(false);
@@ -191,63 +191,16 @@ function MainPage(props) {
         </div>
 
         {chooseCity && (
-          <div
-            className="container__location"
-            onClick={(e) => handleWindowClick(e)}
-          >
-            <section className="location">
-              <div className="location__inner">
-                <div className="location__close">
-                  <div
-                    className="location__icon--padding"
-                    onClick={() => setChooseCity(false)}
-                  >
-                    <img
-                      src={closeIcon}
-                      className="location__icon"
-                      alt="close_icon"
-                    />
-                  </div>
-                </div>
-                <label className="location__title">Укажите Ваш город</label>
-                <input
-                  type="text"
-                  className={
-                    !isCorrectCity
-                      ? "location__input location__input--border"
-                      : "location__input"
-                  }
-                  placeholder="Введите город"
-                  value={city}
-                  onChange={(e) => handleInputChange(e)}
-                />
-                {!isCorrectCity && (
-                  <p className="location__error">
-                    Город введен неверно. Проверьте правильность ввода или
-                    убедитесь, что в данном городе предоставляются наши услуги.
-                  </p>
-                )}
-                {city && isCorrectCity && (
-                  <ul className="location__list">
-                    {props.cities.map((item) => {
-                      const valueFix = item.value.toLowerCase();
-                      if (valueFix.includes(city.toLowerCase())) {
-                        return (
-                          <li
-                            key={item.id}
-                            className="location__item"
-                            onClick={() => handleItemClick(item.value)}
-                          >
-                            {item.value}
-                          </li>
-                        );
-                      }
-                    })}
-                  </ul>
-                )}
-              </div>
-            </section>
-          </div>
+          <ChooseCity
+            handleWindowClick={(e) => handleWindowClick(e)}
+            handleCloseClick={() => setChooseCity(false)}
+            srcIcon={closeIcon}
+            isCorrectCity={isCorrectCity}
+            city={city}
+            handleCityChange={(e) => handleInputChange(e)}
+            cities={props.cities}
+            handleItemClick={handleItemClick}
+          />
         )}
 
         {/* <!-- End menu section --> */}

@@ -6,6 +6,7 @@ function Modal(props) {
   const history = useHistory();
   function onButtonAcceptClick() {
     history.push(`/order/${props.orderId}`);
+    // props.onButtonClick();
     props.onButtonDeclineClick();
   }
 
@@ -35,6 +36,7 @@ function Modal(props) {
 }
 
 Modal.propTypes = {
+  onButtonClick: PropTypes.func,
   onButtonDeclineClick: PropTypes.func,
   orderId: PropTypes.string,
 };

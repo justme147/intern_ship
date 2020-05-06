@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 
 // import EmptyAdminLayout from "../layouts/EmptyAdminLayout.jsx";
 import logo from "../assets/images/adminpanel/logo.svg";
 
-export default function AdminAuth() {
+function AdminAuth(props) {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
   const history = useHistory();
+
+  function handleLoginClick() {
+    const data = {
+      login: email,
+      password: pass,
+    };
+    props.login(data);
+    history.push("/admin");
+  }
+
   return (
     // <EmptyAdminLayout>
     <div className="wrapper">
@@ -24,15 +37,25 @@ export default function AdminAuth() {
               <h2 className="auth__subtitle">Вход</h2>
               <form className="auth__form">
                 <label className="auth__label">Почта</label>
-                <input type="email" className="auth__input" />
+                <input
+                  type="email"
+                  className="auth__input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 <label className="auth__label">Пароль</label>
-                <input type="password" className="auth__input" />
+                <input
+                  type="password"
+                  className="auth__input"
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
+                />
                 <div className="auth__row auth__row--between">
                   <p className="auth__link">Запросить доступ</p>
                   {/* <Link to="/internship/build/admin"> */}
                   <button
                     className="button auth__button"
-                    onClick={() => history.push("/admin")}
+                    onClick={handleLoginClick}
                   >
                     Войти
                   </button>
@@ -47,3 +70,9 @@ export default function AdminAuth() {
     // </EmptyAdminLayout>
   );
 }
+
+AdminAuth.propTypes = {
+  login: PropTypes.func,
+};
+
+export default AdminAuth;

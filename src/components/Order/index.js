@@ -2,8 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import OrderItem from "./OrderItem";
+import { useHistory } from "react-router-dom";
 
 function Order(props) {
+  const history = useHistory();
+  function declineClick() {
+    props.onButtonClick();
+    history.push("/order");
+  }
+
   function OrderButton() {
     let button;
     switch (props.step) {
@@ -54,7 +61,7 @@ function Order(props) {
         button = (
           <button
             className="button body-main-order__button body-main-order__button--gradient"
-            onClick={props.onButtonClick}
+            onClick={declineClick}
           >
             Отменить
           </button>

@@ -1,35 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f5411984aec6d64dce742770811841a1",
+    "revision": "f00513a22b282694c75445cac5d39ec0",
     "url": "/internship/build/index.html"
   },
   {
-    "revision": "a707479daecbe6d12cc2",
-    "url": "/internship/build/static/css/main.984d1db2.chunk.css"
+    "revision": "aa1328294c5c3ca7d9ba",
+    "url": "/internship/build/static/css/main.296e4846.chunk.css"
   },
   {
-    "revision": "1db6bed95c2de06afcca",
-    "url": "/internship/build/static/js/2.1ae03ebd.chunk.js"
+    "revision": "e40d2e1e9eaa58351ffe",
+    "url": "/internship/build/static/js/2.0417e547.chunk.js"
   },
   {
     "revision": "d36cb11450bc7ac43339fe2a1aa67b29",
-    "url": "/internship/build/static/js/2.1ae03ebd.chunk.js.LICENSE.txt"
+    "url": "/internship/build/static/js/2.0417e547.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a707479daecbe6d12cc2",
-    "url": "/internship/build/static/js/main.c60e2f58.chunk.js"
+    "revision": "aa1328294c5c3ca7d9ba",
+    "url": "/internship/build/static/js/main.44307ef8.chunk.js"
   },
   {
     "revision": "abdaac7c40a32f6f53a6",
     "url": "/internship/build/static/js/runtime-main.74b42d9f.js"
-  },
-  {
-    "revision": "c74e75965971378286288c2ad0cc24d8",
-    "url": "/internship/build/static/media/CRETA.c74e7596.jpg"
-  },
-  {
-    "revision": "50e553b8e8d58c829d74889edbdf56dd",
-    "url": "/internship/build/static/media/ELANTRA.50e553b8.jpg"
   },
   {
     "revision": "88823c2015ffd5fa89d567e17297a137",
@@ -80,10 +72,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/internship/build/static/media/Roboto-Regular.cdf3710c.woff"
   },
   {
-    "revision": "baafb7186b9133a1957a7643cbbfe03f",
-    "url": "/internship/build/static/media/SONATA.baafb718.jpg"
-  },
-  {
     "revision": "a7259b771b9372084629a2284445d0bb",
     "url": "/internship/build/static/media/approve_icon.a7259b77.svg"
   },
@@ -98,10 +86,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "9f1b3b91cf6744470015a09e2dbea7e4",
     "url": "/internship/build/static/media/form_icon_delete.9f1b3b91.svg"
-  },
-  {
-    "revision": "d1b1dbd7245285ecc69d5943a3a01c90",
-    "url": "/internship/build/static/media/i30N.d1b1dbd7.jpg"
   },
   {
     "revision": "c1749e14d0e08b93682e05f7ce17c6ce",

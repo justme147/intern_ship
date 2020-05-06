@@ -1,21 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import RadioButton from "../RadioButton";
+import { fetchData } from "../../assets/scripts/fetchdata";
 
 function OptionsTariff(props) {
-  const [value, setValue] = useState([
-    {
-      id: 1,
-      value: "Поминутно",
-      title: "Поминутно, 7₽/мин",
-    },
-    {
-      id: 2,
-      value: "На сутки",
-      title: "На сутки, 1999 ₽/сутки",
-    },
-  ]);
+  const [value, setValue] = useState([]);
+
+  const [tariffs, setTariffs] = useState([]);
+  useEffect(() => {
+    async function fetchRate() {
+      try {
+        const rate = await fetchData("rate", props.bearer);
+        // console.log(rate);
+        // setTariffs(data);
+        const rateArr = rate.map((item) => {
+          const result = {
+            id: item.id,
+            value: item.rateTypeId.name,
+            title: `${item.rateTypeId.name}, ${item.price} ₽/${item.rateTypeId.unit}`,
+          };
+          return result;
+          // setValue([...value, {...result}]);
+        });
+        console.log(rateArr);
+        setValue(rateArr);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchRate();
+  }, []);
+
   function handleInputChange(e) {
     props.menuTariffChange("value", e.target.value, 4);
   }
@@ -40,6 +56,7 @@ function OptionsTariff(props) {
 
 OptionsTariff.propTypes = {
   menuTariffChange: PropTypes.func,
+  bearer: PropTypes.object,
 };
 
 export default OptionsTariff;

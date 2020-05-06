@@ -14,7 +14,7 @@ function OptionsColor(props) {
         return (
           <RadioButton
             name="color"
-            value={item}
+            value={item[0].toUpperCase() + item.slice(1)}
             inputChange={handleInputChange}
             key={item}
           />

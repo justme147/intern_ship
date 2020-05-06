@@ -25,7 +25,10 @@ function Options(props) {
         />
 
         <h4 className="body-main-options__subtitle">Тариф</h4>
-        <OptionTariff menuTariffChange={props.onOrderChange} />
+        <OptionTariff
+          menuTariffChange={props.onOrderChange}
+          bearer={props.bearer}
+        />
 
         <h4 className="body-main-options__subtitle">Доп услуги</h4>
         <OptionServices menuServicesChange={props.onOrderChange} />
@@ -40,6 +43,7 @@ Options.propTypes = {
   onOrderChange: PropTypes.func,
   onInputDateChange: PropTypes.func,
   colors: PropTypes.array,
+  bearer: PropTypes.object,
 };
 
 export default Options;

@@ -7,7 +7,7 @@ function ModelList(props) {
   return (
     <div className="body-main-model__list">
       {props.cars.map((item) => {
-        return props.filter !== "all" ? (
+        return props.filter !== "Все модели" ? (
           props.filter === item.categoryId.name ? (
             <ModelItem
               car={item}

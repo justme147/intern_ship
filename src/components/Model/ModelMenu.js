@@ -6,12 +6,12 @@ import { fetchData } from "../../assets/scripts/fetchdata";
 
 function ModelMenu(props) {
   const [menu, setMenu] = useState([
-    { id: 1, name: "all", title: "Все модели" },
+    { id: 1, name: "Все модели", title: "Все модели" },
   ]);
   useEffect(() => {
     async function fetchMenuItems() {
       try {
-        const response = await fetchData("category");
+        const response = await fetchData("category", props.bearer);
         setMenu([...menu, ...response]);
         // console.log(response);
       } catch (e) {
@@ -38,6 +38,7 @@ function ModelMenu(props) {
 
 ModelMenu.propTypes = {
   filter: PropTypes.string,
+  bearer: PropTypes.object,
   onMenuClick: PropTypes.func,
 };
 

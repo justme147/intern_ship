@@ -11,7 +11,7 @@ import AdminPanel from "./pages/AdminPanel";
 // import AdminAuth from "./pages/AdminAuth";
 // import AdminLayout from "./layouts/AdminLayout";
 
-import { fetchData } from "./assets/scripts/fetchdata";
+import { fetchData, authLogin } from "./assets/scripts/fetchdata";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -64,6 +64,7 @@ export default class App extends React.Component {
           title: "Правый руль",
         },
       ],
+      bearer: {},
     };
   }
 
@@ -110,8 +111,11 @@ export default class App extends React.Component {
       localStorage.setItem("isShowed", false);
     }
 
-    const city = await fetchData("city");
-    const placies = await fetchData("point");
+    const bearer = await authLogin();
+    this.setState({ bearer });
+
+    const city = await fetchData("city", this.state.bearer);
+    const placies = await fetchData("point", this.state.bearer);
 
     const newCity = city.map((item) => {
       const filterPlacies = placies.filter(
@@ -163,9 +167,18 @@ export default class App extends React.Component {
     // const history = this.state.history;
     // const current = history[history.length - 1];
     // const order = current.order;
+    let active;
+
+    if (this.state.isActive < 5) {
+      active = this.state.isActive + 1;
+    } else if (this.state.isActive === 5) {
+      active = 4;
+    } else {
+      active = 5;
+    }
 
     this.setState({
-      isActive: this.state.isActive < 4 ? this.state.isActive + 1 : 4,
+      isActive: active,
       isModal: this.state.isActive === 4 ? true : false,
       // history: this.state.history.concat({ order }),
     });
@@ -257,6 +270,7 @@ export default class App extends React.Component {
           <Model
             onMenuItemClick={this.handleOrderChange}
             onModelClick={this.handleModelClick}
+            bearer={this.state.bearer}
           />
         );
         break;
@@ -270,6 +284,7 @@ export default class App extends React.Component {
             onOrderChange={this.handleOrderChange}
             onInputDateChange={this.handleDateInputChange}
             colors={this.state.colorsCar}
+            bearer={this.state.bearer}
           />
         );
         break;
@@ -293,6 +308,25 @@ export default class App extends React.Component {
           />
         );
         break;
+      default:
+        renderStep = (
+          <Total
+            // since={order[3].since}
+            // name={order[1].name}
+            // model={order[1].value}
+            // number={order[1].number}
+            // fuel={order[1].fuel}
+            // isFull={order[5].value}
+            // image={order[1].image}
+            since={this.state.order[3].since}
+            name={this.state.order[1].name}
+            model={this.state.order[1].value}
+            number={this.state.order[1].number}
+            fuel={this.state.order[1].fuel}
+            isFull={this.state.order[5].value}
+            image={this.state.order[1].image}
+          />
+        );
     }
 
     return (

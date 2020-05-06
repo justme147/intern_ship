@@ -26,6 +26,7 @@ function OrderPage(props) {
 
         {props.isModal ? (
           <Modal
+            onButtonClick={props.handleButtonClick}
             onButtonDeclineClick={props.handleButtonDeclineClick}
             orderId={props.orderId}
           />

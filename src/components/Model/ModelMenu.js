@@ -5,24 +5,9 @@ import ModelMenuItem from "./ModelMenuItem";
 import { fetchData } from "../../assets/scripts/fetchdata";
 
 function ModelMenu(props) {
-  const [menu, setMenu] = useState([
-    { id: 1, name: "Все модели", title: "Все модели" },
-  ]);
-  useEffect(() => {
-    async function fetchMenuItems() {
-      try {
-        const response = await fetchData("category", props.bearer);
-        setMenu([...menu, ...response]);
-        // console.log(response);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    fetchMenuItems();
-  }, []);
   return (
     <ul className="body-main-model__ul">
-      {menu.map((item) => {
+      {props.menu.map((item) => {
         return (
           <ModelMenuItem
             item={item}
@@ -38,8 +23,8 @@ function ModelMenu(props) {
 
 ModelMenu.propTypes = {
   filter: PropTypes.string,
-  bearer: PropTypes.object,
   onMenuClick: PropTypes.func,
+  menu: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default ModelMenu;

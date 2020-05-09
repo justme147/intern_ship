@@ -76,9 +76,10 @@ function MainPage(props) {
     setIsCorrectCity(true);
   }
 
-  async function handleItemClick(value) {
+  async function handleItemClick(value, id) {
     localStorage.setItem("city", value);
     props.onListItemClick("city", value, 0);
+    props.onListItemClick("cityId", id, 0);
     props.onHeaderCityChange(value);
     setCity("");
     setChooseCity(false);
@@ -104,6 +105,11 @@ function MainPage(props) {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  function handleCloseClick() {
+    setChooseCity(false);
+    setCity("");
   }
 
   function handleWindowClick(e) {
@@ -193,7 +199,7 @@ function MainPage(props) {
         {chooseCity && (
           <ChooseCity
             handleWindowClick={(e) => handleWindowClick(e)}
-            handleCloseClick={() => setChooseCity(false)}
+            handleCloseClick={() => handleCloseClick()}
             srcIcon={closeIcon}
             isCorrectCity={isCorrectCity}
             city={city}

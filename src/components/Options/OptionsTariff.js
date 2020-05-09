@@ -11,7 +11,10 @@ function OptionsTariff(props) {
   useEffect(() => {
     async function fetchRate() {
       try {
-        const rate = await fetchData("rate", props.bearer);
+        const rate = await fetchData(
+          "rate",
+          JSON.parse(localStorage.getItem("api_token"))
+        );
         // console.log(rate);
         // setTariffs(data);
         const rateArr = rate.map((item) => {
@@ -23,7 +26,7 @@ function OptionsTariff(props) {
           return result;
           // setValue([...value, {...result}]);
         });
-        console.log(rateArr);
+        // console.log(rateArr);
         setValue(rateArr);
       } catch (e) {
         console.log(e);
@@ -34,6 +37,10 @@ function OptionsTariff(props) {
 
   function handleInputChange(e) {
     props.menuTariffChange("value", e.target.value, 4);
+    const rateId = value.filter((item) => item.value === e.target.value);
+    if (rateId.length) {
+      props.menuTariffChange("rateId", rateId[0].id, 4);
+    }
   }
 
   return (
@@ -56,7 +63,6 @@ function OptionsTariff(props) {
 
 OptionsTariff.propTypes = {
   menuTariffChange: PropTypes.func,
-  bearer: PropTypes.object,
 };
 
 export default OptionsTariff;

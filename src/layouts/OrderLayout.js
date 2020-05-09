@@ -28,7 +28,6 @@ function OrderLayout(props) {
                   handleButtonClick={props.handleButtonClick}
                   isModal={props.isModal}
                   handleButtonDeclineClick={props.handleButtonDeclineClick}
-                  orderId={props.orderId}
                 />
               </Route>
               <Route path={`/order/:id`}>
@@ -36,7 +35,6 @@ function OrderLayout(props) {
                   order={props.order}
                   handleButtonClick={props.handleButtonClick}
                   isActive={props.isActive}
-                  orderId={props.orderId}
                 />
               </Route>
             </Switch>
@@ -55,7 +53,6 @@ OrderLayout.propTypes = {
   handleButtonClick: PropTypes.func,
   isModal: PropTypes.bool,
   handleButtonDeclineClick: PropTypes.func,
-  orderId: PropTypes.string,
   headerCity: PropTypes.string,
 };
 

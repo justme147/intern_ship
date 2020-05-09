@@ -11,7 +11,7 @@ import AdminPanel from "./pages/AdminPanel";
 // import AdminAuth from "./pages/AdminAuth";
 // import AdminLayout from "./layouts/AdminLayout";
 
-import { fetchData, authLogin } from "./assets/scripts/fetchdata";
+import { fetchData, authLogin, deleteData } from "./assets/scripts/fetchdata";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,17 +19,19 @@ export default class App extends React.Component {
     this.state = {
       isActive: 1,
       isModal: false,
-      orderId: `RU${Date.now()}`,
       colorsCar: [],
       cityHeader: localStorage.getItem("city"),
       cities: [],
       order: [
         {
+          cityId: "",
           city: localStorage.getItem("city"),
+          placeId: "",
           place: "",
           title: "Пункт выдачи",
         },
         {
+          carId: "",
           name: "",
           number: "",
           value: "",
@@ -48,6 +50,7 @@ export default class App extends React.Component {
           by: "",
         },
         {
+          rateId: "",
           value: "",
           title: "Тариф",
         },
@@ -64,7 +67,6 @@ export default class App extends React.Component {
           title: "Правый руль",
         },
       ],
-      bearer: {},
     };
   }
 
@@ -112,10 +114,30 @@ export default class App extends React.Component {
     }
 
     const bearer = await authLogin();
-    this.setState({ bearer });
 
-    const city = await fetchData("city", this.state.bearer);
-    const placies = await fetchData("point", this.state.bearer);
+    localStorage.setItem("api_token", JSON.stringify(bearer));
+
+    // const deleteOrder = await deleteData(
+    //   "order",
+    //   JSON.parse(localStorage.getItem("api_token")),
+    //   "5eb5bb49099b810b946c8f0f"
+    // );
+    // console.log(deleteOrder);
+
+    // const orders = await fetchData(
+    //   "order",
+    //   JSON.parse(localStorage.getItem("api_token"))
+    // );
+    // console.log(orders);
+
+    const city = await fetchData(
+      "city",
+      JSON.parse(localStorage.getItem("api_token"))
+    );
+    const placies = await fetchData(
+      "point",
+      JSON.parse(localStorage.getItem("api_token"))
+    );
 
     const newCity = city.map((item) => {
       const filterPlacies = placies.filter(
@@ -147,7 +169,22 @@ export default class App extends React.Component {
       return { ...item, placies: placiesCoords };
     });
 
-    this.setState({ cities: newCity });
+    const cityId = city.filter(
+      (item) => item.name === localStorage.getItem("city")
+    );
+
+    this.setState((prev) => ({
+      ...prev,
+      cities: newCity,
+      order: [
+        {
+          ...prev.order[0],
+          cityId: cityId[0].id,
+        },
+        ...prev.order.slice(1),
+      ],
+    }));
+    // this.setState({ cities: newCity });
   };
 
   handleMenuClick = (id) => {
@@ -214,7 +251,6 @@ export default class App extends React.Component {
 
     const from = new Date(since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
     const to = new Date(by.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
-
     const time = new Date(to - from);
 
     const datetime = [];
@@ -270,7 +306,6 @@ export default class App extends React.Component {
           <Model
             onMenuItemClick={this.handleOrderChange}
             onModelClick={this.handleModelClick}
-            bearer={this.state.bearer}
           />
         );
         break;
@@ -284,7 +319,6 @@ export default class App extends React.Component {
             onOrderChange={this.handleOrderChange}
             onInputDateChange={this.handleDateInputChange}
             colors={this.state.colorsCar}
-            bearer={this.state.bearer}
           />
         );
         break;
@@ -308,7 +342,7 @@ export default class App extends React.Component {
           />
         );
         break;
-      default:
+      case 5:
         renderStep = (
           <Total
             // since={order[3].since}
@@ -327,6 +361,7 @@ export default class App extends React.Component {
             image={this.state.order[1].image}
           />
         );
+        break;
     }
 
     return (
@@ -351,7 +386,6 @@ export default class App extends React.Component {
             handleButtonClick={this.handleButtonClick}
             isModal={this.state.isModal}
             handleButtonDeclineClick={this.handleButtonDeclineClick}
-            orderId={this.state.orderId}
           />
         </Route>
         <Route path="/admin" component={AdminPanel} />

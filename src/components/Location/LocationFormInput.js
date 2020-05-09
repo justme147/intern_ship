@@ -38,7 +38,7 @@ function LocationFormInput(props) {
                 <li
                   className="form-section__item"
                   key={item.id}
-                  onClick={() => props.handleMenuItemClick(outputProp)}
+                  onClick={() => props.handleMenuItemClick(outputProp, item.id)}
                 >
                   {outputProp}
                 </li>

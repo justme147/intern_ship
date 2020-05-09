@@ -31,7 +31,57 @@ export async function authLogin() {
   }
 }
 
-export async function fetchData(table, bearer) {
+export async function fetchData(table, bearer, query = "") {
+  try {
+    const appId = process.env.REACT_APP_APPLICATION_ID;
+    const headersBearer = {
+      "Content-Type": "application/json",
+      "X-Api-Factory-Application-Id": appId,
+      Authorization: `Bearer ${bearer.access_token}`,
+    };
+
+    const response = await fetch(
+      `http://api-factory.simbirsoft1.com/api/db/${table}${query}`,
+      {
+        method: "GET",
+        headers: headersBearer,
+      }
+    );
+
+    const json = await response.json();
+
+    return json.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function fetchDataById(table, bearer, id) {
+  try {
+    const appId = process.env.REACT_APP_APPLICATION_ID;
+    const headersBearer = {
+      "Content-Type": "application/json",
+      "X-Api-Factory-Application-Id": appId,
+      Authorization: `Bearer ${bearer.access_token}`,
+    };
+
+    const response = await fetch(
+      `http://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
+      {
+        method: "GET",
+        headers: headersBearer,
+      }
+    );
+
+    const json = await response.json();
+
+    return json.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function postData(table, bearer, body) {
   try {
     const appId = process.env.REACT_APP_APPLICATION_ID;
     const headersBearer = {
@@ -43,14 +93,41 @@ export async function fetchData(table, bearer) {
     const response = await fetch(
       `http://api-factory.simbirsoft1.com/api/db/${table}`,
       {
-        method: "GET",
+        method: "POST",
         headers: headersBearer,
+        body: JSON.stringify(body),
       }
     );
 
     const json = await response.json();
 
     return json.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function deleteData(table, bearer, id) {
+  try {
+    const appId = process.env.REACT_APP_APPLICATION_ID;
+    const headersBearer = {
+      "Content-Type": "application/json",
+      "X-Api-Factory-Application-Id": appId,
+      Authorization: `Bearer ${bearer.access_token}`,
+    };
+
+    const response = await fetch(
+      `http://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
+      {
+        method: "DELETE",
+        headers: headersBearer,
+      }
+    );
+
+    const json = await response.json();
+
+    // return json.data;
+    return json;
   } catch (e) {
     console.log(e);
   }

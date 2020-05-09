@@ -7,16 +7,7 @@ function ModelList(props) {
   return (
     <div className="body-main-model__list">
       {props.cars.map((item) => {
-        return props.filter !== "Все модели" ? (
-          props.filter === item.categoryId.name ? (
-            <ModelItem
-              car={item}
-              key={item.id}
-              onMenuItemClick={props.onMenuItemClick}
-              selectItem={props.selectItem}
-            />
-          ) : null
-        ) : (
+        return (
           <ModelItem
             car={item}
             key={item.id}

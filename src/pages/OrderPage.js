@@ -28,7 +28,7 @@ function OrderPage(props) {
           <Modal
             onButtonClick={props.handleButtonClick}
             onButtonDeclineClick={props.handleButtonDeclineClick}
-            orderId={props.orderId}
+            order={props.order}
           />
         ) : (
           ""
@@ -46,7 +46,6 @@ OrderPage.propTypes = {
   handleButtonClick: PropTypes.func,
   isModal: PropTypes.bool,
   handleButtonDeclineClick: PropTypes.func,
-  orderId: PropTypes.string,
 };
 
 export default OrderPage;

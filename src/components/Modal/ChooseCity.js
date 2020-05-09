@@ -45,7 +45,7 @@ function ChooseCity(props) {
                     <li
                       key={item.id}
                       className="location__item"
-                      onClick={() => props.handleItemClick(item.name)}
+                      onClick={() => props.handleItemClick(item.name, item.id)}
                     >
                       {item.name}
                     </li>

@@ -9,7 +9,7 @@ import AdminOrderList from "../pages/AdminOrderList";
 import AdminError from "../pages/AdminError";
 
 export default function AdminPanel() {
-  const [logged, setLogged] = useState({});
+  const [logged, setLogged] = useState({ login: "123123" });
   return (
     // <div className="wrapper">
     //   <div className="container">

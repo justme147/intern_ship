@@ -48,7 +48,6 @@ function LocationForm(props) {
     }
 
     items.length === 0 ? setIsCorrectPlace(false) : setIsCorrectPlace(true);
-    console.log("useEffect");
   }, [props.place]);
 
   useEffect(() => {
@@ -98,20 +97,24 @@ function LocationForm(props) {
   function inputClick(e) {
     if (e.target.name === "city") {
       props.onInputChange("place", "", 0);
+      props.onInputChange("placeId", "", 0);
     }
     props.onInputChange(e.target.name, "", 0);
+    props.onInputChange(e.target.name + "Id", "", 0);
   }
 
-  function cityItemClick(value) {
+  function cityItemClick(value, id) {
     props.onInputChange("city", value, 0);
+    props.onInputChange("cityId", id, 0);
     setCityShow(false);
     setIsCorrectCity(true);
     if (value === props.city) return;
     fetchData(value);
   }
 
-  function placeItemClick(value) {
+  function placeItemClick(value, id) {
     props.onInputChange("place", value, 0);
+    props.onInputChange("placeId", id, 0);
     setPlaceShow(false);
     setIsCorrectPlace(true);
     // console.log("itemClick");
@@ -122,10 +125,20 @@ function LocationForm(props) {
     if (e.target.name === "city" && e.key === "Enter") {
       if (!isCorrectCity) return;
       fetchData(props.city);
+      const cityId = props.cities.filter(
+        (item) => item.name === e.target.value
+      );
+      if (cityId.length) {
+        props.onInputChange("cityId", cityId[0].id, 0);
+      }
       e.target.blur();
       setCityShow(false);
     } else if (e.target.name === "place" && e.key === "Enter") {
       if (!isCorrectPlace) return;
+      const placeId = placies.filter((item) => item.address === e.target.value);
+      if (placeId.length) {
+        props.onInputChange("placeId", placeId[0].id, 0);
+      }
       e.target.blur();
       setPlaceShow(false);
     }

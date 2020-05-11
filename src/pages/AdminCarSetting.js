@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
 import AdminBodyLayout from "../layouts/AdminBodyLayout";
 import CarCard from "../components/CarCard";
 import CarSetting from "../components/CarSetting";
+import { Link } from "react-router-dom";
 
-export default function AdminCarSetting() {
+function AdminCarSetting(props) {
   return (
     <AdminBodyLayout title="Карточка автомобиля">
-      <div className="body-main__wrap">
-        <CarCard />
-        <CarSetting />
-      </div>
+      {props.car ? (
+        <div className="body-main__wrap">
+          <CarCard car={props.car} />
+          <CarSetting car={props.car} />
+        </div>
+      ) : (
+        <p>
+          Машина не выбранна, нажмите <Link to="/admin/car-list">здесь</Link>{" "}
+          для выбора
+        </p>
+      )}
     </AdminBodyLayout>
   );
 }
+
+AdminCarSetting.propTypes = {
+  car: PropTypes.object,
+};
+
+export default AdminCarSetting;

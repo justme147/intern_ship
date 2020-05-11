@@ -50,7 +50,7 @@
 .button {
   @include styletext(18px, $white, 21px);
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
-  font-family: "RobotoMd";
+  font-family: "RobotoMd", Arial, sans-serif;
   background-blend-mode: darken;
   padding: 13.5px 0;
   border-radius: 8px;
@@ -290,9 +290,6 @@
       }
     }
 
-    &__icon {
-    }
-
     &__text {
       @include styletext(14px, $dark_gray, 16px);
       margin-left: 7px;
@@ -339,7 +336,7 @@
 
     &__city {
       @include styletext(14px, $white, 16px);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
     }
 
     &__btn-group {
@@ -349,7 +346,7 @@
     &__accept {
       background: $main_accent;
       @include styletext(14px, $white, 16px);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
       padding: 8px 10px;
       border-radius: 4px;
 
@@ -365,7 +362,7 @@
     &__decline {
       background: $main_accent;
       @include styletext(14px, $white, 16px);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
       padding: 8px 10px;
       border-radius: 4px;
       margin-left: 10px;
@@ -381,7 +378,7 @@
 
     &__depend {
       @include styletext(12px, $white, 14px);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
       margin-top: 10px;
     }
 
@@ -429,7 +426,7 @@
 
     &__text {
       @include styletext(26px, $dark_gray, 30px);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
       margin-top: 25px;
 
       @media (max-width: $bp3) {
@@ -567,7 +564,7 @@
 
     &__title {
       @include styletext(40px, $white, 47px);
-      font-family: "RobotoMd";
+      font-family: "RobotoMd", Arial, sans-serif;
 
       @media (max-width: $bp1) {
         font-size: 32px;
@@ -577,7 +574,7 @@
 
     &__text {
       @include styletext(24px, $light_gray, 90%);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
       margin-top: 8px;
 
       @media (max-width: $bp1) {
@@ -656,12 +653,7 @@
     display: none;
   }
 }
-/* Слайдер запущен */
-.slick-slider.slick-initialized {
-}
-/* Слайдер с точками */
-.slick-slider.slick-dotted {
-}
+
 /* Ограничивающая оболочка */
 .slick-list {
   height: 100%;
@@ -671,21 +663,6 @@
 .slick-track {
   display: flex;
   height: 100%;
-}
-/* Слайд */
-.slick-slide {
-}
-/* Слайд активный (показывается) */
-.slick-slide.slick-active {
-}
-/* Слайд основной */
-.slick-slide.slick-current {
-}
-/* Слайд по центру */
-.slick-slide.slick-center {
-}
-/* Клонированный слайд */
-.slick-slide.slick-cloned {
 }
 /* Стрелка */
 .slick-arrow {
@@ -716,9 +693,6 @@
 /* Стрелка вправо */
 .slick-arrow.slick-next {
   right: 0;
-}
-/* Стрелка не активная */
-.slick-arrow.slick-disabled {
 }
 /* Точки (булиты) */
 .slick-dots {
@@ -814,7 +788,7 @@
 
   &__input {
     @include styletext(14px, $main_black, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     padding: 8px 10px;
     border: 1px solid $dark_gray;
     text-align: center;
@@ -829,7 +803,7 @@
 
   &__error {
     @include styletext(14px, $red, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     margin-top: 10px;
   }
 
@@ -858,7 +832,7 @@
 
   &__item {
     @include styletext(14px, $dark_gray, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     padding: 6px 0;
     cursor: pointer;
 
@@ -899,7 +873,7 @@
 
   &__item {
     @include styletext(32px, $white, 37px);
-    font-family: "RobotoMd";
+    font-family: "RobotoMd", Arial, sans-serif;
     text-transform: uppercase;
     margin-top: 10px;
 

@@ -10,6 +10,7 @@ import AdminError from "../pages/AdminError";
 
 export default function AdminPanel() {
   const [logged, setLogged] = useState({ login: "123123" });
+  const [car, setCar] = useState(null);
   return (
     // <div className="wrapper">
     //   <div className="container">
@@ -27,7 +28,7 @@ export default function AdminPanel() {
       <Route path="/admin/car-setting">
         {logged.login ? (
           <AdminLayout>
-            <AdminCarSetting />
+            <AdminCarSetting car={car} />
           </AdminLayout>
         ) : (
           <Redirect to="/admin/login" />
@@ -36,7 +37,7 @@ export default function AdminPanel() {
       <Route path="/admin/car-list">
         {logged.login ? (
           <AdminLayout>
-            <AdminCarList />
+            <AdminCarList handleCarClick={(item) => setCar(item)} />
           </AdminLayout>
         ) : (
           <Redirect to="/admin/login" />

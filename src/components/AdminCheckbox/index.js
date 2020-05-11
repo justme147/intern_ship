@@ -14,7 +14,12 @@ function AdminCheckbox(props) {
 
   return (
     <label className="checkbox-section__container checkbox-section__container--color">
-      <input type="checkbox" className="checkbox-section__input" />
+      <input
+        type="checkbox"
+        className="checkbox-section__input"
+        checked={props.checked}
+        readOnly={props.readOnly}
+      />
       <span className={spanClasses.join(" ")}></span>
       {props.text}
     </label>
@@ -25,6 +30,12 @@ AdminCheckbox.propTypes = {
   blue: PropTypes.bool,
   border: PropTypes.bool,
   text: PropTypes.string,
+  checked: PropTypes.bool,
+  readOnly: PropTypes.bool,
+};
+
+AdminCheckbox.defaultProps = {
+  checked: false,
 };
 
 export default AdminCheckbox;

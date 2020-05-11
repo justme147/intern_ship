@@ -1,15 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function CarCard() {
+function CarCard(props) {
   return (
     <div className="body-main__card">
       <div className="body-main__info">
         <img
-          src="/images/orderpage/cars/i30 N.jpg"
-          alt=""
+          src={`http://api-factory.simbirsoft1.com${props.car.thumbnail.path}`}
+          alt={props.car.name}
           className="body-main__image"
         />
-        <h3 className="body-main__model">Hyndai, i30 N</h3>
+        <h3 className="body-main__model">{props.car.name}</h3>
         <p className="body-main__type">Компакт-кар</p>
         <label className="body-main__file">
           <input type="file" />
@@ -29,11 +30,17 @@ export default function CarCard() {
       <div className="body-main__description">
         <h4 className="body-main__label body-main__label--bold">Описание</h4>
         <p className="body-main__text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque,
-          quidem, commodi soluta qui quae quod dolorum sint alias, possimus
-          illum assumenda eligendi cumque?
+          {props.car.description === "" || !props.car.description
+            ? "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimusillum assumenda eligendi cumque?"
+            : props.car.description}
         </p>
       </div>
     </div>
   );
 }
+
+CarCard.propTypes = {
+  car: PropTypes.object,
+};
+
+export default CarCard;

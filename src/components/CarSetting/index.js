@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import AdminCheckbox from "../AdminCheckbox";
 
-export default function CarSetting() {
-  const [colors, setColors] = useState([
-    { id: 1, color: "Красный" },
-    { id: 2, color: "Белый" },
-    { id: 3, color: "Черный" },
-  ]);
+function CarSetting(props) {
+  const [model, setModel] = useState("");
+  const [type, setType] = useState("");
+  const [colors, setColors] = useState([]);
+  useEffect(() => {
+    setModel(props.car.name);
+    setType("Компакт-кар");
+    setColors(props.car.colors);
+  }, []);
   return (
     <div className="body-main__settings">
       <h2 className="body-main__subtitle">Настройки автомобиля</h2>
@@ -16,18 +20,22 @@ export default function CarSetting() {
           Модель автомобиля
           <input
             type="text"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
             className="body-main__input"
             placeholder="Введите модель автомобиля"
           />
         </label>
-        <label className="body-main__group body-main__group--red">
+        <label className="body-main__group">
           Тип автомобиля
           <input
             type="text"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
             className="body-main__input"
             placeholder="Введите тип автомобиля"
           />
-          <span className="body-main__error">Пример ошибки</span>
+          {/* <span className="body-main__error">Пример ошибки</span> */}
         </label>
       </div>
       <div className="body-main__wrap body-main__wrap--end">
@@ -46,7 +54,7 @@ export default function CarSetting() {
 
       <div className="body-main__checkbox-group body-main__checkbox-group--margin">
         {colors.map((item) => {
-          return <AdminCheckbox text={item.color} key={item.id} blue />;
+          return <AdminCheckbox text={item} key={item} blue checked />;
         })}
       </div>
 
@@ -68,3 +76,9 @@ export default function CarSetting() {
     </div>
   );
 }
+
+CarSetting.propTypes = {
+  car: PropTypes.object,
+};
+
+export default CarSetting;

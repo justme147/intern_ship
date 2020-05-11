@@ -1,7 +1,7 @@
 .form-section {
   &__container {
     @include styletext(14px, $main_black, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     margin-top: 32px;
     display: inline-block;
     text-align: right;
@@ -18,9 +18,6 @@
     &:first-child {
       margin-top: 0;
     }
-  }
-
-  &__label {
   }
 
   &__input {
@@ -74,7 +71,7 @@
 
   &__item {
     @include styletext(14px, $dark_gray, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     padding: 6px 0 6px 8px;
     cursor: pointer;
 
@@ -93,7 +90,7 @@
     position: absolute;
     right: 0;
     @include styletext(12px, $dark_gray, 14px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     text-align: left;
     background-color: $white;
     padding: 4px 0 4px 8px;
@@ -107,13 +104,13 @@
   &-content {
     &__title {
       @include styletext(16px, $main_black, 18px);
-      font-family: "RobotoMd";
+      font-family: "RobotoMd", Arial, sans-serif;
       margin-top: 5px;
     }
 
     &__text {
       @include styletext(14px, $admin_subtitle, 16px);
-      font-family: "RobotoL";
+      font-family: "RobotoL", Arial, sans-serif;
       margin-top: 5px;
     }
   }
@@ -130,7 +127,7 @@
     display: flex;
     // position: relative;
     @include styletext(14px, $dark_gray, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     margin-left: 16px;
     // padding-left: 20px;
     cursor: pointer;
@@ -179,7 +176,7 @@
     padding-left: 20px;
     margin-top: 8px;
     @include styletext(14px, $dark_gray, 16px);
-    font-family: "RobotoL";
+    font-family: "RobotoL", Arial, sans-serif;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -188,7 +185,7 @@
 
     &--color {
       @include styletext(10px, $admin_subtitle, 12px);
-      font-family: "RobotoRg";
+      font-family: "RobotoRg", Arial, sans-serif;
 
       &:first-child {
         margin-top: 0;
@@ -406,7 +403,7 @@
 
       &__subtitle {
         @include styletext(14px, $main_black, 16px);
-        font-family: "RobotoL";
+        font-family: "RobotoL", Arial, sans-serif;
       }
 
       &__chart {
@@ -441,7 +438,7 @@
         display: flex;
         margin-left: 16px;
         @include styletext(14px, $dark_gray, 16px);
-        font-family: "RobotoL";
+        font-family: "RobotoL", Arial, sans-serif;
         cursor: pointer;
 
         &:first-child {
@@ -514,7 +511,7 @@
 
       &__subtitle {
         @include styletext(14px, $main_black, 16px);
-        font-family: "RobotoL";
+        font-family: "RobotoL", Arial, sans-serif;
         margin-top: 32px;
       }
 
@@ -555,20 +552,20 @@
 
       &__fuel {
         @include styletext(14px, $main_black, 16px);
-        font-family: "RobotoL";
+        font-family: "RobotoL", Arial, sans-serif;
         span {
           font-weight: bold;
-          font-family: "Roboto";
+          font-family: "Roboto", Arial, sans-serif;
         }
         margin-top: 8px;
       }
 
       &__since {
         @include styletext(14px, $main_black, 16px);
-        font-family: "RobotoL";
+        font-family: "RobotoL", Arial, sans-serif;
         span {
           font-weight: bold;
-          font-family: "Roboto";
+          font-family: "Roboto", Arial, sans-serif;
         }
         margin-top: 8px;
       }
@@ -587,7 +584,7 @@
 
       &__title {
         @include styletext(18px, $main_black, 21px);
-        font-family: "RobotoMd";
+        font-family: "RobotoMd", Arial, sans-serif;
         text-align: right;
         margin-bottom: 26px;
       }
@@ -597,11 +594,8 @@
         justify-content: space-between;
         align-items: flex-end;
         @include styletext(14px, $main_black, 16px);
-        font-family: "RobotoL";
+        font-family: "RobotoL", Arial, sans-serif;
         margin-top: 16px;
-      }
-
-      &__subtitle {
       }
 
       &__text {
@@ -612,11 +606,11 @@
 
       &__price {
         @include styletext(16px, $main_black, 16px);
-        font-family: "RobotoMd";
+        font-family: "RobotoMd", Arial, sans-serif;
         margin-top: 32px;
 
         span {
-          font-family: "Roboto";
+          font-family: "Roboto", Arial, sans-serif;
           font-weight: bold;
         }
       }

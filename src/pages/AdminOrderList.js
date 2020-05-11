@@ -7,12 +7,6 @@ import OrderList from "../components/OrderList";
 import { fetchData } from "../assets/scripts/fetchdata";
 
 export default function AdminOrderList() {
-  const [options, setOptions] = useState([
-    { id: 1, text: "Полный бак" },
-    { id: 2, text: "Детское кресло" },
-    { id: 3, text: "Правый руль" },
-  ]);
-
   const [timeList, setTimeList] = useState([
     { id: 1, value: "year", title: "За год" },
     { id: 2, value: "month", title: "За месяц" },
@@ -49,9 +43,14 @@ export default function AdminOrderList() {
       const orders = await fetchData(
         "order",
         JSON.parse(localStorage.getItem("api_token")),
-        "?page=2&limit=5"
+        "?page=0&limit=5"
       );
+      // const some = await fetchData(
+      //   "orderStatus",
+      //   JSON.parse(localStorage.getItem("api_token"))
+      // );
       console.log(orders);
+      // console.log(some);
 
       setCitiesList(citiesList);
       setCarsList(carsList);

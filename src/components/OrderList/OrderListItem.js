@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import AdminCheckbox from "../../components/AdminCheckbox";
+
 function OrderListItem(props) {
+  const [options, setOptions] = useState([
+    { id: 1, text: "Полный бак", checked: props.order.isFullTank },
+    { id: 2, text: "Детское кресло", checked: props.order.isNeedChildChair },
+    { id: 3, text: "Правый руль", checked: props.order.isRightWheel },
+  ]);
   return (
     <div className="body-main__item">
       <div className="body-main__car">
@@ -17,7 +24,7 @@ function OrderListItem(props) {
             {props.order.pointId.address}
           </p>
           <p className="body-main__text body-main__text--light">
-            12.06.2019 12:00 — 13.06.2019 12:00
+            {new Date(props.dateFrom) + " - " + new Date(props.dateTo)}
           </p>
           <p className="body-main__text body-main__text--light">
             Цвет: <font>{props.order.color}</font>
@@ -25,9 +32,17 @@ function OrderListItem(props) {
         </div>
       </div>
       <div className="body-main__checkbox-group">
-        {/* {options.map((item) => {
-          return <AdminCheckbox text={item.text} key={item.id} border />;
-        })} */}
+        {options.map((item) => {
+          return (
+            <AdminCheckbox
+              text={item.text}
+              key={item.id}
+              border
+              checked={item.checked}
+              readOnly
+            />
+          );
+        })}
       </div>
       <div className="body-main__price">{props.order.price} ₽</div>
       <div className="body-main__btn-group">

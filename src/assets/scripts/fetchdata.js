@@ -14,12 +14,15 @@ export async function authLogin() {
       username: "intern",
       password: "intern-S!",
     };
-    const login = await fetch("//api-factory.simbirsoft1.com/api/auth/login", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body),
-      // referrerPolicy: "unsafe-url",
-    });
+    const login = await fetch(
+      "http://api-factory.simbirsoft1.com/api/auth/login",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+        referrerPolicy: "unsafe-url",
+      }
+    );
 
     const bearer = await login.json();
 
@@ -39,11 +42,11 @@ export async function fetchData(table, bearer, query = "") {
     };
 
     const response = await fetch(
-      `//api-factory.simbirsoft1.com/api/db/${table}${query}`,
+      `http://api-factory.simbirsoft1.com/api/db/${table}${query}`,
       {
         method: "GET",
         headers: headersBearer,
-        // referrerPolicy: "unsafe-url",
+        referrerPolicy: "unsafe-url",
       }
     );
 

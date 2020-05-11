@@ -18,7 +18,7 @@ export async function authLogin() {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),
-      referrerPolicy: "unsafe-url",
+      // referrerPolicy: "unsafe-url",
     });
 
     const bearer = await login.json();
@@ -43,7 +43,7 @@ export async function fetchData(table, bearer, query = "") {
       {
         method: "GET",
         headers: headersBearer,
-        referrerPolicy: "unsafe-url",
+        // referrerPolicy: "unsafe-url",
       }
     );
 

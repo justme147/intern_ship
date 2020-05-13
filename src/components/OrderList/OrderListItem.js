@@ -24,7 +24,15 @@ function OrderListItem(props) {
             {props.order.pointId.address}
           </p>
           <p className="body-main__text body-main__text--light">
-            {new Date(props.dateFrom) + " - " + new Date(props.dateTo)}
+            {new Date(props.order.dateFrom)
+              .toLocaleString()
+              .replace(",", "")
+              .slice(0, -3) +
+              " - " +
+              new Date(props.order.dateTo)
+                .toLocaleString()
+                .replace(",", "")
+                .slice(0, -3)}
           </p>
           <p className="body-main__text body-main__text--light">
             Цвет: <font>{props.order.color}</font>

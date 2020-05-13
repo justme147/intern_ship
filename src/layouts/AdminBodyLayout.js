@@ -14,7 +14,7 @@ function AdminBodyLayout(props) {
 
 AdminBodyLayout.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.object,
+  children: PropTypes.array,
 };
 
 export default AdminBodyLayout;

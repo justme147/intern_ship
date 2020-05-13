@@ -9,8 +9,10 @@ import menuIcon5 from "../../../assets/images/adminpanel/menu_item_5.svg";
 import menuIcon6 from "../../../assets/images/adminpanel/menu_item_6.svg";
 import menuIcon7 from "../../../assets/images/adminpanel/menu_item_7.svg";
 import imgToSvg from "../../../assets/scripts/svgHover";
+import { useHistory } from "react-router-dom";
 
 export default function NavbarMenu() {
+  const history = useHistory();
   const [menuItem, setMenuItem] = useState([
     {
       id: 1,
@@ -28,6 +30,15 @@ export default function NavbarMenu() {
 
   useEffect(() => {
     imgToSvg(".sidebar__icon");
+    console.log(history);
+    menuItem.map((item) => {
+      if (
+        history.location.pathname.indexOf(item.url) !== -1 &&
+        item.url !== ""
+      ) {
+        setActive(item.id);
+      }
+    });
   }, []);
 
   const [active, setActive] = useState();

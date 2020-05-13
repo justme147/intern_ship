@@ -1,24 +1,83 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import _ from "lodash";
 
+import Select from "../components/Select";
 import AdminBodyLayout from "../layouts/AdminBodyLayout";
 import { fetchData } from "../assets/scripts/fetchdata";
 
 function AdminCarList(props) {
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    pageSize: 7,
+    pageCount: 0,
+    currentPage: 1,
+  });
+
+  const [markList, setMarkList] = useState([
+    { id: 1, title: "Марка", disable: true },
+  ]);
+  const [valueMark, setValueMark] = useState("1");
+
+  const [modelList, setModelList] = useState([
+    { id: 1, title: "Модель", disable: true },
+  ]);
+  const [valueModel, setValueModel] = useState("1");
+
+  const [categoryList, setCategoryList] = useState([
+    { id: 1, title: "Категория", disable: true },
+  ]);
+  const [valueCategory, setValueCategory] = useState("1");
+
   const [carList, setCarList] = useState([]);
+
   const [filter, setFilter] = useState({ isIncrease: true, category: "name" });
+
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function fetchCars() {
       const car = await fetchData(
         "car",
         JSON.parse(localStorage.getItem("api_token")),
-        "?sort[name]=1&page=0&limit=7"
+        "?sort[name]=1"
       );
-      console.log(car);
-      setCarList(car);
+
+      const marks = Array.from(
+        new Set(car.map((item) => item.name.split(", ")[0]))
+      );
+      const newMarks = marks.map((item, idx) => ({ id: idx + 2, title: item }));
+
+      const models = Array.from(
+        new Set(
+          car.map((item) => ({ id: item.id, title: item.name.split(", ")[1] }))
+        )
+      );
+
+      const categories = await fetchData(
+        "category",
+        localStorage.getItem("api_token")
+      );
+
+      const newCategories = categories.map((item) => ({
+        id: item.id,
+        title: item.name,
+      }));
+
+      const allItems = _.chunk(car, pagination.pageSize);
+      console.log(allItems);
+      const pageCount = _.size(allItems);
+      console.log(pageCount);
+
+      setPagination({ ...pagination, pageCount });
+
+      setMarkList(markList.concat(newMarks));
+      setModelList(modelList.concat(models));
+      setCategoryList(categoryList.concat(newCategories));
+      setLoading(false);
+      // setCarList(car);
     }
     fetchCars();
   }, []);
@@ -45,103 +104,187 @@ function AdminCarList(props) {
         JSON.parse(localStorage.getItem("api_token")),
         `?sort[${filter.category}]=${
           filter.isIncrease ? "1" : "-1"
-        }&page=0&limit=7`
+        }${query}&page=${pagination.currentPage - 1}&limit=7`
       );
       setCarList(car);
     }
     sortCar();
   }, [filter]);
+
+  async function handleClickResetButton() {
+    setValueMark("1");
+    setValueModel("1");
+    setValueCategory("1");
+    // setValueStatus("1");
+
+    const car = await fetchData(
+      "car",
+      JSON.parse(localStorage.getItem("api_token")),
+      "?sort[name]=1&page=0&limit=7"
+    );
+
+    setQuery("");
+    setCarList(car);
+    setFilter({ isIncrease: true, category: "name" });
+  }
+
+  async function handleClickApplyButton() {
+    const markItem = markList.filter((item) => item.id === +valueMark);
+    const modelItem = modelList.filter((item) => item.id === valueModel);
+    const name = `${valueMark !== "1" ? `${markItem[0].title}, ` : ""}${
+      valueModel !== "1" ? `${modelItem[0].title}` : ""
+    }`;
+
+    const query = `${name !== "" ? `&name=${name}` : ""}${
+      valueCategory !== "1" ? `&categoryId[id]=${valueCategory}` : ""
+    }`;
+
+    const car = await fetchData(
+      "car",
+      JSON.parse(localStorage.getItem("api_token")),
+      `?sort[name]=1${query}&page=0&limit=7`
+    );
+
+    setCarList(car);
+    setQuery(query);
+  }
+
+  function paginatePages() {
+    const pages = [];
+    for (let i = 1; i <= pagination.pageCount; i++) {
+      pages.push(i);
+    }
+
+    return (
+      <>
+        <span onClick={() => pageChangeHandler(pagination.currentPage - 1)}>
+          назад
+        </span>
+        {pages.map((item) => (
+          <span key={item} onClick={() => pageChangeHandler(item)}>
+            {item}
+          </span>
+        ))}
+        <span onClick={() => pageChangeHandler(pagination.currentPage + 1)}>
+          вперед
+        </span>
+      </>
+    );
+  }
+
+  async function pageChangeHandler(page) {
+    if (
+      +page < 1 ||
+      +page > pagination.pageCount ||
+      +page === pagination.currentPage
+    )
+      return;
+    setPagination({ ...pagination, currentPage: +page });
+
+    const car = await fetchData(
+      "car",
+      JSON.parse(localStorage.getItem("api_token")),
+      `?sort[name]=1&page=${+page - 1}&limit=7`
+    );
+    console.log(car);
+    setCarList(car);
+  }
+
   return (
     <AdminBodyLayout title="Список авто">
-      <div className="body-main__order">
-        <div className="body-main__header">
-          <div className="body-main__options">
-            <div className="body-main__select-wrapper">
-              <div className="body-main__arrows"></div>
-              <select name="" id="" className="body-main__select">
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-              </select>
+      {loading && <p>Загрузка...</p>}
+      {!loading && (
+        <div className="body-main__order">
+          <div className="body-main__header">
+            <div className="body-main__options">
+              <Select
+                list={markList}
+                value={valueMark}
+                handleChangeValue={(e) => setValueMark(e.target.value)}
+              />
+              <Select
+                list={modelList}
+                value={valueModel}
+                handleChangeValue={(e) => setValueModel(e.target.value)}
+              />
+              <Select
+                list={categoryList}
+                value={valueCategory}
+                handleChangeValue={(e) => setValueCategory(e.target.value)}
+              />
+              <div className="body-main__select-wrapper">
+                <div className="body-main__arrows"></div>
+                <select name="" id="" className="body-main__select">
+                  <option value="">Field</option>
+                  <option value="">Field</option>
+                  <option value="">Field</option>
+                  <option value="">Field</option>
+                </select>
+              </div>
             </div>
-            <div className="body-main__select-wrapper">
-              <div className="body-main__arrows"></div>
-              <select name="" id="" className="body-main__select">
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-              </select>
-            </div>
-            <div className="body-main__select-wrapper">
-              <div className="body-main__arrows"></div>
-              <select name="" id="" className="body-main__select">
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-              </select>
-            </div>
-            <div className="body-main__select-wrapper">
-              <div className="body-main__arrows"></div>
-              <select name="" id="" className="body-main__select">
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-                <option value="">Field</option>
-              </select>
+            <div className="body-main__options">
+              <button
+                className="body-main__button body-main__button--red body-main__button--width"
+                onClick={() => handleClickResetButton()}
+              >
+                Сбросить
+              </button>
+              <button
+                className="body-main__button body-main__button--blue body-main__button--width body-main__button--marginL"
+                onClick={() => handleClickApplyButton()}
+              >
+                Применить
+              </button>
             </div>
           </div>
-          <div className="body-main__options">
-            <button className="body-main__button body-main__button--red body-main__button--width">
-              Reset
-            </button>
-            <button className="body-main__button body-main__button--blue body-main__button--width body-main__button--marginL">
-              Apply
-            </button>
-          </div>
-        </div>
-        <div className="body-main__list body-main__list--padding">
-          <table className="body-main__table">
-            <thead>
-              <tr>
-                <th onClick={(e) => filterTable(e)} data-filter="name">
-                  Марка
-                </th>
-                <th onClick={(e) => filterTable(e)} data-filter="name">
-                  Модель
-                </th>
-                <th onClick={(e) => filterTable(e)} data-filter="categoryId">
-                  Категория
-                </th>
-                <th onClick={(e) => filterTable(e)} data-filter="priceMin">
-                  Цена от
-                </th>
-                <th onClick={(e) => filterTable(e)} data-filter="priceMax">
-                  Цена до
-                </th>
-                {/* <th>Header</th> */}
-                {/* <th>Header</th> */}
-              </tr>
-            </thead>
-            <tbody>
-              {carList.map((item) => {
-                return (
-                  <tr key={item.id} onClick={() => handleItemClick(item)}>
-                    <td>{item.name.split(", ")[0]}</td>
-                    <td>{item.name.split(", ")[1]}</td>
-                    <td>{item.categoryId.name}</td>
-                    <td>{item.priceMin}</td>
-                    <td>{item.priceMax}</td>
+          <div className="body-main__list body-main__list--padding">
+            <table className="body-main__table">
+              <thead>
+                <tr>
+                  <th onClick={(e) => filterTable(e)} data-filter="name">
+                    Марка
+                  </th>
+                  <th onClick={(e) => filterTable(e)} data-filter="name">
+                    Модель
+                  </th>
+                  <th onClick={(e) => filterTable(e)} data-filter="categoryId">
+                    Категория
+                  </th>
+                  <th onClick={(e) => filterTable(e)} data-filter="priceMin">
+                    Цена от
+                  </th>
+                  <th onClick={(e) => filterTable(e)} data-filter="priceMax">
+                    Цена до
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {carList.length ? (
+                  carList.map((item) => {
+                    return (
+                      <tr key={item.id} onClick={() => handleItemClick(item)}>
+                        <td>{item.name.split(", ")[0]}</td>
+                        <td>{item.name.split(", ")[1]}</td>
+                        <td>{item.categoryId.name}</td>
+                        <td>{item.priceMin}</td>
+                        <td>{item.priceMax}</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr className="body-main__empty">
+                    <td colSpan="5">
+                      Записей по указанным фильтрам не найдено. Сбросьте фильтры
+                      и повторите попытку.
+                    </td>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                )}
+              </tbody>
+            </table>
+          </div>
+          <div className="body-main__footer">{paginatePages()}</div>
         </div>
-        <div className="body-main__footer"></div>
-      </div>
+      )}
     </AdminBodyLayout>
   );
 }

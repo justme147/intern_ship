@@ -21,7 +21,7 @@ function Model(props) {
           "category",
           localStorage.getItem("api_token")
         );
-        setMenu([...menu, ...response]);
+        setMenu(menu.concat(response));
         // console.log(response);
       } catch (e) {
         console.log(e);

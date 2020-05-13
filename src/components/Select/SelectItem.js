@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 
 function SelectItem({ item }) {
   return (
-    <option value={item.value ? item.value : item.id}>{item.title}</option>
+    <option value={item.id} disabled={item.disable}>
+      {item.title}
+    </option>
   );
 }
 
 SelectItem.propTypes = {
   item: PropTypes.object,
+  disable: PropTypes.bool,
 };
 
 export default SelectItem;

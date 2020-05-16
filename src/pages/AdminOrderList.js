@@ -5,11 +5,15 @@ import Select from "../components/Select";
 import AdminBodyLayout from "../layouts/AdminBodyLayout";
 import AdminCheckbox from "../components/AdminCheckbox";
 import OrderList from "../components/OrderList";
-import { fetchData } from "../assets/scripts/fetchdata";
+import { fetchData, putData } from "../assets/scripts/fetchdata";
 
 export default function AdminOrderList() {
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState({
+    title: "",
+    correct: true,
+  });
   const [pagination, setPagination] = useState({
     pageSize: 5,
     pageCount: 0,
@@ -79,7 +83,7 @@ export default function AdminOrderList() {
       //   "orderStatus",
       //   JSON.parse(localStorage.getItem("api_token"))
       // );
-      console.log(orders);
+      console.log(orders.data);
       const pageCount = Math.ceil(orders.count / pagination.pageSize);
       setPagination({ ...pagination, pageCount });
       // console.log(some);
@@ -228,19 +232,57 @@ export default function AdminOrderList() {
     setOrderList(orders.data);
   }
 
-  function handleAlertChange() {
+  async function handleAlertChange(id, status, currentStatus) {
     setAlert(true);
+    // setTimeout(() => {
+    //   setAlert(false);
+    // }, 5000);
+    if (status === currentStatus.name) {
+      setAlertMessage({
+        title:
+          "Неудача! Текущий статус совпадает с тем на который вы хотите изменить",
+        correct: false,
+      });
+      return;
+    } else {
+      setAlertMessage({ title: "Успех! Статус заказа изменен", correct: true });
+    }
 
-    setTimeout(() => {
-      setAlert(false);
-    }, 2000);
+    const orderStatus = await fetchData(
+      "orderStatus",
+      JSON.parse(localStorage.getItem("api_token")),
+      `?name=${status}`
+    );
+
+    const updateOrder = {
+      orderStatusId: orderStatus.data[0],
+    };
+
+    const putOrderStatus = await putData(
+      "order",
+      JSON.parse(localStorage.getItem("api_token")),
+      id,
+      updateOrder
+    );
+
+    const updateOrderList = orderList.map((item) => {
+      if (item.id === putOrderStatus.id) {
+        // console.log(item);
+        return putOrderStatus;
+      }
+      return item;
+    });
+
+    setOrderList(updateOrderList);
   }
 
   return (
     <AdminBodyLayout
       title="Заказы"
-      alert="Успех! Статус заказа изменен"
+      alert={alertMessage.title}
+      isCorrect={alertMessage.correct}
       isShow={alert}
+      closeHandler={() => setAlert(false)}
     >
       {loading && <Loader />}
       {!loading && (

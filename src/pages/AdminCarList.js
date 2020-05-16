@@ -39,7 +39,7 @@ function AdminCarList(props) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    console.log(history);
+    // console.log(history);
     async function fetchCars() {
       const car = await fetchData(
         "car",
@@ -97,7 +97,7 @@ function AdminCarList(props) {
   function handleItemClick(car) {
     props.handleCarClick(car);
     history.push("/admin/car-setting");
-    console.log(car);
+    // console.log(car);
   }
 
   useEffect(() => {

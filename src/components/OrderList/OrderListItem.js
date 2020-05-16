@@ -66,14 +66,26 @@ function OrderListItem(props) {
       <div className="body-main__btn-group">
         <button
           className="body-main__action body-main__action--accept"
-          onClick={props.changeAlert}
+          onClick={() =>
+            props.changeAlert(
+              props.order.id,
+              "confirmed",
+              props.order.orderStatusId
+            )
+          }
         >
           <img src={props.approveIcon} alt="accept_icon" />
           Готово
         </button>
         <button
           className="body-main__action body-main__action--decline"
-          onClick={props.changeAlert}
+          onClick={() =>
+            props.changeAlert(
+              props.order.id,
+              "cancelled",
+              props.order.orderStatusId
+            )
+          }
         >
           <img src={props.rejectIcon} alt="decline_icon" />
           Отмена

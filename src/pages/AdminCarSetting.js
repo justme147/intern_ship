@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 function AdminCarSetting(props) {
   return (
     <AdminBodyLayout title="Карточка автомобиля">
-      {props.car ? (
+      {props.car && (
         <div className="body-main__wrap">
           <CarCard car={props.car} />
           <CarSetting car={props.car} />
         </div>
-      ) : (
+      )}
+      {!props.car && (
         <p>
           Машина не выбранна, нажмите <Link to="/admin/car-list">здесь</Link>{" "}
           для выбора

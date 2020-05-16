@@ -12,8 +12,19 @@ function CarSetting({ car }) {
   function addNewColor() {
     if (newColor === "") {
     }
-    setColors(colors.concat(newColor));
+    setColors(colors.concat(newColor[0].toLowerCase() + newColor.slice(1)));
     setNewColor("");
+  }
+
+  function saveCarHandler() {
+    console.log("save");
+  }
+
+  function resetCarHandler() {
+    console.log("reset");
+    setModel(car.name);
+    setType("Компакт-кар");
+    setColors(car.colors);
   }
 
   return (
@@ -52,7 +63,7 @@ function CarSetting({ car }) {
             className="body-main__input"
             placeholder="Введите цвет автомобиля"
           />
-          <span className="body-main__error">Пример ошибки</span>
+          {/* <span className="body-main__error">Пример ошибки</span> */}
         </label>
         <button className="body-main__create" onClick={addNewColor}>
           <span></span>
@@ -61,16 +72,22 @@ function CarSetting({ car }) {
 
       <div className="body-main__checkbox-group body-main__checkbox-group--margin">
         {colors.map((item) => {
-          return <AdminCheckbox text={item} key={item} blue checked />;
+          return <AdminCheckbox text={item} key={item} blue checked readOnly />;
         })}
       </div>
 
       <div className="body-main__wrap body-main__wrap--between">
         <div className="body-main__edit">
-          <button className="body-main__button body-main__button--blue">
+          <button
+            className="body-main__button body-main__button--blue"
+            onClick={saveCarHandler}
+          >
             Сохранить
           </button>
-          <button className="body-main__button body-main__button--gray">
+          <button
+            className="body-main__button body-main__button--gray"
+            onClick={resetCarHandler}
+          >
             Отменить
           </button>
         </div>

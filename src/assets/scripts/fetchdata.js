@@ -111,6 +111,32 @@ export async function postData(table, bearer, body) {
   }
 }
 
+export async function putData(table, bearer, id, body) {
+  try {
+    const appId = process.env.REACT_APP_APPLICATION_ID;
+    const headersBearer = {
+      "Content-Type": "application/json",
+      "X-Api-Factory-Application-Id": appId,
+      Authorization: `Bearer ${bearer.access_token}`,
+    };
+
+    const response = await fetch(
+      `http://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
+      {
+        method: "PUT",
+        headers: headersBearer,
+        body: JSON.stringify(body),
+      }
+    );
+
+    const json = await response.json();
+
+    return json.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function deleteData(table, bearer, id) {
   try {
     const appId = process.env.REACT_APP_APPLICATION_ID;

@@ -3,15 +3,19 @@ import PropTypes from "prop-types";
 
 import AdminCheckbox from "../AdminCheckbox";
 
-function CarSetting(props) {
-  const [model, setModel] = useState("");
-  const [type, setType] = useState("");
-  const [colors, setColors] = useState([]);
-  useEffect(() => {
-    setModel(props.car.name);
-    setType("Компакт-кар");
-    setColors(props.car.colors);
-  }, []);
+function CarSetting({ car }) {
+  const [model, setModel] = useState(car.name);
+  const [type, setType] = useState("Компакт-кар");
+  const [colors, setColors] = useState(car.colors);
+  const [newColor, setNewColor] = useState("");
+
+  function addNewColor() {
+    if (newColor === "") {
+    }
+    setColors(colors.concat(newColor));
+    setNewColor("");
+  }
+
   return (
     <div className="body-main__settings">
       <h2 className="body-main__subtitle">Настройки автомобиля</h2>
@@ -43,11 +47,14 @@ function CarSetting(props) {
           Доступные цвета
           <input
             type="text"
+            value={newColor}
+            onChange={(e) => setNewColor(e.target.value)}
             className="body-main__input"
             placeholder="Введите цвет автомобиля"
           />
+          <span className="body-main__error">Пример ошибки</span>
         </label>
-        <button className="body-main__create">
+        <button className="body-main__create" onClick={addNewColor}>
           <span></span>
         </button>
       </div>

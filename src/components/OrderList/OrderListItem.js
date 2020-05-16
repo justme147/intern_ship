@@ -9,8 +9,18 @@ function OrderListItem(props) {
     { id: 2, text: "Детское кресло", checked: props.order.isNeedChildChair },
     { id: 3, text: "Правый руль", checked: props.order.isRightWheel },
   ]);
+
+  const itemClasses = ["body-main__item"];
+
+  if (props.order.orderStatusId.name === "new") {
+    itemClasses.push("body-main__item--blue");
+  } else if (props.order.orderStatusId.name === "cancelled") {
+    itemClasses.push("body-main__item--red");
+  } else if (props.order.orderStatusId.name === "confirmed") {
+    itemClasses.push("body-main__item--green");
+  }
   return (
-    <div className="body-main__item">
+    <div className={itemClasses.join(" ")}>
       <div className="body-main__car">
         <img
           src={`http://api-factory.simbirsoft1.com${props.order.carId.thumbnail.path}`}
@@ -54,11 +64,17 @@ function OrderListItem(props) {
       </div>
       <div className="body-main__price">{props.order.price} ₽</div>
       <div className="body-main__btn-group">
-        <button className="body-main__action body-main__action--accept">
+        <button
+          className="body-main__action body-main__action--accept"
+          onClick={props.changeAlert}
+        >
           <img src={props.approveIcon} alt="accept_icon" />
           Готово
         </button>
-        <button className="body-main__action body-main__action--decline">
+        <button
+          className="body-main__action body-main__action--decline"
+          onClick={props.changeAlert}
+        >
           <img src={props.rejectIcon} alt="decline_icon" />
           Отмена
         </button>
@@ -76,6 +92,7 @@ OrderListItem.propTypes = {
   approveIcon: PropTypes.string,
   rejectIcon: PropTypes.string,
   editIcon: PropTypes.string,
+  changeAlert: PropTypes.func,
 };
 
 export default OrderListItem;

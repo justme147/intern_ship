@@ -50,7 +50,11 @@ export async function fetchData(table, bearer, query = "") {
 
     const json = await response.json();
 
-    return json.data;
+    if (query === "") {
+      return json.data;
+    } else {
+      return json;
+    }
   } catch (e) {
     console.log(e);
   }

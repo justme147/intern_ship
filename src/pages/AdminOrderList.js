@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import Loader from "../components/Loader";
 import Select from "../components/Select";
 import AdminBodyLayout from "../layouts/AdminBodyLayout";
 import AdminCheckbox from "../components/AdminCheckbox";
@@ -8,6 +9,12 @@ import { fetchData } from "../assets/scripts/fetchdata";
 
 export default function AdminOrderList() {
   const [loading, setLoading] = useState(true);
+  const [alert, setAlert] = useState(false);
+  const [pagination, setPagination] = useState({
+    pageSize: 5,
+    pageCount: 0,
+    currentPage: 1,
+  });
 
   const [timeList, setTimeList] = useState([
     { id: 1, title: "Период", disable: true },
@@ -38,6 +45,8 @@ export default function AdminOrderList() {
 
   const [orderList, setOrderList] = useState([]);
 
+  const [query, setQuery] = useState("");
+
   useEffect(() => {
     async function fetchOptions() {
       const cities = await fetchData(
@@ -62,18 +71,22 @@ export default function AdminOrderList() {
       const orders = await fetchData(
         "order",
         JSON.parse(localStorage.getItem("api_token")),
-        "?sort[createdAt]=-1&page=0&limit=5"
+        `?sort[createdAt]=-1&page=${pagination.currentPage - 1}&limit=${
+          pagination.pageSize
+        }`
       );
       // const some = await fetchData(
       //   "orderStatus",
       //   JSON.parse(localStorage.getItem("api_token"))
       // );
       console.log(orders);
+      const pageCount = Math.ceil(orders.count / pagination.pageSize);
+      setPagination({ ...pagination, pageCount });
       // console.log(some);
 
       setCitiesList(citiesList.concat(newCitiesList));
       setCarsList(carsList.concat(newCarsList));
-      setOrderList(orders);
+      setOrderList(orders.data);
       setLoading(false);
     }
     fetchOptions();
@@ -91,7 +104,10 @@ export default function AdminOrderList() {
       "?sort[createdAt]=-1&page=0&limit=5"
     );
 
-    setOrderList(orders);
+    const pageCount = Math.ceil(orders.count / pagination.pageSize);
+
+    setOrderList(orders.data);
+    setPagination({ ...pagination, currentPage: 1, pageCount });
   }
 
   async function handleClickApplyButton() {
@@ -126,25 +142,107 @@ export default function AdminOrderList() {
       queryStatus = `&dateTo[$lt]=${dateNow.getTime()}`;
     }
 
+    const query = `${
+      valueTime !== "1"
+        ? `&createdAt[$gt]=${dateFrom.getTime()}&createdAt[$lt]=${dateNow.getTime()}`
+        : ""
+    }${valueCars !== "1" ? `&carId[id]=${valueCars}` : ""}${
+      valueCities !== "1" ? `&cityId[id]=${valueCities}` : ""
+    }${queryStatus}`;
+
     const orders = await fetchData(
       "order",
       JSON.parse(localStorage.getItem("api_token")),
-      `?sort[createdAt]=-1${
-        valueTime !== "1"
-          ? `&createdAt[$gt]=${dateFrom.getTime()}&createdAt[$lt]=${dateNow.getTime()}`
-          : ""
-      }${valueCars !== "1" ? `&carId[id]=${valueCars}` : ""}${
-        valueCities !== "1" ? `&cityId[id]=${valueCities}` : ""
-      }${queryStatus}&page=0&limit=5`
+      `?sort[createdAt]=-1${query}&page=0&limit=5`
     );
 
+    const pageCount = Math.ceil(orders.count / pagination.pageSize);
+
     // console.log(orders);
-    setOrderList(orders);
+    setQuery(query);
+    setOrderList(orders.data);
+    setPagination({ ...pagination, currentPage: 1, pageCount });
+  }
+
+  function paginatePages() {
+    const pages = [];
+    for (let i = 1; i <= pagination.pageCount; i++) {
+      if (i < pagination.currentPage - 1 || i > pagination.currentPage + 1) {
+        continue;
+      }
+      pages.push(i);
+    }
+
+    if (pages[0] > 2) {
+      pages.unshift("...");
+      pages.unshift(1);
+    } else if (pages[0] === 2) {
+      pages.unshift(1);
+    }
+
+    if (pages[pages.length - 1] < pagination.pageCount - 1) {
+      pages.push("...");
+      pages.push(pagination.pageCount);
+    } else if (pages[pages.length - 1] === pagination.pageCount - 1) {
+      pages.push(pagination.pageCount);
+    }
+
+    return (
+      <>
+        <span onClick={() => pageChangeHandler(pagination.currentPage - 1)}>
+          &#171;
+        </span>
+        {pages.map((item, idx) => (
+          <span
+            key={item + idx}
+            onClick={item !== "..." ? () => pageChangeHandler(item) : null}
+            className={item === pagination.currentPage ? "active" : ""}
+          >
+            {item}
+          </span>
+        ))}
+        <span onClick={() => pageChangeHandler(pagination.currentPage + 1)}>
+          &#187;
+        </span>
+      </>
+    );
+  }
+
+  async function pageChangeHandler(page) {
+    if (
+      +page < 1 ||
+      +page > pagination.pageCount ||
+      +page === pagination.currentPage
+    )
+      return;
+    setPagination({ ...pagination, currentPage: +page });
+
+    const orders = await fetchData(
+      "order",
+      JSON.parse(localStorage.getItem("api_token")),
+      `?sort[createdAt]=-1${query}&page=${+page - 1}&limit=${
+        pagination.pageSize
+      }`
+    );
+
+    setOrderList(orders.data);
+  }
+
+  function handleAlertChange() {
+    setAlert(true);
+
+    setTimeout(() => {
+      setAlert(false);
+    }, 2000);
   }
 
   return (
-    <AdminBodyLayout title="Заказы">
-      {loading && <p>Загрузка...</p>}
+    <AdminBodyLayout
+      title="Заказы"
+      alert="Успех! Статус заказа изменен"
+      isShow={alert}
+    >
+      {loading && <Loader />}
       {!loading && (
         <div className="body-main__order">
           <div className="body-main__header body-main__header--border">
@@ -189,7 +287,7 @@ export default function AdminOrderList() {
             </div>
           </div>
           {orderList.length ? (
-            <OrderList orders={orderList} />
+            <OrderList orders={orderList} changeAlert={handleAlertChange} />
           ) : (
             <p className="body-main__empty">
               Записей по указанным фильтрам не найдено. Сбросьте фильтры и
@@ -197,7 +295,9 @@ export default function AdminOrderList() {
             </p>
           )}
 
-          <div className="body-main__footer body-main__footer--border"></div>
+          <div className="body-main__footer body-main__footer--border">
+            {paginatePages()}
+          </div>
         </div>
       )}
     </AdminBodyLayout>

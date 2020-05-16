@@ -17,6 +17,7 @@ function OrderList(props) {
             approveIcon={approveIcon}
             rejectIcon={rejectIcon}
             editIcon={editIcon}
+            changeAlert={props.changeAlert}
           />
         );
       })}
@@ -26,6 +27,7 @@ function OrderList(props) {
 
 OrderList.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.object),
+  changeAlert: PropTypes.func,
 };
 
 export default OrderList;

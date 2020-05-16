@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
+import Loader from "../components/Loader";
 import Select from "../components/Select";
 import AdminBodyLayout from "../layouts/AdminBodyLayout";
 import { fetchData } from "../assets/scripts/fetchdata";
@@ -38,6 +39,7 @@ function AdminCarList(props) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
+    console.log(history);
     async function fetchCars() {
       const car = await fetchData(
         "car",
@@ -45,14 +47,19 @@ function AdminCarList(props) {
         "?sort[name]=1"
       );
 
+      // console.log(car);
+
       const marks = Array.from(
-        new Set(car.map((item) => item.name.split(", ")[0]))
+        new Set(car.data.map((item) => item.name.split(", ")[0]))
       );
       const newMarks = marks.map((item, idx) => ({ id: idx + 2, title: item }));
 
       const models = Array.from(
         new Set(
-          car.map((item) => ({ id: item.id, title: item.name.split(", ")[1] }))
+          car.data.map((item) => ({
+            id: item.id,
+            title: item.name.split(", ")[1],
+          }))
         )
       );
 
@@ -66,11 +73,7 @@ function AdminCarList(props) {
         title: item.name,
       }));
 
-      const allItems = _.chunk(car, pagination.pageSize);
-      console.log(allItems);
-      const pageCount = _.size(allItems);
-      console.log(pageCount);
-
+      const pageCount = Math.ceil(car.count / pagination.pageSize);
       setPagination({ ...pagination, pageCount });
 
       setMarkList(markList.concat(newMarks));
@@ -104,9 +107,11 @@ function AdminCarList(props) {
         JSON.parse(localStorage.getItem("api_token")),
         `?sort[${filter.category}]=${
           filter.isIncrease ? "1" : "-1"
-        }${query}&page=${pagination.currentPage - 1}&limit=7`
+        }${query}&page=${pagination.currentPage - 1}&limit=${
+          pagination.pageSize
+        }`
       );
-      setCarList(car);
+      setCarList(car.data);
     }
     sortCar();
   }, [filter]);
@@ -123,8 +128,11 @@ function AdminCarList(props) {
       "?sort[name]=1&page=0&limit=7"
     );
 
+    const pageCount = Math.ceil(car.count / pagination.pageSize);
+
     setQuery("");
-    setCarList(car);
+    setCarList(car.data);
+    setPagination({ ...pagination, currentPage: 1, pageCount });
     setFilter({ isIncrease: true, category: "name" });
   }
 
@@ -145,28 +153,53 @@ function AdminCarList(props) {
       `?sort[name]=1${query}&page=0&limit=7`
     );
 
-    setCarList(car);
+    // console.log(car);
+    const pageCount = Math.ceil(car.count / pagination.pageSize);
+
+    setCarList(car.data);
+    setPagination({ ...pagination, currentPage: 1, pageCount });
     setQuery(query);
   }
 
   function paginatePages() {
     const pages = [];
     for (let i = 1; i <= pagination.pageCount; i++) {
+      if (i < pagination.currentPage - 1 || i > pagination.currentPage + 1) {
+        continue;
+      }
       pages.push(i);
+    }
+
+    if (pages[0] > 2) {
+      pages.unshift("...");
+      pages.unshift(1);
+    } else if (pages[0] === 2) {
+      pages.unshift(1);
+    }
+
+    if (pages[pages.length - 1] < pagination.pageCount - 1) {
+      pages.push("...");
+      pages.push(pagination.pageCount);
+    } else if (pages[pages.length - 1] === pagination.pageCount - 1) {
+      pages.push(pagination.pageCount);
     }
 
     return (
       <>
         <span onClick={() => pageChangeHandler(pagination.currentPage - 1)}>
-          назад
+          &#171;
         </span>
-        {pages.map((item) => (
-          <span key={item} onClick={() => pageChangeHandler(item)}>
+        {pages.map((item, idx) => (
+          <span
+            key={item + idx}
+            onClick={item !== "..." ? () => pageChangeHandler(item) : null}
+            className={item === pagination.currentPage ? "active" : ""}
+          >
             {item}
           </span>
         ))}
         <span onClick={() => pageChangeHandler(pagination.currentPage + 1)}>
-          вперед
+          &#187;
         </span>
       </>
     );
@@ -184,15 +217,17 @@ function AdminCarList(props) {
     const car = await fetchData(
       "car",
       JSON.parse(localStorage.getItem("api_token")),
-      `?sort[name]=1&page=${+page - 1}&limit=7`
+      `?sort[${filter.category}]=${
+        filter.isIncrease ? "1" : "-1"
+      }${query}&page=${+page - 1}&limit=7`
     );
     console.log(car);
-    setCarList(car);
+    setCarList(car.data);
   }
 
   return (
     <AdminBodyLayout title="Список авто">
-      {loading && <p>Загрузка...</p>}
+      {loading && <Loader />}
       {!loading && (
         <div className="body-main__order">
           <div className="body-main__header">

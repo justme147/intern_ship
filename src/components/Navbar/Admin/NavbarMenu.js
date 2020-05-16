@@ -20,7 +20,12 @@ export default function NavbarMenu() {
       url: "/car-setting",
       img: menuIcon1,
     },
-    { id: 2, title: "Список авто", url: "/car-list", img: menuIcon2 },
+    {
+      id: 2,
+      title: "Список авто",
+      url: "/car-list",
+      img: menuIcon2,
+    },
     { id: 3, title: "Заказы", url: "/order-list", img: menuIcon3 },
     { id: 4, title: "Menu 4", url: "", img: menuIcon4 },
     { id: 5, title: "Menu 5", url: "", img: menuIcon5 },
@@ -30,7 +35,7 @@ export default function NavbarMenu() {
 
   useEffect(() => {
     imgToSvg(".sidebar__icon");
-    console.log(history);
+    // console.log(history);
     menuItem.map((item) => {
       if (
         history.location.pathname.indexOf(item.url) !== -1 &&

@@ -117,19 +117,6 @@ export default class App extends React.Component {
 
     localStorage.setItem("api_token", JSON.stringify(bearer));
 
-    // const deleteOrder = await deleteData(
-    //   "order",
-    //   JSON.parse(localStorage.getItem("api_token")),
-    //   "5eb5bb49099b810b946c8f0f"
-    // );
-    // console.log(deleteOrder);
-
-    // const orders = await fetchData(
-    //   "order",
-    //   JSON.parse(localStorage.getItem("api_token"))
-    // );
-    // console.log(orders);
-
     const city = await fetchData(
       "city",
       JSON.parse(localStorage.getItem("api_token"))

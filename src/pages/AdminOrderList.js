@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Loader from "../components/Loader";
 import Select from "../components/Select";
 import AdminBodyLayout from "../layouts/AdminBodyLayout";
-import AdminCheckbox from "../components/AdminCheckbox";
+import AdminCheckbox from "../components/Checkbox/AdminCheckbox";
 import OrderList from "../components/OrderList";
 import { fetchData, putData } from "../assets/scripts/fetchdata";
 
@@ -47,6 +47,11 @@ export default function AdminOrderList() {
   ]);
   const [valueStatus, setValueStatus] = useState("1");
 
+  const [statList, setStatList] = useState([
+    { id: 1, title: "Статус", disable: true },
+  ]);
+  const [valueStat, setValueStat] = useState("1");
+
   const [orderList, setOrderList] = useState([]);
 
   const [query, setQuery] = useState("");
@@ -72,6 +77,16 @@ export default function AdminOrderList() {
         title: item.name.split(", ")[1],
       }));
 
+      const status = await fetchData(
+        "orderStatus",
+        JSON.parse(localStorage.getItem("api_token"))
+      );
+
+      const newStatus = status.map((item) => ({
+        id: item.id,
+        title: item.name,
+      }));
+
       const orders = await fetchData(
         "order",
         JSON.parse(localStorage.getItem("api_token")),
@@ -86,10 +101,10 @@ export default function AdminOrderList() {
       console.log(orders.data);
       const pageCount = Math.ceil(orders.count / pagination.pageSize);
       setPagination({ ...pagination, pageCount });
-      // console.log(some);
 
       setCitiesList(citiesList.concat(newCitiesList));
       setCarsList(carsList.concat(newCarsList));
+      setStatList(statList.concat(newStatus));
       setOrderList(orders.data);
       setLoading(false);
     }
@@ -101,6 +116,7 @@ export default function AdminOrderList() {
     setValueCars("1");
     setValueCities("1");
     setValueStatus("1");
+    setValueStat("1");
 
     const orders = await fetchData(
       "order",
@@ -152,7 +168,9 @@ export default function AdminOrderList() {
         : ""
     }${valueCars !== "1" ? `&carId[id]=${valueCars}` : ""}${
       valueCities !== "1" ? `&cityId[id]=${valueCities}` : ""
-    }${queryStatus}`;
+    }${queryStatus}${
+      valueStat !== "1" ? `&orderStatusId[id]=${valueStat}` : ""
+    }`;
 
     const orders = await fetchData(
       "order",
@@ -162,7 +180,7 @@ export default function AdminOrderList() {
 
     const pageCount = Math.ceil(orders.count / pagination.pageSize);
 
-    // console.log(orders);
+    console.log(orders);
     setQuery(query);
     setOrderList(orders.data);
     setPagination({ ...pagination, currentPage: 1, pageCount });
@@ -311,6 +329,12 @@ export default function AdminOrderList() {
                 list={statusList}
                 value={valueStatus}
                 handleChangeValue={(e) => setValueStatus(e.target.value)}
+              />
+
+              <Select
+                list={statList}
+                value={valueStat}
+                handleChangeValue={(e) => setValueStat(e.target.value)}
               />
             </div>
             <div className="body-main__options">

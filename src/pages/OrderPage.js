@@ -21,6 +21,7 @@ function OrderPage(props) {
             order={props.order}
             onButtonClick={props.handleButtonClick}
             step={props.isActive}
+            price={props.price}
           />
         </div>
 
@@ -29,6 +30,7 @@ function OrderPage(props) {
             onButtonClick={props.handleButtonClick}
             onButtonDeclineClick={props.handleButtonDeclineClick}
             order={props.order}
+            price={props.price}
           />
         ) : (
           ""
@@ -46,6 +48,7 @@ OrderPage.propTypes = {
   handleButtonClick: PropTypes.func,
   isModal: PropTypes.bool,
   handleButtonDeclineClick: PropTypes.func,
+  price: PropTypes.number,
 };
 
 export default OrderPage;

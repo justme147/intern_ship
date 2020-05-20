@@ -6,8 +6,8 @@ import { fetchData } from "../../assets/scripts/fetchdata";
 
 function OptionsTariff(props) {
   const [value, setValue] = useState([]);
+  const [price, setPrice] = useState(props.price);
 
-  const [tariffs, setTariffs] = useState([]);
   useEffect(() => {
     async function fetchRate() {
       try {
@@ -21,6 +21,7 @@ function OptionsTariff(props) {
           const result = {
             id: item.id,
             value: item.rateTypeId.name,
+            price: item.price,
             title: `${item.rateTypeId.name}, ${item.price} ₽/${item.rateTypeId.unit}`,
           };
           return result;
@@ -36,6 +37,26 @@ function OptionsTariff(props) {
   }, []);
 
   function handleInputChange(e) {
+    e.persist();
+    const from = new Date(
+      props.since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`)
+    ).getTime();
+    const to = new Date(
+      props.by.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`)
+    ).getTime();
+    const time = (to / 1000 - from / 1000) / 60;
+
+    if (e.target.value === "Поминутно") {
+      const newPrice = time * +e.target.attributes.price.value;
+      props.priceChange(price + newPrice);
+    }
+
+    if (e.target.value === "На сутки") {
+      const pricePerMinute = +e.target.attributes.price.value / 1440;
+      const newPrice = time * pricePerMinute;
+      props.priceChange(Math.ceil(price + newPrice));
+    }
+
     props.menuTariffChange("value", e.target.value, 4);
     const rateId = value.filter((item) => item.value === e.target.value);
     if (rateId.length) {
@@ -51,6 +72,7 @@ function OptionsTariff(props) {
             name="tariff"
             value={item.value}
             title={item.title}
+            price={item.price}
             inputChange={handleInputChange}
             key={item.id}
             labelClass="radio-section__container--margin"
@@ -63,6 +85,9 @@ function OptionsTariff(props) {
 
 OptionsTariff.propTypes = {
   menuTariffChange: PropTypes.func,
+  priceChange: PropTypes.func,
+  since: PropTypes.string,
+  by: PropTypes.string,
 };
 
 export default OptionsTariff;

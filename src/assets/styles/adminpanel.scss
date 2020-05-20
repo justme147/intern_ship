@@ -182,6 +182,8 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
   &__label {
     @include styletext(10.5px, $admin_subtitle, 12px);
     font-family: Helvetica, Arial, sans-serif;
+    position: relative;
+    height: 100%;
     // margin-top: 15px;
     // display: block;
 
@@ -199,6 +201,13 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     padding: 8px 11px;
     margin-top: 8px;
     margin-bottom: 15px;
+  }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    @include styletext(10px, $red, 11px);
   }
 
   &__link {
@@ -252,6 +261,10 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     @include styletext(16px, $admin_title, 18px);
     font-family: Helvetica, Arial, sans-serif;
     margin-left: 7px;
+
+    &:hover {
+      color: $main_black;
+    }
   }
 
   &__list {
@@ -333,10 +346,19 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       display: flex;
     }
 
+    &__notif {
+      position: relative;
+    }
+
     &__notification {
       padding: 23px 26px;
       box-shadow: -0.5px 0px 0px #cacedb, 0.5px 0px 0px #cacedb;
       position: relative;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f7f7f7;
+      }
     }
 
     &__icon {
@@ -348,10 +370,10 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
 
     &__count {
       display: block;
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       background-color: #c4183c;
-      @include styletext(9px, $white, 13px);
+      @include styletext(9px, $white, 16px);
       text-align: center;
       border-radius: 50%;
       position: absolute;
@@ -397,6 +419,12 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       background-color: $white;
       border: 1px solid #e1e5eb;
       border-radius: 4px;
+
+      &--notif {
+        width: 150px;
+        left: auto;
+        right: 0;
+      }
     }
 
     &__dropitem {
@@ -660,6 +688,21 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
         letter-spacing: -2.5px;
         margin-top: 13px;
       }
+
+      &--light {
+        @include styletext(15px, $admin_title, 18px);
+        letter-spacing: -0.4375px;
+        font-family: "RobotoRg";
+        margin-top: 15px;
+
+        & a {
+          color: $blue;
+
+          &:hover {
+            color: #004c9c;
+          }
+        }
+      }
     }
 
     &__group {
@@ -737,7 +780,7 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       display: inline-block;
 
       &--margin {
-        margin-top: 14px;
+        margin-top: 25px;
       }
     }
 
@@ -1094,6 +1137,10 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       & a {
         @include styletext(14px, $blue, 16px);
         font-family: Helvetica, Arial, sans-serif;
+
+        &:hover {
+          color: #004c9c;
+        }
       }
     }
 

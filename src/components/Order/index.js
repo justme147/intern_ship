@@ -2,11 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import OrderItem from "./OrderItem";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { fetchDataById, putData } from "../../assets/scripts/fetchdata";
 
 function Order(props) {
   const history = useHistory();
-  function declineClick() {
+  const { id } = useParams();
+  async function declineClick() {
+    const orderStatus = await fetchDataById(
+      "orderStatus",
+      JSON.parse(localStorage.getItem("api_token")),
+      "5e26a1f5099b810b946c5d8c"
+    );
+
+    const updateOrder = {
+      orderStatusId: orderStatus,
+    };
+
+    const putOrderStatus = await putData(
+      "order",
+      JSON.parse(localStorage.getItem("api_token")),
+      id,
+      updateOrder
+    );
+    console.log(putOrderStatus);
     props.onButtonClick();
     history.push("/order");
   }
@@ -82,7 +101,8 @@ function Order(props) {
         })}
 
         <p className="body-main-order__price">
-          <span>Цена: </span>от 8 000 до 12 000 ₽
+          <span>Цена: </span>
+          {props.price} ₽
         </p>
         <OrderButton />
       </div>
@@ -94,6 +114,7 @@ Order.propTypes = {
   order: PropTypes.arrayOf(PropTypes.object),
   onButtonClick: PropTypes.func,
   step: PropTypes.number,
+  price: PropTypes.number,
 };
 
 export default Order;

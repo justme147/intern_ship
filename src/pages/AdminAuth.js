@@ -6,15 +6,30 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../assets/images/adminpanel/logo.svg";
 
 function AdminAuth(props) {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const history = useHistory();
+  const [error, setError] = useState({ login: false, pass: false });
 
-  function handleLoginClick() {
+  async function handleLoginClick() {
+    // setError({ login: false, pass: false });
+    let errors = false;
+    if (email === "") {
+      setError({ ...error, login: true });
+      errors = true;
+    }
+    if (pass === "") {
+      setError({ ...error, pass: true });
+      errors = true;
+    }
+
+    if (errors) return;
+
     const data = {
       login: email,
       password: pass,
     };
+
     props.login(data);
     history.push("/admin");
   }
@@ -36,20 +51,36 @@ function AdminAuth(props) {
             <div className="auth__content">
               <h2 className="auth__subtitle">Вход</h2>
               <form className="auth__form">
-                <label className="auth__label">Почта</label>
-                <input
-                  type="email"
-                  className="auth__input"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <label className="auth__label">Пароль</label>
-                <input
-                  type="password"
-                  className="auth__input"
-                  value={pass}
-                  onChange={(e) => setPass(e.target.value)}
-                />
+                <label className="auth__label">
+                  Почта
+                  <input
+                    type="email"
+                    className="auth__input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {error.login && (
+                    <span className="auth__error">
+                      Поле не может быть пустым
+                    </span>
+                  )}
+                </label>
+
+                <label className="auth__label">
+                  Пароль
+                  <input
+                    type="password"
+                    className="auth__input"
+                    value={pass}
+                    onChange={(e) => setPass(e.target.value)}
+                  />
+                  {error.pass && (
+                    <span className="auth__error">
+                      Поле не может быть пустым
+                    </span>
+                  )}
+                </label>
+
                 <div className="auth__row auth__row--between">
                   <p className="auth__link">Запросить доступ</p>
                   {/* <Link to="/internship/build/admin"> */}

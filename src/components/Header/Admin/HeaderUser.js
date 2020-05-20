@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import avatar from "../../../assets/images/adminpanel/avatar.jpg";
 import dropdownIcon from "../../../assets/images/adminpanel/dropdown_icon.svg";
 import { useHistory } from "react-router-dom";
 
-export default function HeaderUser() {
+function HeaderUser(props) {
   const history = useHistory();
   const [isMenu, setIsMenu] = useState(false);
+
+  function handleExitClick() {
+    props.exit();
+    history.push("/admin/login");
+  }
+
   return (
     <div className="body-header__user">
       <div className="body-header__cont" onClick={() => setIsMenu(!isMenu)}>
@@ -17,10 +24,7 @@ export default function HeaderUser() {
 
       {isMenu && (
         <ul className="body-header__dropmenu">
-          <li
-            className="body-header__dropitem"
-            onClick={() => history.push("/admin/login")}
-          >
+          <li className="body-header__dropitem" onClick={handleExitClick}>
             Выйти
           </li>
         </ul>
@@ -28,3 +32,9 @@ export default function HeaderUser() {
     </div>
   );
 }
+
+HeaderUser.propTypes = {
+  exit: PropTypes.func,
+};
+
+export default HeaderUser;

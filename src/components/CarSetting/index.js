@@ -1,30 +1,114 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import AdminCheckbox from "../AdminCheckbox";
+import AdminCheckbox from "../Checkbox/AdminCheckbox";
+import { putData } from "../../assets/scripts/fetchdata";
 
-function CarSetting({ car }) {
+function CarSetting({ car, changeAlert, changeAlertMessage }) {
   const [model, setModel] = useState(car.name);
   const [type, setType] = useState("Компакт-кар");
-  const [colors, setColors] = useState(car.colors);
+  const [colors, setColors] = useState([]);
   const [newColor, setNewColor] = useState("");
+
+  const [error, setError] = useState({
+    model: { empty: false },
+    type: { empty: false },
+    color: { empty: false, identical: false },
+  });
+
+  useEffect(() => {
+    const updateArray = car.colors.map((item) => ({
+      name: item,
+      checked: true,
+    }));
+    setColors(updateArray);
+  }, []);
 
   function addNewColor() {
     if (newColor === "") {
+      setError({ ...error, color: { ...error.color, empty: true } });
+      return;
     }
-    setColors(colors.concat(newColor[0].toLowerCase() + newColor.slice(1)));
+    setColors(colors.concat({ name: newColor, checked: true }));
     setNewColor("");
+    setError({ ...error, color: { ...error.color, empty: false } });
   }
 
-  function saveCarHandler() {
-    console.log("save");
+  async function saveCarHandler() {
+    let errors = false;
+
+    if (model === "") {
+      setError({
+        ...error,
+        model: { ...error.model, empty: true },
+      });
+      errors = true;
+    }
+    if (type === "") {
+      setError({
+        ...error,
+        type: { ...error.type, empty: true },
+      });
+      errors = true;
+    }
+
+    if (errors) {
+      changeAlertMessage({
+        title: "Неудача. Полe 'модель' и 'тип' не могут быть пустыми",
+        correct: false,
+      });
+      changeAlert(true);
+      return;
+    }
+
+    const colorsNew = [];
+    colors.map((item) => (item.checked ? colorsNew.push(item.name) : null));
+
+    const updateCar = {
+      name: model,
+      colors: colorsNew,
+    };
+
+    const putCar = await putData(
+      "car",
+      JSON.parse(localStorage.getItem("api_token")),
+      car.id,
+      updateCar
+    );
+
+    changeAlertMessage({
+      title: "Успех. Автомобиль успешно изменен",
+      correct: true,
+    });
+    changeAlert(true);
   }
 
   function resetCarHandler() {
     console.log("reset");
     setModel(car.name);
     setType("Компакт-кар");
-    setColors(car.colors);
+
+    const updateArray = car.colors.map((item) => ({
+      name: item,
+      checked: true,
+    }));
+    setColors(updateArray);
+    setError({
+      model: { empty: false },
+      type: { empty: false },
+      color: { empty: false, identical: false },
+    });
+    changeAlert(false);
+  }
+
+  function handleCheckboxChange(name) {
+    const findItem = colors.filter((item) => item.name === name);
+    findItem[0].checked = !findItem[0].checked;
+    const newColors = colors.map((item) => {
+      return item.name === findItem[0].name ? findItem[0] : item;
+    });
+
+    setColors(newColors);
   }
 
   return (
@@ -40,6 +124,9 @@ function CarSetting({ car }) {
             className="body-main__input"
             placeholder="Введите модель автомобиля"
           />
+          {error.model.empty && (
+            <span className="body-main__error">Поле не может быть пустым</span>
+          )}
         </label>
         <label className="body-main__group">
           Тип автомобиля
@@ -50,7 +137,9 @@ function CarSetting({ car }) {
             className="body-main__input"
             placeholder="Введите тип автомобиля"
           />
-          {/* <span className="body-main__error">Пример ошибки</span> */}
+          {error.type.empty && (
+            <span className="body-main__error">Поле не может быть пустым</span>
+          )}
         </label>
       </div>
       <div className="body-main__wrap body-main__wrap--end">
@@ -59,11 +148,17 @@ function CarSetting({ car }) {
           <input
             type="text"
             value={newColor}
-            onChange={(e) => setNewColor(e.target.value)}
+            onChange={(e) =>
+              setNewColor(
+                e.target.value.length !== 0 ? e.target.value.toLowerCase() : ""
+              )
+            }
             className="body-main__input"
             placeholder="Введите цвет автомобиля"
           />
-          {/* <span className="body-main__error">Пример ошибки</span> */}
+          {error.color.empty && (
+            <span className="body-main__error">Поле не может быть пустым</span>
+          )}
         </label>
         <button className="body-main__create" onClick={addNewColor}>
           <span></span>
@@ -72,7 +167,15 @@ function CarSetting({ car }) {
 
       <div className="body-main__checkbox-group body-main__checkbox-group--margin">
         {colors.map((item) => {
-          return <AdminCheckbox text={item} key={item} blue checked readOnly />;
+          return (
+            <AdminCheckbox
+              text={item.name}
+              key={item.name}
+              blue
+              checked={item.checked}
+              changeHandler={handleCheckboxChange}
+            />
+          );
         })}
       </div>
 
@@ -103,6 +206,8 @@ function CarSetting({ car }) {
 
 CarSetting.propTypes = {
   car: PropTypes.object,
+  changeAlert: PropTypes.func,
+  changeAlertMessage: PropTypes.func,
 };
 
 export default CarSetting;

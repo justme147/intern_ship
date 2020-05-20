@@ -23,7 +23,7 @@ function MainPage(props) {
 
   useEffect(() => {
     imgToSvg(".list__image");
-    imgToSvg(".body-header__icon");
+    // imgToSvg(".body-header__icon");
     toggleMenu();
     if (localStorage.getItem("isShowed") === "false") {
       setIsCity(true);

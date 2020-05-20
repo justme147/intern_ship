@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/internship/build/static/css/main.be82eefc.chunk.css",
-    "main.js": "/internship/build/static/js/main.044bf8b0.chunk.js",
-    "main.js.map": "/internship/build/static/js/main.044bf8b0.chunk.js.map",
+    "main.css": "/internship/build/static/css/main.50b893a3.chunk.css",
+    "main.js": "/internship/build/static/js/main.e78e1d29.chunk.js",
+    "main.js.map": "/internship/build/static/js/main.e78e1d29.chunk.js.map",
     "runtime-main.js": "/internship/build/static/js/runtime-main.74b42d9f.js",
     "runtime-main.js.map": "/internship/build/static/js/runtime-main.74b42d9f.js.map",
-    "static/js/2.d3e2b322.chunk.js": "/internship/build/static/js/2.d3e2b322.chunk.js",
-    "static/js/2.d3e2b322.chunk.js.map": "/internship/build/static/js/2.d3e2b322.chunk.js.map",
+    "static/js/2.22c881e9.chunk.js": "/internship/build/static/js/2.22c881e9.chunk.js",
+    "static/js/2.22c881e9.chunk.js.map": "/internship/build/static/js/2.22c881e9.chunk.js.map",
     "index.html": "/internship/build/index.html",
-    "precache-manifest.72c9d3c5dfa0c30077011c2290bfb145.js": "/internship/build/precache-manifest.72c9d3c5dfa0c30077011c2290bfb145.js",
+    "precache-manifest.1c87589315866701d87f26f5ef36a7bd.js": "/internship/build/precache-manifest.1c87589315866701d87f26f5ef36a7bd.js",
     "service-worker.js": "/internship/build/service-worker.js",
-    "static/css/main.be82eefc.chunk.css.map": "/internship/build/static/css/main.be82eefc.chunk.css.map",
-    "static/js/2.d3e2b322.chunk.js.LICENSE.txt": "/internship/build/static/js/2.d3e2b322.chunk.js.LICENSE.txt",
+    "static/css/main.50b893a3.chunk.css.map": "/internship/build/static/css/main.50b893a3.chunk.css.map",
+    "static/js/2.22c881e9.chunk.js.LICENSE.txt": "/internship/build/static/js/2.22c881e9.chunk.js.LICENSE.txt",
     "static/media/main.scss": "/internship/build/static/media/slider_screen_4.0c23ae9e.jpg",
     "static/media/approve_icon.svg": "/internship/build/static/media/approve_icon.a7259b77.svg",
     "static/media/check_icon.svg": "/internship/build/static/media/check_icon.7eb73a2f.svg",
@@ -41,8 +41,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.74b42d9f.js",
-    "static/js/2.d3e2b322.chunk.js",
-    "static/css/main.be82eefc.chunk.css",
-    "static/js/main.044bf8b0.chunk.js"
+    "static/js/2.22c881e9.chunk.js",
+    "static/css/main.50b893a3.chunk.css",
+    "static/js/main.e78e1d29.chunk.js"
   ]
 }

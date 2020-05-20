@@ -31,7 +31,7 @@ function CarCard(props) {
         <h4 className="body-main__label body-main__label--bold">Описание</h4>
         <p className="body-main__text">
           {props.car.description === "" || !props.car.description
-            ? "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimusillum assumenda eligendi cumque?"
+            ? "Описания нет"
             : props.car.description}
         </p>
       </div>

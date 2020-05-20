@@ -84,7 +84,7 @@ function Modal(props) {
     };
 
     const orderData = {
-      orderStatusId: statusId[0],
+      orderStatusId: statusId.data[0],
       cityId: newCityId,
       pointId: newPlaceId,
       carId: newCarId,
@@ -92,7 +92,7 @@ function Modal(props) {
       dateFrom,
       dateTo,
       rateId: newRateId,
-      price: 10500,
+      price: props.price,
       isFullTank: props.order[5].value,
       isNeedChildChair: props.order[6].value,
       isRightWheel: props.order[7].value,
@@ -139,7 +139,7 @@ function Modal(props) {
           {/* </Link> */}
           <button
             className="button button__decline"
-            onClick={props.onButtonDeclineClick}
+            onClick={() => props.onButtonDeclineClick("reject")}
           >
             Вернуться
           </button>
@@ -153,6 +153,7 @@ Modal.propTypes = {
   onButtonClick: PropTypes.func,
   onButtonDeclineClick: PropTypes.func,
   order: PropTypes.arrayOf(PropTypes.object),
+  price: PropTypes.number,
 };
 
 export default Modal;

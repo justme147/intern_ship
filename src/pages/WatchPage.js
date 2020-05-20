@@ -12,11 +12,6 @@ function WatchPage(props) {
 
   useEffect(() => {
     async function showOrder() {
-      const orders = await fetchData(
-        "order",
-        JSON.parse(localStorage.getItem("api_token"))
-      );
-      console.log(orders);
       const order = await fetchDataById(
         "order",
         JSON.parse(localStorage.getItem("api_token")),
@@ -39,20 +34,13 @@ function WatchPage(props) {
         </div>
 
         <div className="body-main__content">
-          <Total
-            since={props.order[3].since}
-            name={props.order[1].name}
-            model={props.order[1].value}
-            number={props.order[1].number}
-            fuel={props.order[1].fuel}
-            isFull={props.order[5].value}
-            image={props.order[1].image}
-          />
+          <Total order={props.order} />
 
           <Order
             order={props.order}
             onButtonClick={props.handleButtonClick}
             step={props.isActive}
+            price={props.price}
           />
         </div>
       </div>
@@ -64,6 +52,7 @@ WatchPage.propTypes = {
   order: PropTypes.arrayOf(PropTypes.object),
   handleButtonClick: PropTypes.func,
   isActive: PropTypes.number,
+  price: PropTypes.number,
 };
 
 export default WatchPage;

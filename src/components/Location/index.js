@@ -90,6 +90,7 @@ function Location(props) {
                       e.preventDefault();
                       setSelectCar(item);
                       props.onInputChange("place", item.address, 0);
+                      props.onInputChange("placeId", item.id, 0);
                     }}
                   ></button>
                 </Marker>

@@ -1,29 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Total(props) {
+function Total({ order }) {
   return (
     <div className="body-main-total__inner">
       <div className="body-main-total">
         <div className="body-main-total__container">
           <div className="body-main-total__descr">
             <p className="body-main-total__model">
-              {props.name}, {props.model}
+              {order[1].name}, {order[1].value}
             </p>
             <p className="body-main-total__number">
-              {props.number.toUpperCase()}
+              {order[1].number.toUpperCase()}
             </p>
             <p className="body-main-total__fuel">
               <span>Топливо </span>
-              {props.isFull ? "100%" : props.fuel}
+              {order[5].isFull ? "100%" : order[1].fuel}
             </p>
             <p className="body-main-total__since">
               <span>Доступна с </span>
-              {props.since}
+              {order[3].since}
             </p>
           </div>
           <div className="body-main-total__img">
-            <img src={props.image} alt="" className="body-main-total__image" />
+            <img
+              src={order[1].image}
+              alt=""
+              className="body-main-total__image"
+            />
           </div>
         </div>
       </div>
@@ -32,13 +36,7 @@ function Total(props) {
 }
 
 Total.propTypes = {
-  name: PropTypes.string,
-  model: PropTypes.string,
-  number: PropTypes.string,
-  isFull: PropTypes.bool,
-  fuel: PropTypes.string,
-  since: PropTypes.string,
-  image: PropTypes.string,
+  order: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Total;

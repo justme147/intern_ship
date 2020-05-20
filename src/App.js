@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, HashRouter } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 
 import Location from "./components/Location";
 import Model from "./components/Model";
@@ -8,8 +8,6 @@ import Total from "./components/Total";
 import MainPage from "./pages/MainPage";
 import OrderLayout from "./layouts/OrderLayout";
 import AdminPanel from "./pages/AdminPanel";
-// import AdminAuth from "./pages/AdminAuth";
-// import AdminLayout from "./layouts/AdminLayout";
 
 import { fetchData, authLogin, deleteData } from "./assets/scripts/fetchdata";
 
@@ -67,6 +65,7 @@ export default class App extends React.Component {
           title: "Правый руль",
         },
       ],
+      orderPrice: 0,
     };
   }
 
@@ -79,8 +78,6 @@ export default class App extends React.Component {
       );
       const json = await response.json();
       const { features } = json;
-
-      // console.log(features[0]);
 
       const position = {
         latitude: features[0].center[1],
@@ -171,7 +168,6 @@ export default class App extends React.Component {
         ...prev.order.slice(1),
       ],
     }));
-    // this.setState({ cities: newCity });
   };
 
   handleMenuClick = (id) => {
@@ -182,15 +178,11 @@ export default class App extends React.Component {
     });
   };
 
-  handleButtonDeclineClick = () => {
-    this.setState({ isModal: false });
+  handleButtonDeclineClick = (flag = "") => {
+    this.setState({ isModal: false, isActive: flag === "reject" ? 4 : 5 });
   };
 
   handleButtonClick = () => {
-    // const order = this.state.order;
-    // const history = this.state.history;
-    // const current = history[history.length - 1];
-    // const order = current.order;
     let active;
 
     if (this.state.isActive < 5) {
@@ -204,20 +196,19 @@ export default class App extends React.Component {
     this.setState({
       isActive: active,
       isModal: this.state.isActive === 4 ? true : false,
-      // history: this.state.history.concat({ order }),
     });
   };
 
   handleOrderChange = (name, value, index) => {
-    // const history = this.state.history;
-    // const current = history[history.length - 1];
-    // const newOrder = current.order.slice();
     const newOrder = this.state.order.slice();
 
     newOrder[index][name] = value;
-    // history[history.length - 1].order = newOrder;
 
     this.setState({ order: newOrder });
+  };
+
+  handlePriceChange = (value) => {
+    this.setState({ orderPrice: value });
   };
 
   handleModelClick = (value) => {
@@ -227,14 +218,8 @@ export default class App extends React.Component {
   handleDateInputChange = (e, index) => {
     this.handleOrderChange(e.target.name, e.target.value, index);
 
-    // const history = this.state.history;
-    // const current = history[history.length - 1];
-    // const order = current.order;
-
     const since = this.state.order[index].since;
     const by = this.state.order[index].by;
-    // const since = order[index].since;
-    // const by = order[index].by;
 
     const from = new Date(since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
     const to = new Date(by.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`));
@@ -269,18 +254,13 @@ export default class App extends React.Component {
 
   render() {
     const isActive = this.state.isActive;
-    // const history = this.state.history;
-    // const current = history[history.length - 1];
-    // const order = current.order;
 
     let renderStep;
 
-    switch (this.state.isActive) {
+    switch (isActive) {
       case 1:
         renderStep = (
           <Location
-            // city={order[0].city}
-            // place={order[0].place}
             city={this.state.order[0].city}
             cities={this.state.cities}
             place={this.state.order[0].place}
@@ -293,61 +273,28 @@ export default class App extends React.Component {
           <Model
             onMenuItemClick={this.handleOrderChange}
             onModelClick={this.handleModelClick}
+            onPriceChange={this.handlePriceChange}
           />
         );
         break;
       case 3:
         renderStep = (
           <Options
-            // since={order[3].since}
-            // by={order[3].by}
             since={this.state.order[3].since}
             by={this.state.order[3].by}
             onOrderChange={this.handleOrderChange}
             onInputDateChange={this.handleDateInputChange}
             colors={this.state.colorsCar}
+            onPriceChange={this.handlePriceChange}
+            price={this.state.orderPrice}
           />
         );
         break;
       case 4:
-        renderStep = (
-          <Total
-            // since={order[3].since}
-            // name={order[1].name}
-            // model={order[1].value}
-            // number={order[1].number}
-            // fuel={order[1].fuel}
-            // isFull={order[5].value}
-            // image={order[1].image}
-            since={this.state.order[3].since}
-            name={this.state.order[1].name}
-            model={this.state.order[1].value}
-            number={this.state.order[1].number}
-            fuel={this.state.order[1].fuel}
-            isFull={this.state.order[5].value}
-            image={this.state.order[1].image}
-          />
-        );
+        renderStep = <Total order={this.state.order} />;
         break;
       case 5:
-        renderStep = (
-          <Total
-            // since={order[3].since}
-            // name={order[1].name}
-            // model={order[1].value}
-            // number={order[1].number}
-            // fuel={order[1].fuel}
-            // isFull={order[5].value}
-            // image={order[1].image}
-            since={this.state.order[3].since}
-            name={this.state.order[1].name}
-            model={this.state.order[1].value}
-            number={this.state.order[1].number}
-            fuel={this.state.order[1].fuel}
-            isFull={this.state.order[5].value}
-            image={this.state.order[1].image}
-          />
-        );
+        renderStep = <Total order={this.state.order} />;
         break;
     }
 
@@ -373,6 +320,7 @@ export default class App extends React.Component {
             handleButtonClick={this.handleButtonClick}
             isModal={this.state.isModal}
             handleButtonDeclineClick={this.handleButtonDeclineClick}
+            price={this.state.orderPrice}
           />
         </Route>
         <Route path="/admin" component={AdminPanel} />

@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import imgToSvg from "../../assets/scripts/svgHover";
 import marker from "../../assets/images/startscreen/icon_map_marker.svg";
 
 function Header(props) {
   const classes = ["body-header__inner"];
+
+  useEffect(() => {
+    imgToSvg(".body-header__icon");
+  }, []);
 
   if (props.padding) {
     classes.push("body-header__inner--padding");

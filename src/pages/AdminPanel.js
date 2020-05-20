@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
 import AdminAuth from "./AdminAuth";
@@ -9,8 +9,14 @@ import AdminOrderList from "../pages/AdminOrderList";
 import AdminError from "../pages/AdminError";
 
 export default function AdminPanel() {
-  const [logged, setLogged] = useState({ login: "123123" });
+  const [logged, setLogged] = useState({});
   const [car, setCar] = useState(null);
+
+  function Layout(el) {
+    return (
+      <AdminLayout handleExitClick={() => setLogged({})}>{el}</AdminLayout>
+    );
+  }
   return (
     // <div className="wrapper">
     //   <div className="container">
@@ -23,31 +29,29 @@ export default function AdminPanel() {
     <Switch>
       {/* <Route path="/admin" exact component={AdminLayout} /> */}
       <Route path="/admin" exact>
-        {logged.login ? <AdminLayout /> : <Redirect to="/admin/login" />}
+        {logged.login ? (
+          <AdminLayout handleExitClick={() => setLogged({})} />
+        ) : (
+          <Redirect to="/admin/login" />
+        )}
       </Route>
       <Route path="/admin/car-setting">
         {logged.login ? (
-          <AdminLayout>
-            <AdminCarSetting car={car} />
-          </AdminLayout>
+          Layout(<AdminCarSetting car={car} />)
         ) : (
           <Redirect to="/admin/login" />
         )}
       </Route>
       <Route path="/admin/car-list">
         {logged.login ? (
-          <AdminLayout>
-            <AdminCarList handleCarClick={(item) => setCar(item)} />
-          </AdminLayout>
+          Layout(<AdminCarList handleCarClick={(item) => setCar(item)} />)
         ) : (
           <Redirect to="/admin/login" />
         )}
       </Route>
       <Route path="/admin/order-list">
         {logged.login ? (
-          <AdminLayout>
-            <AdminOrderList />
-          </AdminLayout>
+          Layout(<AdminOrderList />)
         ) : (
           <Redirect to="/admin/login" />
         )}

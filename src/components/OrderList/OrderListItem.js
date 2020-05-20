@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import AdminCheckbox from "../../components/AdminCheckbox";
+import AdminCheckbox from "../Checkbox/AdminCheckbox";
 
 function OrderListItem(props) {
   const [options, setOptions] = useState([

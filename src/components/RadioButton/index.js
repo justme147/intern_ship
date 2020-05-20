@@ -16,6 +16,7 @@ function RadioButton(props) {
         value={props.value}
         onChange={props.inputChange}
         className="radio-section__input"
+        price={props.price ? props.price : null}
       />
       <span className="radio-section__checkmark"></span>
       {props.title ? props.title : props.value}
@@ -29,6 +30,7 @@ RadioButton.propTypes = {
   value: PropTypes.string,
   inputChange: PropTypes.func,
   title: PropTypes.string,
+  price: PropTypes.number,
 };
 
 export default RadioButton;

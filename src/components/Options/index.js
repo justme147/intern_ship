@@ -25,10 +25,20 @@ function Options(props) {
         />
 
         <h4 className="body-main-options__subtitle">Тариф</h4>
-        <OptionTariff menuTariffChange={props.onOrderChange} />
+        <OptionTariff
+          menuTariffChange={props.onOrderChange}
+          since={props.since}
+          by={props.by}
+          priceChange={props.onPriceChange}
+          price={props.price}
+        />
 
         <h4 className="body-main-options__subtitle">Доп услуги</h4>
-        <OptionServices menuServicesChange={props.onOrderChange} />
+        <OptionServices
+          menuServicesChange={props.onOrderChange}
+          priceChange={props.onPriceChange}
+          price={props.price}
+        />
       </div>
     </div>
   );
@@ -40,6 +50,8 @@ Options.propTypes = {
   onOrderChange: PropTypes.func,
   onInputDateChange: PropTypes.func,
   colors: PropTypes.array,
+  onPriceChange: PropTypes.func,
+  price: PropTypes.number,
 };
 
 export default Options;

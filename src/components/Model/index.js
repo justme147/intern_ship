@@ -41,9 +41,9 @@ function Model(props) {
       const response = await fetchData(
         "car",
         localStorage.getItem("api_token"),
-        `?${query}&page=0&limit=6`
+        `?${query}`
       );
-      setCar(response);
+      setCar(response.data);
     } catch (e) {
       console.log(e);
     }
@@ -64,6 +64,7 @@ function Model(props) {
     props.onMenuItemClick("fuel", "35%", 1);
     props.onModelClick(color.concat(car.colors));
     props.onMenuItemClick("image", srcImg, 1);
+    props.onPriceChange(car.priceMin);
   }
 
   return (
@@ -89,6 +90,7 @@ function Model(props) {
 Model.propTypes = {
   onMenuItemClick: PropTypes.func,
   onModelClick: PropTypes.func,
+  onPriceChange: PropTypes.func,
 };
 
 export default Model;

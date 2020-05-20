@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Route, Switch } from "react-router-dom";
 
@@ -6,8 +6,20 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import OrderPage from "../pages/OrderPage";
 import WatchPage from "../pages/WatchPage";
+import BurgerMenu from "../components/Navbar/BurgerMenu";
+import MenuList from "../components/Navbar/MenuList";
+import LangSwitch from "../components/Navbar/LangSwitch";
+
+import imgToSvg from "../assets/scripts/svgHover";
+import toggleMenu from "../assets/scripts/startscreenmenu";
 
 function OrderLayout(props) {
+  const [isCity, setIsCity] = useState(false);
+  const [chooseCity, setChooseCity] = useState(false);
+  useEffect(() => {
+    imgToSvg(".list__image");
+    toggleMenu();
+  }, []);
   return (
     <div className="wrapper">
       <div className="container">
@@ -15,7 +27,13 @@ function OrderLayout(props) {
           <Navbar fixed />
           <section className="body--order">
             <header className="body-header">
-              <Header padding city={props.headerCity} />
+              <Header
+                padding
+                city={props.headerCity}
+                modalShow={isCity}
+                onButtonAcceptClick={() => setIsCity(false)}
+                onButtonDeclineClick={() => setChooseCity(true)}
+              />
             </header>
 
             <Switch>
@@ -28,6 +46,7 @@ function OrderLayout(props) {
                   handleButtonClick={props.handleButtonClick}
                   isModal={props.isModal}
                   handleButtonDeclineClick={props.handleButtonDeclineClick}
+                  price={props.price}
                 />
               </Route>
               <Route path={`/order/:id`}>
@@ -35,11 +54,36 @@ function OrderLayout(props) {
                   order={props.order}
                   handleButtonClick={props.handleButtonClick}
                   isActive={props.isActive}
+                  price={props.price}
                 />
               </Route>
             </Switch>
           </section>
         </div>
+        <div className="container__menu">
+          <section className="menu">
+            <div className="menu__inner">
+              <BurgerMenu padding close />
+
+              <MenuList />
+
+              <LangSwitch display />
+            </div>
+          </section>
+        </div>
+
+        {/* {chooseCity && (
+          <ChooseCity
+            handleWindowClick={(e) => handleWindowClick(e)}
+            handleCloseClick={() => handleCloseClick()}
+            srcIcon={closeIcon}
+            isCorrectCity={isCorrectCity}
+            city={city}
+            handleCityChange={(e) => handleInputChange(e)}
+            cities={props.cities}
+            handleItemClick={handleItemClick}
+          />
+        )} */}
       </div>
     </div>
   );
@@ -54,6 +98,7 @@ OrderLayout.propTypes = {
   isModal: PropTypes.bool,
   handleButtonDeclineClick: PropTypes.func,
   headerCity: PropTypes.string,
+  price: PropTypes.number,
 };
 
 export default OrderLayout;

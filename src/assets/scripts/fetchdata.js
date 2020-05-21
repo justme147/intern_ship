@@ -17,6 +17,7 @@ export async function authLogin() {
     const login = await fetch(
       "http://api-factory.simbirsoft1.com/api/auth/login",
       {
+        credentials: "include",
         method: "POST",
         headers: headers,
         body: JSON.stringify(body),
@@ -43,6 +44,7 @@ export async function fetchData(table, bearer, query = "") {
     const response = await fetch(
       `http://api-factory.simbirsoft1.com/api/db/${table}${query}`,
       {
+        credentials: "include",
         method: "GET",
         headers: headersBearer,
       }

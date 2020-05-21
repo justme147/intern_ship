@@ -94,11 +94,6 @@ export default function AdminOrderList() {
           pagination.pageSize
         }`
       );
-      // const some = await fetchData(
-      //   "orderStatus",
-      //   JSON.parse(localStorage.getItem("api_token"))
-      // );
-      console.log(orders.data);
       const pageCount = Math.ceil(orders.count / pagination.pageSize);
       setPagination({ ...pagination, pageCount });
 
@@ -180,7 +175,6 @@ export default function AdminOrderList() {
 
     const pageCount = Math.ceil(orders.count / pagination.pageSize);
 
-    console.log(orders);
     setQuery(query);
     setOrderList(orders.data);
     setPagination({ ...pagination, currentPage: 1, pageCount });
@@ -252,9 +246,6 @@ export default function AdminOrderList() {
 
   async function handleAlertChange(id, status, currentStatus) {
     setAlert(true);
-    // setTimeout(() => {
-    //   setAlert(false);
-    // }, 5000);
     if (status === currentStatus.name) {
       setAlertMessage({
         title:
@@ -285,7 +276,6 @@ export default function AdminOrderList() {
 
     const updateOrderList = orderList.map((item) => {
       if (item.id === putOrderStatus.id) {
-        // console.log(item);
         return putOrderStatus;
       }
       return item;

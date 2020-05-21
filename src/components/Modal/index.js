@@ -6,7 +6,6 @@ import {
   fetchData,
   fetchDataById,
   postData,
-  deleteData,
 } from "../../assets/scripts/fetchdata";
 
 function Modal(props) {
@@ -18,7 +17,6 @@ function Modal(props) {
       JSON.parse(localStorage.getItem("api_token")),
       "?name=new"
     );
-    // console.log(statusId[0]);
 
     const cityId = await fetchDataById(
       "city",
@@ -31,8 +29,6 @@ function Modal(props) {
       name: cityId.name,
     };
 
-    // console.log(cityId);
-
     const placeId = await fetchDataById(
       "point",
       JSON.parse(localStorage.getItem("api_token")),
@@ -44,7 +40,6 @@ function Modal(props) {
       name: placeId.name,
       address: placeId.address,
     };
-    // console.log(placeId);
 
     const carId = await fetchDataById(
       "car",
@@ -61,7 +56,6 @@ function Modal(props) {
       priceMin: carId.priceMin,
       thumbnail: carId.thumbnail,
     };
-    // console.log(carId);
 
     const dateFrom = Date.parse(
       props.order[3].since.replace(/(\d+).(\d+).(\d+)/, `$3.$2.$1`)
@@ -98,29 +92,13 @@ function Modal(props) {
       isRightWheel: props.order[7].value,
     };
 
-    // console.log(orderData);
-
     const postOrder = await postData(
       "order",
       JSON.parse(localStorage.getItem("api_token")),
       orderData
     );
-    console.log(postOrder);
 
-    // const deleteOrder = await deleteData(
-    //   "order",
-    //   JSON.parse(localStorage.getItem("api_token")),
-    //   "5eb5b77e099b810b946c8efa"
-    // );
-    // console.log(deleteOrder);
-
-    const orders = await fetchData(
-      "order",
-      JSON.parse(localStorage.getItem("api_token"))
-    );
-    console.log(orders);
     history.push(`/order/${postOrder.id}`);
-    // props.onButtonClick();
     props.onButtonDeclineClick();
   }
 
@@ -129,14 +107,12 @@ function Modal(props) {
       <div className="modal__inner">
         <div className="modal__content">
           <h2 className="modal__title">Подтвердить заказ</h2>
-          {/* <Link to={`/internship/build/order/${props.orderId}`}> */}
           <button
             className="button button__accept"
             onClick={() => onButtonAcceptClick()}
           >
             Подтвердить
           </button>
-          {/* </Link> */}
           <button
             className="button button__decline"
             onClick={() => props.onButtonDeclineClick("reject")}

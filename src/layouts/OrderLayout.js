@@ -14,8 +14,6 @@ import imgToSvg from "../assets/scripts/svgHover";
 import toggleMenu from "../assets/scripts/startscreenmenu";
 
 function OrderLayout(props) {
-  const [isCity, setIsCity] = useState(false);
-  const [chooseCity, setChooseCity] = useState(false);
   useEffect(() => {
     imgToSvg(".list__image");
     toggleMenu();
@@ -27,13 +25,7 @@ function OrderLayout(props) {
           <Navbar fixed />
           <section className="body--order">
             <header className="body-header">
-              <Header
-                padding
-                city={props.headerCity}
-                modalShow={isCity}
-                onButtonAcceptClick={() => setIsCity(false)}
-                onButtonDeclineClick={() => setChooseCity(true)}
-              />
+              <Header padding city={props.headerCity} />
             </header>
 
             <Switch>
@@ -71,19 +63,6 @@ function OrderLayout(props) {
             </div>
           </section>
         </div>
-
-        {/* {chooseCity && (
-          <ChooseCity
-            handleWindowClick={(e) => handleWindowClick(e)}
-            handleCloseClick={() => handleCloseClick()}
-            srcIcon={closeIcon}
-            isCorrectCity={isCorrectCity}
-            city={city}
-            handleCityChange={(e) => handleInputChange(e)}
-            cities={props.cities}
-            handleItemClick={handleItemClick}
-          />
-        )} */}
       </div>
     </div>
   );

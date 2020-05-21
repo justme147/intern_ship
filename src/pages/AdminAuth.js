@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 
-// import EmptyAdminLayout from "../layouts/EmptyAdminLayout.jsx";
 import logo from "../assets/images/adminpanel/logo.svg";
 
 function AdminAuth(props) {
@@ -12,7 +11,6 @@ function AdminAuth(props) {
   const [error, setError] = useState({ login: false, pass: false });
 
   async function handleLoginClick() {
-    // setError({ login: false, pass: false });
     let errors = false;
     if (email === "") {
       setError({ ...error, login: true });
@@ -35,7 +33,6 @@ function AdminAuth(props) {
   }
 
   return (
-    // <EmptyAdminLayout>
     <div className="wrapper">
       <div className="container">
         <div className="container__content container__content--gray container__content--center">
@@ -83,14 +80,13 @@ function AdminAuth(props) {
 
                 <div className="auth__row auth__row--between">
                   <p className="auth__link">Запросить доступ</p>
-                  {/* <Link to="/internship/build/admin"> */}
+
                   <button
                     className="button auth__button"
                     onClick={handleLoginClick}
                   >
                     Войти
                   </button>
-                  {/* </Link> */}
                 </div>
               </form>
             </div>
@@ -98,7 +94,6 @@ function AdminAuth(props) {
         </div>
       </div>
     </div>
-    // </EmptyAdminLayout>
   );
 }
 

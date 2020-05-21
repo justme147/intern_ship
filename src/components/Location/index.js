@@ -62,7 +62,6 @@ function Location(props) {
           onInputChange={props.onInputChange}
           cities={props.cities}
           onViewportChange={ViewportChange}
-          // onInputClick={props.onInputClick}
         />
         <div className="body-main-location__map">
           <h5 className="body-main-location__subtitle">Выбрать на карте:</h5>

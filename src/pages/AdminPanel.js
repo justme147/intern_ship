@@ -18,16 +18,7 @@ export default function AdminPanel() {
     );
   }
   return (
-    // <div className="wrapper">
-    //   <div className="container">
-    //     <Switch>
-    //       <Route path="/admin" exact component={AdminAuth} />
-    //       <Route path="/admin/panel" component={AdminLayout} />
-    //     </Switch>
-    //   </div>
-    // </div>
     <Switch>
-      {/* <Route path="/admin" exact component={AdminLayout} /> */}
       <Route path="/admin" exact>
         {logged.login ? (
           <AdminLayout handleExitClick={() => setLogged({})} />

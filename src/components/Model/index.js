@@ -22,7 +22,6 @@ function Model(props) {
           localStorage.getItem("api_token")
         );
         setMenu(menu.concat(response));
-        // console.log(response);
       } catch (e) {
         console.log(e);
       }
@@ -70,12 +69,7 @@ function Model(props) {
   return (
     <div className="body-main-model__inner">
       <div className="body-main-model">
-        <ModelMenu
-          filter={filter}
-          onMenuClick={handleMenuClick}
-          menu={menu}
-          // bearer={props.bearer}
-        />
+        <ModelMenu filter={filter} onMenuClick={handleMenuClick} menu={menu} />
         <ModelList
           cars={car}
           filter={filter}

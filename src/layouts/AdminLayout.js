@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 
 import Navbar from "../components/Navbar/Admin";
 import Header from "../components/Header/Admin";
-// import AdminCarSetting from "../pages/AdminCarSetting";
-// import AdminCarList from "../pages/AdminCarList";
-// import AdminOrderList from "../pages/AdminOrderList";
 import Footer from "../components/Footer/Admin";
 import { fetchData } from "../assets/scripts/fetchdata";
 

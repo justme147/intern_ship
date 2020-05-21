@@ -23,7 +23,6 @@ function MainPage(props) {
 
   useEffect(() => {
     imgToSvg(".list__image");
-    // imgToSvg(".body-header__icon");
     toggleMenu();
     if (localStorage.getItem("isShowed") === "false") {
       setIsCity(true);
@@ -55,9 +54,7 @@ function MainPage(props) {
   }, [chooseCity]);
 
   useEffect(() => {
-    // setIsCorrectCity(true);
     const items = document.querySelectorAll(".location__item");
-    // console.log(items);
 
     if (city === "") {
       setIsCorrectCity(true);

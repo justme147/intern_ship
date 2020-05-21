@@ -1,28 +1,3 @@
-// .lds-dual-ring {
-//   display: inline-block;
-//   width: 80px;
-//   height: 80px;
-// }
-// .lds-dual-ring:after {
-//   content: " ";
-//   display: block;
-//   width: 64px;
-//   height: 64px;
-//   margin: 8px;
-//   border-radius: 50%;
-//   border: 6px solid $admin_subtitle;
-//   border-color: $admin_subtitle transparent $admin_subtitle transparent;
-//   animation: lds-dual-ring 1.2s linear infinite;
-// }
-// @keyframes lds-dual-ring {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
-
 //variables
 $bg-color: #fff; //container background-color;
 $basic-dark-color: #212121; //color of the spinner
@@ -48,52 +23,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     border-radius: 50%;
   }
 }
-
-// .spinner.spinner-1 {
-//   @keyframes rotate-animation {
-//     0% {
-//       transform: rotate(0deg);
-//     }
-
-//     100% {
-//       transform: rotate(360deg);
-//     }
-//   }
-
-//   @keyframes anti-rotate-animation {
-//     0% {
-//       transform: rotate(0deg);
-//     }
-
-//     100% {
-//       transform: rotate(-360deg);
-//     }
-//   }
-
-//   &:before {
-//     width: $main-spinner-dimensions;
-//     height: $main-spinner-dimensions;
-//     border-bottom-color: $basic-dark-color;
-//     border-right-color: $basic-dark-color;
-//     border-top-color: rgba($basic-dark-color, 0);
-//     border-left-color: rgba($basic-dark-color, 0);
-//     top: 0px;
-//     left: 0px;
-//     animation: rotate-animation 1s linear 0s infinite;
-//   }
-
-//   &:after {
-//     width: $small-spinner-dimensions;
-//     height: $small-spinner-dimensions;
-//     border-bottom-color: $basic-dark-color;
-//     border-right-color: $basic-dark-color;
-//     border-top-color: rgba($basic-dark-color, 0);
-//     border-left-color: rgba($basic-dark-color, 0);
-//     top: ($main-spinner-dimensions - $small-spinner-dimensions) / 2;
-//     left: ($main-spinner-dimensions - $small-spinner-dimensions) / 2;
-//     animation: anti-rotate-animation 0.85s linear 0s infinite;
-//   }
-// }
 
 .spinner.spinner-3 {
   @keyframes scale-2 {
@@ -148,9 +77,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     }
   }
 
-  &__logo {
-  }
-
   &__title {
     @include styletext(24px, $admin_title, 28px);
     font-family: Helvetica, Arial, sans-serif;
@@ -184,12 +110,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     font-family: Helvetica, Arial, sans-serif;
     position: relative;
     height: 100%;
-    // margin-top: 15px;
-    // display: block;
-
-    &:first-child {
-      // margin-top: 0;
-    }
   }
 
   &__input {
@@ -240,9 +160,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     position: relative;
   }
 
-  &__menu {
-  }
-
   &__header {
     display: flex;
     align-items: center;
@@ -265,9 +182,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     &:hover {
       color: $main_black;
     }
-  }
-
-  &__list {
   }
 
   &__item {
@@ -314,7 +228,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // background-color: $admin_bcg;
   }
 
   &-header {
@@ -364,7 +277,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     &__icon {
       &--width {
         width: 17px;
-        // height: 21px;
       }
     }
 
@@ -382,7 +294,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     }
 
     &__user {
-      // padding: 13px 32px 13px 25px;
       position: relative;
     }
 
@@ -497,8 +408,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       margin-top: 30px;
       display: flex;
       align-items: flex-start;
-      // justify-content: space-between;
-      // flex-wrap: wrap;
 
       &--nowrap {
         flex-wrap: wrap;
@@ -613,7 +522,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       letter-spacing: -0.408571px;
 
       &--bold {
-        // font-weight: bold;
         font-family: "RobotoMd", Arial, sans-serif;
       }
     }
@@ -626,7 +534,7 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     &__progress {
       width: 100%;
       height: 5px;
-      // position: relative;
+
       box-shadow: inset 0px 0.5px 4px rgba(0, 0, 0, 0.25);
       border-radius: 4px;
       margin-top: 10px;
@@ -730,12 +638,10 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     }
 
     &__error {
-      // display: block;
       position: absolute;
       left: 0;
       bottom: -16px;
       @include styletext(10px, $red, 11px);
-      // margin-top: 5px;
     }
 
     &__create {
@@ -753,7 +659,7 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       & span::after {
         height: 2px;
         background-color: $admin_border;
-        // border-radius: 3px;
+
         width: 16px;
         display: block;
         position: absolute;
@@ -782,12 +688,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       &--margin {
         margin-top: 25px;
       }
-    }
-
-    &__edit {
-    }
-
-    &__delete {
     }
 
     &__button {
@@ -885,7 +785,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       height: 0px;
       background: #000000;
       position: absolute;
-      // z-index: -9999;
       right: 8px;
       top: 50%;
 
@@ -928,11 +827,10 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       justify-content: space-between;
       align-items: center;
       padding: 13px 21px;
-      // border-radius: 1px;
+
       position: relative;
 
       &--blue {
-        // border-left: 2px solid $blue;
         &::before {
           content: "";
           position: absolute;
@@ -946,7 +844,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       }
 
       &--red {
-        // border-left: 2px solid $red;
         &::before {
           content: "";
           position: absolute;
@@ -960,7 +857,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       }
 
       &--green {
-        // border-left: 2px solid $main_accent;
         &::before {
           content: "";
           position: absolute;
@@ -980,8 +876,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     }
 
     &__descr {
-      // max-width: 286.5px;
-      // width: 100%;
       width: 286px;
       margin-left: 16px;
     }
@@ -1092,7 +986,6 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
       }
 
       & span {
-        // padding: 10px;
         font-family: Helvetica, Arial, sans-serif;
         @include styletext(15px, $blue, 17px);
         letter-spacing: -0.471429px;

@@ -9,7 +9,6 @@ function HeaderNotification(props) {
     <div className="body-header__notif">
       <div
         className="body-header__notification"
-        // onClick={() => setIsMenu(!isMenu)}
         onMouseEnter={() => setIsMenu(true)}
         onMouseLeave={() => setIsMenu(false)}
       >

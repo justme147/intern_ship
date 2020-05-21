@@ -65,9 +65,6 @@ function LocationForm(props) {
         return;
       }
 
-      // if (e.target === inputCity || inputCity.contains(e.target)) return;
-      // if (e.target === inputPlace || inputPlace.contains(e.target)) return;
-
       setCityShow(false);
       setPlaceShow(false);
     };
@@ -117,7 +114,6 @@ function LocationForm(props) {
     props.onInputChange("placeId", id, 0);
     setPlaceShow(false);
     setIsCorrectPlace(true);
-    // console.log("itemClick");
   }
 
   function onInputKeyDown(e) {
@@ -145,8 +141,6 @@ function LocationForm(props) {
   }
 
   async function fetchData(value) {
-    // if (value === props.city) return;
-
     const token = process.env.REACT_APP_MAPBOX_TOKEN;
     const newValue = value === "Волгоград" ? `город-герой ${value}` : value;
     const response = await fetch(

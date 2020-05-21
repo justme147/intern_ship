@@ -39,15 +39,12 @@ function AdminCarList(props) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    // console.log(history);
     async function fetchCars() {
       const car = await fetchData(
         "car",
         JSON.parse(localStorage.getItem("api_token")),
         "?sort[name]=1"
       );
-
-      // console.log(car);
 
       const marks = Array.from(
         new Set(car.data.map((item) => item.name.split(", ")[0]))
@@ -80,7 +77,6 @@ function AdminCarList(props) {
       setModelList(modelList.concat(models));
       setCategoryList(categoryList.concat(newCategories));
       setLoading(false);
-      // setCarList(car);
     }
     fetchCars();
   }, []);
@@ -97,7 +93,6 @@ function AdminCarList(props) {
   function handleItemClick(car) {
     props.handleCarClick(car);
     history.push("/admin/car-setting");
-    // console.log(car);
   }
 
   useEffect(() => {
@@ -120,7 +115,6 @@ function AdminCarList(props) {
     setValueMark("1");
     setValueModel("1");
     setValueCategory("1");
-    // setValueStatus("1");
 
     const car = await fetchData(
       "car",
@@ -153,7 +147,6 @@ function AdminCarList(props) {
       `?sort[name]=1${query}&page=0&limit=7`
     );
 
-    // console.log(car);
     const pageCount = Math.ceil(car.count / pagination.pageSize);
 
     setCarList(car.data);
@@ -221,7 +214,6 @@ function AdminCarList(props) {
         filter.isIncrease ? "1" : "-1"
       }${query}&page=${+page - 1}&limit=7`
     );
-    console.log(car);
     setCarList(car.data);
   }
 

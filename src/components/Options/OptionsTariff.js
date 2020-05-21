@@ -15,8 +15,6 @@ function OptionsTariff(props) {
           "rate",
           JSON.parse(localStorage.getItem("api_token"))
         );
-        // console.log(rate);
-        // setTariffs(data);
         const rateArr = rate.map((item) => {
           const result = {
             id: item.id,
@@ -25,9 +23,7 @@ function OptionsTariff(props) {
             title: `${item.rateTypeId.name}, ${item.price} ₽/${item.rateTypeId.unit}`,
           };
           return result;
-          // setValue([...value, {...result}]);
         });
-        // console.log(rateArr);
         setValue(rateArr);
       } catch (e) {
         console.log(e);

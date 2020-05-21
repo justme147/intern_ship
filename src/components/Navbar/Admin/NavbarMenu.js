@@ -35,7 +35,6 @@ export default function NavbarMenu() {
 
   useEffect(() => {
     imgToSvg(".sidebar__icon");
-    // console.log(history);
     menuItem.map((item) => {
       if (
         history.location.pathname.indexOf(item.url) !== -1 &&

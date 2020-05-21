@@ -125,11 +125,9 @@
 .radio-section {
   &__container {
     display: flex;
-    // position: relative;
     @include styletext(14px, $dark_gray, 16px);
     font-family: "RobotoL", Arial, sans-serif;
     margin-left: 16px;
-    // padding-left: 20px;
     cursor: pointer;
     user-select: none;
     align-items: center;
@@ -325,7 +323,6 @@
 .body {
   &--order {
     width: calc(100% - 64px);
-    // padding: 0 64px;
   }
 
   &-header__inner {
@@ -371,12 +368,6 @@
   }
 
   &-main {
-    &__inner {
-      // padding: 0 64px;
-      // display: flex;
-      // flex-wrap: wrap;
-    }
-
     &__nav {
       border-top: 1px solid $light_gray;
       border-bottom: 1px solid $light_gray;
@@ -390,10 +381,7 @@
     }
 
     &-location {
-      // padding: 0 0 0 64px;
-
       &__inner {
-        // width: calc(100% - 384px);
         padding: 0 0 0 64px;
       }
 
@@ -407,8 +395,6 @@
       }
 
       &__chart {
-        // width: 100%;
-        // max-width: 736px;
         width: 736px;
         height: 352px;
         background-color: $dark_gray;
@@ -425,7 +411,6 @@
 
     &-model {
       &__inner {
-        // width: calc(100% - 384px);
         padding: 0 0 32px 64px;
       }
 
@@ -505,7 +490,6 @@
 
     &-options {
       &__inner {
-        // width: calc(100% - 384px);
         padding: 0 0 32px 64px;
       }
 

@@ -163,6 +163,10 @@ function AdminCarList(props) {
       pages.push(i);
     }
 
+    if (!pagination.pageCount) {
+      pages.push(1);
+    }
+
     if (pages[0] > 2) {
       pages.unshift("...");
       pages.unshift(1);

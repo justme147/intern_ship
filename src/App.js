@@ -15,6 +15,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       isActive: 1,
       isModal: false,
       colorsCar: [],
@@ -307,6 +308,7 @@ export default class App extends React.Component {
             cities={this.state.cities}
             onListItemClick={this.handleOrderChange}
             onHeaderCityChange={(value) => this.setState({ cityHeader: value })}
+            loading={this.state.loading}
           />
         </Route>
         <Route path="/order">

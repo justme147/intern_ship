@@ -9,6 +9,7 @@ import BurgerMenu from "../components/Navbar/BurgerMenu";
 import Slider from "../components/Slider";
 import MenuList from "../components/Navbar/MenuList";
 import ChooseCity from "../components/Modal/ChooseCity";
+import Loader from "../components/Loader";
 
 import closeIcon from "../assets/images/startscreen/icon_close.svg";
 import imgToSvg from "../assets/scripts/svgHover";
@@ -120,6 +121,11 @@ function MainPage(props) {
     <div className="wrapper">
       <div className="container">
         <div className="container__content">
+          {props.loading && (
+            <section className="loader">
+              <Loader white />
+            </section>
+          )}
           {/* Start sidebar section  */}
 
           <Navbar />
@@ -213,6 +219,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
+  loading: PropTypes.bool,
   city: PropTypes.string,
   cities: PropTypes.arrayOf(PropTypes.object),
   onListItemClick: PropTypes.func,

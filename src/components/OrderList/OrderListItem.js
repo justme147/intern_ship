@@ -12,11 +12,20 @@ function OrderListItem(props) {
 
   const itemClasses = ["body-main__item"];
 
-  if (props.order.orderStatusId.name === "new") {
+  if (
+    props.order.hasOwnProperty("orderStatusId") &&
+    props.order.orderStatusId.name === "new"
+  ) {
     itemClasses.push("body-main__item--blue");
-  } else if (props.order.orderStatusId.name === "cancelled") {
+  } else if (
+    props.order.hasOwnProperty("orderStatusId") &&
+    props.order.orderStatusId.name === "cancelled"
+  ) {
     itemClasses.push("body-main__item--red");
-  } else if (props.order.orderStatusId.name === "confirmed") {
+  } else if (
+    props.order.hasOwnProperty("orderStatusId") &&
+    props.order.orderStatusId.name === "confirmed"
+  ) {
     itemClasses.push("body-main__item--green");
   }
   return (

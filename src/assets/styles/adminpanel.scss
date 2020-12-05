@@ -12,6 +12,7 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
   height: $basic-spinner-dimensions;
   margin: 0 auto;
   margin-top: 100px;
+  z-index: 999;
 
   &:before,
   &:after {
@@ -21,6 +22,7 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     border-width: 4px;
     border-style: solid;
     border-radius: 50%;
+    z-index: 999;
   }
 }
 
@@ -59,6 +61,15 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of
     left: 0;
     opacity: 0;
     animation: scale-2 1s linear 0.5s infinite;
+  }
+}
+
+.spinner-white {
+  &:before {
+    border-color: #fff;
+  }
+  &:after {
+    border-color: #fff;
   }
 }
 

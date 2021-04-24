@@ -121,11 +121,11 @@ function MainPage(props) {
     <div className="wrapper">
       <div className="container">
         <div className="container__content">
-          {props.loading && (
+          {/* {props.loading && (
             <section className="loader">
               <Loader white />
             </section>
-          )}
+          )} */}
           {/* Start sidebar section  */}
 
           <Navbar />

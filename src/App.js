@@ -126,7 +126,7 @@ export default class App extends React.Component {
 
     const newCity = city.map((item) => {
       const filterPlacies = placies.filter(
-        (place) => place.cityId.id === item.id
+        (place) => place.cityId?.id === item?.id
       );
 
       const placiesCoords = [];
@@ -154,6 +154,8 @@ export default class App extends React.Component {
       return { ...item, placies: placiesCoords };
     });
 
+    console.log(newCity);
+
     const cityId = city.filter(
       (item) => item.name === localStorage.getItem("city")
     );
@@ -164,7 +166,7 @@ export default class App extends React.Component {
       order: [
         {
           ...prev.order[0],
-          cityId: cityId[0].id,
+          cityId: cityId[0]?.id,
         },
         ...prev.order.slice(1),
       ],

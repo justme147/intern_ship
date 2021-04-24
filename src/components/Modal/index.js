@@ -92,6 +92,8 @@ function Modal(props) {
       isRightWheel: props.order[7].value,
     };
 
+    console.log(orderData);
+
     const postOrder = await postData(
       "order",
       JSON.parse(localStorage.getItem("api_token")),

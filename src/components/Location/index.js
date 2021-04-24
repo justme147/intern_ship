@@ -87,6 +87,12 @@ function Location(props) {
                     className="body-main-location__marker"
                     onClick={(e) => {
                       e.preventDefault();
+                      setViewport((prev) => ({
+                        ...prev,
+                        zoom: 15,
+                        latitude: item.coordinate[0],
+                        longitude: item.coordinate[1],
+                      }));
                       setSelectCar(item);
                       props.onInputChange("place", item.address, 0);
                       props.onInputChange("placeId", item.id, 0);

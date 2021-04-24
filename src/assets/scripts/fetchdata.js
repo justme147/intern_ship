@@ -15,7 +15,7 @@ export async function authLogin() {
       password: "intern-S!",
     };
     const login = await fetch(
-      "http://api-factory.simbirsoft1.com/api/auth/login",
+      "https://api-factory.simbirsoft1.com/api/auth/login",
       {
         method: "POST",
         headers: headers,
@@ -41,7 +41,7 @@ export async function fetchData(table, bearer, query = "") {
     };
 
     const response = await fetch(
-      `http://api-factory.simbirsoft1.com/api/db/${table}${query}`,
+      `https://api-factory.simbirsoft1.com/api/db/${table}${query}`,
       {
         method: "GET",
         headers: headersBearer,
@@ -70,7 +70,7 @@ export async function fetchDataById(table, bearer, id) {
     };
 
     const response = await fetch(
-      `http://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
+      `https://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
       {
         method: "GET",
         headers: headersBearer,
@@ -95,7 +95,7 @@ export async function postData(table, bearer, body) {
     };
 
     const response = await fetch(
-      `http://api-factory.simbirsoft1.com/api/db/${table}`,
+      `https://api-factory.simbirsoft1.com/api/db/${table}`,
       {
         method: "POST",
         headers: headersBearer,
@@ -121,7 +121,7 @@ export async function putData(table, bearer, id, body) {
     };
 
     const response = await fetch(
-      `http://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
+      `https://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
       {
         method: "PUT",
         headers: headersBearer,
@@ -147,7 +147,7 @@ export async function deleteData(table, bearer, id) {
     };
 
     const response = await fetch(
-      `http://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
+      `https://api-factory.simbirsoft1.com/api/db/${table}/${id}`,
       {
         method: "DELETE",
         headers: headersBearer,
